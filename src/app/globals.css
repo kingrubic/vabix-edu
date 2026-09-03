@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --color-vabix-deep-teal: #163c3e;
+  --color-vabix-teal: #214f51;
+  --color-vabix-forest: #105032;
+  --color-vabix-gold: #dea443;
+  --color-vabix-soft-gold: #e4b862;
+  --color-vabix-ivory: #f8f5ed;
+  --color-vabix-warm: #fcfbf8;
+  --color-vabix-white: #ffffff;
+  --color-vabix-ink: #16332b;
+  --color-vabix-muted: #66746f;
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --max-copy: 40rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-vabix-warm);
+  color: var(--color-vabix-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-vabix-gold) 35%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-vabix-gold);
+  outline-offset: 3px;
+}
+
+.prose-vabix p {
+  max-width: 42rem;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-vabix-gold);
+}
+
+.measure {
+  max-width: 42rem;
+}
+
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-vabix-gold), transparent);
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-node {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.orbit-slow {
+  animation: orbit-spin 48s linear infinite;
+}
+
+.orbit-slower {
+  animation: orbit-spin 72s linear infinite reverse;
+}
+
+.node-pulse {
+  animation: pulse-node 3.6s ease-in-out infinite;
+}
+
+.input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid color-mix(in srgb, var(--color-vabix-deep-teal) 18%, transparent);
+  background: white;
+  padding: 0.6rem 0.8rem;
+  color: var(--color-vabix-ink);
+  font-size: 16px;
+}
+.input:focus {
+  outline: 2px solid var(--color-vabix-gold);
+  outline-offset: 1px;
+}
