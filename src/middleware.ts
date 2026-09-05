@@ -1,29 +1,46 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { isBizcarHost, isBizcarPath, isPublicBizcarPath, rewriteBizcarHostPath } from "@/security/routes";
+import {
+  isBizcarHost,
+  isBizcarPath,
+  isPublicBizcarPath,
+  rewriteBizcarHostPath,
+  shouldServeBizcarAtRoot,
+} from "@/security/routes";
 import { bizcarPath } from "@/lib/bizcarPaths";
 import { SESSION_COOKIE, verifySession } from "@/security/jwt";
+
+function continueWithPath(request: NextRequest, effectivePath: string, rewriteTo?: string) {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", effectivePath);
+
+  if (rewriteTo && rewriteTo !== request.nextUrl.pathname) {
+    const url = request.nextUrl.clone();
+    url.pathname = rewriteTo;
+    const response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+    response.headers.set("x-pathname", effectivePath);
+    return response;
+  }
+
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+  response.headers.set("x-pathname", effectivePath);
+  return response;
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-pathname", pathname);
+  const rewritten = rewriteBizcarHostPath(pathname);
 
-  if (isBizcarHost(host)) {
-    const rewritten = rewriteBizcarHostPath(pathname);
-    if (rewritten) {
-      const url = request.nextUrl.clone();
-      url.pathname = rewritten;
-      const response = NextResponse.rewrite(url);
-      response.headers.set("x-pathname", rewritten);
-      return response;
-    }
+  if (rewritten && (isBizcarHost(host) || (pathname === "/" && shouldServeBizcarAtRoot(host)))) {
+    const response = continueWithPath(request, rewritten, rewritten);
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    response.headers.set("Cache-Control", "private, no-store");
+    return response;
   }
 
-  const legacy = rewriteBizcarHostPath(pathname);
-  if (legacy && !isBizcarHost(host) && pathname !== "/" && !pathname.startsWith("/bizcar")) {
+  if (rewritten && pathname !== "/" && !pathname.startsWith("/bizcar") && !isBizcarHost(host)) {
     const url = request.nextUrl.clone();
-    url.pathname = legacy;
+    url.pathname = rewritten;
     return NextResponse.redirect(url);
   }
 
@@ -38,8 +55,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  const response = NextResponse.next({ request: { headers: requestHeaders } });
-  response.headers.set("x-pathname", pathname);
+  const response = continueWithPath(request, pathname);
   if (isBizcarPath(pathname) || isBizcarHost(host)) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
     response.headers.set("Cache-Control", "private, no-store");

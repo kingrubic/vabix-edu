@@ -26,7 +26,12 @@ export function EngineLanding() {
             Vào không gian làm việc
           </Link>
         </div>
-        <p className="mt-6 text-xs text-white/40">Đường local: /bizcar · /bizcar/engine · /bizcar/login</p>
+        <p className="mt-6 text-xs text-white/40">
+          Local: / và /bizcar là MyBizCar · /bizcar/engine · /bizcar/login · website VABIX tại{" "}
+          <Link href="/vabix" className="text-vabix-gold underline-offset-2 hover:underline">
+            /vabix
+          </Link>
+        </p>
         <div className="mt-14 grid gap-4 md:grid-cols-4">
           {Object.entries(COMPONENT_LABELS).map(([code, meta]) => (
             <article key={code} className="bizcar-panel p-5">

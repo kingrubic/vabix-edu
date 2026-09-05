@@ -11,6 +11,24 @@ export function isBizcarHost(host: string | null | undefined): boolean {
   );
 }
 
+/** Local / Cursor preview — mở MyBizCar, không mở website VABIX. */
+export function isLocalDevHost(host: string | null | undefined): boolean {
+  if (!host) return false;
+  const normalized = host.split(":")[0].toLowerCase();
+  return (
+    normalized === "localhost" ||
+    normalized === "127.0.0.1" ||
+    normalized === "0.0.0.0" ||
+    normalized === "[::1]" ||
+    normalized.endsWith(".localhost")
+  );
+}
+
+/** `/` phục vụ MyBizCar trên local, preview, và host bizcar. Production vabix.edu.vn giữ trang VABIX. */
+export function shouldServeBizcarAtRoot(host: string | null | undefined): boolean {
+  return isBizcarHost(host) || isLocalDevHost(host) || process.env.NODE_ENV !== "production";
+}
+
 export function isBizcarPath(pathname: string): boolean {
   return isBizcarAppPath(pathname) || pathname.startsWith("/api/bizcar");
 }

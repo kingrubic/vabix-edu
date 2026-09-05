@@ -40,7 +40,7 @@ export function Footer() {
       <Container className="py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
-            <Link href="/" aria-label="VABIX — trang chủ">
+            <Link href="/vabix" aria-label="VABIX — trang chủ">
               <Logo variant="dark" className="h-11 sm:h-12" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/75">{siteConfig.positioning}</p>

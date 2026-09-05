@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Mở [http://localhost:3000](http://localhost:3000).
+Mở [http://localhost:3000](http://localhost:3000) — trên local `/` là **MyBizCar**. Website VABIX xem tại [http://localhost:3000/vabix](http://localhost:3000/vabix).
 
 ## Lệnh kiểm tra
 
@@ -42,12 +42,13 @@ npm install
 npm run dev
 ```
 
-MyBizCar local **không dùng** `/` — `/` vẫn là website VABIX.
+Trên local và preview, `/` mở MyBizCar (không mở website VABIX). Production `vabix.edu.vn` vẫn giữ `/` là trang doanh nghiệp.
 
-- Giới thiệu MyBizCar: http://localhost:3000/bizcar
+- Giới thiệu MyBizCar: http://localhost:3000 hoặc http://localhost:3000/bizcar
 - Động cơ 3D: http://localhost:3000/bizcar/engine
 - Đăng nhập: http://localhost:3000/bizcar/login
 - Dashboard: http://localhost:3000/bizcar/dashboard
+- Website VABIX (local): http://localhost:3000/vabix
 
 Trên domain `bizcar.vabix.edu.vn` (khi có DNS), middleware map `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
 

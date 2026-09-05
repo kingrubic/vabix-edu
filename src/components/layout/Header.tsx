@@ -10,7 +10,7 @@ import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Logo } from "@/components/brand/Logo";
 
 function hasDarkHero(pathname: string) {
-  if (pathname === "/") return true;
+  if (pathname === "/" || pathname === "/vabix") return true;
   return pathname.startsWith("/mo-hinh-phuong-phap/") && pathname !== "/mo-hinh-phuong-phap/";
 }
 
@@ -48,7 +48,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-4 sm:h-[76px] sm:px-6 lg:px-8">
-        <Link href="/" className="flex shrink-0 items-center" aria-label="VABIX — trang chủ">
+        <Link href="/vabix" className="flex shrink-0 items-center" aria-label="VABIX — trang chủ">
           <Logo variant={solid ? "light" : "dark"} priority />
         </Link>
 
