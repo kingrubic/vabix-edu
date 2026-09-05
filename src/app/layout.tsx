@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { JsonLd } from "@/components/ui/Misc";
 import { createMetadata, organizationJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
@@ -29,6 +28,8 @@ export const metadata: Metadata = {
     "kết nối doanh nghiệp",
     "BMDO",
     "B2A",
+    "MyBizCar",
+    "MTUA",
   ],
 };
 
@@ -43,9 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Bỏ qua điều hướng
         </a>
-        <Header />
-        <main id="noi-dung">{children}</main>
-        <Footer />
+        <ConditionalChrome>{children}</ConditionalChrome>
       </body>
     </html>
   );
