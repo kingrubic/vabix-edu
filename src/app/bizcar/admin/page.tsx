@@ -11,31 +11,31 @@ export const metadata = { title: "Quản trị — MyBizCar", robots: { index: f
 export default async function AdminPage() {
   await loadStore();
   const user = await requireSession();
-  if (!isPlatformAdmin(user.access) && !isAcademicAdmin(user.access)) redirect("/dashboard");
+  if (!isPlatformAdmin(user.access) && !isAcademicAdmin(user.access)) redirect("/bizcar/dashboard");
   return (
     <BizcarShell user={user} title="Quản trị nền tảng">
       <div className="mx-auto grid max-w-4xl gap-4 px-4 py-10 md:grid-cols-2">
         <Panel>
           <h2 className="text-xl font-semibold">Chuẩn học thuật</h2>
-          <Link href="/admin/standards" className="mt-3 inline-flex min-h-11 text-vabix-gold">
+          <Link href="/bizcar/admin/standards" className="mt-3 inline-flex min-h-11 text-vabix-gold">
             Mở Standards CMS
           </Link>
         </Panel>
         <Panel>
           <h2 className="text-xl font-semibold">Người dùng</h2>
-          <Link href="/admin/users" className="mt-3 inline-flex min-h-11 text-vabix-gold">
+          <Link href="/bizcar/admin/users" className="mt-3 inline-flex min-h-11 text-vabix-gold">
             Danh sách tài khoản
           </Link>
         </Panel>
         <Panel>
           <h2 className="text-xl font-semibold">Doanh nghiệp</h2>
-          <Link href="/admin/organizations" className="mt-3 inline-flex min-h-11 text-vabix-gold">
+          <Link href="/bizcar/admin/organizations" className="mt-3 inline-flex min-h-11 text-vabix-gold">
             Tổ chức
           </Link>
         </Panel>
         <Panel>
           <h2 className="text-xl font-semibold">Nhật ký kiểm toán</h2>
-          <Link href="/admin/audit-log" className="mt-3 inline-flex min-h-11 text-vabix-gold">
+          <Link href="/bizcar/admin/audit-log" className="mt-3 inline-flex min-h-11 text-vabix-gold">
             Audit log
           </Link>
         </Panel>

@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
-        source: "/(dashboard|assessments|organizations|admin|login)/:path*",
+        source: "/bizcar/:path*",
         headers: [
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
           { key: "Cache-Control", value: "private, no-store" },

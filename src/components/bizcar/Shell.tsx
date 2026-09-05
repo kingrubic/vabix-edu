@@ -4,6 +4,7 @@ import { CONFIDENTIALITY_BANNER } from "@/domain/labels";
 import { Logo } from "@/components/brand/Logo";
 import type { CurrentUser } from "@/security/session";
 import { isAcademicAdmin, isPlatformAdmin } from "@/security/rbac";
+import { bizcarPath } from "@/lib/bizcarPaths";
 
 export function ConfidentialityBanner() {
   return (
@@ -28,7 +29,7 @@ export function BizcarShell({
       <header className="border-b border-white/10">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4">
           <div className="flex items-center gap-4">
-            <Link href="/engine" className="flex items-center gap-3">
+            <Link href={bizcarPath.home} className="flex items-center gap-3">
               <Logo variant="light" className="h-9" />
             </Link>
             <div>
@@ -38,19 +39,22 @@ export function BizcarShell({
           </div>
           {user ? (
             <nav className="flex flex-wrap items-center gap-2 text-sm">
-              <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href="/dashboard">
+              <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href={bizcarPath.dashboard}>
                 Bảng điều khiển
               </Link>
-              <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href="/assessments">
+              <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href={bizcarPath.assessments}>
                 Đánh giá
               </Link>
+              <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href={bizcarPath.engine}>
+                Động cơ 3D
+              </Link>
               {isAcademicAdmin(user.access) ? (
-                <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href="/admin/standards">
+                <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href={bizcarPath.adminStandards}>
                   Chuẩn
                 </Link>
               ) : null}
               {isPlatformAdmin(user.access) ? (
-                <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href="/admin">
+                <Link className="min-h-11 px-3 py-2 text-white/80 hover:text-vabix-gold" href={bizcarPath.admin}>
                   Quản trị
                 </Link>
               ) : null}
@@ -62,7 +66,7 @@ export function BizcarShell({
               </form>
             </nav>
           ) : (
-            <Link href="/login" className="min-h-11 px-4 py-2 font-semibold text-vabix-gold">
+            <Link href={bizcarPath.login} className="min-h-11 px-4 py-2 font-semibold text-vabix-gold">
               Đăng nhập
             </Link>
           )}

@@ -86,7 +86,7 @@ export async function updateCfsWeightAction(formData: FormData) {
     standardVersionId: STANDARD_VERSION_ID,
     ip: null,
   });
-  revalidatePath("/admin/standards/mtua");
+  revalidatePath("/bizcar/admin/standards/mtua");
   return {
     ok: true,
     message: createdNewVersion
@@ -103,6 +103,6 @@ export async function toggleUserAction(formData: FormData) {
     const row = store.users.find((item) => item.id === userId);
     if (row) row.isActive = !row.isActive;
   });
-  revalidatePath("/admin/users");
+  revalidatePath("/bizcar/admin/users");
   return { ok: true };
 }

@@ -22,7 +22,7 @@ export function AssessmentFrame({
     <BizcarShell user={user} title={assessment.title}>
       <div className="mx-auto max-w-7xl space-y-5 px-4 py-6">
         <div className="flex flex-wrap items-center gap-3">
-          <Link href="/assessments" className="text-sm text-white/60">
+          <Link href="/bizcar/assessments" className="text-sm text-white/60">
             ← Đánh giá
           </Link>
           <DemoMark show={assessment.isDemo || organization.isDemo} />

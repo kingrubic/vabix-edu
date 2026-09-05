@@ -25,10 +25,10 @@ export default async function AssessmentHubPage({ params }: { params: Promise<{ 
             Chuẩn {bundle.standard?.version.name} {bundle.standard?.version.version} · {bundle.standard?.version.developmentDisclaimer}
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <Link href={`/assessments/${assessmentId}/engine`} className="text-vabix-gold">
+            <Link href={`/bizcar/assessments/${assessmentId}/engine`} className="text-vabix-gold">
               Mở động cơ 3D
             </Link>
-            <Link href={`/assessments/${assessmentId}/report`} className="text-white/70">
+            <Link href={`/bizcar/assessments/${assessmentId}/report`} className="text-white/70">
               Báo cáo
             </Link>
           </div>

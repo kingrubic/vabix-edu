@@ -8,6 +8,7 @@ import { cookieOptions, SESSION_COOKIE, signSession, verifyPassword } from "@/se
 import { getCurrentUser } from "@/security/session";
 import { rateLimit } from "@/security/rateLimit";
 import { loginSchema } from "./schema";
+import { bizcarPath, safeBizcarNext } from "@/lib/bizcarPaths";
 
 export async function loginAction(
   _prev: { error?: string } | null,
@@ -31,7 +32,7 @@ export async function loginAction(
   const { token } = await signSession({ sub: user.id, email: user.email, name: user.name });
   const jar = await cookies();
   jar.set(SESSION_COOKIE, token, cookieOptions());
-  redirect("/dashboard");
+  redirect(safeBizcarNext(String(formData.get("next") ?? "")));
 }
 
 export async function logoutAction() {
@@ -39,5 +40,5 @@ export async function logoutAction() {
   const jar = await cookies();
   if (user) await revokeJti(user.id, user.claims.jti);
   jar.set(SESSION_COOKIE, "", { ...cookieOptions(), maxAge: 0 });
-  redirect("/login");
+  redirect(bizcarPath.login);
 }

@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { MNEMONIC_DISCLAIMER, DEVELOPMENT_DISCLAIMER, COMPONENT_LABELS } from "@/domain/labels";
 import { Logo } from "@/components/brand/Logo";
+import { bizcarPath } from "@/lib/bizcarPaths";
 
 export function EngineLanding() {
   return (
     <div className="bizcar-shell">
       <div className="mx-auto max-w-6xl px-4 py-16">
         <Logo variant="light" className="h-10" />
-        <p className="eyebrow mt-10">VABIX · BMDO · The BizCar</p>
+        <p className="eyebrow mt-10">MyBizCar 3D · không gian tách khỏi website VABIX</p>
         <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-tight sm:text-6xl">
           MyBizCar 3D
           <span className="mt-3 block text-vabix-gold">Động cơ doanh nghiệp MTUA</span>
@@ -18,13 +19,14 @@ export function EngineLanding() {
         <p className="mt-4 max-w-3xl text-sm text-amber-100/80">{MNEMONIC_DISCLAIMER}</p>
         <p className="mt-2 text-sm text-white/50">{DEVELOPMENT_DISCLAIMER}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/engine" className="inline-flex min-h-11 items-center bg-vabix-gold px-5 font-semibold text-vabix-deep-teal">
+          <Link href={bizcarPath.engine} className="inline-flex min-h-11 items-center bg-vabix-gold px-5 font-semibold text-vabix-deep-teal">
             Mở động cơ 3D
           </Link>
-          <Link href="/login?next=/dashboard" className="inline-flex min-h-11 items-center border border-white/30 px-5 text-white">
+          <Link href={bizcarPath.login} className="inline-flex min-h-11 items-center border border-white/30 px-5 text-white">
             Vào không gian làm việc
           </Link>
         </div>
+        <p className="mt-6 text-xs text-white/40">Đường local: /bizcar · /bizcar/engine · /bizcar/login</p>
         <div className="mt-14 grid gap-4 md:grid-cols-4">
           {Object.entries(COMPONENT_LABELS).map(([code, meta]) => (
             <article key={code} className="bizcar-panel p-5">

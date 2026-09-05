@@ -33,7 +33,7 @@ export default async function DashboardPage() {
             <h1 className="text-3xl font-semibold">Hồ sơ đánh giá MTUA</h1>
           </div>
           <div className="flex gap-2">
-            <Link href="/assessments/new" className="inline-flex min-h-11 items-center bg-vabix-gold px-4 font-semibold text-vabix-deep-teal">
+            <Link href="/bizcar/assessments/new" className="inline-flex min-h-11 items-center bg-vabix-gold px-4 font-semibold text-vabix-deep-teal">
               Tạo đánh giá
             </Link>
           </div>
@@ -48,7 +48,7 @@ export default async function DashboardPage() {
               <p className="mt-2 text-sm text-white/60">
                 {org.industry} · {org.stage} · {org.size}
               </p>
-              <Link href={`/organizations/${org.id}`} className="mt-4 inline-flex min-h-11 items-center text-vabix-gold">
+              <Link href={`/bizcar/organizations/${org.id}`} className="mt-4 inline-flex min-h-11 items-center text-vabix-gold">
                 Mở doanh nghiệp
               </Link>
             </Panel>
@@ -84,10 +84,10 @@ export default async function DashboardPage() {
                 </div>
               ) : null}
               <div className="mt-4 flex flex-wrap gap-3">
-                <Link href={`/assessments/${assessment.id}`} className="text-vabix-gold">
+                <Link href={`/bizcar/assessments/${assessment.id}`} className="text-vabix-gold">
                   Mở hồ sơ
                 </Link>
-                <Link href={`/assessments/${assessment.id}/engine`} className="text-white/70">
+                <Link href={`/bizcar/assessments/${assessment.id}/engine`} className="text-white/70">
                   Động cơ 3D
                 </Link>
               </div>

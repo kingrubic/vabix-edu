@@ -53,7 +53,8 @@ export const siteConfig = {
     resident: "https://smar.vabix.vn/",
     login: "https://vabix.vn/login-page",
     marketplace: "https://vabix.vn/career-web-group",
-    bizcarEngine: "/engine",
+    bizcarEngine: "/bizcar/engine",
+    bizcarHome: "/bizcar",
     bizcarHost: "https://bizcar.vabix.edu.vn",
   },
   cta: {

@@ -11,7 +11,7 @@ export const metadata = { title: "Tổ chức — MyBizCar", robots: { index: fa
 export default async function AdminOrganizationsPage() {
   await loadStore();
   const user = await requireSession();
-  if (!isPlatformAdmin(user.access)) redirect("/dashboard");
+  if (!isPlatformAdmin(user.access)) redirect("/bizcar/dashboard");
   const store = await loadStore();
   return (
     <BizcarShell user={user} title="Tổ chức">
@@ -19,7 +19,7 @@ export default async function AdminOrganizationsPage() {
         {store.organizations.map((org) => (
           <Panel key={org.id}>
             <div className="flex items-center gap-2">
-              <Link href={`/organizations/${org.id}`} className="text-lg font-semibold">
+              <Link href={`/bizcar/organizations/${org.id}`} className="text-lg font-semibold">
                 {org.name}
               </Link>
               <DemoMark show={org.isDemo} />

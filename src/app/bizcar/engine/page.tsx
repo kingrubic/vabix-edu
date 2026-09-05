@@ -43,7 +43,7 @@ export default async function EngineModulePage({
       <div className="mx-auto max-w-7xl space-y-5 px-4 py-8">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="eyebrow">Module chính · /engine</p>
+            <p className="eyebrow">Module chính · /bizcar/engine</p>
             <h1 className="mt-2 text-3xl font-semibold">Động cơ doanh nghiệp 3D</h1>
             <p className="mt-2 max-w-3xl text-sm text-white/65">{MNEMONIC_DISCLAIMER}</p>
             <p className="mt-1 text-xs text-white/45">{DEVELOPMENT_DISCLAIMER}</p>
@@ -52,13 +52,13 @@ export default async function EngineModulePage({
             <DemoMark show={Boolean(isDemo)} />
             {user ? (
               <Link
-                href={`/assessments/${assessmentId}/engine`}
+                href={`/bizcar/assessments/${assessmentId}/engine`}
                 className="inline-flex min-h-11 items-center text-vabix-gold"
               >
                 Mở trong hồ sơ đánh giá
               </Link>
             ) : (
-              <Link href="/login?next=/engine" className="inline-flex min-h-11 items-center bg-vabix-gold px-4 font-semibold text-vabix-deep-teal">
+              <Link href="/bizcar/login?next=/bizcar/engine" className="inline-flex min-h-11 items-center bg-vabix-gold px-4 font-semibold text-vabix-deep-teal">
                 Đăng nhập để đánh giá
               </Link>
             )}

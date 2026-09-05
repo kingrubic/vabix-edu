@@ -10,7 +10,7 @@ export const metadata = { title: "Nhật ký — MyBizCar", robots: { index: fal
 export default async function AuditLogPage() {
   await loadStore();
   const user = await requireSession();
-  if (!isPlatformAdmin(user.access) && !isAcademicAdmin(user.access)) redirect("/dashboard");
+  if (!isPlatformAdmin(user.access) && !isAcademicAdmin(user.access)) redirect("/bizcar/dashboard");
   const store = await loadStore();
   return (
     <BizcarShell user={user} title="Nhật ký kiểm toán">

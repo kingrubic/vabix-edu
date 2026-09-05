@@ -31,9 +31,9 @@ import {
 } from "./schema";
 
 function revalidateAssessment(id: string) {
-  revalidatePath(`/assessments/${id}`);
-  revalidatePath(`/assessments/${id}/engine`);
-  revalidatePath("/dashboard");
+  revalidatePath(`/bizcar/assessments/${id}`);
+  revalidatePath(`/bizcar/assessments/${id}/engine`);
+  revalidatePath("/bizcar/dashboard");
 }
 
 async function actor() {
@@ -78,7 +78,7 @@ export async function createOrganizationAction(formData: FormData) {
     standardVersionId: null,
     ip: null,
   });
-  redirect(`/organizations/${organization.id}`);
+  redirect(`/bizcar/organizations/${organization.id}`);
 }
 
 export async function createAssessmentAction(formData: FormData) {
@@ -110,7 +110,7 @@ export async function createAssessmentAction(formData: FormData) {
     standardVersionId: assessment.standardVersionId,
     ip: null,
   });
-  redirect(`/assessments/${assessment.id}/context`);
+  redirect(`/bizcar/assessments/${assessment.id}/context`);
 }
 
 export async function saveContextAction(formData: FormData) {
@@ -523,7 +523,7 @@ export async function createRevisionAction(formData: FormData) {
     standardVersionId: assessment.standardVersionId,
     ip: null,
   });
-  redirect(`/assessments/${next.id}`);
+  redirect(`/bizcar/assessments/${next.id}`);
 }
 
 export async function inviteMemberAction(formData: FormData) {
@@ -540,6 +540,6 @@ export async function inviteMemberAction(formData: FormData) {
   const target = await findUserByEmail(email);
   if (!target) return { error: "Chưa có tài khoản với email này." };
   await addMember({ organizationId, userId: target.id, role, createdBy: user.id });
-  revalidatePath(`/organizations/${organizationId}`);
+  revalidatePath(`/bizcar/organizations/${organizationId}`);
   return { ok: true };
 }

@@ -73,7 +73,7 @@ export async function createMaisAction(formData: FormData) {
     standardVersionId: assessment.standardVersionId,
     ip: null,
   });
-  revalidatePath(`/assessments/${assessment.id}/mais`);
+  revalidatePath(`/bizcar/assessments/${assessment.id}/mais`);
   return { ok: true };
 }
 
@@ -100,7 +100,7 @@ export async function createExperimentAction(formData: FormData) {
       createdBy: user.id,
     });
   });
-  revalidatePath(`/assessments/${assessment.id}/mais`);
+  revalidatePath(`/bizcar/assessments/${assessment.id}/mais`);
   return { ok: true };
 }
 
@@ -133,6 +133,6 @@ export async function decideExperimentAction(formData: FormData) {
     standardVersionId: assessment.standardVersionId,
     ip: null,
   });
-  revalidatePath(`/assessments/${assessment.id}/mais`);
+  revalidatePath(`/bizcar/assessments/${assessment.id}/mais`);
   return { ok: true };
 }

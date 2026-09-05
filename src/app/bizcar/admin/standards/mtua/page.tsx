@@ -13,7 +13,7 @@ export const metadata = { title: "Chuẩn MTUA — MyBizCar", robots: { index: f
 export default async function MtuaStandardPage() {
   await loadStore();
   const user = await requireSession();
-  if (!isAcademicAdmin(user.access)) redirect("/dashboard");
+  if (!isAcademicAdmin(user.access)) redirect("/bizcar/dashboard");
   const store = await loadStore();
   const connections = store.standardCfsConnections;
   const criteria = store.standardCriteria;

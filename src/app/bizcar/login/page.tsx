@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/bizcar/LoginForm";
 import { BizcarShell } from "@/components/bizcar/Shell";
@@ -14,7 +15,7 @@ export const metadata = {
 export default async function LoginPage() {
   await loadStore();
   const user = await getCurrentUser();
-  if (user) redirect("/dashboard");
+  if (user) redirect("/bizcar/dashboard");
   return (
     <BizcarShell title="Đăng nhập không gian làm việc">
       <div className="mx-auto grid max-w-5xl gap-8 px-4 py-16 lg:grid-cols-2">
@@ -26,7 +27,9 @@ export default async function LoginPage() {
           </p>
         </div>
         <Panel>
-          <LoginForm />
+          <Suspense fallback={<p className="text-white/50">Đang tải form…</p>}>
+            <LoginForm />
+          </Suspense>
           <div className="mt-6 text-xs text-white/50">
             <p>Tài khoản minh họa / mật khẩu chung: {DEMO_PASSWORD}</p>
             <ul className="mt-2 space-y-1">

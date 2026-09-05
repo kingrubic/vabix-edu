@@ -23,7 +23,7 @@ export function AssessmentNav({ assessmentId, current }: { assessmentId: string;
         return (
           <Link
             key={step.href}
-            href={`/assessments/${assessmentId}/${step.href}`}
+            href={`/bizcar/assessments/${assessmentId}/${step.href}`}
             className={`inline-flex min-h-11 shrink-0 items-center border px-3 text-sm ${
               active ? "border-vabix-gold bg-vabix-gold/15 text-vabix-gold" : "border-white/10 text-white/70"
             }`}

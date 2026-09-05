@@ -18,14 +18,14 @@ export default async function AssessmentsPage() {
       <div className="mx-auto max-w-5xl space-y-4 px-4 py-8">
         <div className="flex justify-between">
           <h1 className="text-3xl font-semibold">Đánh giá MTUA</h1>
-          <Link href="/assessments/new" className="inline-flex min-h-11 items-center bg-vabix-gold px-4 font-semibold text-vabix-deep-teal">
+          <Link href="/bizcar/assessments/new" className="inline-flex min-h-11 items-center bg-vabix-gold px-4 font-semibold text-vabix-deep-teal">
             Tạo mới
           </Link>
         </div>
         {assessments.map((assessment) => (
           <Panel key={assessment.id}>
             <div className="flex flex-wrap items-center gap-2">
-              <Link href={`/assessments/${assessment.id}`} className="text-xl font-semibold">
+              <Link href={`/bizcar/assessments/${assessment.id}`} className="text-xl font-semibold">
                 {assessment.title}
               </Link>
               <StatusBadge status={assessment.status} />

@@ -11,7 +11,7 @@ export const metadata = { title: "Chuẩn — MyBizCar", robots: { index: false,
 export default async function StandardsPage() {
   await loadStore();
   const user = await requireSession();
-  if (!isAcademicAdmin(user.access)) redirect("/dashboard");
+  if (!isAcademicAdmin(user.access)) redirect("/bizcar/dashboard");
   const store = await loadStore();
   return (
     <BizcarShell user={user} title="Standards CMS">
@@ -23,7 +23,7 @@ export default async function StandardsPage() {
               {version.name} · {version.version}
             </h2>
             <p className="mt-2 text-sm text-white/60">{version.developmentDisclaimer}</p>
-            <Link href="/admin/standards/mtua" className="mt-3 inline-flex min-h-11 text-vabix-gold">
+            <Link href="/bizcar/admin/standards/mtua" className="mt-3 inline-flex min-h-11 text-vabix-gold">
               Quản lý MTUA
             </Link>
           </Panel>

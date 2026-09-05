@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { isBizcarHost, isBizcarPath, isPublicBizcarPath } from "@/security/routes";
+import { isBizcarHost, isBizcarPath, isPublicBizcarPath, rewriteBizcarHostPath } from "@/security/routes";
+import { bizcarPath } from "@/lib/bizcarPaths";
 import { SESSION_COOKIE, verifySession } from "@/security/jwt";
 
 export async function middleware(request: NextRequest) {
@@ -8,12 +9,30 @@ export async function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-pathname", pathname);
 
+  if (isBizcarHost(host)) {
+    const rewritten = rewriteBizcarHostPath(pathname);
+    if (rewritten) {
+      const url = request.nextUrl.clone();
+      url.pathname = rewritten;
+      const response = NextResponse.rewrite(url);
+      response.headers.set("x-pathname", rewritten);
+      return response;
+    }
+  }
+
+  const legacy = rewriteBizcarHostPath(pathname);
+  if (legacy && !isBizcarHost(host) && pathname !== "/" && !pathname.startsWith("/bizcar")) {
+    const url = request.nextUrl.clone();
+    url.pathname = legacy;
+    return NextResponse.redirect(url);
+  }
+
   if (isBizcarPath(pathname) && !isPublicBizcarPath(pathname)) {
     const token = request.cookies.get(SESSION_COOKIE)?.value;
     const session = token ? await verifySession(token) : null;
     if (!session) {
       const url = request.nextUrl.clone();
-      url.pathname = "/login";
+      url.pathname = bizcarPath.login;
       url.searchParams.set("next", pathname);
       return NextResponse.redirect(url);
     }

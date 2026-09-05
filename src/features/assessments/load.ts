@@ -8,7 +8,7 @@ export async function loadAssessmentPage(assessmentId: string) {
   const user = await requireSession();
   const bundle = await loadAssessmentBundle(assessmentId);
   if (!bundle || !bundle.organization || !bundle.standard) notFound();
-  if (!canViewAssessment(user.access, bundle.assessment)) redirect("/dashboard");
+  if (!canViewAssessment(user.access, bundle.assessment)) redirect("/bizcar/dashboard");
   const model = assembleEngine(bundle);
   return {
     user,

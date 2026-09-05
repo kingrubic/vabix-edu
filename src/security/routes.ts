@@ -1,12 +1,4 @@
-export const BIZCAR_PREFIXES = [
-  "/engine",
-  "/login",
-  "/dashboard",
-  "/organizations",
-  "/assessments",
-  "/admin",
-  "/api/bizcar",
-] as const;
+import { isBizcarAppPath, isPublicBizcarAppPath } from "@/lib/bizcarPaths";
 
 export function isBizcarHost(host: string | null | undefined): boolean {
   if (!host) return false;
@@ -20,9 +12,29 @@ export function isBizcarHost(host: string | null | undefined): boolean {
 }
 
 export function isBizcarPath(pathname: string): boolean {
-  return BIZCAR_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  return isBizcarAppPath(pathname) || pathname.startsWith("/api/bizcar");
 }
 
 export function isPublicBizcarPath(pathname: string): boolean {
-  return pathname === "/engine" || pathname === "/login" || pathname.startsWith("/api/bizcar/auth");
+  return isPublicBizcarAppPath(pathname);
+}
+
+const HOST_ALIASES: Record<string, string> = {
+  "/": "/bizcar",
+  "/engine": "/bizcar/engine",
+  "/login": "/bizcar/login",
+  "/dashboard": "/bizcar/dashboard",
+  "/assessments": "/bizcar/assessments",
+  "/admin": "/bizcar/admin",
+};
+
+export function rewriteBizcarHostPath(pathname: string): string | null {
+  if (HOST_ALIASES[pathname]) return HOST_ALIASES[pathname];
+  for (const [from, to] of Object.entries(HOST_ALIASES)) {
+    if (from !== "/" && pathname.startsWith(`${from}/`)) {
+      return `${to}${pathname.slice(from.length)}`;
+    }
+  }
+  if (pathname.startsWith("/organizations/")) return `/bizcar${pathname}`;
+  return null;
 }

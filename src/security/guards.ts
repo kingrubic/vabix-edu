@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { bizcarPath } from "@/lib/bizcarPaths";
 import { getCurrentUser, type CurrentUser } from "./session";
 import {
   canAccessOrganization,
@@ -14,20 +15,20 @@ import { getAssessment } from "@/db/repo";
 
 export async function requireSession(): Promise<CurrentUser> {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect(bizcarPath.login);
   return user;
 }
 
 export async function requireOrgAccess(organizationId: string): Promise<CurrentUser> {
   const user = await requireSession();
-  if (!canAccessOrganization(user.access, organizationId)) redirect("/dashboard");
+  if (!canAccessOrganization(user.access, organizationId)) redirect(bizcarPath.dashboard);
   return user;
 }
 
 export async function requireAssessmentView(assessmentId: string) {
   const user = await requireSession();
   const assessment = await getAssessment(assessmentId);
-  if (!assessment || !canViewAssessment(user.access, assessment)) redirect("/dashboard");
+  if (!assessment || !canViewAssessment(user.access, assessment)) redirect(bizcarPath.dashboard);
   return { user, assessment };
 }
 

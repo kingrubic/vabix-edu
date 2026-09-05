@@ -157,7 +157,7 @@ export function CorporateHome() {
               ))}
             </ol>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/engine" variant="gold">
+              <Button href="/bizcar/engine" variant="gold">
                 Mở MyBizCar 3D →
               </Button>
               <Button href="/mo-hinh-phuong-phap/bizcar" variant="outline" className="border-white/40 text-white">

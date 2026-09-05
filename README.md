@@ -42,10 +42,14 @@ npm install
 npm run dev
 ```
 
-- Website doanh nghiệp: http://localhost:3000
-- Module chính (động cơ 3D): http://localhost:3000/engine
-- Đăng nhập workspace: http://localhost:3000/login
-- Trên domain mục tiêu: `https://bizcar.vabix.edu.vn/` (giới thiệu) và `https://bizcar.vabix.edu.vn/engine` (động cơ 3D). Subdomain này chưa có DNS — cùng app sẽ chạy tại `https://vabix.edu.vn/engine` sau khi merge.
+MyBizCar local **không dùng** `/` — `/` vẫn là website VABIX.
+
+- Giới thiệu MyBizCar: http://localhost:3000/bizcar
+- Động cơ 3D: http://localhost:3000/bizcar/engine
+- Đăng nhập: http://localhost:3000/bizcar/login
+- Dashboard: http://localhost:3000/bizcar/dashboard
+
+Trên domain `bizcar.vabix.edu.vn` (khi có DNS), middleware map `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
 
 Tài khoản DEMO (mật khẩu chung `Demo@Vabix2026!`):
 
@@ -66,7 +70,7 @@ Xem `.env.example`. Bắt buộc trên production: `AUTH_SECRET`.
 
 1. Trỏ DNS về cùng deployment Next.js.
 2. Đặt `BIZCAR_HOST=bizcar.vabix.edu.vn`.
-3. Middleware rewrite `/` trên host này sang `/engine`.
+3. Middleware rewrite `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
 4. Bật HTTPS và đặt `AUTH_SECRET` đủ dài.
 5. Khi có Supabase/PostgreSQL: chạy `prisma/migrations/0001_init_rls.sql` rồi đặt `DATABASE_URL` (adapter Prisma sẽ được nối vào `src/db` — hiện MVP dùng file store + schema sẵn).
 

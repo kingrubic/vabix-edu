@@ -28,13 +28,13 @@ export default async function OrganizationPage({ params }: { params: Promise<{ o
           {organization.industry} · {organization.stage} · {organization.size}
         </p>
         <p className="text-sm text-amber-100/70">{organization.confidentialityNote}</p>
-        <Link href="/assessments/new" className="inline-flex min-h-11 items-center text-vabix-gold">
+        <Link href="/bizcar/assessments/new" className="inline-flex min-h-11 items-center text-vabix-gold">
           Tạo đánh giá cho doanh nghiệp này
         </Link>
         {assessments.map((assessment) => (
           <Panel key={assessment.id}>
             <div className="flex flex-wrap items-center gap-2">
-              <Link href={`/assessments/${assessment.id}`} className="text-lg font-semibold">
+              <Link href={`/bizcar/assessments/${assessment.id}`} className="text-lg font-semibold">
                 {assessment.title}
               </Link>
               <StatusBadge status={assessment.status} />

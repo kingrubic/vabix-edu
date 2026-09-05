@@ -12,7 +12,7 @@ export const metadata = { title: "Người dùng — MyBizCar", robots: { index:
 export default async function UsersPage() {
   await loadStore();
   const user = await requireSession();
-  if (!isPlatformAdmin(user.access)) redirect("/dashboard");
+  if (!isPlatformAdmin(user.access)) redirect("/bizcar/dashboard");
   const store = await loadStore();
   return (
     <BizcarShell user={user} title="Người dùng">
