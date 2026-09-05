@@ -8,14 +8,6 @@ export async function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-pathname", pathname);
 
-  if (isBizcarHost(host) && pathname === "/") {
-    const url = request.nextUrl.clone();
-    url.pathname = "/engine";
-    const rewrite = NextResponse.rewrite(url);
-    rewrite.headers.set("x-pathname", "/engine");
-    return rewrite;
-  }
-
   if (isBizcarPath(pathname) && !isPublicBizcarPath(pathname)) {
     const token = request.cookies.get(SESSION_COOKIE)?.value;
     const session = token ? await verifySession(token) : null;

@@ -156,9 +156,12 @@ export function CorporateHome() {
                 </li>
               ))}
             </ol>
-            <div className="mt-8">
-              <Button href="/mo-hinh-phuong-phap/bizcar" variant="gold">
-                Khám phá The BizCar →
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/engine" variant="gold">
+                Mở MyBizCar 3D →
+              </Button>
+              <Button href="/mo-hinh-phuong-phap/bizcar" variant="outline" className="border-white/40 text-white">
+                Khám phá The BizCar
               </Button>
             </div>
           </div>

@@ -18,11 +18,11 @@ export function EngineLanding() {
         <p className="mt-4 max-w-3xl text-sm text-amber-100/80">{MNEMONIC_DISCLAIMER}</p>
         <p className="mt-2 text-sm text-white/50">{DEVELOPMENT_DISCLAIMER}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/login" className="inline-flex min-h-11 items-center bg-vabix-gold px-5 font-semibold text-vabix-deep-teal">
-            Vào không gian làm việc
+          <Link href="/engine" className="inline-flex min-h-11 items-center bg-vabix-gold px-5 font-semibold text-vabix-deep-teal">
+            Mở động cơ 3D
           </Link>
-          <Link href="/login" className="inline-flex min-h-11 items-center border border-white/30 px-5 text-white">
-            Xem đánh giá minh họa
+          <Link href="/login?next=/dashboard" className="inline-flex min-h-11 items-center border border-white/30 px-5 text-white">
+            Vào không gian làm việc
           </Link>
         </div>
         <div className="mt-14 grid gap-4 md:grid-cols-4">

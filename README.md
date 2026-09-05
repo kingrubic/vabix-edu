@@ -43,7 +43,9 @@ npm run dev
 ```
 
 - Website doanh nghiệp: http://localhost:3000
-- MyBizCar: http://localhost:3000/engine rồi `/login`
+- Module chính (động cơ 3D): http://localhost:3000/engine
+- Đăng nhập workspace: http://localhost:3000/login
+- Trên domain mục tiêu: `https://bizcar.vabix.edu.vn/` (giới thiệu) và `https://bizcar.vabix.edu.vn/engine` (động cơ 3D). Subdomain này chưa có DNS — cùng app sẽ chạy tại `https://vabix.edu.vn/engine` sau khi merge.
 
 Tài khoản DEMO (mật khẩu chung `Demo@Vabix2026!`):
 
