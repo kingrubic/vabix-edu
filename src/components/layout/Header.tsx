@@ -63,8 +63,8 @@ export function Header() {
           >
             Cổng Cư dân
           </Link>
-          <Button href="/ket-noi" variant="gold" className="hidden min-h-10 px-4 text-sm md:inline-flex">
-            Kết nối cùng VABIX
+          <Button href="/ket-noi#tu-van" variant="gold" className="hidden min-h-10 px-4 text-sm md:inline-flex">
+            Trao đổi nhu cầu doanh nghiệp
           </Button>
           <button
             type="button"

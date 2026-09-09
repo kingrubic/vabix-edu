@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/siteConfig";
-import { solutions } from "@/content/solutions";
+import { consultingServices } from "@/content/consulting";
+import { programs } from "@/content/programs";
 import { methodologies } from "@/content/methodologies";
 import { experts } from "@/content/experts";
 import { articles } from "@/content/articles";
 import { caseStudies } from "@/content/caseStudies";
 import { events } from "@/content/events";
 import { handbooks, books, villages, collections, supportServices } from "@/content/network";
+import { knowledgeProducts } from "@/content/knowledgeProducts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -14,7 +16,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/ve-vabix",
     "/giai-phap",
+    "/giai-phap/dao-tao-huan-luyen",
+    "/giai-phap/tu-van-chuyen-doi",
+    "/giai-phap/trustworking",
+    "/chuong-trinh",
     "/mo-hinh-phuong-phap",
+    "/san-pham-tri-thuc",
+    "/nhan-luc-mo-nhan-luc-so",
     "/mang-luoi",
     "/mang-luoi/chuyen-gia",
     "/mang-luoi/doi-tac",
@@ -37,8 +45,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/khuyen-cao",
   ];
   const extra = [
-    ...solutions.map((s) => `/giai-phap/${s.slug}`),
+    ...consultingServices.map((s) => `/giai-phap/tu-van-chuyen-doi/${s.slug}`),
+    ...programs.filter((p) => p.status === "published").map((p) => `/chuong-trinh/${p.slug}`),
     ...methodologies.map((m) => `/mo-hinh-phuong-phap/${m.slug}`),
+    ...knowledgeProducts.map((p) => `/san-pham-tri-thuc/${p.slug}`),
     ...experts.map((e) => `/mang-luoi/chuyen-gia/${e.slug}`),
     ...articles.map((a) => `/tri-thuc/${a.slug}`),
     ...caseStudies.map((c) => `/tri-thuc/case-study/${c.slug}`),

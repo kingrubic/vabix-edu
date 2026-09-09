@@ -5,16 +5,24 @@ import { siteConfig } from "@/lib/siteConfig";
 import type { LeadType } from "@/lib/leads";
 import { Button } from "@/components/ui/Button";
 
-const needs = [
-  "Tư vấn chiến lược",
-  "Đào tạo doanh nhân",
-  "Huấn luyện doanh nghiệp",
-  "Thiết kế & vận hành (BizCar)",
-  "Kết nối doanh nghiệp",
-  "Xúc tiến thương mại",
+const defaultNeeds = [
+  "Đào tạo & huấn luyện",
+  "Tư vấn chuyển đổi doanh nghiệp",
+  "Trustworking — tìm nhà cung cấp / đối tác",
+  "Trustworking — giới thiệu giải pháp",
+  "Kết nối chuyên gia",
   "Đăng ký chương trình",
+  "Hợp tác cùng VABIX",
   "Khác",
 ];
+
+const needByType: Partial<Record<LeadType, string[]>> = {
+  "trust-buyer": ["Tìm nhà cung cấp", "Tìm đối tác hợp tác", "Tìm giải pháp theo ngành", "Khác"],
+  "trust-supplier": ["Giới thiệu sản phẩm / dịch vụ", "Mở rộng thị trường", "Tham gia làng ngành", "Khác"],
+  "trust-expert": ["Tư vấn chuyên môn", "Đồng hành dự án", "Giảng dạy / huấn luyện", "Khác"],
+  partnership: ["Hợp tác chương trình", "Hợp tác truyền thông", "Hợp tác mạng lưới", "Khác"],
+  program: ["Đăng ký chương trình", "Tư vấn chương trình theo yêu cầu", "Khảo sát nội bộ", "Khác"],
+};
 
 const sizes = ["Dưới 20 người", "20–50", "51–200", "Trên 200"];
 
@@ -32,6 +40,7 @@ export function LeadForm({
   const started = useMemo(() => Date.now(), []);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const needs = needByType[type] ?? defaultNeeds;
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -115,7 +124,7 @@ export function LeadForm({
           <a className="underline" href="/chinh-sach-quyen-rieng-tu">
             chính sách quyền riêng tư
           </a>{" "}
-          và việc VABIX liên hệ về yêu cầu này.
+          và việc VABIX lưu trữ, bảo mật và liên hệ về yêu cầu này. Thông tin không được dùng để chào bán một chiều.
         </span>
       </label>
       {message ? (

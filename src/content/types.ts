@@ -167,3 +167,93 @@ export type Metric = {
   value: string;
   label: string;
 };
+
+export type PillarId = "dao-tao-huan-luyen" | "tu-van-chuyen-doi" | "trustworking";
+
+export type Pillar = {
+  id: PillarId;
+  number: string;
+  en: string;
+  vi: string;
+  href: string;
+  problem: string;
+  value: string;
+  summary: string;
+  services: { label: string; href: string }[];
+  cta: { label: string; href: string };
+};
+
+export type ProgramGroupId = "ceo" | "management" | "custom";
+
+export type TopicCategoryId =
+  | "lanh-dao-quan-tri"
+  | "chien-luoc-mo-hinh"
+  | "to-chuc-van-hanh"
+  | "con-nguoi-van-hoa"
+  | "thi-truong-khach-hang"
+  | "tai-chinh"
+  | "cong-nghe-ai";
+
+export type TrainingProgram = {
+  id: string;
+  slug: string;
+  title: string;
+  shortTitle: string;
+  englishName?: string;
+  group: ProgramGroupId;
+  audience: string;
+  audienceList: string[];
+  problem: string;
+  objectives: string[];
+  topics: string[];
+  topicCategories: TopicCategoryId[];
+  methodology: string;
+  deliverables: string[];
+  outcomes: string[];
+  duration?: string;
+  durationNote?: string;
+  format?: string;
+  certificate?: string;
+  faculty?: string[];
+  status: "published" | "draft";
+  featured: boolean;
+  relatedPrograms: string[];
+  relatedModels: string[];
+  seoDescription: string;
+};
+
+export type TrainingGroup = {
+  id: string;
+  number: string;
+  title: string;
+  audience: string;
+  goal: string;
+  topics: string[];
+  outcomes: string[];
+};
+
+export type ConsultingService = {
+  id: string;
+  slug: string;
+  number: string;
+  title: string;
+  summary: string;
+  scope: string[];
+  deliverables: string[];
+  outcomes: string[];
+};
+
+export type KnowledgeProduct = {
+  id: string;
+  slug: string;
+  category: "sach" | "cam-nang" | "bieu-mau" | "hoc-lieu";
+  title: string;
+  summary: string;
+  status: "published" | "coming";
+  href?: string;
+};
+
+export type CoreValue = {
+  title: string;
+  body: string;
+};

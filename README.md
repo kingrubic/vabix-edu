@@ -1,6 +1,6 @@
-# VABIX — Làng kết nối tri thức & kinh doanh
+# VABIX — Hệ sinh thái tri thức thực chiến
 
-Website doanh nghiệp mới của VABIX, xây trên **Next.js App Router**, TypeScript và hệ thống thiết kế teal + gold.
+Website doanh nghiệp trên **Next.js App Router**, TypeScript, brand teal + gold.
 
 ## Chạy local
 
@@ -11,7 +11,7 @@ npm run dev
 
 Mở [http://localhost:3000](http://localhost:3000).
 
-## Lệnh kiểm tra
+## Kiểm tra
 
 ```bash
 npm run lint
@@ -19,12 +19,19 @@ npm run typecheck
 npm run build
 ```
 
-## Cấu trúc nội dung
+## Kiến trúc thông tin (3T)
 
-- Liên hệ, mạng xã hội, cổng cư dân: `src/lib/siteConfig.ts`
-- Chuyên gia, bài viết, case study, sự kiện, giải pháp, mô hình: `src/content/`
-- Form lead gọi `POST /api/leads`. Khi chưa có backend, set `LEAD_WEBHOOK_URL` hoặc form sẽ trả lỗi trung thực (không giả success).
+- `/` Trang chủ
+- `/ve-vabix` Sứ mệnh, khát vọng 2031, cam kết, 5 giá trị
+- `/giai-phap` Tổng quan 3T
+- `/giai-phap/dao-tao-huan-luyen` Training & Coaching
+- `/giai-phap/tu-van-chuyen-doi` Transformation (+ 12 dịch vụ)
+- `/giai-phap/trustworking` Trustworking
+- `/chuong-trinh` Catalog đào tạo
+- `/mo-hinh-phuong-phap` BizCar, 3W, B2A, BABOSO, KORA, KLASS, MyBizCar
+- `/san-pham-tri-thuc` Sách, cẩm nang, biểu mẫu, học liệu
+- `/nhan-luc-mo-nhan-luc-so` Nhân lực mở & nhân lực số
 
-## Ghi chú audit
+Nội dung: `src/content/`. Liên hệ: `src/lib/siteConfig.ts`. Form: `POST /api/leads` (cần `LEAD_WEBHOOK_URL`).
 
-Thư mục gốc ban đầu **không có codebase website** — chỉ có hồ sơ năng lực 2026, logo và slide. Site cũ tại https://vabix.vn/ chạy nền tảng ShopXanh (marketplace). Dự án này tái cấu trúc thông tin, giữ chức năng cư dân / làng ngành / nhà cung cấp / cẩm nang / sách / bộ sưu tập qua IA mới và redirect URL cũ.
+Xem `CONTENT_APPROVAL.md` cho dữ liệu chưa được Founder duyệt.

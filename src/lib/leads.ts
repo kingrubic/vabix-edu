@@ -1,4 +1,12 @@
-export type LeadType = "consult" | "connect" | "program" | "event";
+export type LeadType =
+  | "consult"
+  | "connect"
+  | "program"
+  | "event"
+  | "trust-buyer"
+  | "trust-supplier"
+  | "trust-expert"
+  | "partnership";
 
 export type LeadPayload = {
   type: LeadType;

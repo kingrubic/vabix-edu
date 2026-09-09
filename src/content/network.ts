@@ -110,10 +110,10 @@ export const programs: Program[] = [
 ];
 
 export const supplierBenefits = [
-  { n: "01", title: "Mở rộng thị trường, gia tăng doanh thu", body: "Cư dân kết nối tìm khách hàng phù hợp, giảm gánh nặng đội ngũ thị trường." },
-  { n: "02", title: "Hỗ trợ marketing và truyền thông", body: "Thương hiệu được lan tỏa qua nền tảng, sự kiện và mạng lưới cư dân." },
-  { n: "03", title: "Cố vấn bởi đội ngũ chuyên gia", body: "Tiếp cận tư vấn quản trị, trải nghiệm khách hàng và pháp lý." },
-  { n: "04", title: "Nguồn nhân lực chất lượng", body: "Đào tạo và cung ứng nhân lực theo từng giai đoạn phát triển." },
-  { n: "05", title: "Nền tảng công nghệ và nội dung", body: "Gian hàng số và nội dung giá trị để quảng bá tiết kiệm hơn." },
-  { n: "06", title: "Hiệp lực chăm sóc khách hàng", body: "Chính sách chăm sóc chung giúp giữ chân khách hàng trung thành." },
+  { n: "01", title: "Tiếp cận đúng thị trường", body: "Trustworking sàng lọc nhu cầu trước khi giới thiệu, giảm thời gian gặp đối tác không phù hợp." },
+  { n: "02", title: "Hồ sơ và bằng chứng năng lực", body: "Chuẩn hóa hồ sơ cung cấp để nâng độ tin cậy khi được kết nối." },
+  { n: "03", title: "Phản hồi để hoàn thiện", body: "Nhận phản hồi từ quá trình kết nối để điều chỉnh sản phẩm, dịch vụ và cách tiếp cận." },
+  { n: "04", title: "Mạng lưới chuyên gia", body: "Tiếp cận chuyên môn trong hệ sinh thái khi bài toán cần đồng hành." },
+  { n: "05", title: "Sự kiện và làng ngành", body: "Tham gia hoạt động cộng đồng có chủ đích, không phải giao lưu danh thiếp." },
+  { n: "06", title: "Hợp tác dài hạn", body: "Theo đuổi quan hệ bền vững. VABIX không bảo đảm doanh thu hay ký kết thành công." },
 ];

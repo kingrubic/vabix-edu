@@ -2,7 +2,7 @@
  * Centralized VABIX site configuration.
  * All contact, social and portal URLs must be consumed from this file.
  *
- * Source of truth: Hồ sơ năng lực VABIX 2026 + public website vabix.vn.
+ * Source of truth: Hồ sơ năng lực VABIX 2026 + định vị Founder 2026 + public website.
  * Historical materials contain conflicting contact details; do not hardcode
  * phone/email/address in components.
  */
@@ -10,16 +10,15 @@ export const siteConfig = {
   siteName: "VABIX",
   legalName: "Công ty Cổ phần VABIX",
   tagline: "Kết tri thức. Nối giá trị.",
-  positioning: "Làng kết nối tri thức & kinh doanh",
-  statement: "Kiến tạo nội lực. Mở rộng kết nối. Phát triển bền vững.",
+  positioning: "Hệ sinh thái tri thức thực chiến và phát triển doanh nghiệp",
+  statement: "Chuyển hóa tri thức thành năng lực. Đồng hành kiến tạo doanh nghiệp phát triển bền vững.",
   description:
-    "VABIX đồng hành cùng doanh nhân và doanh nghiệp nâng cao năng lực quản trị, thiết kế hệ thống vận hành và mở rộng mạng lưới hợp tác thông qua tri thức thực chiến.",
+    "VABIX đồng hành cùng doanh chủ, lãnh đạo và doanh nghiệp thông qua đào tạo & huấn luyện thực chiến, tư vấn chuyển đổi và Trustworking — kết nối kinh doanh dựa trên niềm tin.",
   website: "https://vabix.vn",
   eduWebsite: "https://vabix.edu.vn",
   locale: "vi_VN",
   language: "vi",
   foundedYear: 2025,
-  researchYearsLabel: "20+",
   taxId: "0318798694",
   founder: {
     name: "Nguyễn Chí Thành",
@@ -55,9 +54,9 @@ export const siteConfig = {
     marketplace: "https://vabix.vn/career-web-group",
   },
   cta: {
-    primary: { label: "Kết nối cùng VABIX", href: "/ket-noi" },
+    primary: { label: "Trao đổi nhu cầu doanh nghiệp", href: "/ket-noi#tu-van" },
     consult: { label: "Đăng ký tư vấn", href: "/ket-noi#tu-van" },
-    explore: { label: "Khám phá VABIX", href: "/ve-vabix" },
+    explore: { label: "Khám phá 3 mũi nhọn", href: "/giai-phap" },
     schedule: { label: "Đặt lịch trao đổi", href: "/ket-noi#tu-van" },
     contact: { label: "Liên hệ VABIX", href: "/lien-he" },
   },

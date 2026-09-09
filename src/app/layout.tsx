@@ -16,7 +16,7 @@ const beVietnam = Be_Vietnam_Pro({
 
 export const metadata: Metadata = {
   ...createMetadata({
-    title: "VABIX — Làng kết nối tri thức & kinh doanh",
+    title: "VABIX — Kết tri thức. Nối giá trị.",
     description: siteConfig.description,
     path: "/",
   }),
@@ -24,11 +24,13 @@ export const metadata: Metadata = {
   keywords: [
     "VABIX",
     "BizCar",
-    "tư vấn chiến lược",
-    "đào tạo doanh nhân",
-    "kết nối doanh nghiệp",
     "BMDO",
-    "B2A",
+    "MBM",
+    "Trustworking",
+    "đào tạo CEO",
+    "tư vấn chuyển đổi doanh nghiệp",
+    "huấn luyện doanh nghiệp",
+    "3W",
   ],
 };
 
