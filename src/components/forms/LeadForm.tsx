@@ -83,11 +83,11 @@ export function LeadForm({
     <form onSubmit={onSubmit} className="space-y-4" noValidate>
       {title ? <h3 className="text-xl font-semibold text-vabix-deep-teal">{title}</h3> : null}
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field name="name" label="Họ tên" required />
-        <Field name="company" label="Doanh nghiệp" />
-        <Field name="role" label="Chức vụ" />
-        <Field name="phone" label="Số điện thoại" type="tel" required />
-        <Field name="email" label="Email" type="email" required />
+        <Field name="name" label="Họ tên" required autoComplete="name" />
+        <Field name="company" label="Doanh nghiệp" autoComplete="organization" />
+        <Field name="role" label="Chức vụ" autoComplete="organization-title" />
+        <Field name="phone" label="Số điện thoại" type="tel" required autoComplete="tel" />
+        <Field name="email" label="Email" type="email" required autoComplete="email" />
         <label className="block text-sm">
           <span className="mb-1.5 block font-medium text-vabix-deep-teal">Quy mô doanh nghiệp</span>
           <select name="companySize" className="input">
@@ -157,11 +157,13 @@ function Field({
   label,
   type = "text",
   required,
+  autoComplete,
 }: {
   name: string;
   label: string;
   type?: string;
   required?: boolean;
+  autoComplete?: string;
 }) {
   return (
     <label className="block text-sm">
@@ -169,7 +171,7 @@ function Field({
         {label}
         {required ? " *" : ""}
       </span>
-      <input name={name} type={type} required={required} className="input" />
+      <input name={name} type={type} required={required} autoComplete={autoComplete} className="input" />
     </label>
   );
 }
