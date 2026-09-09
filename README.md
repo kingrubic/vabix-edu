@@ -52,7 +52,7 @@ Trên local và preview, `/` mở MyBizCar (không mở website VABIX). Producti
 
 Trên domain `bizcar.vabix.edu.vn` (khi có DNS), middleware map `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
 
-Tài khoản DEMO (mật khẩu chung `Demo@Vabix2026!`):
+Tài khoản DEMO (email / vai trò — mật khẩu không lưu trong mã nguồn):
 
 - `ceo@demo.vabix.edu.vn` — COMPANY_ADMIN
 - `coach@vabix.edu.vn` — COACH_EVALUATOR
@@ -61,7 +61,7 @@ Tài khoản DEMO (mật khẩu chung `Demo@Vabix2026!`):
 - `member@demo.vabix.edu.vn` — COMPANY_MEMBER
 - `viewer@demo.vabix.edu.vn` — VIEWER
 
-Khi chưa có `DATABASE_URL`, ứng dụng dùng kho JSON cục bộ `data/bizcar-store.json` (tự seed lần đầu).
+Khi chưa có `DATABASE_URL`, ứng dụng dùng kho JSON cục bộ `data/bizcar-store.json`. File đã có thì được tải nguyên trạng. Lần seed đầu tiên (chưa có file) bắt buộc `BIZCAR_DEMO_SEED_PASSWORD` — xem `.env.example`; thiếu biến này thì seed thất bại, không tạo mật khẩu mặc định.
 
 ### Biến môi trường
 

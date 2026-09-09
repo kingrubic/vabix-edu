@@ -18,5 +18,3 @@ export const IDS = {
     demo: "00000000-0000-4000-8000-000000000040",
   },
 } as const;
-
-export const DEMO_PASSWORD = "Demo@Vabix2026!";
