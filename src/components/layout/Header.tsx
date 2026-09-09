@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { primaryNav } from "@/content/navigation";
+import { siteConfig } from "@/lib/siteConfig";
 import { Button } from "@/components/ui/Button";
 import { MegaMenu } from "@/components/layout/MegaMenu";
 import { MobileMenu } from "@/components/layout/MobileMenu";
@@ -40,50 +41,54 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid
-          ? "border-b border-vabix-deep-teal/10 bg-vabix-warm/95 text-vabix-deep-teal shadow-[0_8px_30px_rgba(22,60,62,0.08)] backdrop-blur"
-          : "bg-transparent text-white"
-      }`}
-    >
-      <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-4 sm:h-[76px] sm:px-6 lg:px-8">
-        <Link href="/vabix" className="flex shrink-0 items-center" aria-label="VABIX — trang chủ">
-          <Logo variant={solid ? "light" : "dark"} priority />
-        </Link>
-
-        <MegaMenu items={primaryNav} inverted={!solid} />
-
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Link
-            href="/cong-cu-dan"
-            className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase lg:inline ${
-              solid ? "text-vabix-muted hover:text-vabix-deep-teal" : "text-white/80 hover:text-white"
-            }`}
-          >
-            Cổng Cư dân
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+          solid
+            ? `border-b border-vabix-deep-teal/10 text-vabix-deep-teal shadow-[0_8px_30px_rgba(22,60,62,0.08)] ${
+                open ? "bg-vabix-warm" : "bg-vabix-warm/95 backdrop-blur"
+              }`
+            : "bg-transparent text-white"
+        }`}
+      >
+        <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-4 sm:h-[76px] sm:px-6 lg:px-8">
+          <Link href={siteConfig.portals.vabixHome} className="flex shrink-0 items-center" aria-label="VABIX — trang chủ">
+            <Logo variant={solid ? "light" : "dark"} priority />
           </Link>
-          <Button href="/ket-noi" variant="gold" className="hidden min-h-10 px-4 text-sm md:inline-flex">
-            Kết nối cùng VABIX
-          </Button>
-          <button
-            type="button"
-            className="inline-flex h-11 w-11 items-center justify-center lg:hidden"
-            aria-expanded={open}
-            aria-controls={menuId}
-            aria-label={open ? "Đóng menu" : "Mở menu"}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span className="sr-only">Menu</span>
-            <span className="flex w-5 flex-col gap-1.5">
-              <span className={`h-px w-full ${solid ? "bg-vabix-deep-teal" : "bg-white"}`} />
-              <span className={`h-px w-full ${solid ? "bg-vabix-deep-teal" : "bg-white"}`} />
-              <span className={`h-px w-3 ${solid ? "bg-vabix-deep-teal" : "bg-white"}`} />
-            </span>
-          </button>
+
+          <MegaMenu items={primaryNav} inverted={!solid} />
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              href="/cong-cu-dan"
+              className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase xl:inline ${
+                solid ? "text-vabix-muted hover:text-vabix-deep-teal" : "text-white/80 hover:text-white"
+              }`}
+            >
+              Cổng Cư dân
+            </Link>
+            <Button href="/ket-noi#tu-van" variant="gold" className="hidden min-h-10 px-4 text-sm xl:inline-flex">
+              Trao đổi nhu cầu doanh nghiệp
+            </Button>
+            <button
+              type="button"
+              className="inline-flex h-11 w-11 items-center justify-center xl:hidden"
+              aria-expanded={open}
+              aria-controls={menuId}
+              aria-label={open ? "Đóng menu" : "Mở menu"}
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span className="sr-only">Menu</span>
+              <span className="flex w-5 flex-col gap-1.5">
+                <span className={`h-px w-full ${solid ? "bg-vabix-deep-teal" : "bg-white"}`} />
+                <span className={`h-px w-full ${solid ? "bg-vabix-deep-teal" : "bg-white"}`} />
+                <span className={`h-px w-3 ${solid ? "bg-vabix-deep-teal" : "bg-white"}`} />
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
       <MobileMenu id={menuId} open={open} onClose={() => setOpen(false)} />
-    </header>
+    </>
   );
 }

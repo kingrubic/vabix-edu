@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
 import { getMethodology, methodologies, bizCarBlocks } from "@/content/methodologies";
+import { threeW } from "@/content/threeW";
 import { MethodologyTemplate } from "@/components/templates/MethodologyTemplate";
 import { featuredExperts } from "@/content/experts";
 import { caseStudies } from "@/content/caseStudies";
 import { ExpertCard, CaseStudyCard } from "@/components/cards/Cards";
 import { SectionHeading } from "@/components/ui/Section";
 import { createMetadata } from "@/lib/seo";
+import Link from "next/link";
 
 export function generateStaticParams() {
   return methodologies.map((m) => ({ slug: m.slug }));
@@ -62,10 +64,17 @@ export default async function MethodPage({ params }: { params: Promise<{ slug: s
           </p>
         </section>
         <section>
-          <SectionHeading title="Chương trình BMDO" />
+          <SectionHeading title="Chương trình BMDO, MBM và công cụ MyBizCar" />
           <p className="measure mt-4 text-vabix-muted">
-            BMDO là xưởng thiết kế vận hành trên nền BizCar. Học viên mang dữ liệu thật và ra về với phiên bản thiết kế của chính doanh nghiệp.
+            BizCar là mô hình. BMDO là thao trường 30 buổi đào tạo thực hành. MBM là chương trình 12 tháng làm chủ mô hình. 3W là chuẩn thành công WOW–WELL–WIN. MyBizCar là công cụ đánh giá trên 12 khối.
           </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href="/chuong-trinh/bmdo" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">BMDO</Link>
+            <Link href="/chuong-trinh/mbm" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">MBM</Link>
+            <Link href="/mo-hinh-phuong-phap/3w" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">3W</Link>
+            <Link href="/mo-hinh-phuong-phap/mybizcar" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">MyBizCar</Link>
+            <Link href="/giai-phap/tu-van-chuyen-doi" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">Tư vấn chuyển đổi</Link>
+          </div>
         </section>
         <section className="bg-vabix-ivory p-6">
           <SectionHeading title="Case study" />
@@ -93,6 +102,34 @@ export default async function MethodPage({ params }: { params: Promise<{ slug: s
             <summary className="cursor-pointer font-semibold text-vabix-deep-teal">BizCar có phải chỉ dành cho doanh nghiệp lớn?</summary>
             <p className="mt-2 text-sm text-vabix-muted">Không. SME và startup dùng BizCar như ngôn ngữ chung để ưu tiên đúng chỗ khi nguồn lực hữu hạn.</p>
           </details>
+        </section>
+      </div>
+    ) : slug === "3w" ? (
+      <div className="space-y-10">
+        <p className="max-w-2xl text-vabix-muted">{threeW.summary}</p>
+        <section>
+          <SectionHeading title="Khung đánh giá đầu ra — không phải slogan" />
+          <div className="mt-6 grid gap-5">
+            {threeW.pillars.map((w) => (
+              <article key={w.key} className="border border-vabix-deep-teal/10 p-5">
+                <p className="text-sm font-semibold tracking-widest text-vabix-gold">{w.key}</p>
+                <h3 className="mt-1 text-xl font-semibold text-vabix-deep-teal">{w.title}</h3>
+                <p className="mt-2 text-vabix-muted">{w.body}</p>
+                <p className="mt-3 text-sm text-vabix-deep-teal">Ví dụ đầu ra: {w.outputs.join(" · ")}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section>
+          <SectionHeading title="Phân biệt mô hình, chương trình và chuẩn" />
+          <dl className="mt-4 space-y-3">
+            {threeW.distinction.map((d) => (
+              <div key={d.term}>
+                <dt className="font-semibold text-vabix-deep-teal">{d.term}</dt>
+                <dd className="text-sm text-vabix-muted">{d.meaning}</dd>
+              </div>
+            ))}
+          </dl>
         </section>
       </div>
     ) : undefined;

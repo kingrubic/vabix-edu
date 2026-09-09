@@ -14,8 +14,8 @@ export default function BecomePartnerPage() {
   return (
     <>
       <PageHero
-        title="Trở thành đối tác / nhà cung cấp"
-        description="VABIX xây dựng môi trường kết nối dựa trên hiểu biết doanh nghiệp, uy tín thành viên và nguyên tắc cùng phát triển."
+        title="Đề xuất hợp tác cùng VABIX"
+        description="Trustworking sàng lọc ban đầu theo hồ sơ, năng lực và bằng chứng. VABIX không bảo lãnh pháp lý, không bảo đảm doanh thu hay ký kết thành công."
         crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Mạng lưới", href: "/mang-luoi" }, { name: "Trở thành đối tác" }]}
       />
       <Container className="grid gap-12 py-16 lg:grid-cols-2">
@@ -35,7 +35,7 @@ export default function BecomePartnerPage() {
           </p>
         </div>
         <div className="border border-vabix-deep-teal/10 bg-white p-6">
-          <LeadForm type="connect" title="Kết nối doanh nghiệp" />
+            <LeadForm type="partnership" title="Đề xuất hợp tác" />
         </div>
       </Container>
     </>

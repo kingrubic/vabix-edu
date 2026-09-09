@@ -15,7 +15,7 @@ const beVietnam = Be_Vietnam_Pro({
 
 export const metadata: Metadata = {
   ...createMetadata({
-    title: "VABIX — Làng kết nối tri thức & kinh doanh",
+    title: "VABIX — Kết tri thức. Nối giá trị.",
     description: siteConfig.description,
     path: "/",
   }),
@@ -23,19 +23,22 @@ export const metadata: Metadata = {
   keywords: [
     "VABIX",
     "BizCar",
-    "tư vấn chiến lược",
-    "đào tạo doanh nhân",
-    "kết nối doanh nghiệp",
     "BMDO",
+    "MBM",
     "B2A",
     "MyBizCar",
     "MTUA",
+    "Trustworking",
+    "đào tạo CEO",
+    "tư vấn chuyển đổi doanh nghiệp",
+    "huấn luyện doanh nghiệp",
+    "3W",
   ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi" className={beVietnam.variable}>
+    <html lang="vi" className={beVietnam.variable} data-scroll-behavior="smooth">
       <body className="min-h-screen antialiased">
         <JsonLd data={organizationJsonLd()} />
         <a

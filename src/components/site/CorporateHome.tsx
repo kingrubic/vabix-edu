@@ -1,26 +1,35 @@
 import Link from "next/link";
-import { metrics } from "@/content/metrics";
-import { solutions } from "@/content/solutions";
-import { painPoints, methodologySteps } from "@/content/about";
+import { proofSignals } from "@/content/metrics";
+import { pillars, supportingLayers } from "@/content/pillars";
+import { painPoints } from "@/content/about";
+import {
+  heroHeadline,
+  heroSubheadline,
+  supportingMessage,
+  tagline,
+  valueJourney,
+} from "@/content/brand";
+import { featuredPrograms } from "@/content/programs";
+import { threeW } from "@/content/threeW";
+import { consultingProcess } from "@/content/consulting";
+import { trustworking } from "@/content/trustworking";
 import { caseStudies } from "@/content/caseStudies";
 import { featuredExperts } from "@/content/experts";
 import { upcomingEvents } from "@/content/events";
-import { articlesByCategory } from "@/content/articles";
+import { articlesByCategory, articleCategories } from "@/content/articles";
 import { partners } from "@/content/network";
-import { articleCategories } from "@/content/articles";
 import { Button } from "@/components/ui/Button";
 import { Container, SectionHeading } from "@/components/ui/Section";
 import { ArrowIcon, JsonLd } from "@/components/ui/Misc";
-import { CaseStudyCard, EventCard, ArticleCard, PartnerLogo, MetricCard, SolutionCard, ExpertCard } from "@/components/cards/Cards";
+import { CaseStudyCard, EventCard, ArticleCard, PartnerLogo, MetricCard, ExpertCard } from "@/components/cards/Cards";
 import { CTASection } from "@/components/sections/CTASection";
-import { OrbitalHero, NetworkGraph } from "@/components/visuals/Network";
-import { Emblem } from "@/components/brand/Logo";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
 export function CorporateHome() {
   const featuredCases = caseStudies.filter((c) => c.featured).slice(0, 3);
   const featuredArticles = articlesByCategory().slice(0, 3);
   const homeEvents = upcomingEvents().slice(0, 3);
+  const [line1, line2] = heroHeadline.split("\n");
 
   return (
     <>
@@ -30,42 +39,298 @@ export function CorporateHome() {
           <div className="absolute -left-32 top-20 h-96 w-96 rounded-full bg-teal-400/10 blur-3xl" />
           <div className="absolute right-0 top-0 h-[480px] w-[480px] bg-[radial-gradient(circle,rgba(222,164,67,0.12),transparent_60%)]" />
         </div>
-        <Container className="relative grid items-center gap-10 pb-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
-          <div>
-            <p className="eyebrow">Làng kết nối tri thức & kinh doanh</p>
-            <h1 className="mt-4 max-w-4xl text-balance text-[36px] font-semibold leading-[1.12] sm:text-[48px] lg:text-[clamp(48px,5vw,76px)]">
-              Kiến tạo nội lực.
-              <br />
-              Mở rộng kết nối.
-              <br />
-              Phát triển bền vững.
-            </h1>
-            <p className="measure mt-6 text-base text-white/80 sm:text-lg">
-              VABIX đồng hành cùng doanh nhân và doanh nghiệp nâng cao năng lực quản trị, thiết kế hệ thống vận hành và mở rộng mạng lưới hợp tác thông qua tri thức thực chiến.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/ve-vabix" variant="gold">
-                Khám phá VABIX
-              </Button>
-              <Button href="/ket-noi#tu-van" variant="outline" className="border-white/40 text-white">
-                Đăng ký tư vấn
-              </Button>
-            </div>
+        <Container className="relative pb-16">
+          <p className="eyebrow">{tagline}</p>
+          <h1 className="mt-4 max-w-5xl text-balance text-[32px] font-semibold leading-[1.15] sm:text-[46px] lg:text-[clamp(44px,4.6vw,64px)]">
+            {line1}
+            <br />
+            {line2}
+          </h1>
+          <p className="measure mt-6 text-base text-white/80 sm:text-lg">{heroSubheadline}</p>
+          <p className="mt-4 text-sm text-vabix-soft-gold">{supportingMessage.join(" ")}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="/ket-noi#tu-van" variant="gold">
+              Trao đổi nhu cầu doanh nghiệp
+            </Button>
+            <Button href="/giai-phap" variant="outline" className="border-white/40 text-white">
+              Khám phá 3 mũi nhọn
+            </Button>
           </div>
-          <OrbitalHero />
         </Container>
         <div className="border-t border-white/10">
           <Container className="grid grid-cols-2 gap-8 py-10 lg:grid-cols-4">
-            {metrics.map((m) => (
+            {proofSignals.map((m) => (
               <MetricCard key={m.id} value={m.value} label={m.label} />
             ))}
           </Container>
         </div>
       </section>
 
-      <section className="bg-vabix-ivory py-16">
+      <section className="py-20" id="ba-mui-nhon">
         <Container>
-          <p className="eyebrow mb-8 text-center">Được tin tưởng đồng hành cùng các tổ chức và doanh nghiệp</p>
+          <SectionHeading
+            align="center"
+            eyebrow="Ba mũi nhọn 3T"
+            title="Đào tạo. Chuyển đổi. Kết nối dựa trên niềm tin."
+            description="3T là cấu trúc dịch vụ chính của VABIX. Kết nối tri thức và kết nối kinh doanh là triết lý thương hiệu — không thay thế 3T."
+          />
+          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+            {pillars.map((p) => (
+              <article key={p.id} className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white p-8">
+                <p className="text-sm font-semibold tracking-widest text-vabix-gold">{p.number} · {p.en}</p>
+                <h3 className="mt-3 text-2xl font-semibold text-vabix-deep-teal">{p.vi}</h3>
+                <p className="mt-4 text-sm text-vabix-muted">{p.problem}</p>
+                <p className="mt-4 text-vabix-ink">{p.value}</p>
+                <ul className="mt-6 space-y-2 text-sm font-medium text-vabix-deep-teal">
+                  {p.services.slice(0, 4).map((s) => (
+                    <li key={s.href + s.label}>
+                      <Link href={s.href}>{s.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link href={p.href} className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-vabix-deep-teal">
+                  {p.cta.label} <ArrowIcon />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-vabix-ivory py-20" id="hanh-trinh-gia-tri">
+        <Container>
+          <SectionHeading
+            title="VABIX tạo giá trị như thế nào?"
+            description="Đây là hành trình giá trị — không phải quy trình tuyến tính bắt buộc cho mọi khách hàng. Doanh nghiệp có thể bắt đầu từ đào tạo, tư vấn hoặc kết nối tùy bài toán."
+          />
+          <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+            {valueJourney.map((s, i) => (
+              <li key={s.step} className="border-t border-vabix-gold pt-5">
+                <p className="text-sm font-semibold tracking-widest text-vabix-gold">{String(i + 1).padStart(2, "0")}</p>
+                <h3 className="mt-2 text-lg font-semibold text-vabix-deep-teal">{s.step}</h3>
+                <p className="mt-2 text-sm text-vabix-muted">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-10">
+            <p className="font-semibold text-vabix-deep-teal">Doanh nghiệp của bạn đang gặp bài toán nào?</p>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {painPoints.map((p) => (
+                <li key={p} className="bg-white p-4 text-sm text-vabix-deep-teal">
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20" id="chuong-trinh">
+        <Container>
+          <SectionHeading
+            eyebrow="Chương trình tiêu biểu"
+            title="Thao trường thực chiến cho doanh chủ và đội ngũ"
+            description="BMDO 30 buổi. MBM 12 tháng. Các chương trình khác: thời lượng được thiết kế theo nhu cầu — không tự đặt số buổi."
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {featuredPrograms()
+              .filter((p) => ["bmdo", "mbm", "thao-truong-khoi-nghiep", "nang-luc-so-ai-lanh-dao", "ung-dung-ai-hieu-suat", "dao-tao-theo-yeu-cau"].includes(p.slug))
+              .map((p) => (
+                <Link key={p.slug} href={`/chuong-trinh/${p.slug}`} className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white p-6 hover:border-vabix-gold">
+                  <p className="eyebrow">{p.shortTitle}</p>
+                  <h3 className="mt-2 text-lg font-semibold text-vabix-deep-teal">{p.title}</h3>
+                  <p className="mt-3 flex-1 text-sm text-vabix-muted">{p.audience}</p>
+                  <p className="mt-4 text-sm font-semibold text-vabix-gold">{p.duration ?? p.durationNote}</p>
+                </Link>
+              ))}
+          </div>
+          <Link href="/chuong-trinh" className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
+            Xem danh mục chương trình <ArrowIcon />
+          </Link>
+        </Container>
+      </section>
+
+      <section className="bg-vabix-deep-teal py-20 text-white" id="phuong-phap">
+        <Container className="grid items-start gap-12 lg:grid-cols-2">
+          <div>
+            <p className="eyebrow">Mô hình nền tảng</p>
+            <h2 className="mt-3 text-4xl font-semibold">The BizCar</h2>
+            <p className="mt-2 text-xl text-vabix-soft-gold">12 khối chức năng. Một hệ thống thống nhất.</p>
+            <p className="measure mt-5 text-white/80">
+              BizCar là mô hình quản trị — không phải khóa học. BMDO là chương trình đào tạo CEO thực chiến. MBM là chương trình làm chủ mô hình. 3W là chuẩn thành công của quá trình học tập và thực thi.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/mo-hinh-phuong-phap/bizcar" variant="gold">
+                Khám phá BizCar
+              </Button>
+              <Button href="/mo-hinh-phuong-phap/mybizcar" variant="outline" className="border-white/40 text-white">
+                MyBizCar
+              </Button>
+              <Button href="/bizcar/engine" variant="outline" className="border-white/40 text-white">
+                Mở MyBizCar 3D
+              </Button>
+            </div>
+          </div>
+          <div>
+            <p className="eyebrow">Chuẩn thành công 3W</p>
+            <h2 className="mt-3 text-3xl font-semibold">{threeW.headline}</h2>
+            <ul className="mt-8 space-y-5">
+              {threeW.pillars.map((w) => (
+                <li key={w.key} className="border-t border-vabix-gold/40 pt-4">
+                  <p className="text-sm font-semibold tracking-widest text-vabix-gold">{w.key} — {w.title}</p>
+                  <p className="mt-2 text-white/80">{w.body}</p>
+                  <p className="mt-2 text-sm text-vabix-soft-gold">{w.outputs.join(" · ")}</p>
+                </li>
+              ))}
+            </ul>
+            <Link href="/mo-hinh-phuong-phap/3w" className="mt-6 inline-block text-vabix-gold">
+              Xem khung đánh giá 3W
+            </Link>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20" id="tu-van-chuyen-doi">
+        <Container>
+          <SectionHeading
+            eyebrow="Transformation"
+            title="Tư vấn chuyển đổi doanh nghiệp"
+            description="Đồng hành từ đánh giá hiện trạng đến đo lường cải tiến. Mười hai nhóm dịch vụ, một quy trình năm bước."
+          />
+          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {consultingProcess.map((s) => (
+              <li key={s.step} className="border-t border-vabix-gold pt-4">
+                <p className="text-sm font-semibold text-vabix-gold">{s.step}</p>
+                <h3 className="mt-2 font-semibold text-vabix-deep-teal">{s.title}</h3>
+                <p className="mt-2 text-sm text-vabix-muted">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+          <Link href="/giai-phap/tu-van-chuyen-doi" className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
+            Xem 12 dịch vụ tư vấn <ArrowIcon />
+          </Link>
+        </Container>
+      </section>
+
+      <section className="bg-vabix-ivory py-20" id="trustworking">
+        <Container className="grid gap-10 lg:grid-cols-2">
+          <div>
+            <p className="eyebrow">Trustworking</p>
+            <h2 className="mt-3 text-3xl font-semibold text-vabix-deep-teal sm:text-4xl">{trustworking.headline}</h2>
+            <p className="measure mt-4 text-vabix-muted">{trustworking.summary}</p>
+            <p className="measure mt-4 text-vabix-ink">{trustworking.screening}</p>
+            <ul className="mt-6 space-y-2 text-sm text-vabix-muted">
+              {trustworking.notNetworking.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
+            <div className="mt-8">
+              <Button href="/giai-phap/trustworking" variant="teal">
+                Tìm hiểu Trustworking
+              </Button>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <article className="bg-white p-6">
+              <h3 className="font-semibold text-vabix-deep-teal">Cho nhà cung cấp</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-4 text-sm text-vabix-muted">
+                {trustworking.supplierValue.slice(0, 3).map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </article>
+            <article className="bg-white p-6">
+              <h3 className="font-semibold text-vabix-deep-teal">Cho khách hàng / đối tác</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-4 text-sm text-vabix-muted">
+                {trustworking.buyerValue.slice(0, 3).map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </article>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20">
+        <Container>
+          <SectionHeading
+            title="Lớp năng lực hỗ trợ"
+            description="Sản phẩm tri thức và nhân lực mở / nhân lực số xuyên suốt hệ sinh thái — không phải trụ cột thứ tư."
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {supportingLayers.map((l) => (
+              <Link key={l.href} href={l.href} className="border border-vabix-deep-teal/10 p-7 hover:border-vabix-gold">
+                <h3 className="text-xl font-semibold text-vabix-deep-teal">{l.title}</h3>
+                <p className="mt-3 text-sm text-vabix-muted">{l.summary}</p>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-vabix-ivory py-20">
+        <Container>
+          <SectionHeading
+            title="Bài toán. Phương pháp. Đầu ra."
+            description="Case study được giữ từ hồ sơ năng lực hiện có. Số liệu định lượng và phạm vi hợp đồng cần Founder xác nhận trước khi dùng như thành tích pháp nhân."
+          />
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {featuredCases.map((c) => (
+              <CaseStudyCard key={c.id} item={c} />
+            ))}
+          </div>
+          <Link href="/tri-thuc/case-study" className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
+            Xem case study <ArrowIcon />
+          </Link>
+        </Container>
+      </section>
+
+      <section className="py-20">
+        <Container>
+          <SectionHeading
+            title="Đội ngũ chuyên gia"
+            description="Hồ sơ chuyên gia được giữ từ dữ liệu hiện có. Chức danh và học vị cần đối chiếu khi cập nhật."
+          />
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredExperts.map((e) => (
+              <ExpertCard key={e.id} expert={e} />
+            ))}
+          </div>
+          <Link href="/mang-luoi/chuyen-gia" className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
+            Mạng lưới chuyên gia <ArrowIcon />
+          </Link>
+        </Container>
+      </section>
+
+      <section className="bg-vabix-ivory py-20">
+        <Container>
+          <SectionHeading title="Sự kiện & tri thức" />
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {homeEvents.map((e) => (
+              <EventCard key={e.id} event={e} />
+            ))}
+          </div>
+          <div className="mt-10 flex flex-wrap gap-2">
+            {articleCategories.slice(0, 6).map((c) => (
+              <Link key={c.id} href={`/tri-thuc?chuyen-muc=${c.id}`} className="border border-vabix-deep-teal/15 px-3 py-1.5 text-xs font-semibold tracking-wide text-vabix-deep-teal uppercase">
+                {c.label}
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {featuredArticles.map((a) => (
+              <ArticleCard key={a.id} article={a} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-16">
+        <Container>
+          <p className="eyebrow mb-3 text-center">Tổ chức xuất hiện trong hồ sơ năng lực</p>
+          <p className="mx-auto mb-8 max-w-2xl text-center text-sm text-vabix-muted">
+            Việc xuất hiện tên tổ chức không đồng nghĩa hợp đồng hiện tại, quan hệ đối tác đang hiệu lực hoặc được phép dùng làm chứng nhận khách hàng. Danh sách chờ Founder xác nhận phạm vi công bố.
+          </p>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
             {partners.map((p) => (
               <PartnerLogo key={p.id} name={p.name} caption={p.caption} />
@@ -74,227 +339,11 @@ export function CorporateHome() {
         </Container>
       </section>
 
-      <section className="py-20" id="vabix-la-ai">
-        <Container>
-          <SectionHeading
-            align="center"
-            title="Kết tri thức. Nối giá trị."
-            description="VABIX là Làng kết nối, nơi tri thức được chuyển hóa thành năng lực thực tiễn và các mối quan hệ hợp tác được kết nối thành giá trị bền vững."
-          />
-          <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-[1fr_auto_1fr]">
-            <article className="border border-vabix-deep-teal/10 bg-white p-8">
-              <p className="text-sm font-semibold tracking-widest text-vabix-gold">01</p>
-              <h3 className="mt-3 text-2xl font-semibold text-vabix-deep-teal">Kết nối tri thức</h3>
-              <p className="mt-3 text-vabix-muted">Giúp doanh nghiệp xây dựng nội lực vững chắc thông qua tri thức thực chiến và trải nghiệm thực tế.</p>
-              <ul className="mt-6 space-y-2 text-sm font-medium text-vabix-deep-teal">
-                <li><Link href="/giai-phap/tu-van-chien-luoc">Tư vấn chiến lược</Link></li>
-                <li><Link href="/giai-phap/dao-tao-doanh-nhan">Đào tạo doanh nhân</Link></li>
-                <li><Link href="/giai-phap/huan-luyen-doanh-nghiep">Huấn luyện doanh nghiệp</Link></li>
-              </ul>
-            </article>
-            <div className="hidden items-center justify-center lg:flex">
-              <Emblem className="h-24 w-24" />
-            </div>
-            <article className="border border-vabix-gold/40 bg-white p-8">
-              <p className="text-sm font-semibold tracking-widest text-vabix-gold">02</p>
-              <h3 className="mt-3 text-2xl font-semibold text-vabix-deep-teal">Kết nối kinh doanh</h3>
-              <p className="mt-3 text-vabix-muted">Mở rộng quan hệ, tiếp cận nguồn lực, đối tác và các cơ hội phát triển.</p>
-              <ul className="mt-6 space-y-2 text-sm font-medium text-vabix-deep-teal">
-                <li><Link href="/giai-phap/ket-noi-doanh-nghiep">Kết nối doanh nghiệp</Link></li>
-                <li><Link href="/giai-phap/xuc-tien-thuong-mai">Xúc tiến thương mại</Link></li>
-              </ul>
-            </article>
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-vabix-ivory py-20">
-        <Container>
-          <SectionHeading eyebrow="Bài toán doanh nghiệp" title="Nhìn đúng bài toán. Tìm đúng lời giải." />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {painPoints.map((p, i) => (
-              <article key={p} className="bg-white p-6">
-                <p className="text-sm font-semibold tracking-widest text-vabix-gold">{String(i + 1).padStart(2, "0")}</p>
-                <p className="mt-3 text-vabix-deep-teal">{p}</p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-10">
-            <p className="font-semibold text-vabix-deep-teal">Doanh nghiệp của bạn đang gặp bài toán nào?</p>
-            <Link href="/ket-noi#tu-van" className="mt-2 inline-flex items-center gap-2 text-vabix-deep-teal">
-              Trao đổi cùng chuyên gia VABIX <ArrowIcon />
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-20">
-        <Container>
-          <SectionHeading title="Giải pháp được thiết kế từ bài toán thực tế" />
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {solutions.filter((s) => s.slug !== "thiet-ke-van-hanh-doanh-nghiep").map((s) => (
-              <SolutionCard key={s.id} number={s.number} title={s.title} summary={s.summary} href={`/giai-phap/${s.slug}`} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-vabix-deep-teal py-20 text-white">
-        <Container className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <p className="eyebrow">VABIX Signature Model</p>
-            <h2 className="mt-3 text-4xl font-semibold">The BizCar</h2>
-            <p className="mt-2 text-xl text-vabix-soft-gold">Thiết kế và vận hành doanh nghiệp toàn diện</p>
-            <p className="measure mt-5 text-white/80">
-              BizCar là khung tư duy giúp lãnh đạo nhìn doanh nghiệp như một hệ thống thống nhất, nhận diện đúng điểm nghẽn và thiết kế lại năng lực vận hành phù hợp với từng giai đoạn.
-            </p>
-            <ol className="mt-8 flex flex-wrap gap-4 text-sm font-semibold tracking-[0.16em]">
-              {["SEE", "DESIGN", "ALIGN", "OPERATE"].map((s, i) => (
-                <li key={s} className="flex items-center gap-4">
-                  <span>{s}</span>
-                  {i < 3 ? <span className="text-vabix-gold">↓</span> : null}
-                </li>
-              ))}
-            </ol>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/bizcar/engine" variant="gold">
-                Mở MyBizCar 3D →
-              </Button>
-              <Button href="/mo-hinh-phuong-phap/bizcar" variant="outline" className="border-white/40 text-white">
-                Khám phá The BizCar
-              </Button>
-            </div>
-          </div>
-          <div className="border border-vabix-gold/30 p-8">
-            <p className="eyebrow">12 khối chức năng</p>
-            <p className="mt-3 text-white/80">Định hướng & thị trường · Nguồn lực & vận hành · Lãnh đạo & tổ chức</p>
-            <Link href="/mo-hinh-phuong-phap/bizcar" className="mt-6 inline-block text-vabix-gold">
-              Xem mô hình đầy đủ
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-20">
-        <Container>
-          <SectionHeading title="Từ nhận diện vấn đề đến chuyển giao năng lực" />
-          <ol className="mt-12 grid gap-8 md:grid-cols-4">
-            {methodologySteps.map((s) => (
-              <li key={s.n} className="border-t border-vabix-gold pt-5">
-                <p className="text-sm font-semibold tracking-widest text-vabix-gold">{s.n}</p>
-                <h3 className="mt-2 text-xl font-semibold text-vabix-deep-teal">{s.title}</h3>
-                <p className="mt-2 text-sm text-vabix-muted">{s.body}</p>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </section>
-
-      <section className="bg-vabix-ivory py-20">
-        <Container>
-          <SectionHeading align="center" title="Nền tảng tri thức & phương pháp triển khai" />
-          <div className="mt-12">
-            <NetworkGraph />
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-20">
-        <Container>
-          <SectionHeading title="Đồng hành thực chiến. Kiến tạo giá trị thực tế." />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {featuredCases.map((c) => (
-              <CaseStudyCard key={c.id} item={c} />
-            ))}
-          </div>
-          <Link href="/tri-thuc/case-study" className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
-            Xem các dự án tiêu biểu <ArrowIcon />
-          </Link>
-        </Container>
-      </section>
-
-      <section className="bg-vabix-ivory py-20">
-        <Container>
-          <SectionHeading
-            title="Đội ngũ chuyên gia"
-            description="VABIX quy tụ những chuyên gia đã trực tiếp nghiên cứu, điều hành, cố vấn và triển khai giải pháp trong môi trường doanh nghiệp."
-          />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredExperts.map((e) => (
-              <ExpertCard key={e.id} expert={e} />
-            ))}
-          </div>
-          <Link href="/mang-luoi/chuyen-gia" className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
-            Khám phá mạng lưới chuyên gia <ArrowIcon />
-          </Link>
-        </Container>
-      </section>
-
-      <section className="relative overflow-hidden bg-vabix-teal py-20 text-white">
-        <Container className="relative max-w-3xl">
-          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl">
-            Mạng lưới không chỉ để kết nối. Mạng lưới phải tạo ra giá trị.
-          </h2>
-          <p className="measure mt-5 text-white/80">
-            VABIX kết nối doanh nghiệp, chuyên gia, đối tác và nguồn lực phù hợp nhằm tạo ra cơ hội hợp tác có chiều sâu và giá trị bền vững.
-          </p>
-          <div className="mt-8">
-            <Button href="/ket-noi" variant="gold">
-              Kết nối cùng VABIX
-            </Button>
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-20">
-        <Container>
-          <SectionHeading title="Sự kiện & chương trình" />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {homeEvents.map((e) => (
-              <EventCard key={e.id} event={e} />
-            ))}
-          </div>
-          <Link href="/su-kien" className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
-            Xem tất cả sự kiện <ArrowIcon />
-          </Link>
-        </Container>
-      </section>
-
-      <section className="bg-vabix-ivory py-20">
-        <Container>
-          <SectionHeading title="Tri thức VABIX" />
-          <div className="mt-6 flex flex-wrap gap-2">
-            {articleCategories.slice(0, 8).map((c) => (
-              <Link key={c.id} href={`/tri-thuc?chuyen-muc=${c.id}`} className="border border-vabix-deep-teal/15 px-3 py-1.5 text-xs font-semibold tracking-wide uppercase text-vabix-deep-teal">
-                {c.label}
-              </Link>
-            ))}
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {featuredArticles.map((a) => (
-              <ArticleCard key={a.id} article={a} />
-            ))}
-          </div>
-          <Link href="/tri-thuc" className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
-            Khám phá kho tri thức <ArrowIcon />
-          </Link>
-        </Container>
-      </section>
-
-      <section className="py-16">
-        <Container>
-          <p className="eyebrow mb-6 text-center">Đối tác & khách hàng</p>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-            {partners.map((p) => (
-              <PartnerLogo key={`wall-${p.id}`} name={p.name} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
       <CTASection
-        title="Một hành trình phát triển đúng bắt đầu từ việc nhìn đúng bài toán."
-        description="Kết nối cùng VABIX để cùng xác định bước đi phù hợp cho doanh nghiệp của bạn."
+        title="Bắt đầu từ bài toán thực tế của doanh nghiệp bạn."
+        description="VABIX đồng hành từ nhu cầu thật — đào tạo, chuyển đổi hoặc Trustworking — đánh giá bằng bằng chứng, không chạy theo hình thức."
+        primary={{ label: "Trao đổi nhu cầu doanh nghiệp", href: "/ket-noi#tu-van" }}
+        secondary={{ label: "Khám phá 3 mũi nhọn", href: "/giai-phap" }}
       />
     </>
   );

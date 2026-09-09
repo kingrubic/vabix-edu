@@ -24,32 +24,7 @@ export const methodologies: Methodology[] = [
       { step: "ALIGN", title: "Đồng bộ", body: "Gắn chiến lược, đội ngũ và nguồn lực quanh một bức tranh." },
       { step: "OPERATE", title: "Vận hành", body: "Triển khai, đo lường và cải tiến liên tục." },
     ],
-    related: ["bmdo", "b2a", "kora"],
-  },
-  {
-    id: "bmdo",
-    slug: "bmdo",
-    name: "BMDO",
-    shortName: "BMDO",
-    eyebrow: "Xưởng thiết kế vận hành",
-    headline: "Từ mô hình đến năng lực vận hành",
-    summary:
-      "BMDO là chương trình thực chiến giúp lãnh đạo thiết kế và vận hành doanh nghiệp — một xưởng làm việc trên dữ liệu thật, không phải lớp lý thuyết.",
-    description:
-      "BMDO được triển khai như xưởng thiết kế vận hành cho doanh nghiệp Việt. Người học không chỉ nghe mô hình mà trực tiếp phác thảo phiên bản BizCar của chính mình, nhận diện bánh xe ưu tiên và xây dựng chỉ số đo lường. Chương trình đã được khai giảng tại SIHUB và đồng hành cùng cộng đồng SME, startup.",
-    whoFor: ["Lãnh đạo SME và startup", "Đội ngũ quản lý cần công cụ thiết kế vận hành", "Tổ chức muốn chuẩn hóa trước khi tăng tốc"],
-    outcomes: [
-      "Phiên bản BizCar của chính doanh nghiệp",
-      "Ưu tiên đổi mới đúng cấu phần",
-      "Nhóm chỉ số theo dõi được sau chương trình",
-    ],
-    process: [
-      { step: "01", title: "Chẩn đoán", body: "Nhìn hệ thống hiện tại qua 12 khối chức năng." },
-      { step: "02", title: "Thiết kế", body: "Phác thảo mô hình vận hành tinh gọn, phù hợp nguồn lực." },
-      { step: "03", title: "Thực hành", body: "Làm trên dữ liệu và tình huống thật của doanh nghiệp." },
-      { step: "04", title: "Chuyển giao", body: "Công cụ, lộ trình và cơ chế phản biện sau chương trình." },
-    ],
-    related: ["bizcar", "klass"],
+    related: ["b2a", "kora", "3w", "mybizcar"],
   },
   {
     id: "b2a",
@@ -125,7 +100,7 @@ export const methodologies: Methodology[] = [
       { step: "03", title: "Ưu tiên", body: "Chọn cấu phần cần xử lý trước." },
       { step: "04", title: "Cam kết", body: "Thống nhất chỉ số và trách nhiệm." },
     ],
-    related: ["bizcar", "bmdo"],
+    related: ["bizcar"],
   },
   {
     id: "klass",
@@ -150,7 +125,56 @@ export const methodologies: Methodology[] = [
       { step: "03", title: "Chuyên nghiệp", body: "B2A, nhân hiệu địa bàn, kiến tạo cơ hội." },
       { step: "04", title: "Toàn cầu", body: "Năng lực kết nối và dẫn dắt ở quy mô rộng hơn." },
     ],
-    related: ["b2a", "baboso", "bmdo"],
+    related: ["b2a", "baboso"],
+  },
+  {
+    id: "3w",
+    slug: "3w",
+    name: "3W — WOW · WELL · WIN",
+    shortName: "3W",
+    eyebrow: "Chuẩn thành công",
+    headline: "WOW trong nhận thức • WELL trong thiết kế • WIN trong thực tiễn.",
+    summary:
+      "3W là khung đánh giá đầu ra của quá trình học tập và thực thi — không phải ba slogan trang trí.",
+    description:
+      "WOW: chiến binh CEO nhìn thấy những điều trước đây chưa nhìn thấy. WELL: thực hành tốt và tạo ra sản phẩm quản trị có thể áp dụng ngay. WIN: chuyển thiết kế thành hành động và kết quả cải tiến có bằng chứng. Đầu ra minh họa gồm nhận diện điểm nghẽn, bản thiết kế quản trị, kế hoạch hành động, chỉ số theo dõi và bằng chứng cải tiến. Phân biệt: BizCar là mô hình quản trị; BMDO là chương trình đào tạo CEO; MBM là chương trình làm chủ mô hình; 3W là chuẩn thành công.",
+    whoFor: ["Học viên BMDO và MBM", "CEO đang thiết kế lại doanh nghiệp", "Đội ngũ đồng hành chuyển đổi"],
+    outcomes: [
+      "Nhận thức bừng sáng về điểm nghẽn",
+      "Sản phẩm quản trị thiết kế đến chuẩn",
+      "Kết quả thực thi có bằng chứng",
+    ],
+    process: [
+      { step: "WOW", title: "Nhận thức bừng sáng", body: "Nhìn thấy điều trước đây chưa nhìn thấy trong doanh nghiệp." },
+      { step: "WELL", title: "Thiết kế đến chuẩn", body: "Tạo sản phẩm quản trị có thể áp dụng ngay." },
+      { step: "WIN", title: "Tạo kết quả thực", body: "Chuyển thiết kế thành hành động và bằng chứng cải tiến." },
+    ],
+    related: ["bizcar"],
+  },
+  {
+    id: "mybizcar",
+    slug: "mybizcar",
+    name: "MyBizCar",
+    shortName: "MyBizCar",
+    eyebrow: "Công cụ chuyên biệt",
+    headline: "Đưa mô hình BizCar vào bản đồ sống của doanh nghiệp",
+    summary:
+      "MyBizCar là công cụ chuyên biệt giúp lãnh đạo biến khung 12 khối thành bản đánh giá và theo dõi của chính doanh nghiệp. Giao diện có thể được tinh chỉnh theo brand; ý nghĩa chỉ số, dữ liệu demo, đánh giá và quyền truy cập không thay đổi trong đợt này.",
+    description:
+      "MyBizCar không thay thế BizCar hay BMDO. Đây là lớp công cụ: nhìn — đánh giá — theo dõi trên cấu trúc 12 khối. Phiên bản 3D (MyBizCar 3D) nếu đang vận hành sẽ được giữ nguyên logic nghiệp vụ. Trang này trình bày vai trò công cụ trong hệ sinh thái: BizCar → BMDO → MBM → Tư vấn chuyển đổi → MyBizCar.",
+    whoFor: ["CEO đang học BMDO / MBM", "Đội ngũ tư vấn dùng chung ngôn ngữ BizCar", "Doanh nghiệp muốn theo dõi 12 khối theo thời gian"],
+    outcomes: [
+      "Có nơi đặt bản đánh giá 12 khối",
+      "Theo dõi ưu tiên cải tiến",
+      "Gắn công cụ với chương trình và tư vấn, không tách rời",
+    ],
+    process: [
+      { step: "01", title: "BizCar", body: "Nhìn doanh nghiệp trên 12 khối." },
+      { step: "02", title: "Đánh giá", body: "Ghi nhận hiện trạng từng khối." },
+      { step: "03", title: "Ưu tiên", body: "Chọn cấu phần cần xử lý trước." },
+      { step: "04", title: "Theo dõi", body: "Quay lại đo sau khi thực thi." },
+    ],
+    related: ["bizcar", "3w"],
   },
 ];
 

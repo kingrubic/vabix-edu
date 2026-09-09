@@ -5,30 +5,32 @@ import { Logo } from "@/components/brand/Logo";
 
 const cols = [
   {
-    title: "Về VABIX",
+    title: "Ba mũi nhọn",
     links: [
-      { label: "Tầm nhìn", href: "/ve-vabix#tam-nhin" },
-      { label: "Sứ mệnh", href: "/ve-vabix#su-menh" },
+      { label: "Đào tạo & huấn luyện", href: "/giai-phap/dao-tao-huan-luyen" },
+      { label: "Tư vấn chuyển đổi", href: "/giai-phap/tu-van-chuyen-doi" },
+      { label: "Trustworking", href: "/giai-phap/trustworking" },
+      { label: "Tổng quan 3T", href: "/giai-phap" },
+    ],
+  },
+  {
+    title: "Chương trình & mô hình",
+    links: [
+      { label: "Danh mục chương trình", href: "/chuong-trinh" },
+      { label: "BMDO", href: "/chuong-trinh/bmdo" },
+      { label: "MBM", href: "/chuong-trinh/mbm" },
+      { label: "BizCar", href: "/mo-hinh-phuong-phap/bizcar" },
+      { label: "3W", href: "/mo-hinh-phuong-phap/3w" },
+    ],
+  },
+  {
+    title: "Hệ sinh thái",
+    links: [
+      { label: "Sản phẩm tri thức", href: "/san-pham-tri-thuc" },
+      { label: "Nhân lực mở & số", href: "/nhan-luc-mo-nhan-luc-so" },
       { label: "Chuyên gia", href: "/mang-luoi/chuyen-gia" },
-      { label: "Đối tác", href: "/mang-luoi/doi-tac" },
-    ],
-  },
-  {
-    title: "Giải pháp",
-    links: [
-      { label: "Tư vấn", href: "/giai-phap/tu-van-chien-luoc" },
-      { label: "Đào tạo", href: "/giai-phap/dao-tao-doanh-nhan" },
-      { label: "Huấn luyện", href: "/giai-phap/huan-luyen-doanh-nghiep" },
-      { label: "Kết nối doanh nghiệp", href: "/giai-phap/ket-noi-doanh-nghiep" },
-    ],
-  },
-  {
-    title: "Tri thức",
-    links: [
-      { label: "Insights", href: "/tri-thuc" },
-      { label: "Case Study", href: "/tri-thuc/case-study" },
+      { label: "Case study", href: "/tri-thuc/case-study" },
       { label: "Sự kiện", href: "/su-kien" },
-      { label: "Cẩm nang", href: "/tri-thuc/cam-nang" },
     ],
   },
 ];
@@ -43,7 +45,8 @@ export function Footer() {
             <Link href="/vabix" aria-label="VABIX — trang chủ">
               <Logo variant="dark" className="h-11 sm:h-12" />
             </Link>
-            <p className="mt-4 text-sm leading-relaxed text-white/75">{siteConfig.positioning}</p>
+            <p className="mt-4 text-sm leading-relaxed text-white/75">{siteConfig.tagline}</p>
+            <p className="mt-2 text-sm leading-relaxed text-white/70">{siteConfig.positioning}</p>
             <ul className="mt-5 flex gap-4 text-sm text-vabix-soft-gold">
               <li>
                 <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer">
@@ -90,7 +93,13 @@ export function Footer() {
                   {siteConfig.contact.email}
                 </a>
               </p>
+              <p className="text-white/60">MST {siteConfig.taxId}</p>
             </address>
+            <p className="mt-4">
+              <Link href="/chinh-sach-quyen-rieng-tu" className="text-sm text-vabix-soft-gold hover:text-vabix-gold">
+                Chính sách quyền riêng tư
+              </Link>
+            </p>
           </div>
         </div>
       </Container>
@@ -99,7 +108,7 @@ export function Footer() {
           <p>
             © {year} {siteConfig.legalName}. {siteConfig.tagline}
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Link href="/chinh-sach-quyen-rieng-tu" className="hover:text-white">
               Quyền riêng tư
             </Link>
@@ -108,6 +117,9 @@ export function Footer() {
             </Link>
             <Link href="/chinh-sach-bao-mat" className="hover:text-white">
               Bảo mật
+            </Link>
+            <Link href="/khuyen-cao" className="hover:text-white">
+              Khuyến cáo
             </Link>
           </div>
         </Container>

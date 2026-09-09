@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { submitLead, type LeadPayload } from "@/lib/leads";
+import { submitLead } from "@/lib/leads";
 
 export async function POST(req: Request) {
-  const body = (await req.json().catch(() => null)) as LeadPayload | null;
-  if (!body) {
+  const body = await req.json().catch(() => null);
+  if (body === null) {
     return NextResponse.json({ ok: false, message: "Dữ liệu không hợp lệ." }, { status: 400 });
   }
   const result = await submitLead(body);

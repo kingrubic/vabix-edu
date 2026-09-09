@@ -1,3 +1,4 @@
+/** Heritage cultural content. Not the current core-value set. */
 export const principles = [
   {
     key: "HỢP",
@@ -49,57 +50,18 @@ export const principles = [
   },
 ];
 
-export const vision =
-  "Trở thành hệ sinh thái kết nối kinh doanh uy tín, nơi trí tuệ Việt được chuyển hóa thành năng lực thực tiễn và các mối quan hệ hợp tác được kiến tạo thành giá trị bền vững.";
-
-export const mission =
-  "Đồng hành cùng doanh nhân và doanh nghiệp Việt nâng cao năng lực quản trị, mở rộng kết nối, phát triển thị trường và vững bước trên hành trình tăng trưởng.";
-
-export const founderQuote =
-  "Trí tuệ chỉ có ý nghĩa khi được ứng dụng. Kết nối chỉ có giá trị khi tạo ra sự hợp tác bền vững.";
-
-export const founderMessage = [
-  "Trong bối cảnh doanh nghiệp Việt đang đối mặt với áp lực cạnh tranh và biến động thị trường, điều doanh nghiệp cần không phải thêm một khẩu hiệu, mà là năng lực nhìn đúng bài toán, thiết kế đúng hệ thống và kết nối đúng đối tác.",
-  "VABIX được kiến tạo như Làng kết nối tri thức và kinh doanh: một bên giúp doanh nghiệp xây nội lực bằng tri thức thực chiến; một bên mở rộng quan hệ, nguồn lực và cơ hội hợp tác. Hai trụ cột này cộng hưởng — vì tăng trưởng bền vững không đến từ kết nối suông, cũng không đến từ đào tạo tách rời thực tiễn.",
-  "Chúng tôi tin rằng mỗi doanh nghiệp là một chiếc xe riêng. Nhiệm vụ của người dẫn dắt là thiết kế, điều chỉnh và giữ cho chiếc xe ấy chạy bền, chạy đúng hướng và đến đích.",
-];
-
 export const journey = [
-  { year: "Trước 2025", title: "Nghiên cứu và thực chiến", body: "Hơn 20 năm nghiên cứu, tư vấn, đào tạo và triển khai cùng doanh nghiệp Việt, hình thành các khung BizCar, B2A, BMDO." },
-  { year: "2025", title: "Thành lập Công ty Cổ phần VABIX", body: "Ra mắt Làng kết nối VABIX, nền tảng số cho cư dân, nhà cung cấp và khách hàng." },
-  { year: "2025–2026", title: "Lan tỏa cùng đối tác", body: "Đồng hành VNPT, SIHUB, SUSPRO và cộng đồng SME — từ lớp thực chiến đến chương trình AI-First." },
-  { year: "Tới đây", title: "Hệ sinh thái tri thức và kết nối", body: "Mở rộng mạng lưới chuyên gia, làng ngành và năng lực chuyển giao cho doanh nghiệp Việt." },
-];
-
-export const glossary = [
-  { term: "VABIX", meaning: "Villages of Business, trong đó chữ X là biểu tượng của kết nối. Gọi chung là Làng kết nối tri thức và kinh doanh." },
-  { term: "Làng ngành", meaning: "Các cộng đồng ngành được liên kết trong VABIX để cùng phát triển, với nhà cung cấp được thẩm định." },
-  { term: "Cư dân kết nối", meaning: "Thành viên được đào tạo và công nhận để kết nối giá trị giữa doanh nghiệp, khách hàng và đối tác." },
-  { term: "Nhà cung cấp", meaning: "Doanh nghiệp có pháp nhân, được thẩm định trước khi cấp chứng nhận chính thức trong Làng." },
-  { term: "BizCar", meaning: "Khung 12 khối chức năng giúp lãnh đạo nhìn và thiết kế doanh nghiệp như một hệ thống thống nhất." },
-];
-
-export const capabilities = [
-  "Tư vấn chiến lược và thiết kế lộ trình phát triển",
-  "Đào tạo doanh nhân và huấn luyện doanh nghiệp theo bài toán thật",
-  "Thiết kế và vận hành doanh nghiệp theo BizCar / BMDO",
-  "Kết nối doanh nghiệp, chuyên gia và nguồn lực",
-  "Xúc tiến thương mại theo ngành và địa bàn",
-  "Phát triển cư dân kết nối theo tháp năng lực KLASS",
+  { year: "Trước 2025", title: "Nghiên cứu và thực chiến", body: "Nguyễn Chí Thành cùng cộng sự nghiên cứu, tư vấn, đào tạo và triển khai cùng doanh nghiệp Việt, hình thành các khung BizCar, B2A, BMDO." },
+  { year: "2025", title: "Thành lập Công ty Cổ phần VABIX", body: "Ra mắt pháp nhân và nền tảng Làng kết nối VABIX cho cư dân, nhà cung cấp và khách hàng." },
+  { year: "2025–2026", title: "Lan tỏa cùng tổ chức và cộng đồng", body: "Đồng hành các chương trình thực chiến, mạng lưới chuyên gia và làng ngành. Phạm vi hợp tác cụ thể được ghi nhận theo từng hồ sơ, không suy diễn thành thành tích pháp nhân." },
+  { year: "Tới 2031", title: "Khát vọng hệ sinh thái tri thức thực chiến", body: "Trở thành hệ sinh thái tri thức thực chiến có nguồn gốc Việt Nam được tin cậy trong nước và quốc tế — đây là định hướng, chưa phải thành tích đã đạt." },
 ];
 
 export const painPoints = [
-  "Chiến lược thiếu rõ ràng hoặc chưa chuyển hóa thành kế hoạch hành động.",
+  "Chiến lược chưa chuyển hóa thành kế hoạch và trách nhiệm thực thi.",
   "Đội ngũ quản lý thiếu tư duy hệ thống và công cụ vận hành thực chiến.",
   "Các bộ phận hoạt động rời rạc, thiếu cơ chế phối hợp.",
-  "Doanh nghiệp khó tiếp cận đúng đối tác và thị trường.",
-  "Các mô hình quản trị chưa được điều chỉnh phù hợp bối cảnh Việt Nam.",
-  "Doanh nghiệp tăng trưởng nhanh hơn năng lực vận hành.",
-];
-
-export const methodologySteps = [
-  { n: "01", title: "Nhìn rõ", body: "Khảo sát và chẩn đoán hiện trạng." },
-  { n: "02", title: "Thiết kế", body: "Thiết kế giải pháp phù hợp bối cảnh và nguồn lực." },
-  { n: "03", title: "Đồng hành", body: "Triển khai cùng đội ngũ doanh nghiệp." },
-  { n: "04", title: "Kiến tạo", body: "Đo lường, điều chỉnh và chuyển giao năng lực." },
+  "Doanh nghiệp khó tiếp cận đúng đối tác, nhà cung cấp và thị trường phù hợp.",
+  "Ứng dụng AI manh mún, chưa gắn với quy trình, dữ liệu và trách nhiệm con người.",
+  "Doanh nghiệp tăng trưởng nhanh hơn năng lực vận hành và kế thừa.",
 ];

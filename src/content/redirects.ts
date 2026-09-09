@@ -1,10 +1,17 @@
 import type { Redirect } from "next/dist/lib/load-custom-routes";
+import { knowledgeProductRedirects } from "./knowledgeProducts";
 
 /**
  * Preserve important ShopXanh / vabix.vn URLs by mapping them
  * into the new information architecture.
  */
+export const iaRedirects: Redirect[] = [
+  { source: "/mo-hinh-phuong-phap/bmdo", destination: "/chuong-trinh/bmdo", permanent: true },
+  ...knowledgeProductRedirects(),
+];
+
 export const legacyRedirects: Redirect[] = [
+  ...iaRedirects,
   { source: "/tin-tuc-trong-ngay", destination: "/tri-thuc", permanent: true },
   { source: "/tin-tuc-trong-ngay.html", destination: "/tri-thuc", permanent: true },
   { source: "/gioi-thieu-vabix", destination: "/ve-vabix", permanent: true },
@@ -25,7 +32,7 @@ export const legacyRedirects: Redirect[] = [
   { source: "/nha-cung-cap", destination: "/mang-luoi/tro-thanh-doi-tac", permanent: true },
   { source: "/khach-tham-quan", destination: "/mang-luoi/nha-cung-cap", permanent: true },
   { source: "/su-kien-ket-noi", destination: "/su-kien", permanent: true },
-  { source: "/san-pham-vabix", destination: "/tri-thuc/sach", permanent: true },
+  { source: "/san-pham-vabix", destination: "/san-pham-tri-thuc", permanent: true },
   { source: "/contact-page.html", destination: "/lien-he", permanent: true },
   { source: "/chinh-sach-quyen-rieng-tu_bm.html", destination: "/chinh-sach-quyen-rieng-tu", permanent: true },
   { source: "/bao-mat-thong-tin", destination: "/chinh-sach-bao-mat", permanent: true },
@@ -46,12 +53,19 @@ export const legacyRedirects: Redirect[] = [
   { source: "/hinh-anh-hoat-dong", destination: "/bo-suu-tap/hinh-anh-ket-noi", permanent: true },
   { source: "/bo-chung-nhan", destination: "/bo-suu-tap/mau-chung-nhan", permanent: true },
   { source: "/ho-tro-doanh-nhan-viet-sach", destination: "/dich-vu-phu-tro/ho-tro-doanh-nhan-viet-sach", permanent: true },
-  { source: "/co-van-dong-hanh-thuc-chien", destination: "/giai-phap/tu-van-chien-luoc", permanent: true },
-  { source: "/dich-vu-cho-thue-nhan-luc", destination: "/dich-vu-phu-tro/nhan-luc-thoi-vu", permanent: true },
+  { source: "/co-van-dong-hanh-thuc-chien", destination: "/giai-phap/tu-van-chuyen-doi", permanent: true },
+  { source: "/dich-vu-cho-thue-nhan-luc", destination: "/nhan-luc-mo-nhan-luc-so", permanent: true },
   { source: "/dich-vu-nguoi-dien-thuyet", destination: "/dich-vu-phu-tro/nha-dien-thuyet", permanent: true },
   { source: "/dich-vu-kol", destination: "/dich-vu-phu-tro/ket-noi-kol", permanent: true },
   { source: "/workshop-chua-lanh-va-nang-luong-danh-cho-ceo_bm.html", destination: "/su-kien/workshop-chua-lanh-nang-luong-ceo-bmdo-01", permanent: true },
   { source: "/le-ky-ket-hop-tac_bm.html", destination: "/su-kien/le-ra-mat-nen-tang-vabix", permanent: true },
   { source: "/bai-viet-demo-3_bm.html", destination: "/su-kien/dao-tao-cu-dan-ket-noi", permanent: true },
   { source: "/bai-viet-demo-2_bm.html", destination: "/su-kien/ket-noi-khach-hang-chung-cu", permanent: true },
+  { source: "/giai-phap/tu-van-chien-luoc", destination: "/giai-phap/tu-van-chuyen-doi/chien-luoc-mo-hinh", permanent: true },
+  { source: "/giai-phap/dao-tao-doanh-nhan", destination: "/giai-phap/dao-tao-huan-luyen", permanent: true },
+  { source: "/giai-phap/huan-luyen-doanh-nghiep", destination: "/giai-phap/dao-tao-huan-luyen", permanent: true },
+  { source: "/giai-phap/thiet-ke-van-hanh-doanh-nghiep", destination: "/mo-hinh-phuong-phap/bizcar", permanent: true },
+  { source: "/giai-phap/ket-noi-doanh-nghiep", destination: "/giai-phap/trustworking", permanent: true },
+  { source: "/giai-phap/xuc-tien-thuong-mai", destination: "/giai-phap/trustworking", permanent: true },
+  { source: "/chuong-trinh-dao-tao", destination: "/chuong-trinh", permanent: true },
 ];

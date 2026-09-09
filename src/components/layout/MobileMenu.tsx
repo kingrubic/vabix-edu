@@ -13,7 +13,7 @@ export function MobileMenu({ id, open, onClose }: { id: string; open: boolean; o
   return (
     <div
       id={id}
-      className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-vabix-warm text-vabix-deep-teal lg:hidden"
+      className="fixed inset-x-0 bottom-0 top-16 z-[60] overflow-y-auto bg-vabix-warm text-vabix-deep-teal sm:top-[76px] xl:hidden"
       role="dialog"
       aria-modal="true"
       aria-label="Menu di động"
@@ -77,8 +77,8 @@ export function MobileMenu({ id, open, onClose }: { id: string; open: boolean; o
           Cổng Cư dân
         </Link>
         <div className="mt-4 flex flex-col gap-3">
-          <Button href="/ket-noi" onClick={onClose}>
-            Kết nối cùng VABIX
+          <Button href="/ket-noi#tu-van" onClick={onClose}>
+            Trao đổi nhu cầu doanh nghiệp
           </Button>
           <p className="text-sm text-vabix-muted">
             {siteConfig.contact.hotline} · {siteConfig.contact.email}
