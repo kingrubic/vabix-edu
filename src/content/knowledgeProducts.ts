@@ -70,6 +70,30 @@ export function getKnowledgeProduct(slug: string) {
   return knowledgeProducts.find((p) => p.slug === slug);
 }
 
+export function knowledgeProductPagePath(product: KnowledgeProduct) {
+  return `/san-pham-tri-thuc/${product.slug}`;
+}
+
+export function knowledgeProductCanonicalPath(product: KnowledgeProduct) {
+  return product.href ?? knowledgeProductPagePath(product);
+}
+
+export function knowledgeProductsOnOwnRoute() {
+  return knowledgeProducts.filter(
+    (product) => knowledgeProductCanonicalPath(product) === knowledgeProductPagePath(product),
+  );
+}
+
+export function knowledgeProductRedirects() {
+  return knowledgeProducts
+    .filter((product) => knowledgeProductCanonicalPath(product) !== knowledgeProductPagePath(product))
+    .map((product) => ({
+      source: knowledgeProductPagePath(product),
+      destination: knowledgeProductCanonicalPath(product),
+      permanent: true as const,
+    }));
+}
+
 export const workforce = {
   positioning:
     "Nhân lực mở và nhân lực số là lớp năng lực hỗ trợ xuyên suốt hệ sinh thái — không phải trụ cột ngang hàng 3T.",

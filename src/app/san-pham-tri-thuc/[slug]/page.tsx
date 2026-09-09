@@ -1,5 +1,10 @@
-import { notFound } from "next/navigation";
-import { getKnowledgeProduct, knowledgeProducts } from "@/content/knowledgeProducts";
+import { notFound, redirect } from "next/navigation";
+import {
+  getKnowledgeProduct,
+  knowledgeProductCanonicalPath,
+  knowledgeProductPagePath,
+  knowledgeProductsOnOwnRoute,
+} from "@/content/knowledgeProducts";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { LeadForm } from "@/components/forms/LeadForm";
@@ -7,20 +12,24 @@ import { createMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 export function generateStaticParams() {
-  return knowledgeProducts.map((p) => ({ slug: p.slug }));
+  return knowledgeProductsOnOwnRoute().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = getKnowledgeProduct(slug);
   if (!p) return {};
-  return createMetadata({ title: p.title, description: p.summary, path: `/san-pham-tri-thuc/${p.slug}` });
+  const canonical = knowledgeProductCanonicalPath(p);
+  if (canonical !== knowledgeProductPagePath(p)) return {};
+  return createMetadata({ title: p.title, description: p.summary, path: canonical });
 }
 
 export default async function KnowledgeProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = getKnowledgeProduct(slug);
   if (!p) notFound();
+  const canonical = knowledgeProductCanonicalPath(p);
+  if (canonical !== knowledgeProductPagePath(p)) redirect(canonical);
   return (
     <>
       <PageHero

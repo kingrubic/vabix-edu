@@ -1,10 +1,17 @@
 import type { Redirect } from "next/dist/lib/load-custom-routes";
+import { knowledgeProductRedirects } from "./knowledgeProducts";
 
 /**
  * Preserve important ShopXanh / vabix.vn URLs by mapping them
  * into the new information architecture.
  */
+export const iaRedirects: Redirect[] = [
+  { source: "/mo-hinh-phuong-phap/bmdo", destination: "/chuong-trinh/bmdo", permanent: true },
+  ...knowledgeProductRedirects(),
+];
+
 export const legacyRedirects: Redirect[] = [
+  ...iaRedirects,
   { source: "/tin-tuc-trong-ngay", destination: "/tri-thuc", permanent: true },
   { source: "/tin-tuc-trong-ngay.html", destination: "/tri-thuc", permanent: true },
   { source: "/gioi-thieu-vabix", destination: "/ve-vabix", permanent: true },

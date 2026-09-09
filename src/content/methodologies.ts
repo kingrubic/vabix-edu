@@ -24,32 +24,7 @@ export const methodologies: Methodology[] = [
       { step: "ALIGN", title: "Đồng bộ", body: "Gắn chiến lược, đội ngũ và nguồn lực quanh một bức tranh." },
       { step: "OPERATE", title: "Vận hành", body: "Triển khai, đo lường và cải tiến liên tục." },
     ],
-    related: ["bmdo", "b2a", "kora", "3w", "mybizcar"],
-  },
-  {
-    id: "bmdo",
-    slug: "bmdo",
-    name: "BMDO",
-    shortName: "BMDO",
-    eyebrow: "Xưởng thiết kế vận hành",
-    headline: "Từ mô hình đến năng lực vận hành",
-    summary:
-      "BMDO là chương trình đào tạo CEO thực chiến — thao trường 30 buổi giúp lãnh đạo thiết kế và vận hành doanh nghiệp trên dữ liệu thật, đánh giá theo chuẩn 3W.",
-    description:
-      "BMDO (Thao trường thiết kế và vận hành doanh nghiệp toàn diện) gồm 30 buổi đào tạo thực hành. Đây là chương trình, không phải mô hình: mô hình nền tảng là BizCar; chuẩn đầu ra là WOW–WELL–WIN. Người học phác thảo phiên bản thiết kế của chính doanh nghiệp, nhận diện điểm nghẽn và xây kế hoạch hành động. Chi tiết danh mục: /chuong-trinh/bmdo.",
-    whoFor: ["Lãnh đạo SME và startup", "Đội ngũ quản lý cần công cụ thiết kế vận hành", "Tổ chức muốn chuẩn hóa trước khi tăng tốc"],
-    outcomes: [
-      "Phiên bản BizCar của chính doanh nghiệp",
-      "Ưu tiên đổi mới đúng cấu phần",
-      "Nhóm chỉ số theo dõi được sau chương trình",
-    ],
-    process: [
-      { step: "01", title: "Chẩn đoán", body: "Nhìn hệ thống hiện tại qua 12 khối chức năng." },
-      { step: "02", title: "Thiết kế", body: "Phác thảo mô hình vận hành tinh gọn, phù hợp nguồn lực." },
-      { step: "03", title: "Thực hành", body: "Làm trên dữ liệu và tình huống thật của doanh nghiệp." },
-      { step: "04", title: "Chuyển giao", body: "Công cụ, lộ trình và cơ chế phản biện sau chương trình." },
-    ],
-    related: ["bizcar", "3w", "mybizcar"],
+    related: ["b2a", "kora", "3w", "mybizcar"],
   },
   {
     id: "b2a",
@@ -125,7 +100,7 @@ export const methodologies: Methodology[] = [
       { step: "03", title: "Ưu tiên", body: "Chọn cấu phần cần xử lý trước." },
       { step: "04", title: "Cam kết", body: "Thống nhất chỉ số và trách nhiệm." },
     ],
-    related: ["bizcar", "bmdo"],
+    related: ["bizcar"],
   },
   {
     id: "klass",
@@ -150,7 +125,7 @@ export const methodologies: Methodology[] = [
       { step: "03", title: "Chuyên nghiệp", body: "B2A, nhân hiệu địa bàn, kiến tạo cơ hội." },
       { step: "04", title: "Toàn cầu", body: "Năng lực kết nối và dẫn dắt ở quy mô rộng hơn." },
     ],
-    related: ["b2a", "baboso", "bmdo"],
+    related: ["b2a", "baboso"],
   },
   {
     id: "3w",
@@ -174,7 +149,7 @@ export const methodologies: Methodology[] = [
       { step: "WELL", title: "Thiết kế đến chuẩn", body: "Tạo sản phẩm quản trị có thể áp dụng ngay." },
       { step: "WIN", title: "Tạo kết quả thực", body: "Chuyển thiết kế thành hành động và bằng chứng cải tiến." },
     ],
-    related: ["bizcar", "bmdo"],
+    related: ["bizcar"],
   },
   {
     id: "mybizcar",
@@ -199,7 +174,7 @@ export const methodologies: Methodology[] = [
       { step: "03", title: "Ưu tiên", body: "Chọn cấu phần cần xử lý trước." },
       { step: "04", title: "Theo dõi", body: "Quay lại đo sau khi thực thi." },
     ],
-    related: ["bizcar", "bmdo", "3w"],
+    related: ["bizcar", "3w"],
   },
 ];
 
