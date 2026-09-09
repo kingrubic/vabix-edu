@@ -71,7 +71,7 @@ export async function submitLead(payload: LeadPayload): Promise<LeadResult> {
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...payload, website: undefined, source: "vabix.vn" }),
+      body: JSON.stringify({ ...payload, website: undefined, source: "vabix.edu.vn" }),
     });
     if (!res.ok) {
       return { ok: false, code: "UPSTREAM", message: "Không gửi được yêu cầu lúc này. Vui lòng thử lại hoặc gọi hotline." };

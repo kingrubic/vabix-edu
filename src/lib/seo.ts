@@ -65,7 +65,12 @@ export function organizationJsonLd() {
       addressLocality: "Thành phố Hồ Chí Minh",
       addressCountry: "VN",
     },
-    sameAs: [siteConfig.social.facebook, siteConfig.social.linkedin, siteConfig.social.youtube],
+    sameAs: [
+      siteConfig.social.facebook,
+      siteConfig.social.linkedin,
+      siteConfig.social.youtube,
+      siteConfig.marketplaceWebsite,
+    ],
   };
 }
 

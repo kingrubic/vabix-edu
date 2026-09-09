@@ -2,7 +2,7 @@
  * Centralized VABIX site configuration.
  * All contact, social and portal URLs must be consumed from this file.
  *
- * Source of truth: Hồ sơ năng lực VABIX 2026 + định vị Founder 2026 + public website.
+ * Source of truth: Hồ sơ năng lực VABIX 2026 + định vị Founder 2026 + public site vabix.edu.vn.
  * Historical materials contain conflicting contact details; do not hardcode
  * phone/email/address in components.
  */
@@ -14,8 +14,8 @@ export const siteConfig = {
   statement: "Chuyển hóa tri thức thành năng lực. Đồng hành kiến tạo doanh nghiệp phát triển bền vững.",
   description:
     "VABIX đồng hành cùng doanh chủ, lãnh đạo và doanh nghiệp thông qua đào tạo & huấn luyện thực chiến, tư vấn chuyển đổi và Trustworking — kết nối kinh doanh dựa trên niềm tin.",
-  website: "https://vabix.vn",
-  eduWebsite: "https://vabix.edu.vn",
+  website: "https://vabix.edu.vn",
+  marketplaceWebsite: "https://vabix.vn",
   locale: "vi_VN",
   language: "vi",
   foundedYear: 2025,

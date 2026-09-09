@@ -42,7 +42,8 @@ Nguồn: `src/lib/siteConfig.ts`
 - Hotline 0919 171 976 · Văn phòng 028 3716 1616 · Tư vấn 0889 659 966
 - Email info@vabix.vn · support@vabix.vn
 - Founder: Nguyễn Chí Thành — Nhà sáng lập · Chủ tịch HĐQT kiêm Tổng Giám đốc
-- Website canonical hiện tại: `https://vabix.vn` (edu: `https://vabix.edu.vn`)
+- Website public / canonical: `https://vabix.edu.vn`
+- `https://vabix.vn` là nền tảng cư dân / marketplace (ShopXanh), không phải canonical của site này
 
 Các tài liệu lịch sử có thông tin liên hệ lệch — không hardcode nơi khác.
 
