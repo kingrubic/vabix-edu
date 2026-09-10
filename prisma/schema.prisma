@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  name         String
+  passwordHash String
+  isDemo       Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Organization {
+  id                   String   @id @default(uuid()) @db.Uuid
+  name                 String
+  slug                 String   @unique
+  industry             String
+  stage                String
+  size                 String
+  isDemo               Boolean  @default(false)
+  confidentialityNote  String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  createdBy            String   @db.Uuid
+
+  @@map("organizations")
+}
+
+model OrganizationMember {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  userId         String   @db.Uuid
+  role           String
+  createdAt      DateTime @default(now())
+  createdBy      String   @db.Uuid
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+  @@map("organization_members")
+}
+
+model StandardVersion {
+  id                      String   @id @default(uuid()) @db.Uuid
+  code                    String
+  name                    String
+  version                 String
+  status                  String
+  effectiveDate           DateTime
+  approvalNote            String
+  changeReason            String
+  impactNote              String
+  developmentDisclaimer   String
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  createdBy               String   @db.Uuid
+
+  @@unique([code, version])
+  @@map("standard_versions")
+}
+
+model Assessment {
+  id                   String    @id @default(uuid()) @db.Uuid
+  organizationId       String    @db.Uuid
+  parentAssessmentId   String?   @db.Uuid
+  revisionNumber       Int       @default(1)
+  title                String
+  status               String
+  standardVersionId    String    @db.Uuid
+  primaryEvaluatorId   String    @db.Uuid
+  secondaryEvaluatorId String?   @db.Uuid
+  assessmentDate       DateTime
+  nextReviewDate       DateTime?
+  isDemo               Boolean   @default(false)
+  lockedAt             DateTime?
+  lockedBy             String?   @db.Uuid
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  createdBy            String    @db.Uuid
+
+  @@index([organizationId])
+  @@index([standardVersionId])
+  @@map("assessments")
+}
+
+model AuditLog {
+  id                String   @id @default(uuid()) @db.Uuid
+  actorUserId       String   @db.Uuid
+  organizationId    String?  @db.Uuid
+  assessmentId      String?  @db.Uuid
+  action            String
+  entityType        String
+  entityId          String
+  oldValue          String?
+  newValue          String?
+  reason            String?
+  standardVersionId String?  @db.Uuid
+  ip                String?
+  createdAt         DateTime @default(now())
+
+  @@index([organizationId, createdAt])
+  @@map("audit_logs")
+}

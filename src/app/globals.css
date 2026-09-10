@@ -114,3 +114,43 @@ body {
   outline: 2px solid var(--color-vabix-gold);
   outline-offset: 1px;
 }
+
+.bizcar-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(34, 197, 194, 0.08), transparent 50%),
+    radial-gradient(900px 500px at 100% 0%, rgba(222, 164, 67, 0.08), transparent 45%),
+    #07141a;
+  color: #f4f1e8;
+}
+
+.bizcar-panel {
+  border: 1px solid rgba(222, 164, 67, 0.18);
+  background: rgba(10, 28, 34, 0.72);
+  backdrop-filter: blur(16px);
+}
+
+.bizcar-input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(244, 241, 232, 0.14);
+  background: rgba(4, 14, 18, 0.65);
+  color: #f4f1e8;
+  padding: 0.6rem 0.8rem;
+  font-size: 16px;
+}
+
+.bizcar-input:focus {
+  outline: 2px solid var(--color-vabix-gold);
+  outline-offset: 1px;
+}
+
+.bizcar-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #dea443;
+}

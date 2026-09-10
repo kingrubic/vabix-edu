@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Đối tác & khách hàng",
-  description: "VABIX được tin tưởng đồng hành cùng VNPT, SIHUB, SUSPRO, ASL Logistics, MB, CSED và cộng đồng SME.",
+  description: "Tổ chức xuất hiện trong hồ sơ năng lực VABIX. Việc nêu tên không đồng nghĩa hợp đồng hiện tại hay chứng nhận khách hàng.",
   path: "/mang-luoi/doi-tac",
 });
 
@@ -15,8 +15,8 @@ export default function PartnersPage() {
   return (
     <>
       <PageHero
-        title="Được tin tưởng đồng hành"
-        description="VABIX đồng hành cùng tổ chức và doanh nghiệp trên hành trình nâng năng lực quản trị, phát triển con người và chuyển hóa mô hình kinh doanh."
+        title="Tổ chức trong hồ sơ năng lực"
+        description="Danh sách dưới đây được giữ từ dữ liệu website và hồ sơ hiện có. Không suy diễn thành khách hàng hợp đồng, đối tác độc quyền hoặc được phép công bố không giới hạn."
         crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Mạng lưới", href: "/mang-luoi" }, { name: "Đối tác" }]}
       />
       <Container className="py-16">

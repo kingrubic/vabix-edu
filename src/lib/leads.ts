@@ -1,4 +1,15 @@
-export type LeadType = "consult" | "connect" | "program" | "event";
+export const LEAD_TYPES = [
+  "consult",
+  "connect",
+  "program",
+  "event",
+  "trust-buyer",
+  "trust-supplier",
+  "trust-expert",
+  "partnership",
+] as const;
+
+export type LeadType = (typeof LEAD_TYPES)[number];
 
 export type LeadPayload = {
   type: LeadType;
@@ -24,12 +35,56 @@ export type LeadResult =
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRe = /^[0-9+\s().-]{8,20}$/;
 
-export function validateLead(payload: LeadPayload): string | null {
-  if (!payload.name?.trim()) return "Vui lòng nhập họ tên.";
-  if (!payload.phone?.trim() || !phoneRe.test(payload.phone)) return "Số điện thoại chưa hợp lệ.";
-  if (!payload.email?.trim() || !emailRe.test(payload.email)) return "Email chưa hợp lệ.";
-  if (!payload.consent) return "Vui lòng đồng ý với chính sách bảo mật trước khi gửi.";
-  return null;
+function isLeadType(value: unknown): value is LeadType {
+  return typeof value === "string" && (LEAD_TYPES as readonly string[]).includes(value);
+}
+
+function asTrimmedString(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
+export function parseLead(input: unknown): { ok: true; payload: LeadPayload } | { ok: false; message: string } {
+  if (!input || typeof input !== "object") {
+    return { ok: false, message: "Dữ liệu không hợp lệ." };
+  }
+  const raw = input as Record<string, unknown>;
+  if (!isLeadType(raw.type)) {
+    return { ok: false, message: "Loại yêu cầu không hợp lệ." };
+  }
+
+  const payload: LeadPayload = {
+    type: raw.type,
+    name: asTrimmedString(raw.name),
+    company: typeof raw.company === "string" ? raw.company : undefined,
+    role: typeof raw.role === "string" ? raw.role : undefined,
+    phone: asTrimmedString(raw.phone),
+    email: asTrimmedString(raw.email),
+    companySize: typeof raw.companySize === "string" ? raw.companySize : undefined,
+    need: typeof raw.need === "string" ? raw.need : undefined,
+    message: typeof raw.message === "string" ? raw.message : undefined,
+    program: typeof raw.program === "string" ? raw.program : undefined,
+    eventSlug: typeof raw.eventSlug === "string" ? raw.eventSlug : undefined,
+    consent: raw.consent === true,
+    website: typeof raw.website === "string" ? raw.website : undefined,
+    elapsedMs: typeof raw.elapsedMs === "number" ? raw.elapsedMs : undefined,
+  };
+
+  if (!payload.name.trim()) return { ok: false, message: "Vui lòng nhập họ tên." };
+  if (!payload.phone.trim() || !phoneRe.test(payload.phone)) {
+    return { ok: false, message: "Số điện thoại chưa hợp lệ." };
+  }
+  if (!payload.email.trim() || !emailRe.test(payload.email)) {
+    return { ok: false, message: "Email chưa hợp lệ." };
+  }
+  if (!payload.consent) {
+    return { ok: false, message: "Vui lòng đồng ý với chính sách bảo mật trước khi gửi." };
+  }
+  return { ok: true, payload };
+}
+
+export function validateLead(payload: unknown): string | null {
+  const parsed = parseLead(payload);
+  return parsed.ok ? null : parsed.message;
 }
 
 export function isLikelySpam(payload: LeadPayload) {
@@ -38,13 +93,20 @@ export function isLikelySpam(payload: LeadPayload) {
   return false;
 }
 
+export function buildLeadWebhookBody(payload: LeadPayload) {
+  const safe = { ...payload };
+  delete safe.website;
+  return { ...safe, source: "vabix.edu.vn" as const };
+}
+
 /**
  * Lead adapter. When LEAD_WEBHOOK_URL is set, posts JSON to that endpoint.
  * When not configured, returns NOT_CONFIGURED so the UI never fakes success.
  */
-export async function submitLead(payload: LeadPayload): Promise<LeadResult> {
-  const error = validateLead(payload);
-  if (error) return { ok: false, code: "VALIDATION", message: error };
+export async function submitLead(input: unknown): Promise<LeadResult> {
+  const parsed = parseLead(input);
+  if (!parsed.ok) return { ok: false, code: "VALIDATION", message: parsed.message };
+  const payload = parsed.payload;
   if (isLikelySpam(payload)) {
     return { ok: false, code: "SPAM", message: "Yêu cầu không thể xử lý. Vui lòng thử lại hoặc gọi hotline." };
   }
@@ -63,7 +125,7 @@ export async function submitLead(payload: LeadPayload): Promise<LeadResult> {
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...payload, website: undefined, source: "vabix.vn" }),
+      body: JSON.stringify(buildLeadWebhookBody(payload)),
     });
     if (!res.ok) {
       return { ok: false, code: "UPSTREAM", message: "Không gửi được yêu cầu lúc này. Vui lòng thử lại hoặc gọi hotline." };

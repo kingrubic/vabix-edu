@@ -2,28 +2,45 @@
   "name": "vabix",
   "version": "2026.1.0",
   "private": true,
-  "description": "VABIX corporate website",
+  "description": "VABIX corporate website and MyBizCar 3D business engine",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/lib/siteIntegrity.test.ts"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.4",
+    "@react-three/fiber": "^9.3.0",
+    "@tanstack/react-query": "^5.87.1",
+    "bcryptjs": "^2.4.3",
+    "jose": "^6.1.0",
     "next": "^15.5.2",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.62.0",
+    "three": "^0.180.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.1.12",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.18.0",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
+    "@types/three": "^0.180.0",
     "eslint": "^9.34.0",
     "eslint-config-next": "^15.5.2",
     "tailwindcss": "^4.1.12",
+    "tsx": "^4.23.13",
     "typescript": "^5.9.2"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.23"
+    }
   }
 }
