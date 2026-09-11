@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Mở [http://localhost:3000](http://localhost:3000) — trên local `/` là **MyBizCar**. Website VABIX xem tại [http://localhost:3000/vabix](http://localhost:3000/vabix).
+Mở [http://localhost:3003](http://localhost:3003) — trên local `/` là **MyBizCar**. Website VABIX xem tại [http://localhost:3003/vabix](http://localhost:3003/vabix).
 
 ## Kiểm tra
 
@@ -39,7 +39,9 @@ Xem `CONTENT_APPROVAL.md` cho dữ liệu chưa được Founder duyệt.
 
 ## MyBizCar 3D — Động cơ doanh nghiệp MTUA
 
-Ứng dụng đo lường và hình dung quản trị, domain mục tiêu: https://bizcar.vabix.edu.vn
+Ứng dụng đo lường và hình dung quản trị, URL chính: https://vabix.edu.vn/bizcar
+
+Subdomain cũ `https://bizcar.vabix.edu.vn` chuyển 308 sang `/bizcar`.
 
 ### Chạy local
 
@@ -50,13 +52,13 @@ npm run dev
 
 Trên local và preview, `/` mở MyBizCar (không mở website VABIX). Production `vabix.edu.vn` vẫn giữ `/` là trang doanh nghiệp.
 
-- Giới thiệu MyBizCar: http://localhost:3000 hoặc http://localhost:3000/bizcar
-- Động cơ 3D: http://localhost:3000/bizcar/engine
-- Đăng nhập: http://localhost:3000/bizcar/login
-- Dashboard: http://localhost:3000/bizcar/dashboard
-- Website VABIX (local): http://localhost:3000/vabix
+- Giới thiệu + Động cơ 3D: http://localhost:3003/bizcar
+- Đăng nhập: http://localhost:3003/bizcar/login (Convex + cookie `vabix_bizcar_session`)
+- API login: `POST /api/bizcar/auth/login`
+- Dashboard: http://localhost:3003/bizcar/dashboard
+- Website VABIX (local): http://localhost:3003/vabix
 
-Trên domain `bizcar.vabix.edu.vn` (khi có DNS), middleware map `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
+Trên domain `bizcar.vabix.edu.vn`, mọi path chuyển sang `https://vabix.edu.vn/bizcar`.
 
 Tài khoản DEMO (mật khẩu chung `DemoVabix2026!`):
 
@@ -73,13 +75,12 @@ MyBizCar lưu trên Convex. Lần seed đầu (kho users trống) cần `NEXT_PU
 
 Xem `.env.example`. Bắt buộc trên production: `AUTH_SECRET`.
 
-### Gắn domain bizcar.vabix.edu.vn
+### URL MyBizCar
 
-1. Trỏ DNS về cùng deployment Next.js.
-2. Đặt `BIZCAR_HOST=bizcar.vabix.edu.vn`.
-3. Middleware rewrite `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
-4. Bật HTTPS và đặt `AUTH_SECRET` đủ dài.
-5. Convex: `npm run dev` (hoặc `npx convex dev`) rồi đặt `NEXT_PUBLIC_CONVEX_URL`.
+1. Production: `https://vabix.edu.vn/bizcar`
+2. Subdomain cũ `bizcar.vabix.edu.vn` 308 sang path trên.
+3. Bật HTTPS và đặt `AUTH_SECRET` đủ dài.
+4. Convex: `npm run dev` (hoặc `npx convex dev`) rồi đặt `NEXT_PUBLIC_CONVEX_URL`.
 
 Chu kỳ Nạp–Nén–Nổ–Neo là cấu trúc ghi nhớ BMDO, không phải mô tả quan hệ nhân quả cơ học.
 Phiên bản phát triển phục vụ hiệu chỉnh và kiểm chứng thực địa.

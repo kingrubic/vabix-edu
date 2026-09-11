@@ -49,6 +49,24 @@ const nextConfig: NextConfig = {
         destination: "https://vabix.edu.vn/:path*",
         statusCode: 301,
       },
+      {
+        source: "/",
+        has: [{ type: "host", value: "bizcar.vabix.edu.vn" }],
+        destination: "https://vabix.edu.vn/bizcar",
+        statusCode: 308,
+      },
+      {
+        source: "/engine",
+        has: [{ type: "host", value: "bizcar.vabix.edu.vn" }],
+        destination: "https://vabix.edu.vn/bizcar",
+        statusCode: 308,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "bizcar.vabix.edu.vn" }],
+        destination: "https://vabix.edu.vn/bizcar/:path*",
+        statusCode: 308,
+      },
       ...legacyRedirects,
     ];
   },

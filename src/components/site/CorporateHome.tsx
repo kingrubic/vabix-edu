@@ -166,7 +166,7 @@ export function CorporateHome() {
               <Button href="/mo-hinh-phuong-phap/mybizcar" variant="outline" className="border-white/40 text-white">
                 MyBizCar
               </Button>
-              <Button href="/bizcar/engine" variant="outline" className="border-white/40 text-white">
+              <Button href="/bizcar" variant="outline" className="border-white/40 text-white">
                 Mở MyBizCar 3D
               </Button>
             </div>

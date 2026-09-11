@@ -103,3 +103,20 @@ export function rewriteBizcarHostPath(pathname: string): string | null {
   if (pathname.startsWith("/organizations/")) return `/bizcar${pathname}`;
   return null;
 }
+
+/** Public home of the 3D app is /bizcar, not the old /engine workbench. */
+export function canonicalBizcarPath(pathname: string): string {
+  if (pathname === "/" || pathname === "/engine") return "/bizcar";
+  if (pathname.startsWith("/bizcar")) return pathname;
+  return rewriteBizcarHostPath(pathname) ?? `/bizcar${pathname.startsWith("/") ? pathname : `/${pathname}`}`;
+}
+
+/** bizcar.vabix.edu.vn → https://vabix.edu.vn/bizcar… */
+export function bizcarHostRedirectUrl(
+  host: string | null | undefined,
+  pathname: string,
+  search = "",
+): string | null {
+  if (!isBizcarHost(host) || isAssetPath(pathname)) return null;
+  return `${CANONICAL_ORIGIN}${canonicalBizcarPath(pathname)}${search}`;
+}

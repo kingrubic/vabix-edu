@@ -20,6 +20,7 @@ const cols = [
       { label: "BMDO", href: "/chuong-trinh/bmdo" },
       { label: "MBM", href: "/chuong-trinh/mbm" },
       { label: "BizCar", href: "/mo-hinh-phuong-phap/bizcar" },
+      { label: "MyBizCar 3D", href: "/bizcar" },
       { label: "3W", href: "/mo-hinh-phuong-phap/3w" },
     ],
   },

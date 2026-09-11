@@ -4,11 +4,11 @@
   "private": true,
   "description": "VABIX corporate website and MyBizCar 3D business engine",
   "scripts": {
-    "dev": "convex dev --run 'next dev'",
-    "dev:next": "next dev",
+    "dev": "convex dev --run 'next dev -p 3003'",
+    "dev:next": "next dev -p 3003",
     "dev:backend": "convex dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H 0.0.0.0 -p 3003",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test src/lib/siteIntegrity.test.ts src/lib/cacheBust.test.ts src/security/routes.test.ts"

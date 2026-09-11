@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  bizcarHostRedirectUrl,
+  canonicalBizcarPath,
   corporateHomePath,
   isAssetPath,
   isVabixCorporateHost,
@@ -40,4 +42,20 @@ test("static App Router chunks are never rewritten", () => {
   assert.equal(rewriteBizcarHostPath("/_next/static/chunks/app/giai-phap/page.js"), null);
   assert.equal(rewriteBizcarHostPath("/giai-phap"), null);
   assert.equal(rewriteBizcarHostPath("/engine"), "/bizcar/engine");
+});
+
+test("bizcar subdomain permanently moves to vabix.edu.vn/bizcar", () => {
+  assert.equal(canonicalBizcarPath("/"), "/bizcar");
+  assert.equal(canonicalBizcarPath("/engine"), "/bizcar");
+  assert.equal(canonicalBizcarPath("/login"), "/bizcar/login");
+  assert.equal(canonicalBizcarPath("/dashboard"), "/bizcar/dashboard");
+  assert.equal(
+    bizcarHostRedirectUrl("bizcar.vabix.edu.vn", "/", ""),
+    "https://vabix.edu.vn/bizcar",
+  );
+  assert.equal(
+    bizcarHostRedirectUrl("bizcar.vabix.edu.vn", "/login", "?next=/dashboard"),
+    "https://vabix.edu.vn/bizcar/login?next=/dashboard",
+  );
+  assert.equal(bizcarHostRedirectUrl("vabix.edu.vn", "/bizcar", ""), null);
 });

@@ -75,6 +75,7 @@ export const primaryNav: NavItem[] = [
       { label: "BMDO", href: "/chuong-trinh/bmdo", description: "Thao trường 30 buổi thiết kế và vận hành doanh nghiệp." },
       { label: "MBM", href: "/chuong-trinh/mbm", description: "Làm chủ mô hình BizCar — 12 tháng." },
       { label: "BizCar", href: "/mo-hinh-phuong-phap/bizcar", description: "Mô hình quản trị 12 khối chức năng." },
+      { label: "MyBizCar 3D", href: "/bizcar", description: "Động cơ doanh nghiệp MTUA — mô phỏng 3D." },
       { label: "3W", href: "/mo-hinh-phuong-phap/3w", description: "Chuẩn thành công WOW–WELL–WIN." },
       { label: "B2A", href: "/mo-hinh-phuong-phap/b2a", description: "Từ địa chỉ, địa bàn đến kết quả thị trường." },
       { label: "BABOSO", href: "/mo-hinh-phuong-phap/baboso", description: "Hành trình từ thương hiệu đến tái mua hàng." },

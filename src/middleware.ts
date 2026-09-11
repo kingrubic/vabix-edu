@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import {
+  bizcarHostRedirectUrl,
   isAssetPath,
   isBizcarHost,
   isBizcarPath,
@@ -72,6 +73,11 @@ export async function middleware(request: NextRequest) {
   const wwwRedirect = wwwCanonicalRedirectUrl(incomingHost, pathname, request.nextUrl.search);
   if (wwwRedirect) {
     return NextResponse.redirect(wwwRedirect, 301);
+  }
+
+  const bizcarRedirect = bizcarHostRedirectUrl(incomingHost, pathname, request.nextUrl.search);
+  if (bizcarRedirect) {
+    return NextResponse.redirect(bizcarRedirect, 308);
   }
 
   if (isAssetPath(pathname)) {

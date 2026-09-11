@@ -50,11 +50,13 @@ export async function verifySession(token: string): Promise<SessionClaims | null
 }
 
 export function cookieOptions() {
+  const production = process.env.NODE_ENV === "production";
   return {
     httpOnly: true,
     sameSite: "lax" as const,
-    secure: process.env.NODE_ENV === "production",
+    secure: production,
     path: "/",
     maxAge: SESSION_TTL_SECONDS,
+    ...(production ? { domain: ".vabix.edu.vn" } : {}),
   };
 }
