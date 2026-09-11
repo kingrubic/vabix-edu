@@ -3,20 +3,16 @@ import { proofSignals } from "@/content/metrics";
 import { pillars, supportingLayers } from "@/content/pillars";
 import { painPoints } from "@/content/about";
 import {
-  heroHeadline,
-  heroSubheadline,
-  supportingMessage,
-  tagline,
+  heroHeadline as fileHeroHeadline,
+  heroSubheadline as fileHeroSubheadline,
+  supportingMessage as fileSupportingMessage,
+  tagline as fileTagline,
   valueJourney,
 } from "@/content/brand";
-import { featuredPrograms } from "@/content/programs";
 import { threeW } from "@/content/threeW";
 import { consultingProcess } from "@/content/consulting";
 import { trustworking } from "@/content/trustworking";
-import { caseStudies } from "@/content/caseStudies";
-import { featuredExperts } from "@/content/experts";
-import { upcomingEvents } from "@/content/events";
-import { articlesByCategory, articleCategories } from "@/content/articles";
+import { articleCategories } from "@/content/articles";
 import { partners } from "@/content/network";
 import { Button } from "@/components/ui/Button";
 import { Container, SectionHeading } from "@/components/ui/Section";
@@ -24,11 +20,26 @@ import { ArrowIcon, JsonLd } from "@/components/ui/Misc";
 import { CaseStudyCard, EventCard, ArticleCard, PartnerLogo, MetricCard, ExpertCard } from "@/components/cards/Cards";
 import { CTASection } from "@/components/sections/CTASection";
 import { breadcrumbJsonLd } from "@/lib/seo";
+import {
+  publishedFeaturedPrograms,
+  publishedCaseStudies,
+  publishedFeaturedExperts,
+  publishedUpcomingEvents,
+  publishedArticlesByCategory,
+  publishedPage,
+} from "@/platform/cms/catalog";
 
 export function CorporateHome() {
-  const featuredCases = caseStudies.filter((c) => c.featured).slice(0, 3);
-  const featuredArticles = articlesByCategory().slice(0, 3);
-  const homeEvents = upcomingEvents().slice(0, 3);
+  const cmsHome = publishedPage("home");
+  const heroHeadline = typeof cmsHome?.heroHeadline === "string" ? cmsHome.heroHeadline : fileHeroHeadline;
+  const heroSubheadline = typeof cmsHome?.heroSubheadline === "string" ? cmsHome.heroSubheadline : fileHeroSubheadline;
+  const tagline = typeof cmsHome?.tagline === "string" ? cmsHome.tagline : fileTagline;
+  const supportingMessage = Array.isArray(cmsHome?.supportingMessage)
+    ? (cmsHome.supportingMessage as string[])
+    : fileSupportingMessage;
+  const featuredCases = publishedCaseStudies().filter((c) => c.featured).slice(0, 3);
+  const featuredArticles = publishedArticlesByCategory().slice(0, 3);
+  const homeEvents = publishedUpcomingEvents().filter((item) => item.status !== "completed").slice(0, 3);
   const [line1, line2] = heroHeadline.split("\n");
 
   return (
@@ -133,7 +144,7 @@ export function CorporateHome() {
             description="BMDO 30 buổi. MBM 12 tháng. Các chương trình khác: thời lượng được thiết kế theo nhu cầu — không tự đặt số buổi."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {featuredPrograms()
+            {publishedFeaturedPrograms()
               .filter((p) => ["bmdo", "mbm", "thao-truong-khoi-nghiep", "nang-luc-so-ai-lanh-dao", "ung-dung-ai-hieu-suat", "dao-tao-theo-yeu-cau"].includes(p.slug))
               .map((p) => (
                 <Link key={p.slug} href={`/chuong-trinh/${p.slug}`} className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white p-6 hover:border-vabix-gold">
@@ -292,7 +303,7 @@ export function CorporateHome() {
             description="Hồ sơ chuyên gia được giữ từ dữ liệu hiện có. Chức danh và học vị cần đối chiếu khi cập nhật."
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredExperts.map((e) => (
+            {publishedFeaturedExperts().map((e) => (
               <ExpertCard key={e.id} expert={e} />
             ))}
           </div>

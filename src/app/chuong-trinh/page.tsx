@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Section";
 import { ProgramCatalog } from "@/components/catalog/ProgramCatalog";
 import { topicCategories } from "@/content/training";
 import { createMetadata } from "@/lib/seo";
+import { publishedPrograms } from "@/platform/cms/catalog";
 
 export const metadata = createMetadata({
   title: "Danh mục chương trình đào tạo",
@@ -12,6 +13,7 @@ export const metadata = createMetadata({
 });
 
 export default function ProgramsPage() {
+  const programs = publishedPrograms();
   return (
     <>
       <PageHero
@@ -23,7 +25,7 @@ export default function ProgramsPage() {
         <p className="mb-8 text-sm text-vabix-muted">
           Lĩnh vực: {topicCategories.map((t) => t.label).join(" · ")}. Học phí, lịch khai giảng và giảng viên chỉ hiển thị khi đã được phê duyệt — hiện tại vui lòng liên hệ tư vấn.
         </p>
-        <ProgramCatalog />
+        <ProgramCatalog programs={programs} />
       </Container>
     </>
   );

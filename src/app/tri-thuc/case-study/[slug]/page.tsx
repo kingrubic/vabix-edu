@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { caseStudies, getCaseStudy } from "@/content/caseStudies";
-import { experts } from "@/content/experts";
+import { caseStudies } from "@/content/caseStudies";
+import { publishedCaseStudy, publishedCaseStudies, publishedExperts } from "@/platform/cms/catalog";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { CTASection } from "@/components/sections/CTASection";
@@ -8,12 +8,18 @@ import { createMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 export function generateStaticParams() {
-  return caseStudies.map((c) => ({ slug: c.slug }));
+  const slugs = new Set(caseStudies.map((item) => item.slug));
+  try {
+    for (const item of publishedCaseStudies()) slugs.add(item.slug);
+  } catch {
+    /* file fallback */
+  }
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const c = getCaseStudy(slug);
+  const c = publishedCaseStudy(slug);
   if (!c) return {};
   return createMetadata({
     title: `${c.organization} — ${c.industry}`,
@@ -25,9 +31,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const c = getCaseStudy(slug);
+  const c = publishedCaseStudy(slug);
   if (!c) notFound();
-  const related = experts.filter((e) => c.relatedExperts.includes(e.slug));
+  const related = publishedExperts().filter((e) => c.relatedExperts?.includes(e.slug));
   const sections = [
     { t: "Bối cảnh", b: c.context },
     { t: "Bài toán", b: c.challenge },

@@ -2,11 +2,11 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { programs, programGroups } from "@/content/programs";
+import { programs as filePrograms, programGroups } from "@/content/programs";
 import { topicCategories } from "@/content/training";
-import type { ProgramGroupId, TopicCategoryId } from "@/content/types";
+import type { ProgramGroupId, TopicCategoryId, TrainingProgram } from "@/content/types";
 
-export function ProgramCatalog() {
+export function ProgramCatalog({ programs = filePrograms }: { programs?: TrainingProgram[] }) {
   const [q, setQ] = useState("");
   const [group, setGroup] = useState<ProgramGroupId | "all">("all");
   const [topic, setTopic] = useState<TopicCategoryId | "all">("all");
@@ -21,7 +21,7 @@ export function ProgramCatalog() {
       const hay = [p.title, p.shortTitle, p.audience, p.problem, ...p.topics].join(" ").toLowerCase();
       return hay.includes(query);
     });
-  }, [q, group, topic]);
+  }, [q, group, topic, programs]);
 
   return (
     <div>

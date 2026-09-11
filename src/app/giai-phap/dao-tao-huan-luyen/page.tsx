@@ -3,7 +3,8 @@ import { Container, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/sections/CTASection";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { trainingGroups, trainingMethod } from "@/content/training";
-import { featuredPrograms, programs } from "@/content/programs";
+import { programs } from "@/content/programs";
+import { publishedFeaturedPrograms } from "@/platform/cms/catalog";
 import { threeW } from "@/content/threeW";
 import { painPoints } from "@/content/about";
 import { createMetadata } from "@/lib/seo";
@@ -104,7 +105,7 @@ export default function TrainingLandingPage() {
       <Container className="py-16">
         <SectionHeading title="Chương trình tiêu biểu" />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {featuredPrograms()
+          {publishedFeaturedPrograms()
             .filter((p) => p.group === "ceo" || p.slug === "dao-tao-theo-yeu-cau")
             .map((p) => (
               <Link key={p.slug} href={`/chuong-trinh/${p.slug}`} className="border border-vabix-deep-teal/10 p-6 hover:border-vabix-gold">

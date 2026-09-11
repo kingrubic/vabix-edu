@@ -1,0 +1,53 @@
+import { requireMenu } from "@/platform/auth/guard";
+import { listClasses, listEnrollments } from "@/platform/lms/classes";
+import { getDb } from "@/platform/db/client";
+import { saveAttendanceForm } from "@/platform/ui/actions";
+
+export default async function AdminAttendancePage() {
+  await requireMenu("/admin/dao-tao/diem-danh");
+  const classes = listClasses() as { id: string; name: string }[];
+  return (
+    <div className="space-y-6">
+      <h1 className="text-2xl font-semibold text-[#163c3e]">Điểm danh</h1>
+      <p className="text-sm text-[#66746f]">Công thức chuyên cần: (có mặt + đi muộn) / (có mặt + đi muộn + vắng). Vắng có phép không nằm mẫu số.</p>
+      {classes.map((cls) => {
+        const schedules = getDb().prepare(`SELECT id, title FROM lms_schedules WHERE class_id=? ORDER BY starts_at`).all(cls.id) as { id: string; title: string }[];
+        const enrollments = listEnrollments(cls.id) as { id: string; full_name: string }[];
+        return (
+          <section key={cls.id} className="platform-card p-5">
+            <h2 className="font-semibold">{cls.name}</h2>
+            {!schedules.length ? <p className="mt-2 text-sm text-[#66746f]">Chưa có buổi học.</p> : (
+              <div className="platform-table-wrap mt-3">
+                <table className="platform-table">
+                  <thead><tr><th>Học viên</th>{schedules.map((item) => <th key={item.id}>{item.title}</th>)}</tr></thead>
+                  <tbody>
+                    {enrollments.map((enrollment) => (
+                      <tr key={enrollment.id}>
+                        <td>{enrollment.full_name}</td>
+                        {schedules.map((schedule) => (
+                          <td key={schedule.id}>
+                            <form action={saveAttendanceForm} className="flex gap-1">
+                              <input type="hidden" name="scheduleId" value={schedule.id} />
+                              <input type="hidden" name="enrollmentId" value={enrollment.id} />
+                              <select name="status" className="input">
+                                <option value="present">Có mặt</option>
+                                <option value="late">Đi muộn</option>
+                                <option value="absent">Vắng</option>
+                                <option value="excused">Có phép</option>
+                              </select>
+                              <button className="underline">Lưu</button>
+                            </form>
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        );
+      })}
+    </div>
+  );
+}

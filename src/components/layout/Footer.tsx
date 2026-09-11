@@ -96,8 +96,8 @@ export function Footer() {
               <p className="text-white/60">MST {siteConfig.taxId}</p>
             </address>
             <p className="mt-4">
-              <Link href="/chinh-sach-quyen-rieng-tu" className="text-sm text-vabix-soft-gold hover:text-vabix-gold">
-                Chính sách quyền riêng tư
+              <Link href="/dang-nhap" className="text-sm text-vabix-soft-gold hover:text-vabix-gold">
+                Đăng nhập cổng học tập
               </Link>
             </p>
           </div>

@@ -46,9 +46,13 @@ const HOST_ALIASES: Record<string, string> = {
   "/admin": "/bizcar/admin",
 };
 
-export function rewriteBizcarHostPath(pathname: string): string | null {
-  if (HOST_ALIASES[pathname]) return HOST_ALIASES[pathname];
-  for (const [from, to] of Object.entries(HOST_ALIASES)) {
+export function rewriteBizcarHostPath(pathname: string, host?: string | null): string | null {
+  const aliases = { ...HOST_ALIASES };
+  if (!isBizcarHost(host)) {
+    delete aliases["/admin"];
+  }
+  if (aliases[pathname]) return aliases[pathname];
+  for (const [from, to] of Object.entries(aliases)) {
     if (from !== "/" && pathname.startsWith(`${from}/`)) {
       return `${to}${pathname.slice(from.length)}`;
     }

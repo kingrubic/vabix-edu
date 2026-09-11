@@ -100,10 +100,9 @@ export function buildLeadWebhookBody(payload: LeadPayload) {
 }
 
 /**
- * Lead adapter. When LEAD_WEBHOOK_URL is set, posts JSON to that endpoint.
- * When not configured, returns NOT_CONFIGURED so the UI never fakes success.
+ * Persist to the platform inquiry table first. Optional webhook is extra delivery, not the source of truth.
  */
-export async function submitLead(input: unknown): Promise<LeadResult> {
+export async function submitLead(input: unknown, sourcePath = ""): Promise<LeadResult> {
   const parsed = parseLead(input);
   if (!parsed.ok) return { ok: false, code: "VALIDATION", message: parsed.message };
   const payload = parsed.payload;
@@ -111,28 +110,25 @@ export async function submitLead(input: unknown): Promise<LeadResult> {
     return { ok: false, code: "SPAM", message: "Yêu cầu không thể xử lý. Vui lòng thử lại hoặc gọi hotline." };
   }
 
-  const endpoint = process.env.LEAD_WEBHOOK_URL;
-  if (!endpoint) {
-    return {
-      ok: false,
-      code: "NOT_CONFIGURED",
-      message:
-        "Hệ thống tiếp nhận chưa được kết nối. Vui lòng gọi hotline hoặc gửi email trực tiếp — thông tin liên hệ nằm cuối trang.",
-    };
-  }
-
   try {
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(buildLeadWebhookBody(payload)),
-    });
-    if (!res.ok) {
-      return { ok: false, code: "UPSTREAM", message: "Không gửi được yêu cầu lúc này. Vui lòng thử lại hoặc gọi hotline." };
+    const { bootPlatform } = await import("@/platform/boot");
+    const { saveInquiryFromLead } = await import("@/platform/inquiries/service");
+    await bootPlatform();
+    const saved = saveInquiryFromLead(payload, sourcePath);
+    const endpoint = process.env.LEAD_WEBHOOK_URL;
+    if (endpoint) {
+      try {
+        await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...buildLeadWebhookBody(payload), inquiryId: saved.id }),
+        });
+      } catch {
+        // Inquiry already stored; webhook is optional.
+      }
     }
-    const data = (await res.json().catch(() => ({}))) as { id?: string };
-    return { ok: true, id: data.id ?? crypto.randomUUID() };
+    return { ok: true, id: saved.id };
   } catch {
-    return { ok: false, code: "UPSTREAM", message: "Không kết nối được máy chủ. Vui lòng thử lại sau." };
+    return { ok: false, code: "UPSTREAM", message: "Không ghi nhận được yêu cầu lúc này. Vui lòng thử lại hoặc gọi hotline." };
   }
 }

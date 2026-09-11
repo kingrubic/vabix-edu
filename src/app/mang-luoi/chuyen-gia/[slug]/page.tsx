@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { experts, getExpert } from "@/content/experts";
-import { caseStudies } from "@/content/caseStudies";
-import { articles } from "@/content/articles";
-import { methodologies } from "@/content/methodologies";
+import { experts } from "@/content/experts";
+import { publishedExpert, publishedExperts, publishedCaseStudies, publishedArticles, publishedMethodologies } from "@/platform/cms/catalog";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { CTASection } from "@/components/sections/CTASection";
@@ -12,23 +10,29 @@ import { JsonLd } from "@/components/ui/Misc";
 import { createMetadata, absUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return experts.map((e) => ({ slug: e.slug }));
+  const slugs = new Set(experts.map((item) => item.slug));
+  try {
+    for (const item of publishedExperts()) slugs.add(item.slug);
+  } catch {
+    /* file fallback */
+  }
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const e = getExpert(slug);
+  const e = publishedExpert(slug);
   if (!e) return {};
   return createMetadata({ title: e.name, description: e.shortBio, path: `/mang-luoi/chuyen-gia/${e.slug}` });
 }
 
 export default async function ExpertDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const e = getExpert(slug);
+  const e = publishedExpert(slug);
   if (!e) notFound();
-  const relatedCases = caseStudies.filter((c) => e.caseStudies.includes(c.slug));
-  const relatedArticles = articles.filter((a) => e.articles.includes(a.slug));
-  const relatedPrograms = methodologies.filter((m) => e.programs.includes(m.slug));
+  const relatedCases = publishedCaseStudies().filter((c) => e.caseStudies?.includes(c.slug));
+  const relatedArticles = publishedArticles().filter((a) => e.articles?.includes(a.slug));
+  const relatedPrograms = publishedMethodologies().filter((m) => e.programs?.includes(m.slug));
 
   return (
     <>

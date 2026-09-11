@@ -1,28 +1,33 @@
 import { notFound } from "next/navigation";
-import { getMethodology, methodologies, bizCarBlocks } from "@/content/methodologies";
+import { methodologies, bizCarBlocks } from "@/content/methodologies";
 import { threeW } from "@/content/threeW";
 import { MethodologyTemplate } from "@/components/templates/MethodologyTemplate";
-import { featuredExperts } from "@/content/experts";
-import { caseStudies } from "@/content/caseStudies";
+import { publishedMethodology, publishedMethodologies, publishedFeaturedExperts, publishedCaseStudies } from "@/platform/cms/catalog";
 import { ExpertCard, CaseStudyCard } from "@/components/cards/Cards";
 import { SectionHeading } from "@/components/ui/Section";
 import { createMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 export function generateStaticParams() {
-  return methodologies.map((m) => ({ slug: m.slug }));
+  const slugs = new Set(methodologies.map((item) => item.slug));
+  try {
+    for (const item of publishedMethodologies()) slugs.add(item.slug);
+  } catch {
+    /* file fallback */
+  }
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const m = getMethodology(slug);
+  const m = publishedMethodology(slug);
   if (!m) return {};
   return createMetadata({ title: m.name, description: m.summary, path: `/mo-hinh-phuong-phap/${m.slug}` });
 }
 
 export default async function MethodPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const m = getMethodology(slug);
+  const m = publishedMethodology(slug);
   if (!m) notFound();
 
   const extra =
@@ -79,7 +84,7 @@ export default async function MethodPage({ params }: { params: Promise<{ slug: s
         <section className="bg-vabix-ivory p-6">
           <SectionHeading title="Case study" />
           <div className="mt-6 grid gap-6 md:grid-cols-2">
-            {caseStudies.slice(0, 2).map((c) => (
+            {publishedCaseStudies().slice(0, 2).map((c) => (
               <CaseStudyCard key={c.id} item={c} />
             ))}
           </div>
@@ -87,7 +92,7 @@ export default async function MethodPage({ params }: { params: Promise<{ slug: s
         <section>
           <SectionHeading title="Đội ngũ" />
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {featuredExperts.slice(0, 3).map((e) => (
+            {publishedFeaturedExperts().slice(0, 3).map((e) => (
               <ExpertCard key={e.id} expert={e} />
             ))}
           </div>

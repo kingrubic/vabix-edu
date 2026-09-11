@@ -23,6 +23,7 @@ import { ExpertCard, PartnerLogo } from "@/components/cards/Cards";
 import { Button } from "@/components/ui/Button";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
+import { publishedPage } from "@/platform/cms/catalog";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,6 +34,8 @@ export const metadata = createMetadata({
 });
 
 export default function AboutPage() {
+  const cms = publishedPage("ve-vabix");
+  const missionText = typeof cms?.mission === "string" ? cms.mission : mission;
   return (
     <>
       <PageHero
@@ -51,7 +54,7 @@ export default function AboutPage() {
       <section id="su-menh" className="bg-vabix-ivory py-16">
         <Container>
           <p className="eyebrow">Sứ mệnh</p>
-          <p className="mt-4 max-w-4xl text-xl font-medium text-vabix-deep-teal">{mission}</p>
+          <p className="mt-4 max-w-4xl text-xl font-medium text-vabix-deep-teal">{missionText}</p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-3">
             {missionChannels.map((c) => (
               <li key={c} className="bg-white p-4 font-semibold text-vabix-deep-teal">

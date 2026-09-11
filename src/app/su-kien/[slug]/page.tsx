@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { events, getEvent } from "@/content/events";
+import { events } from "@/content/events";
+import { publishedEvent, publishedEvents } from "@/platform/cms/catalog";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { LeadForm } from "@/components/forms/LeadForm";
@@ -8,19 +9,25 @@ import { createMetadata, absUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
 
 export function generateStaticParams() {
-  return events.map((e) => ({ slug: e.slug }));
+  const slugs = new Set(events.map((item) => item.slug));
+  try {
+    for (const item of publishedEvents()) slugs.add(item.slug);
+  } catch {
+    /* file fallback */
+  }
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const e = getEvent(slug);
+  const e = publishedEvent(slug);
   if (!e) return {};
   return createMetadata({ title: e.title, description: e.excerpt, path: `/su-kien/${e.slug}`, image: e.image });
 }
 
 export default async function EventDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const e = getEvent(slug);
+  const e = publishedEvent(slug);
   if (!e) notFound();
   return (
     <>
