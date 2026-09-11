@@ -28,21 +28,23 @@ const cols = [
     links: [
       { label: "Sản phẩm tri thức", href: "/san-pham-tri-thuc" },
       { label: "Nhân lực mở & số", href: "/nhan-luc-mo-nhan-luc-so" },
-      { label: "Chuyên gia", href: "/mang-luoi/chuyen-gia" },
-      { label: "Case study", href: "/tri-thuc/case-study" },
+      { label: "Về VABIX", href: "/ve-vabix" },
+      { label: "Mạng lưới", href: "/mang-luoi" },
+      { label: "Tri thức", href: "/tri-thuc" },
       { label: "Sự kiện", href: "/su-kien" },
+      { label: "Liên hệ", href: "/lien-he" },
     ],
   },
 ];
 
-export function Footer() {
+export function Footer({ homeHref = "/" }: { homeHref?: string }) {
   const year = new Date().getFullYear();
   return (
     <footer className="bg-vabix-deep-teal text-white">
       <Container className="py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
-            <Link href="/vabix" aria-label="VABIX — trang chủ">
+            <Link href={homeHref} aria-label="VABIX — trang chủ">
               <Logo variant="dark" className="h-11 sm:h-12" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/75">{siteConfig.tagline}</p>

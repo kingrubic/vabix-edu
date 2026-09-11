@@ -31,7 +31,7 @@ export default function BecomePartnerPage() {
             ))}
           </ol>
           <p className="mt-8 text-sm text-vabix-muted">
-            Nhà cung cấp phải là tổ chức có pháp nhân, được thẩm định trước khi cấp chứng nhận chính thức. Tiêu chuẩn được điều chỉnh theo từng giai đoạn phát triển của Làng.
+            Nhà cung cấp cần là tổ chức có pháp nhân. VABIX thực hiện sàng lọc / đánh giá ban đầu theo hồ sơ, năng lực và bằng chứng — chưa cấp chứng nhận nhà cung cấp khi tiêu chuẩn chưa được phê duyệt.
           </p>
         </div>
         <div className="border border-vabix-deep-teal/10 bg-white p-6">

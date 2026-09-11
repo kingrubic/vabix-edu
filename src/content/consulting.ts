@@ -3,7 +3,7 @@ import type { ConsultingService } from "./types";
 export const consultingProcess = [
   { step: "01", title: "Đánh giá hiện trạng", body: "Thu thập thông tin, nhìn toàn diện chiến lược, thị trường, con người, tài chính, tổ chức, công nghệ và vận hành." },
   { step: "02", title: "Xác định điểm nghẽn", body: "Phân biệt biểu hiện và nguyên nhân, chọn điểm nghẽn ưu tiên thay vì xử lý lan man." },
-  { step: "03", title: "Thiết kế giải pháp", body: "Thiết kế giải pháp phù hợp bối cảnh và nguồn lực, bảo đảm các cấu phần phối hợp với nhau." },
+  { step: "03", title: "Thiết kế giải pháp", body: "Thiết kế giải pháp phù hợp bối cảnh và nguồn lực, sao cho các cấu phần phối hợp với nhau." },
   { step: "04", title: "Đồng hành triển khai", body: "Chuyển giải pháp thành kế hoạch, người chịu trách nhiệm, thời hạn và milestone." },
   { step: "05", title: "Đo lường và cải tiến", body: "Đánh giá bằng dữ liệu và bằng chứng, điều chỉnh và chuẩn hóa những gì đã hiệu quả." },
 ];
@@ -20,7 +20,7 @@ export const consultingPositioning =
   "VABIX đồng hành cùng doanh chủ và đội ngũ lãnh đạo trong đánh giá hiện trạng, xác định điểm nghẽn, thiết kế giải pháp và triển khai những thay đổi cần thiết để nâng cao hiệu quả và năng lực phát triển doanh nghiệp.";
 
 export const consultingNote =
-  "Giải pháp xem xét toàn diện chiến lược, thị trường, con người, tài chính, tổ chức, công nghệ và vận hành, bảo đảm sự phối hợp, không tạo thêm những điểm gãy mới. VABIX không cam kết ROI, doanh thu hay tỷ lệ cải thiện định lượng khi chưa có căn cứ đo lường.";
+  "Giải pháp xem xét toàn diện chiến lược, thị trường, con người, tài chính, tổ chức, công nghệ và vận hành, nhằm sự phối hợp giữa các cấu phần, không tạo thêm những điểm gãy mới. VABIX không cam kết ROI, doanh thu hay tỷ lệ cải thiện định lượng khi chưa có căn cứ đo lường.";
 
 export const consultingServices: ConsultingService[] = [
   {

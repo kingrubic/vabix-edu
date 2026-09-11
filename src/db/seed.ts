@@ -2,7 +2,9 @@ import type {
   ActivationAssessment,
   Assessment,
   AssessmentContext,
+  AuditLog,
   CfsConnectionScore,
+  Comment,
   ComponentAssessment,
   CriterionScore,
   EvidenceItem,
@@ -27,6 +29,47 @@ import { CFS_CODES, COMPONENT_CODES } from "@/domain/types";
 import { IDS } from "./ids";
 
 const now = "2026-09-01T08:00:00.000Z";
+
+export const DEMO_ACCOUNTS = [
+  {
+    email: "ceo@demo.vabix.edu.vn",
+    name: "Nguyễn Minh Châu",
+    title: "Tổng giám đốc — Cơ khí Hòa Bình",
+    roleLabel: "CEO minh họa",
+  },
+  {
+    email: "coach@demo.vabix.edu.vn",
+    name: "ThS. Đặng Đức An",
+    title: "Coach đánh giá BMDO",
+    roleLabel: "Coach đánh giá",
+  },
+  {
+    email: "academic@demo.vabix.edu.vn",
+    name: "TS. Lê Hồng Nhung",
+    title: "Quản trị học thuật BMDO",
+    roleLabel: "Quản trị học thuật",
+  },
+  {
+    email: "admin@demo.vabix.edu.vn",
+    name: "Phạm Quốc Huy",
+    title: "Quản trị nền tảng VABIX",
+    roleLabel: "Quản trị nền tảng",
+  },
+  {
+    email: "member@demo.vabix.edu.vn",
+    name: "Hoàng Thị Lan",
+    title: "Trưởng khối vận hành",
+    roleLabel: "Thành viên",
+  },
+  {
+    email: "viewer@demo.vabix.edu.vn",
+    name: "Võ Thanh Tùng",
+    title: "Thành viên HĐQT (xem)",
+    roleLabel: "Người xem",
+  },
+] as const;
+
+export const DEMO_ACCOUNT_EMAILS = DEMO_ACCOUNTS.map((account) => account.email);
 
 function emptyStore(): StoreShape {
   return {
@@ -190,8 +233,8 @@ export function buildSeedStore(passwordHash: string): StoreShape {
   const users: User[] = [
     {
       id: IDS.users.superAdmin,
-      email: "admin@vabix.edu.vn",
-      name: "Quản trị nền tảng VABIX",
+      email: "admin@demo.vabix.edu.vn",
+      name: "Phạm Quốc Huy",
       passwordHash,
       isDemo: true,
       isActive: true,
@@ -200,8 +243,8 @@ export function buildSeedStore(passwordHash: string): StoreShape {
     },
     {
       id: IDS.users.academic,
-      email: "academic@vabix.edu.vn",
-      name: "Quản trị học thuật BMDO",
+      email: "academic@demo.vabix.edu.vn",
+      name: "TS. Lê Hồng Nhung",
       passwordHash,
       isDemo: true,
       isActive: true,
@@ -210,8 +253,8 @@ export function buildSeedStore(passwordHash: string): StoreShape {
     },
     {
       id: IDS.users.coach,
-      email: "coach@vabix.edu.vn",
-      name: "Huấn luyện viên đánh giá",
+      email: "coach@demo.vabix.edu.vn",
+      name: "ThS. Đặng Đức An",
       passwordHash,
       isDemo: true,
       isActive: true,
@@ -221,7 +264,7 @@ export function buildSeedStore(passwordHash: string): StoreShape {
     {
       id: IDS.users.companyAdmin,
       email: "ceo@demo.vabix.edu.vn",
-      name: "Tổng giám đốc — Công ty minh họa",
+      name: "Nguyễn Minh Châu",
       passwordHash,
       isDemo: true,
       isActive: true,
@@ -231,7 +274,7 @@ export function buildSeedStore(passwordHash: string): StoreShape {
     {
       id: IDS.users.member,
       email: "member@demo.vabix.edu.vn",
-      name: "Thành viên doanh nghiệp minh họa",
+      name: "Hoàng Thị Lan",
       passwordHash,
       isDemo: true,
       isActive: true,
@@ -241,7 +284,7 @@ export function buildSeedStore(passwordHash: string): StoreShape {
     {
       id: IDS.users.viewer,
       email: "viewer@demo.vabix.edu.vn",
-      name: "Người xem được chia sẻ",
+      name: "Võ Thanh Tùng",
       passwordHash,
       isDemo: true,
       isActive: true,
@@ -266,13 +309,14 @@ export function buildSeedStore(passwordHash: string): StoreShape {
     },
     {
       id: IDS.orgs.demo,
-      name: "DEMO COMPANY — DỮ LIỆU MINH HỌA",
-      slug: "demo-company",
+      name: "Cơ khí Hòa Bình (minh họa)",
+      slug: "co-khi-hoa-binh-demo",
       industry: "Sản xuất thiết bị công nghiệp vừa",
       stage: "Tăng trưởng",
-      size: "120 người",
+      size: "128 người",
       isDemo: true,
-      confidentialityNote: "Dữ liệu minh họa. Không trộn với doanh nghiệp thật.",
+      confidentialityNote:
+        "Hồ sơ minh họa của một doanh nghiệp cơ khí miền Bắc — không phải khách hàng thật. Không trộn với dữ liệu vận hành.",
       createdAt: now,
       updatedAt: now,
       createdBy: IDS.users.superAdmin,
@@ -334,7 +378,7 @@ export function buildSeedStore(passwordHash: string): StoreShape {
     assessmentId: IDS.assessment.demo,
     organizationId: IDS.orgs.demo,
     createdBy: IDS.users.coach,
-    title: "Đánh giá MTUA minh họa — kỳ 2026.1",
+    title: "Đánh giá MTUA — Cơ khí Hòa Bình kỳ 2026.1",
     primaryEvaluatorId: IDS.users.coach,
     isDemo: true,
     now,
@@ -345,11 +389,11 @@ export function buildSeedStore(passwordHash: string): StoreShape {
   created.assessment.nextReviewDate = "2026-10-01";
   created.context.industry = "Sản xuất thiết bị công nghiệp vừa";
   created.context.companyStage = "Tăng trưởng";
-  created.context.companySize = "120 người";
-  created.context.scope = "Toàn công ty — hệ thống quản trị điều hành";
+  created.context.companySize = "128 người";
+  created.context.scope = "Toàn công ty — hệ thống quản trị điều hành và phân bổ CAPEX 18 tháng";
   created.context.timeHorizon = "18 tháng";
   created.context.notes =
-    "Hồ sơ minh họa có chủ đích: Mission thiết kế cao nhưng kích hoạt thấp; Aspiration rõ; Commitment mạnh kèm lực nghịch; TU yếu.";
+    "Hồ sơ minh họa có chủ đích: sứ mệnh thiết kế khá hoàn chỉnh nhưng ít được mở khi duyệt việc; đích 18 tháng rõ; cam kết nguồn lực mạnh đang khóa nhà máy cũ — TU yếu.";
 
   const designScores: Record<string, number> = {};
   for (const code of ["M1", "M2", "M3", "M4", "M5", "M6"]) designScores[code] = 9;
@@ -469,18 +513,120 @@ export function buildSeedStore(passwordHash: string): StoreShape {
       componentCode: "U",
       criterionCode: "U2",
       connectionCode: "TU",
-      title: "Khóa ngân sách nhà máy cũ",
-      note: "14 tỷ đã khóa. Đây là tín hiệu cam kết mạnh và lực nghịch đồng thời.",
+      title: "Nghị quyết BĐH 12/2025 — khóa 14 tỷ nhà máy cũ",
+      note: "14 tỷ đã khóa cho đại tu dây chuyền phay CNC tại KCN Phú Nghĩa. Tín hiệu cam kết mạnh và lực nghịch với đích xuất khẩu 18 tháng.",
       linkUrl: null,
       storageKey: null,
       mimeType: null,
       fileName: null,
       fileSize: null,
       kind: "DECISION_RECORD",
-      createdAt: now,
+      createdAt: "2026-08-18T04:20:00.000Z",
+      createdBy: IDS.users.coach,
+    },
+    {
+      id: "ev-demo-4",
+      assessmentId: IDS.assessment.demo,
+      componentCode: "U",
+      criterionCode: "U4",
+      connectionCode: "TU",
+      title: "Biên bản điều hành 15/08/2026",
+      note: "Ba dự án mới được duyệt theo tiêu chí công suất nhà máy hiện hữu. Sứ mệnh 'thiết bị chính xác cho khách hàng dài hạn' không được mở trong cuộc họp.",
+      linkUrl: null,
+      storageKey: null,
+      mimeType: null,
+      fileName: null,
+      fileSize: null,
+      kind: "DECISION_RECORD",
+      createdAt: "2026-08-20T09:10:00.000Z",
+      createdBy: IDS.users.coach,
+    },
+    {
+      id: "ev-demo-5",
+      assessmentId: IDS.assessment.demo,
+      componentCode: "A",
+      criterionCode: "A2",
+      connectionCode: "UA",
+      title: "Quan sát họp kinh doanh Q2/2026",
+      note: "Poster bộ giá trị 'Bền bỉ – Chính xác – Đồng hành' treo ở sảnh. Trong họp, ưu tiên vẫn là doanh số tháng và giữ đơn hàng Q4.",
+      linkUrl: null,
+      storageKey: null,
+      mimeType: null,
+      fileName: null,
+      fileSize: null,
+      kind: "NOTE",
+      createdAt: "2026-08-22T02:40:00.000Z",
+      createdBy: IDS.users.member,
+    },
+    {
+      id: "ev-demo-6",
+      assessmentId: IDS.assessment.demo,
+      componentCode: "T",
+      criterionCode: "T6",
+      connectionCode: "MT",
+      title: "OKR khối — phân rã đích xuất khẩu",
+      note: "Khối KD có mục tiêu 18 tháng; khối sản xuất vẫn đo theo OEE nhà máy cũ. Phân rã chưa khớp.",
+      linkUrl: null,
+      storageKey: null,
+      mimeType: null,
+      fileName: null,
+      fileSize: null,
+      kind: "NOTE",
+      createdAt: "2026-08-25T07:00:00.000Z",
       createdBy: IDS.users.coach,
     },
   ];
+
+  const comments: Comment[] = [
+    {
+      id: "cmt-demo-1",
+      assessmentId: IDS.assessment.demo,
+      body: "TU = 3 là điểm hở chủ đích. Aspiration đã rõ, nhưng quyền và ngân sách vẫn bảo vệ nhà máy cũ — không nên ưu tiên sửa MDS của A chỉ vì điểm thiết kế thấp hơn.",
+      createdAt: "2026-08-28T03:15:00.000Z",
+      createdBy: IDS.users.coach,
+    },
+    {
+      id: "cmt-demo-2",
+      assessmentId: IDS.assessment.demo,
+      body: "Khối vận hành đang giữ 14 tỷ vì sợ gián đoạn đơn hàng Q4 cho khách Nhật. Nếu nới CAPEX, cần phương án song song 30 ngày chứ không cắt đột ngột.",
+      createdAt: "2026-08-29T08:40:00.000Z",
+      createdBy: IDS.users.member,
+    },
+    {
+      id: "cmt-demo-3",
+      assessmentId: IDS.assessment.demo,
+      body: "Đồng ý thử 30 ngày: mở quyền duyệt CAPEX dưới 2 tỷ cho đích xuất khẩu, báo cáo BĐH mỗi thứ Sáu. HĐQT chỉ xem, không can thiệp vận hành thử nghiệm.",
+      createdAt: "2026-09-01T02:05:00.000Z",
+      createdBy: IDS.users.companyAdmin,
+    },
+    {
+      id: "cmt-demo-4",
+      assessmentId: IDS.assessment.demo,
+      body: "Hồ sơ đủ để hiệu chỉnh mô hình, chưa đủ để gọi là chứng nhận. Giữ nhãn phát triển BMDO-MDS-01-MTUA 0.1.",
+      createdAt: "2026-09-01T06:30:00.000Z",
+      createdBy: IDS.users.academic,
+    },
+  ];
+
+  const followup = createEmptyAssessmentRecords({
+    assessmentId: IDS.assessment.followup,
+    organizationId: IDS.orgs.demo,
+    createdBy: IDS.users.companyAdmin,
+    title: "Đánh giá MTUA — kỳ 2026.2 (theo dõi thử nghiệm TU)",
+    primaryEvaluatorId: IDS.users.coach,
+    isDemo: true,
+    now: "2026-09-08T01:00:00.000Z",
+  });
+  followup.assessment.status = "DRAFT";
+  followup.assessment.parentAssessmentId = IDS.assessment.demo;
+  followup.assessment.revisionNumber = 2;
+  followup.assessment.nextReviewDate = "2026-10-04";
+  followup.context.industry = created.context.industry;
+  followup.context.companyStage = created.context.companyStage;
+  followup.context.companySize = created.context.companySize;
+  followup.context.scope = "Theo dõi 30 ngày nới khớp TU — so với baseline 2026.1";
+  followup.context.timeHorizon = "18 tháng";
+  followup.context.notes = "Bản nháp. Chưa chấm điểm. Dùng sau khi thử nghiệm MAIS kết thúc.";
 
   const experiment: ImprovementExperiment = {
     id: IDS.experiment.demo,
@@ -508,7 +654,7 @@ export function buildSeedStore(passwordHash: string): StoreShape {
     connectionNote: "TU là liên kết tới hạn yếu.",
     sideEffect: "Nếu nới khóa quá nhanh có thể mất kỷ luật thực thi.",
     ownerUserId: IDS.users.companyAdmin,
-    ownerName: "Tổng giám đốc — Công ty minh họa",
+    ownerName: "Nguyễn Minh Châu — Tổng giám đốc",
     scope: "Ban điều hành + khối sản xuất",
     testPeriod: "30 ngày",
     mechanism: "",
@@ -530,42 +676,89 @@ export function buildSeedStore(passwordHash: string): StoreShape {
   store.criterionAnchors = criterionAnchors;
   store.standardCfsConnections = standardCfsConnections;
   store.standardThresholds = [standardThresholds];
-  store.assessments = [created.assessment];
-  store.assessmentContexts = [created.context];
-  store.componentAssessments = created.components;
-  store.criterionScores = created.scores;
-  store.activationAssessments = created.activations;
-  store.forceAssessments = created.forces;
-  store.cfsConnectionScores = created.cfs;
+  store.assessments = [created.assessment, followup.assessment];
+  store.assessmentContexts = [created.context, followup.context];
+  store.componentAssessments = [...created.components, ...followup.components];
+  store.criterionScores = [...created.scores, ...followup.scores];
+  store.activationAssessments = [...created.activations, ...followup.activations];
+  store.forceAssessments = [...created.forces, ...followup.forces];
+  store.cfsConnectionScores = [...created.cfs, ...followup.cfs];
   store.evidenceItems = evidenceItems;
   store.improvementExperiments = [experiment];
   store.improvementActions = [action];
+  store.comments = comments;
   store.sharePermissions = [
     {
       id: "share-demo-viewer",
       assessmentId: IDS.assessment.demo,
       userId: IDS.users.viewer,
       canEdit: false,
-      createdAt: now,
+      createdAt: "2026-08-27T04:00:00.000Z",
       createdBy: IDS.users.companyAdmin,
     },
   ];
-  store.auditLogs = [
+  const auditLogs: AuditLog[] = [
     {
       id: "aud-seed",
       actorUserId: IDS.users.superAdmin,
       organizationId: IDS.orgs.demo,
       assessmentId: IDS.assessment.demo,
       action: "SEED_DEMO",
+      entityType: "organization",
+      entityId: IDS.orgs.demo,
+      oldValue: null,
+      newValue: "Cơ khí Hòa Bình (minh họa) seeded",
+      reason: "Khởi tạo dữ liệu minh họa trên Convex",
+      standardVersionId: STANDARD_VERSION_ID,
+      ip: null,
+      createdAt: "2026-08-15T01:00:00.000Z",
+    },
+    {
+      id: "aud-create-assessment",
+      actorUserId: IDS.users.coach,
+      organizationId: IDS.orgs.demo,
+      assessmentId: IDS.assessment.demo,
+      action: "CREATE_ASSESSMENT",
       entityType: "assessment",
       entityId: IDS.assessment.demo,
       oldValue: null,
-      newValue: "DEMO COMPANY assessment created",
-      reason: "Khởi tạo dữ liệu minh họa",
+      newValue: "UNDER_REVIEW",
+      reason: "Mở kỳ đánh giá 2026.1",
+      standardVersionId: STANDARD_VERSION_ID,
+      ip: null,
+      createdAt: "2026-08-18T03:00:00.000Z",
+    },
+    {
+      id: "aud-share-viewer",
+      actorUserId: IDS.users.companyAdmin,
+      organizationId: IDS.orgs.demo,
+      assessmentId: IDS.assessment.demo,
+      action: "SHARE_ASSESSMENT",
+      entityType: "sharePermission",
+      entityId: "share-demo-viewer",
+      oldValue: null,
+      newValue: "viewer@demo.vabix.edu.vn canEdit=false",
+      reason: "HĐQT theo dõi, không sửa điểm",
+      standardVersionId: STANDARD_VERSION_ID,
+      ip: null,
+      createdAt: "2026-08-27T04:00:00.000Z",
+    },
+    {
+      id: "aud-submit-review",
+      actorUserId: IDS.users.coach,
+      organizationId: IDS.orgs.demo,
+      assessmentId: IDS.assessment.demo,
+      action: "SUBMIT_FOR_REVIEW",
+      entityType: "assessment",
+      entityId: IDS.assessment.demo,
+      oldValue: "DATA_COLLECTION",
+      newValue: "UNDER_REVIEW",
+      reason: "Đủ bằng chứng để hiệu chỉnh TU",
       standardVersionId: STANDARD_VERSION_ID,
       ip: null,
       createdAt: now,
     },
   ];
+  store.auditLogs = auditLogs;
   return store;
 }

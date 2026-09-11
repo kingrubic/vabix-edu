@@ -55,7 +55,8 @@ export const siteConfig = {
     bizcarEngine: "/bizcar/engine",
     bizcarHome: "/bizcar",
     bizcarHost: "https://bizcar.vabix.edu.vn",
-    vabixHome: "/vabix",
+    vabixHome: "/",
+    vabixLocalHome: "/vabix",
   },
   cta: {
     primary: { label: "Trao đổi nhu cầu doanh nghiệp", href: "/ket-noi#tu-van" },

@@ -49,6 +49,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         ]}
       />
       <Container className="space-y-10 py-16">
+        <p className="text-sm text-vabix-muted">
+          Case study được giữ từ hồ sơ năng lực. Số liệu định lượng, thời gian đồng hành và phạm vi hợp đồng cần Founder xác nhận trước khi dùng như thành tích của pháp nhân VABIX (thành lập 2025).
+        </p>
         {sections.map((s) => (
           <section key={s.t}>
             <h2 className="text-2xl font-semibold text-vabix-deep-teal">{s.t}</h2>

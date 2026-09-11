@@ -65,7 +65,7 @@ export const methodologies: Methodology[] = [
     whoFor: ["Đội ngũ bán hàng và chăm sóc khách hàng", "Nhà cung cấp trong mạng lưới VABIX", "Doanh nghiệp muốn chuẩn hóa hành trình khách hàng"],
     outcomes: [
       "Hành trình khách hàng được chuẩn hóa",
-      "Tăng tỷ lệ chuyển từ cơ hội (BO) sang đơn hàng (SO)",
+      "Chuẩn hóa đường đi từ cơ hội (BO) đến đơn hàng (SO)",
       "Chăm sóc và tái mua hàng trở thành một phần của hệ thống",
     ],
     process: [

@@ -15,7 +15,7 @@ export default function VillagesPage() {
     <>
       <PageHero
         title="Làng ngành"
-        description="Làng kết nối kinh doanh gồm các làng ngành được liên kết với nhau. Mỗi làng tập hợp nhà cung cấp được thẩm định theo định hướng của VABIX."
+        description="Làng kết nối kinh doanh gồm các làng ngành được liên kết với nhau. Mỗi làng tập hợp nhà cung cấp đã qua sàng lọc / đánh giá ban đầu theo định hướng Trustworking của VABIX."
         crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Mạng lưới", href: "/mang-luoi" }, { name: "Làng ngành" }]}
       />
       <Container className="grid gap-4 py-16 sm:grid-cols-2 lg:grid-cols-3">

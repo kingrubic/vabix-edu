@@ -16,7 +16,7 @@ export const caseStudies: CaseStudy[] = [
     results:
       "Đội ngũ có khung phân tích địa bàn thống nhất, hành trình khách hàng được chuẩn hóa từ nhận diện thương hiệu đến dịch vụ và tái mua hàng. Mô hình triển khai được lặp lại trên nhiều địa điểm.",
     quote: {
-      text: "Hơn 15 năm đồng hành cùng VNPT là minh chứng cho khả năng thiết kế chương trình thực chiến cho hệ thống quy mô lớn.",
+      text: "Hơn 15 năm đồng hành cùng VNPT được ghi trong hồ sơ năng lực — cần xác nhận đây là thành tích Founder / đội ngũ hay pháp nhân VABIX (thành lập 2025).",
       author: "VABIX",
       role: "Hồ sơ năng lực 2026",
     },
@@ -40,9 +40,9 @@ export const caseStudies: CaseStudy[] = [
       "VABIX phối hợp SIHUB (TP.HCM) triển khai chuỗi chương trình lan tỏa tri thức: quản trị dự án, nhân sự, thương hiệu, digital marketing, thuyết trình, bán hàng, chiến lược và tài chính doanh nghiệp.",
     methodologies: ["bizcar", "bmdo"],
     implementation:
-      "Các lớp và hội thảo được tổ chức tại SIHUB, hướng tới ba nhóm: dự án khởi nghiệp đang tìm mô hình vận hành, startup giai đoạn định hình – tăng trưởng, và SME cần đổi mới để bứt phá. Hội thảo đổi mới sáng tạo trong quản trị SME & Startup đã thu hút hơn 60 lãnh đạo doanh nghiệp.",
+      "Các lớp và hội thảo được tổ chức tại SIHUB, hướng tới ba nhóm: dự án khởi nghiệp đang tìm mô hình vận hành, startup giai đoạn định hình – tăng trưởng, và SME cần đổi mới để bứt phá. Hồ sơ ghi hội thảo đổi mới sáng tạo đã thu hút hơn 60 lãnh đạo doanh nghiệp — số liệu chờ Founder xác nhận.",
     results:
-      "Hàng trăm founder và quản lý được tiếp cận công cụ quản trị thực chiến, kết nối chuyên gia và cộng đồng, hình thành môi trường học – chia sẻ – đồng hành.",
+      "Hồ sơ ghi hàng trăm founder và quản lý được tiếp cận công cụ quản trị thực chiến, kết nối chuyên gia và cộng đồng. Phạm vi và số liệu chờ Founder xác nhận trước khi dùng như thành tích pháp nhân.",
     coverImage: "/images/covers/sihub.jpg",
     gallery: ["/images/covers/sihub.jpg"],
     relatedExperts: ["nguyen-chi-thanh", "tran-van-lieng"],

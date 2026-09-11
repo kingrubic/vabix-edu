@@ -16,6 +16,7 @@ export const smeSegments = [
   { id: "service", name: "Doanh nghiệp dịch vụ" },
 ];
 
+/** Community quotes kept for CMS. Do not render as public proof until Founder confirms publication rights. */
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
@@ -68,7 +69,7 @@ export const books: Book[] = [
 export const villages: Village[] = [
   { id: "v1", slug: "tu-van-dao-tao", name: "Tư vấn & Đào tạo", summary: "Tập hợp chuyên gia tư vấn, đào tạo và huấn luyện doanh nghiệp." },
   { id: "v2", slug: "truyen-thong-tiep-thi", name: "Truyền thông và Tiếp thị", summary: "Giải pháp marketing 360 độ từ chiến lược đến nội dung và thương hiệu." },
-  { id: "v3", slug: "thuc-pham-thuc-uong", name: "Thực phẩm & Thức uống", summary: "Nhà cung cấp được thẩm định về uy tín, chất lượng và an toàn." },
+  { id: "v3", slug: "thuc-pham-thuc-uong", name: "Thực phẩm & Thức uống", summary: "Nhà cung cấp thực phẩm và thức uống được sàng lọc ban đầu theo hồ sơ và bằng chứng." },
   { id: "v4", slug: "tai-chinh-bao-hiem", name: "Tài chính & Bảo hiểm", summary: "Dịch vụ tài chính, bảo hiểm và tư vấn nguồn lực." },
   { id: "v5", slug: "khoa-hoc-cong-nghe", name: "Khoa học & Công nghệ", summary: "Giải pháp công nghệ, chuyển đổi số và đổi mới." },
   { id: "v6", slug: "nong-lam-ngu", name: "Nông Lâm Ngư nghiệp", summary: "Xóm nghề và nhà cung cấp chuỗi nông – lâm – ngư." },
@@ -93,7 +94,7 @@ export const collections = [
   { slug: "hinh-anh-ky-ket", title: "Hình ảnh ký kết", summary: "Khoảnh khắc hợp tác, ký kết và đồng hành cùng đối tác." },
   { slug: "hinh-anh-dao-tao", title: "Hình ảnh đào tạo", summary: "Các khóa huấn luyện, workshop và lớp thực chiến." },
   { slug: "hinh-anh-ket-noi", title: "Hình ảnh kết nối", summary: "Sự kiện kết nối doanh nghiệp, chuyên gia và cư dân." },
-  { slug: "mau-chung-nhan", title: "Mẫu chứng nhận", summary: "Chứng nhận nhà cung cấp và cư dân trong Làng VABIX." },
+  { slug: "mau-chung-nhan", title: "Mẫu chứng nhận", summary: "Tư liệu mẫu chứng nhận lưu trữ — không đồng nghĩa tiêu chuẩn chứng nhận nhà cung cấp đã được phê duyệt." },
 ];
 
 export const supportServices = [

@@ -207,7 +207,7 @@ export const solutions: Solution[] = [
       "Kết nối chủ doanh nghiệp, chuyên gia, đối tác và nguồn lực phù hợp để tạo nền tảng hợp tác bền vững.",
     whoFor: [
       "Doanh nghiệp cần đối tác, chuyên gia hoặc nguồn lực đúng bài toán",
-      "Tổ chức muốn tham gia cộng đồng có tiêu chuẩn và sự thẩm định",
+      "Tổ chức muốn tham gia cộng đồng có sàng lọc ban đầu theo hồ sơ và bằng chứng",
       "Lãnh đạo muốn rút ngắn thời gian tìm đúng người, đúng nhu cầu",
     ],
     painPoints: [
@@ -286,7 +286,7 @@ export const solutions: Solution[] = [
     ],
     methodologies: ["b2a", "baboso"],
     faqs: [
-      { question: "Doanh nghiệp chưa phải nhà cung cấp của Làng có thể tham gia?", answer: "Có. VABIX tiếp nhận nhu cầu kết nối và xúc tiến. Việc trở thành nhà cung cấp trong Làng là một lộ trình có thẩm định riêng, được mô tả tại mục Trở thành đối tác." },
+      { question: "Doanh nghiệp chưa phải nhà cung cấp của Làng có thể tham gia?", answer: "Có. VABIX tiếp nhận nhu cầu kết nối. Việc trở thành nhà cung cấp trong Làng là lộ trình sàng lọc / đánh giá ban đầu, được mô tả tại mục Trở thành đối tác — chưa phải chứng nhận pháp lý." },
     ],
   },
 ];

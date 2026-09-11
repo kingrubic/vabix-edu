@@ -30,12 +30,12 @@ export default async function LoginPage() {
             <LoginForm />
           </Suspense>
           <div className="mt-6 text-xs text-white/50">
-            <p>Tài khoản minh họa (mật khẩu không hiển thị trên giao diện):</p>
+            <p>Tài khoản minh họa — mật khẩu chung: <span className="text-white/80">DemoVabix2026!</span></p>
             <ul className="mt-2 space-y-1">
-              <li>ceo@demo.vabix.edu.vn — Quản trị doanh nghiệp</li>
-              <li>coach@vabix.edu.vn — Đánh giá viên</li>
-              <li>admin@vabix.edu.vn — Quản trị nền tảng</li>
-              <li>academic@vabix.edu.vn — Quản trị học thuật</li>
+              <li>ceo@demo.vabix.edu.vn — CEO minh họa</li>
+              <li>coach@demo.vabix.edu.vn — Coach đánh giá</li>
+              <li>academic@demo.vabix.edu.vn — Quản trị học thuật</li>
+              <li>admin@demo.vabix.edu.vn — Quản trị nền tảng</li>
               <li>member@demo.vabix.edu.vn — Thành viên</li>
               <li>viewer@demo.vabix.edu.vn — Người xem</li>
             </ul>

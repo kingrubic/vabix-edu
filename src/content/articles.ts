@@ -57,7 +57,7 @@ B2A bổ sung cho BABOSO: một bên chuẩn hóa cách đánh thị trường t
     title: "Đổi mới sáng tạo trong quản trị SME & Startup: tư duy thiết kế và vận hành thực chiến",
     excerpt:
       "Đổi mới không dừng ở tuyên ngôn. Hội thảo cùng SIHUB đặt đổi mới vào từng cấu phần của doanh nghiệp.",
-    content: `Hội thảo “Đổi mới sáng tạo trong quản trị SME và Startup: Tư duy thiết kế và vận hành doanh nghiệp thực chiến” do SIHUB và VABIX phối hợp tổ chức đã thu hút hơn 60 lãnh đạo startup và SME.
+    content: `Hội thảo “Đổi mới sáng tạo trong quản trị SME và Startup: Tư duy thiết kế và vận hành doanh nghiệp thực chiến” do SIHUB và VABIX phối hợp tổ chức. Số lượng lãnh đạo tham dự (hồ sơ ghi “hơn 60”) cần Founder xác nhận trước khi dùng như thành tích đã kiểm chứng.
 
 Đổi mới sáng tạo, dưới lăng kính quản trị, phải là quá trình biến ý tưởng thành giá trị thực — sản phẩm, dịch vụ, quy trình, marketing hoặc mô hình kinh doanh. Theo BizCar, khi doanh nghiệp nhìn thấy rõ chiếc xe của mình, họ biết bánh nào cần đổi trước, tránh “đổi mới sai bánh”.
 
@@ -94,7 +94,7 @@ Khai giảng tại SIHUB đánh dấu việc đưa phương pháp này đến g�
     excerpt: "Tăng tốc không bền nếu thiếu niềm tin bên trong tổ chức và với thị trường.",
     content: `Trong kỷ nguyên tăng tốc, doanh nghiệp dễ chạy theo công cụ và kênh mới trong khi bỏ quên nền tảng: niềm tin. Quản trị niềm tin không phải khẩu hiệu văn hóa. Đó là cách tổ chức giữ lời, vận hành minh bạch và tạo ra trải nghiệm nhất quán — những điều khách hàng, nhân sự và đối tác cảm nhận được hàng ngày.
 
-VABIX đặt niềm tin trong sáu chữ vàng, đặc biệt là Thực tín: giữ lời, hành động đúng sự thật, công khai và đáng tin cậy.`,
+VABIX đặt niềm tin trong các giá trị cốt lõi hiện hành — chính trực trong tri thức, thực chiến tạo giá trị, học hỏi và cải tiến không ngừng, tin cậy và trách nhiệm, cùng phát triển. Di sản văn hóa “Sáu chữ vàng” (Thực tín) được giữ như dấu ấn lịch sử, không thay thế bộ giá trị cốt lõi.`,
     category: "lanh-dao",
     categoryLabel: "Lãnh đạo",
     coverImage: "/images/covers/experts.jpg",

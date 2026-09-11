@@ -11,7 +11,7 @@ export function MegaMenu({ items, inverted }: { items: NavItem[]; inverted: bool
     : "text-vabix-deep-teal/90 hover:text-vabix-deep-teal";
 
   return (
-    <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Điều hướng chính">
+    <nav className="hidden items-center gap-0.5 2xl:flex" aria-label="Điều hướng chính">
       {items.map((item) => {
         const hasMenu = Boolean(item.groups?.length || item.children?.length);
         if (!hasMenu) {

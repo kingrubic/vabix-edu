@@ -1,4 +1,3 @@
-import { testimonials } from "@/content/network";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
@@ -7,7 +6,8 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Nhà cung cấp",
-  description: "Gian hàng số của các nhà cung cấp trong Làng VABIX — kết nối cung cầu trên nền tảng có thẩm định.",
+  description:
+    "Gian hàng số của các nhà cung cấp trong Làng VABIX. Hồ sơ được sàng lọc ban đầu trong Trustworking — không đồng nghĩa chứng nhận pháp lý.",
   path: "/mang-luoi/nha-cung-cap",
 });
 
@@ -16,7 +16,7 @@ export default function SuppliersPage() {
     <>
       <PageHero
         title="Gian hàng nhà cung cấp"
-        description="Không gian số của các nhà cung cấp trong Làng VABIX. Việc tham gia được thẩm định — không phải gian hàng tự do."
+        description="Không gian số của các nhà cung cấp trong Làng VABIX. Việc tham gia được sàng lọc ban đầu — không phải gian hàng tự do, không phải chứng nhận pháp lý."
         crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Mạng lưới", href: "/mang-luoi" }, { name: "Nhà cung cấp" }]}
       />
       <Container className="py-16">
@@ -31,16 +31,13 @@ export default function SuppliersPage() {
             Trở thành nhà cung cấp
           </Button>
         </div>
-        <h2 className="mt-14 text-2xl font-semibold text-vabix-deep-teal">Tiếng nói từ cộng đồng</h2>
-        <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <blockquote key={t.id} className="border border-vabix-deep-teal/10 p-6">
-              <p className="text-sm text-vabix-ink">“{t.quote}”</p>
-              <footer className="mt-4 text-sm font-semibold text-vabix-deep-teal">
-                {t.author} <span className="block font-normal text-vabix-muted">{t.role}</span>
-              </footer>
-            </blockquote>
-          ))}
+        <p className="measure mt-10 text-sm text-vabix-muted">
+          Lời chứng thực cộng đồng được giữ trong hồ sơ nội bộ và chưa công bố trên trang này cho đến khi Founder xác nhận quyền sử dụng. Xem Trustworking để hiểu nguyên tắc sàng lọc và giới hạn trách nhiệm.
+        </p>
+        <div className="mt-4">
+          <Button href="/giai-phap/trustworking" variant="outline" className="border-vabix-deep-teal text-vabix-deep-teal">
+            Xem Trustworking
+          </Button>
         </div>
       </Container>
     </>

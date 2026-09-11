@@ -82,7 +82,7 @@ export const events: EventItem[] = [
     category: "Kết nối",
     excerpt: "Chương trình kết nối cung – cầu dành cho cộng đồng cư dân và doanh nghiệp phục vụ đời sống đô thị.",
     content:
-      "Sự kiện kết nối doanh nghiệp với khách hàng tại các khu chung cư, thuộc trụ cột xúc tiến thương mại của VABIX.",
+      "Sự kiện kết nối doanh nghiệp với khách hàng tại các khu chung cư, thuộc hoạt động Trustworking của VABIX.",
     image: "/images/covers/vnpt.jpg",
     startDate: "2025-04-18",
     location: "TP. Hồ Chí Minh",

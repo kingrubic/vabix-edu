@@ -15,7 +15,7 @@ export default function CaseStudiesPage() {
     <>
       <PageHero
         title="Đồng hành thực chiến. Kiến tạo giá trị thực tế."
-        description="Các chương trình tư vấn, đào tạo và chuyển đổi được triển khai trên bài toán thật của tổ chức."
+        description="Các chương trình tư vấn, đào tạo và chuyển đổi được triển khai trên bài toán thật của tổ chức. Số liệu định lượng trong từng hồ sơ chờ Founder xác nhận trước khi dùng như thành tích pháp nhân."
         crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Tri thức", href: "/tri-thuc" }, { name: "Case Study" }]}
       />
       <Container className="grid gap-6 py-16 md:grid-cols-3">

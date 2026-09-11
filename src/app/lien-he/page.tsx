@@ -21,7 +21,7 @@ export default function ContactPage() {
       />
       <Container className="grid gap-12 py-16 lg:grid-cols-2">
         <div>
-          <h2 className="text-xl font-semibold text-vabix-deep-teal">Làng Kết nối VABIX</h2>
+          <h2 className="text-xl font-semibold text-vabix-deep-teal">{siteConfig.legalName}</h2>
           <address className="mt-4 space-y-2 not-italic text-vabix-muted">
             <p>{c.address}</p>
             <p>
@@ -31,10 +31,10 @@ export default function ContactPage() {
               Điện thoại văn phòng: <a href={c.officePhoneHref}>{c.officePhone}</a>
             </p>
             <p>
-              Email: <a href={c.emailHref}>{c.email}</a>
+              Email: <span suppressHydrationWarning>{c.email}</span>
             </p>
             <p>
-              Hỗ trợ: <a href={c.supportEmailHref}>{c.supportEmail}</a>
+              Hỗ trợ: <span suppressHydrationWarning>{c.supportEmail}</span>
             </p>
           </address>
           <ul className="mt-6 space-y-1 text-sm">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
+import { ConvexClientProvider } from "@/components/providers/ConvexClientProvider";
 import { JsonLd } from "@/components/ui/Misc";
 import { createMetadata, organizationJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
@@ -36,10 +37,18 @@ export const metadata: Metadata = {
   ],
 };
 
+export const revalidate = 0;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi" className={beVietnam.variable} data-scroll-behavior="smooth">
       <body className="min-h-screen antialiased">
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              '(function(){try{if("serviceWorker" in navigator){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister()})});}var u=new URL(location.href);if(u.searchParams.has("_cv")){u.searchParams.delete("_cv");var q=u.searchParams.toString();history.replaceState(null,"",u.pathname+(q?("?"+q):"")+u.hash);}}catch(e){}})();',
+          }}
+        />
         <JsonLd data={organizationJsonLd()} />
         <a
           href="#noi-dung"
@@ -47,7 +56,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Bỏ qua điều hướng
         </a>
-        <ConditionalChrome>{children}</ConditionalChrome>
+        <ConvexClientProvider>
+          <ConditionalChrome>{children}</ConditionalChrome>
+        </ConvexClientProvider>
       </body>
     </html>
   );

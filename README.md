@@ -58,16 +58,16 @@ Trên local và preview, `/` mở MyBizCar (không mở website VABIX). Producti
 
 Trên domain `bizcar.vabix.edu.vn` (khi có DNS), middleware map `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
 
-Tài khoản DEMO (email / vai trò — mật khẩu không lưu trong mã nguồn):
+Tài khoản DEMO (mật khẩu chung `DemoVabix2026!`):
 
 - `ceo@demo.vabix.edu.vn` — COMPANY_ADMIN
-- `coach@vabix.edu.vn` — COACH_EVALUATOR
-- `admin@vabix.edu.vn` — SUPER_ADMIN
-- `academic@vabix.edu.vn` — ACADEMIC_ADMIN
+- `coach@demo.vabix.edu.vn` — COACH_EVALUATOR
+- `academic@demo.vabix.edu.vn` — ACADEMIC_ADMIN
+- `admin@demo.vabix.edu.vn` — SUPER_ADMIN
 - `member@demo.vabix.edu.vn` — COMPANY_MEMBER
 - `viewer@demo.vabix.edu.vn` — VIEWER
 
-Khi chưa có `DATABASE_URL`, ứng dụng dùng kho JSON cục bộ `data/bizcar-store.json`. File đã có thì được tải nguyên trạng. Lần seed đầu tiên (chưa có file) bắt buộc `BIZCAR_DEMO_SEED_PASSWORD` — xem `.env.example`; thiếu biến này thì seed thất bại, không tạo mật khẩu mặc định.
+MyBizCar lưu trên Convex. Lần seed đầu (kho users trống) cần `NEXT_PUBLIC_CONVEX_URL` và `BIZCAR_DEMO_SEED_PASSWORD` — xem `.env.example`.
 
 ### Biến môi trường
 
@@ -79,7 +79,7 @@ Xem `.env.example`. Bắt buộc trên production: `AUTH_SECRET`.
 2. Đặt `BIZCAR_HOST=bizcar.vabix.edu.vn`.
 3. Middleware rewrite `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
 4. Bật HTTPS và đặt `AUTH_SECRET` đủ dài.
-5. Khi có Supabase/PostgreSQL: chạy `prisma/migrations/0001_init_rls.sql` rồi đặt `DATABASE_URL` (adapter Prisma sẽ được nối vào `src/db` — hiện MVP dùng file store + schema sẵn).
+5. Convex: `npm run dev` (hoặc `npx convex dev`) rồi đặt `NEXT_PUBLIC_CONVEX_URL`.
 
 Chu kỳ Nạp–Nén–Nổ–Neo là cấu trúc ghi nhớ BMDO, không phải mô tả quan hệ nhân quả cơ học.
 Phiên bản phát triển phục vụ hiệu chỉnh và kiểm chứng thực địa.

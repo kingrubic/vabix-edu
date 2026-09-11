@@ -11,6 +11,8 @@ import {
   validateLead,
   type LeadPayload,
 } from "./leads";
+import { consultNeeds, needsForLeadType } from "../content/leadNeeds";
+import { proofSignals, unverifiedMetricsDraft } from "../content/metrics";
 import { duplicatePaths, sitemapPaths } from "./sitemapPaths";
 
 const validLead: LeadPayload = {
@@ -71,4 +73,28 @@ test("webhook payload drops honeypot and stamps source", () => {
   assert.equal(body.source, "vabix.edu.vn");
   assert.equal(body.type, "consult");
   assert.equal(body.email, validLead.email);
+});
+
+test("consult form needs follow 3T plus supporting layers", () => {
+  assert.deepEqual([...consultNeeds], [
+    "Training & Coaching",
+    "Transformation",
+    "Trustworking",
+    "Sản phẩm tri thức",
+    "Nhân lực mở & Nhân lực số",
+    "Khác",
+  ]);
+  assert.deepEqual([...needsForLeadType("consult")], [...consultNeeds]);
+  assert.deepEqual([...needsForLeadType("connect")], [...consultNeeds]);
+});
+
+test("unverified quantitative stats stay off the public homepage strip", () => {
+  const publicValues = proofSignals.map((m) => m.value);
+  for (const draft of unverifiedMetricsDraft) {
+    assert.equal(publicValues.includes(draft.value), false);
+  }
+  assert.equal(
+    sitemapPaths().some((path) => path.startsWith("/bizcar")),
+    false,
+  );
 });

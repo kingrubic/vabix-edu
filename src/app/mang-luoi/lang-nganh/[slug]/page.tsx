@@ -33,7 +33,7 @@ export default async function VillagePage({ params }: { params: Promise<{ slug: 
       />
       <Container className="py-16">
         <p className="measure text-vabix-muted">
-          Làng {v.name} tập hợp các nhà cung cấp và chuyên gia phù hợp, được VABIX thẩm định trước khi kết nối với cư dân và khách hàng. Để tham gia với tư cách nhà cung cấp, vui lòng xem lộ trình trở thành đối tác.
+          Làng {v.name} tập hợp các nhà cung cấp và chuyên gia phù hợp. VABIX thực hiện sàng lọc / đánh giá ban đầu trước khi giới thiệu — không đồng nghĩa chứng nhận pháp lý hay bảo đảm chất lượng tuyệt đối. Để tham gia với tư cách nhà cung cấp, vui lòng xem lộ trình trở thành đối tác.
         </p>
       </Container>
       <CTASection title="Kết nối trong làng ngành" description="Gửi nhu cầu kết nối hoặc hồ sơ nhà cung cấp." />

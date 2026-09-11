@@ -4,18 +4,21 @@
   "private": true,
   "description": "VABIX corporate website and MyBizCar 3D business engine",
   "scripts": {
-    "dev": "next dev",
+    "dev": "convex dev --run 'next dev'",
+    "dev:next": "next dev",
+    "dev:backend": "convex dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/lib/siteIntegrity.test.ts"
+    "test": "tsx --test src/lib/siteIntegrity.test.ts src/lib/cacheBust.test.ts src/security/routes.test.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.4",
     "@react-three/fiber": "^9.3.0",
     "@tanstack/react-query": "^5.87.1",
     "bcryptjs": "^2.4.3",
+    "convex": "^1.45.0",
     "jose": "^6.1.0",
     "next": "^15.5.2",
     "react": "^19.1.1",

@@ -12,11 +12,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.cloudflareinsights.com",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
-      "connect-src 'self'",
+      "connect-src 'self' http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:* https://*.convex.cloud wss://*.convex.cloud https://*.convex.site https://cloudflareinsights.com https://*.cloudflareinsights.com",
       "worker-src 'self' blob:",
       "frame-ancestors 'self'",
       "base-uri 'self'",
@@ -36,13 +36,35 @@ const nextConfig: NextConfig = {
     imageSizes: [64, 96, 128, 256, 384],
   },
   async redirects() {
-    return legacyRedirects;
+    return [
+      {
+        source: "/",
+        has: [{ type: "host", value: "www.vabix.edu.vn" }],
+        destination: "https://vabix.edu.vn/",
+        statusCode: 301,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.vabix.edu.vn" }],
+        destination: "https://vabix.edu.vn/:path*",
+        statusCode: 301,
+      },
+      ...legacyRedirects,
+    ];
   },
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      {
+        source: "/((?!_next/).*)",
+        headers: [
+          { key: "Cache-Control", value: "private, no-cache, no-store, max-age=0, must-revalidate" },
+          { key: "CDN-Cache-Control", value: "no-store" },
+          { key: "Cloudflare-CDN-Cache-Control", value: "no-store" },
+        ],
       },
       {
         source: "/bizcar/:path*",

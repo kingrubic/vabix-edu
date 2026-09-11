@@ -1,3 +1,5 @@
+import { api, getConvexHttpClient } from "@/lib/convexServer";
+
 export const LEAD_TYPES = [
   "consult",
   "connect",
@@ -100,8 +102,8 @@ export function buildLeadWebhookBody(payload: LeadPayload) {
 }
 
 /**
- * Lead adapter. When LEAD_WEBHOOK_URL is set, posts JSON to that endpoint.
- * When not configured, returns NOT_CONFIGURED so the UI never fakes success.
+ * Lead adapter. Prefers Convex local/cloud when NEXT_PUBLIC_CONVEX_URL is set.
+ * Optionally also posts to LEAD_WEBHOOK_URL. If neither is configured, returns NOT_CONFIGURED.
  */
 export async function submitLead(input: unknown): Promise<LeadResult> {
   const parsed = parseLead(input);
@@ -111,8 +113,11 @@ export async function submitLead(input: unknown): Promise<LeadResult> {
     return { ok: false, code: "SPAM", message: "Yêu cầu không thể xử lý. Vui lòng thử lại hoặc gọi hotline." };
   }
 
+  const body = buildLeadWebhookBody(payload);
+  const convexId = await saveLeadToConvex(body);
   const endpoint = process.env.LEAD_WEBHOOK_URL;
-  if (!endpoint) {
+
+  if (!convexId && !endpoint) {
     return {
       ok: false,
       code: "NOT_CONFIGURED",
@@ -121,18 +126,46 @@ export async function submitLead(input: unknown): Promise<LeadResult> {
     };
   }
 
-  try {
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(buildLeadWebhookBody(payload)),
-    });
-    if (!res.ok) {
-      return { ok: false, code: "UPSTREAM", message: "Không gửi được yêu cầu lúc này. Vui lòng thử lại hoặc gọi hotline." };
+  if (endpoint) {
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok && !convexId) {
+        return { ok: false, code: "UPSTREAM", message: "Không gửi được yêu cầu lúc này. Vui lòng thử lại hoặc gọi hotline." };
+      }
+    } catch {
+      if (!convexId) {
+        return { ok: false, code: "UPSTREAM", message: "Không kết nối được máy chủ. Vui lòng thử lại sau." };
+      }
     }
-    const data = (await res.json().catch(() => ({}))) as { id?: string };
-    return { ok: true, id: data.id ?? crypto.randomUUID() };
+  }
+
+  return { ok: true, id: convexId ?? crypto.randomUUID() };
+}
+
+async function saveLeadToConvex(body: ReturnType<typeof buildLeadWebhookBody>): Promise<string | null> {
+  const client = getConvexHttpClient();
+  if (!client) return null;
+  try {
+    const id = await client.mutation(api.leads.submit, {
+      type: body.type,
+      name: body.name,
+      company: body.company,
+      role: body.role,
+      phone: body.phone,
+      email: body.email,
+      companySize: body.companySize,
+      need: body.need,
+      message: body.message,
+      program: body.program,
+      eventSlug: body.eventSlug,
+      source: body.source,
+    });
+    return String(id);
   } catch {
-    return { ok: false, code: "UPSTREAM", message: "Không kết nối được máy chủ. Vui lòng thử lại sau." };
+    return null;
   }
 }
