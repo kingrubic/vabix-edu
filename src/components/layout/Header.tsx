@@ -51,14 +51,14 @@ export function Header() {
             : "bg-transparent text-white"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-4 sm:h-[76px] sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-3 px-4 sm:h-[76px] sm:px-6 lg:px-8">
           <Link href={siteConfig.portals.vabixHome} className="flex shrink-0 items-center" aria-label="VABIX — trang chủ">
             <Logo variant={solid ? "light" : "dark"} priority />
           </Link>
 
           <MegaMenu items={primaryNav} inverted={!solid} />
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <Link
               href="/dang-nhap"
               className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase xl:inline ${
@@ -69,14 +69,14 @@ export function Header() {
             </Link>
             <Link
               href="/cong-cu-dan"
-              className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase xl:inline ${
+              className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase 2xl:inline ${
                 solid ? "text-vabix-muted hover:text-vabix-deep-teal" : "text-white/80 hover:text-white"
               }`}
             >
               Cổng Cư dân
             </Link>
-            <Button href="/ket-noi#tu-van" variant="gold" className="hidden min-h-10 px-4 text-sm xl:inline-flex">
-              Trao đổi nhu cầu doanh nghiệp
+            <Button href="/ket-noi#tu-van" variant="gold" className="hidden min-h-10 px-3 text-sm xl:inline-flex 2xl:px-4">
+              Trao đổi nhu cầu
             </Button>
             <button
               type="button"

@@ -73,6 +73,9 @@ export function MobileMenu({ id, open, onClose }: { id: string; open: boolean; o
             </div>
           );
         })}
+        <Link href="/dang-nhap" onClick={onClose} className="py-4 text-sm font-semibold tracking-[0.12em] uppercase text-vabix-muted">
+          Đăng nhập
+        </Link>
         <Link href="/cong-cu-dan" onClick={onClose} className="py-4 text-sm font-semibold tracking-[0.12em] uppercase text-vabix-muted">
           Cổng Cư dân
         </Link>

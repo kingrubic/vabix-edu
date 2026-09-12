@@ -11,12 +11,12 @@ export function MegaMenu({ items, inverted }: { items: NavItem[]; inverted: bool
     : "text-vabix-deep-teal/90 hover:text-vabix-deep-teal";
 
   return (
-    <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Điều hướng chính">
+    <nav className="hidden min-w-0 items-center xl:flex" aria-label="Điều hướng chính">
       {items.map((item) => {
         const hasMenu = Boolean(item.groups?.length || item.children?.length);
         if (!hasMenu) {
           return (
-            <Link key={item.href} href={item.href} className={`px-2.5 py-2 text-[13px] font-medium ${linkCls}`}>
+            <Link key={item.href} href={item.href} className={`px-2 py-2 text-[13px] font-medium whitespace-nowrap ${linkCls}`}>
               {item.label}
             </Link>
           );
@@ -31,7 +31,7 @@ export function MegaMenu({ items, inverted }: { items: NavItem[]; inverted: bool
           >
             <Link
               href={item.href}
-              className={`flex items-center gap-1 px-2.5 py-2 text-[13px] font-medium ${linkCls}`}
+              className={`flex items-center gap-1 px-2 py-2 text-[13px] font-medium whitespace-nowrap ${linkCls}`}
               aria-expanded={open}
               aria-haspopup="true"
             >
