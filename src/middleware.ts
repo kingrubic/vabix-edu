@@ -8,6 +8,11 @@ import {
 } from "@/security/routes";
 import { bizcarPath } from "@/lib/bizcarPaths";
 import { SESSION_COOKIE, verifySession } from "@/security/jwt";
+import {
+  PLATFORM_SESSION_COOKIE,
+  isPlatformProtectedPath,
+  verifyPlatformSession,
+} from "@/platform/auth/jwt";
 
 function continueWithPath(request: NextRequest, effectivePath: string, rewriteTo?: string) {
   const requestHeaders = new Headers(request.headers);
@@ -29,7 +34,7 @@ function continueWithPath(request: NextRequest, effectivePath: string, rewriteTo
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
-  const rewritten = rewriteBizcarHostPath(pathname);
+  const rewritten = rewriteBizcarHostPath(pathname, host);
 
   if (rewritten && (isBizcarHost(host) || (pathname === "/" && shouldServeBizcarAtRoot(host)))) {
     const response = continueWithPath(request, rewritten, rewritten);
@@ -44,6 +49,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  if (isPlatformProtectedPath(pathname)) {
+    const token = request.cookies.get(PLATFORM_SESSION_COOKIE)?.value;
+    const session = token ? await verifyPlatformSession(token) : null;
+    if (!session) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/dang-nhap";
+      url.searchParams.set("next", pathname);
+      const response = NextResponse.redirect(url);
+      response.headers.set("X-Robots-Tag", "noindex, nofollow");
+      return response;
+    }
+  }
+
   if (isBizcarPath(pathname) && !isPublicBizcarPath(pathname)) {
     const token = request.cookies.get(SESSION_COOKIE)?.value;
     const session = token ? await verifySession(token) : null;
@@ -56,7 +74,12 @@ export async function middleware(request: NextRequest) {
   }
 
   const response = continueWithPath(request, pathname);
-  if (isBizcarPath(pathname) || isBizcarHost(host)) {
+  if (
+    isBizcarPath(pathname) ||
+    isBizcarHost(host) ||
+    isPlatformProtectedPath(pathname) ||
+    pathname.startsWith("/dang-nhap")
+  ) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
     response.headers.set("Cache-Control", "private, no-store");
   }

@@ -60,6 +60,14 @@ export function Header() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
+              href="/dang-nhap"
+              className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase xl:inline ${
+                solid ? "text-vabix-muted hover:text-vabix-deep-teal" : "text-white/80 hover:text-white"
+              }`}
+            >
+              Đăng nhập
+            </Link>
+            <Link
               href="/cong-cu-dan"
               className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase xl:inline ${
                 solid ? "text-vabix-muted hover:text-vabix-deep-teal" : "text-white/80 hover:text-white"

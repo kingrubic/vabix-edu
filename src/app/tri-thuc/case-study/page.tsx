@@ -1,4 +1,4 @@
-import { caseStudies } from "@/content/caseStudies";
+import { publishedCaseStudies } from "@/platform/cms/catalog";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { CaseStudyCard } from "@/components/cards/Cards";
@@ -19,7 +19,7 @@ export default function CaseStudiesPage() {
         crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Tri thức", href: "/tri-thuc" }, { name: "Case Study" }]}
       />
       <Container className="grid gap-6 py-16 md:grid-cols-3">
-        {caseStudies.map((c) => (
+        {publishedCaseStudies().map((c) => (
           <CaseStudyCard key={c.id} item={c} />
         ))}
       </Container>

@@ -154,3 +154,58 @@ body {
   font-weight: 600;
   color: #dea443;
 }
+
+.platform-shell {
+  min-height: 100vh;
+  background: #f8f5ed;
+  color: #16332b;
+}
+
+.platform-sidebar {
+  background: #163c3e;
+  color: #f8f5ed;
+}
+
+.platform-card {
+  border: 1px solid color-mix(in srgb, #163c3e 12%, transparent);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(22, 60, 62, 0.04);
+}
+
+.platform-table-wrap {
+  overflow: auto;
+  max-width: 100%;
+}
+
+.platform-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.platform-table th {
+  text-align: left;
+  font-weight: 600;
+  color: #163c3e;
+  border-bottom: 1px solid color-mix(in srgb, #163c3e 12%, transparent);
+  padding: 0.7rem 0.75rem;
+  white-space: nowrap;
+}
+
+.platform-table td {
+  border-bottom: 1px solid color-mix(in srgb, #163c3e 8%, transparent);
+  padding: 0.7rem 0.75rem;
+  vertical-align: top;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

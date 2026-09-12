@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
-import { getProgram, programs, programGroups } from "@/content/programs";
+import { programs } from "@/content/programs";
+import { programGroups } from "@/content/programs";
+import { publishedProgram, publishedPrograms } from "@/platform/cms/catalog";
 import { topicCategories } from "@/content/training";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, SectionHeading } from "@/components/ui/Section";
@@ -9,12 +11,18 @@ import { createMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 export function generateStaticParams() {
-  return programs.filter((p) => p.status === "published").map((p) => ({ slug: p.slug }));
+  const slugs = new Set(programs.filter((item) => item.status === "published").map((item) => item.slug));
+  try {
+    for (const item of publishedPrograms()) slugs.add(item.slug);
+  } catch {
+    /* file fallback */
+  }
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const p = getProgram(slug);
+  const p = publishedProgram(slug);
   if (!p) return {};
   return createMetadata({ title: p.title, description: p.seoDescription, path: `/chuong-trinh/${p.slug}` });
 }
@@ -35,11 +43,11 @@ function Block({ title, items }: { title: string; items: string[] }) {
 
 export default async function ProgramDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const p = getProgram(slug);
+  const p = publishedProgram(slug);
   if (!p) notFound();
   const groupLabel = programGroups.find((g) => g.id === p.group)?.label;
   const topics = p.topicCategories.map((id) => topicCategories.find((t) => t.id === id)?.label).filter(Boolean);
-  const related = programs.filter((x) => p.relatedPrograms.includes(x.slug));
+  const related = publishedPrograms().filter((x) => p.relatedPrograms.includes(x.slug));
 
   return (
     <>

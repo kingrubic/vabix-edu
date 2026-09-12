@@ -1,4 +1,4 @@
-import { upcomingEvents } from "@/content/events";
+import { publishedUpcomingEvents } from "@/platform/cms/catalog";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { EventCard } from "@/components/cards/Cards";
@@ -12,7 +12,7 @@ export const metadata = createMetadata({
 });
 
 export default function EventsPage() {
-  const list = upcomingEvents().filter((e) => e.status !== "completed");
+  const list = publishedUpcomingEvents().filter((e) => e.status !== "completed");
   return (
     <>
       <PageHero

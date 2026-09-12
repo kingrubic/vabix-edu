@@ -1,4 +1,4 @@
-import { experts } from "@/content/experts";
+import { publishedExperts } from "@/platform/cms/catalog";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { ExpertCard } from "@/components/cards/Cards";
@@ -11,6 +11,7 @@ export const metadata = createMetadata({
 });
 
 export default function ExpertsPage() {
+  const list = publishedExperts();
   return (
     <>
       <PageHero
@@ -19,7 +20,7 @@ export default function ExpertsPage() {
         crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Mạng lưới", href: "/mang-luoi" }, { name: "Chuyên gia" }]}
       />
       <Container className="grid gap-4 py-16 sm:grid-cols-2 lg:grid-cols-3">
-        {experts.map((e) => (
+        {list.map((e) => (
           <ExpertCard key={e.id} expert={e} />
         ))}
       </Container>

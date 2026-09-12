@@ -4,6 +4,7 @@ import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { JsonLd } from "@/components/ui/Misc";
 import { createMetadata, organizationJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
+import { bootPlatform } from "@/platform/boot";
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -36,7 +37,8 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  await bootPlatform();
   return (
     <html lang="vi" className={beVietnam.variable} data-scroll-behavior="smooth">
       <body className="min-h-screen antialiased">

@@ -1,7 +1,8 @@
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/sections/CTASection";
-import { knowledgeProductCategories, knowledgeProducts } from "@/content/knowledgeProducts";
+import { knowledgeProductCategories } from "@/content/knowledgeProducts";
+import { publishedKnowledgeProducts } from "@/platform/cms/catalog";
 import { createMetadata } from "@/lib/seo";
 import Link from "next/link";
 
@@ -31,7 +32,7 @@ export default function KnowledgeProductsPage() {
         <Container>
           <SectionHeading title="Danh mục hiện có" />
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {knowledgeProducts.map((p) => (
+            {publishedKnowledgeProducts().map((p) => (
               <article key={p.id} className="bg-white p-6">
                 <p className="eyebrow">{p.status === "coming" ? "Chưa mở truy cập công khai" : "Ấn phẩm"}</p>
                 <h3 className="mt-2 text-lg font-semibold text-vabix-deep-teal">{p.title}</h3>

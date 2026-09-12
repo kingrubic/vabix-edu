@@ -1,8 +1,8 @@
-import { methodologies } from "@/content/methodologies";
 import { threeW } from "@/content/threeW";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { createMetadata } from "@/lib/seo";
+import { publishedMethodologies } from "@/platform/cms/catalog";
 import Link from "next/link";
 
 export const metadata = createMetadata({
@@ -12,6 +12,7 @@ export const metadata = createMetadata({
 });
 
 export default function MethodsIndexPage() {
+  const list = publishedMethodologies();
   return (
     <>
       <PageHero
@@ -26,7 +27,7 @@ export default function MethodsIndexPage() {
         </Link>
       </Container>
       <Container className="grid gap-4 pb-16 md:grid-cols-2">
-        {methodologies.map((m) => (
+        {list.map((m) => (
           <Link key={m.slug} href={`/mo-hinh-phuong-phap/${m.slug}`} className="border border-vabix-deep-teal/10 p-7 hover:border-vabix-gold">
             <p className="eyebrow">{m.eyebrow}</p>
             <h2 className="mt-2 text-2xl font-semibold text-vabix-deep-teal">{m.name}</h2>

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { articles, getArticle } from "@/content/articles";
+import { articles } from "@/content/articles";
+import { publishedArticle, publishedArticles } from "@/platform/cms/catalog";
 import { PageHero, Prose } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { JsonLd } from "@/components/ui/Misc";
@@ -8,12 +9,18 @@ import { createMetadata, absUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
 
 export function generateStaticParams() {
-  return articles.map((a) => ({ slug: a.slug }));
+  const slugs = new Set(articles.map((item) => item.slug));
+  try {
+    for (const item of publishedArticles()) slugs.add(item.slug);
+  } catch {
+    /* file fallback */
+  }
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const a = getArticle(slug);
+  const a = publishedArticle(slug);
   if (!a) return {};
   return createMetadata({
     title: a.title,
@@ -26,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const a = getArticle(slug);
+  const a = publishedArticle(slug);
   if (!a) notFound();
   return (
     <>

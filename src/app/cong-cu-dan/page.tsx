@@ -39,8 +39,8 @@ export default function ResidentPortalPage() {
             Khu vực đào tạo bắt buộc trước khi trở thành Cư dân Kết nối Chuyên nghiệp, theo tháp năng lực KLASS: kỹ năng giao tiếp, B2A, văn hóa Làng, AI và chăm sóc khách hàng.
           </p>
           <div className="mt-6">
-            <Button href="/mo-hinh-phuong-phap/klass" variant="gold">
-              Tìm hiểu KLASS
+            <Button href="/dang-nhap" variant="gold">
+              Vào cổng học tập
             </Button>
           </div>
         </article>

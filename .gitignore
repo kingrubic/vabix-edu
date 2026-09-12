@@ -12,3 +12,7 @@ tsconfig.tsbuildinfo
 data/bizcar-store.json
 data/private-uploads
 data/*.tmp
+data/vabix-platform.sqlite
+data/vabix-platform.sqlite-*
+data/backups/
+data/uploads/

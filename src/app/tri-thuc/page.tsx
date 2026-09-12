@@ -1,4 +1,5 @@
-import { articlesByCategory, articleCategories } from "@/content/articles";
+import { articleCategories } from "@/content/articles";
+import { publishedArticlesByCategory } from "@/platform/cms/catalog";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Section";
 import { ArticleCard } from "@/components/cards/Cards";
@@ -19,7 +20,7 @@ export default async function KnowledgePage({
 }) {
   const sp = await searchParams;
   const cat = sp["chuyen-muc"] as ArticleCategory | undefined;
-  const list = articlesByCategory(cat && articleCategories.some((c) => c.id === cat) ? cat : undefined);
+  const list = publishedArticlesByCategory(cat && articleCategories.some((c) => c.id === cat) ? cat : undefined);
   return (
     <>
       <PageHero
