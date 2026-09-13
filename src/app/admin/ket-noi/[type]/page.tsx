@@ -16,7 +16,7 @@ export default async function InquiriesPage({ params }: { params: Promise<{ type
   await requireMenu(`/admin/ket-noi/${type}`);
   const types = MAP[type] ?? ["consult"];
   const rows = (listInquiries() as { type: string }[]).filter((row) => types.includes(row.type));
-  const people = directoryForTasks() as { id: string; name: string }[];
+  const people = (await directoryForTasks()) as { id: string; name: string }[];
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-[#163c3e]">Kết nối</h1>

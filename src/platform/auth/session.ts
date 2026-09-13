@@ -1,8 +1,17 @@
 import { createHash, randomBytes } from "node:crypto";
 import { cookies } from "next/headers";
 import { getDb, nowIso } from "@/platform/db/client";
-import type { Actor, Grant } from "@/platform/permissions/evaluate";
-import type { DataScope, PermissionAction, PlatformRole } from "@/platform/permissions/registry";
+import { isPlatformConvexConfigured } from "@/platform/convex/client";
+import {
+  convexCountAdmins,
+  convexCreateSession,
+  convexGetAuthBundle,
+  convexGetUserByEmail,
+  convexGetUserById,
+  convexListUserGrants,
+  convexRevokeUserSessions,
+} from "@/platform/convex/repo";
+import type { Grant } from "@/platform/permissions/evaluate";
 import {
   PLATFORM_SESSION_COOKIE,
   PLATFORM_SESSION_TTL,
@@ -11,6 +20,7 @@ import {
   verifyPlatformSession,
   type PlatformClaims,
 } from "./jwt";
+import type { PlatformActor, PlatformUserRow } from "./types";
 
 export {
   PLATFORM_SESSION_COOKIE,
@@ -19,7 +29,7 @@ export {
   signPlatformSession,
   verifyPlatformSession,
 };
-export type { PlatformClaims };
+export type { PlatformClaims, PlatformActor, PlatformUserRow };
 
 export function hashToken(token: string) {
   return createHash("sha256").update(token).digest("hex");
@@ -27,53 +37,6 @@ export function hashToken(token: string) {
 
 export function randomToken() {
   return randomBytes(32).toString("hex");
-}
-
-export type PlatformUserRow = {
-  id: string;
-  email: string;
-  name: string;
-  password_hash: string | null;
-  avatar_file_id: string | null;
-  role: PlatformRole;
-  department_id: string | null;
-  status: "pending" | "active" | "locked" | "archived";
-  last_login_at: string | null;
-  is_seed: number;
-};
-
-export type PlatformActor = Actor & {
-  email: string;
-  name: string;
-  avatarFileId: string | null;
-  isSeed: boolean;
-  claims: PlatformClaims;
-};
-
-function loadGrants(userId: string): Grant[] {
-  const db = getDb();
-  const rows = db
-    .prepare(
-      `SELECT g.code AS group_code, g.name AS group_name, gg.menu_code, gg.action, gg.scope
-       FROM permission_group_members m
-       JOIN permission_groups g ON g.id = m.group_id
-       JOIN permission_group_grants gg ON gg.group_id = g.id
-       WHERE m.user_id = ? AND g.status = 'active'`,
-    )
-    .all(userId) as {
-    group_code: string;
-    group_name: string;
-    menu_code: string;
-    action: PermissionAction;
-    scope: DataScope;
-  }[];
-  return rows.map((row) => ({
-    menuCode: row.menu_code,
-    action: row.action,
-    scope: row.scope,
-    groupCode: row.group_code,
-    groupName: row.group_name,
-  }));
 }
 
 function loadAssignedClassIds(userId: string) {
@@ -85,19 +48,17 @@ function loadAssignedClassIds(userId: string) {
   return [...new Set([...staff, ...enrolled].map((row) => row.class_id))];
 }
 
-export function findPlatformUserByEmail(email: string) {
-  return (
-    (getDb()
-      .prepare(`SELECT * FROM users WHERE lower(email) = lower(?)`)
-      .get(email) as PlatformUserRow | undefined) ?? null
-  );
+export async function findPlatformUserByEmail(email: string) {
+  if (!isPlatformConvexConfigured()) return null;
+  return convexGetUserByEmail(email);
 }
 
-export function findPlatformUserById(id: string) {
-  return (getDb().prepare(`SELECT * FROM users WHERE id = ?`).get(id) as PlatformUserRow | undefined) ?? null;
+export async function findPlatformUserById(id: string) {
+  if (!isPlatformConvexConfigured()) return null;
+  return convexGetUserById(id);
 }
 
-export function toActor(user: PlatformUserRow, claims: PlatformClaims): PlatformActor {
+export function toActor(user: PlatformUserRow, claims: PlatformClaims, grants: Grant[] = []): PlatformActor {
   return {
     id: user.id,
     email: user.email,
@@ -106,7 +67,7 @@ export function toActor(user: PlatformUserRow, claims: PlatformClaims): Platform
     role: user.role,
     departmentId: user.department_id,
     status: user.status,
-    grants: loadGrants(user.id),
+    grants,
     assignedClassIds: loadAssignedClassIds(user.id),
     isSeed: Boolean(user.is_seed),
     claims,
@@ -119,13 +80,12 @@ export async function getPlatformActor(): Promise<PlatformActor | null> {
   if (!token) return null;
   const claims = await verifyPlatformSession(token);
   if (!claims) return null;
-  const session = getDb()
-    .prepare(`SELECT revoked_at, expires_at FROM auth_sessions WHERE id = ?`)
-    .get(claims.jti) as { revoked_at: string | null; expires_at: string } | undefined;
-  if (!session || session.revoked_at || session.expires_at < nowIso()) return null;
-  const user = findPlatformUserById(claims.sub);
-  if (!user || user.status !== "active") return null;
-  return toActor(user, claims);
+  if (!isPlatformConvexConfigured()) return null;
+  const bundle = await convexGetAuthBundle(claims.sub, claims.jti);
+  if (!bundle) return null;
+  if (bundle.session.revoked_at || bundle.session.expires_at < nowIso()) return null;
+  if (bundle.user.status !== "active") return null;
+  return toActor(bundle.user, claims, bundle.grants);
 }
 
 export async function requirePlatformActor() {
@@ -138,39 +98,26 @@ export async function requirePlatformActor() {
   return actor;
 }
 
-export function revokeUserSessions(userId: string, exceptJti?: string) {
-  const db = getDb();
-  if (exceptJti) {
-    db.prepare(`UPDATE auth_sessions SET revoked_at = ? WHERE user_id = ? AND id != ? AND revoked_at IS NULL`).run(
-      nowIso(),
-      userId,
-      exceptJti,
-    );
-  } else {
-    db.prepare(`UPDATE auth_sessions SET revoked_at = ? WHERE user_id = ? AND revoked_at IS NULL`).run(nowIso(), userId);
-  }
+export async function revokeUserSessions(userId: string, exceptJti?: string) {
+  await convexRevokeUserSessions(userId, exceptJti);
 }
 
-export function createSessionRecord(userId: string, jti: string) {
+export async function createSessionRecord(userId: string, jti: string) {
   const expires = new Date(Date.now() + PLATFORM_SESSION_TTL * 1000).toISOString();
-  getDb()
-    .prepare(
-      `INSERT INTO auth_sessions (id, user_id, expires_at, revoked_at, user_agent, created_at) VALUES (?, ?, ?, NULL, '', ?)`,
-    )
-    .run(jti, userId, expires, nowIso());
+  await convexCreateSession(userId, jti, expires);
 }
 
-export function countActiveAdmins(exceptUserId?: string) {
-  const row = getDb()
-    .prepare(
-      `SELECT COUNT(*) AS n FROM users WHERE role = 'admin' AND status = 'active' ${exceptUserId ? "AND id != ?" : ""}`,
-    )
-    .get(...(exceptUserId ? [exceptUserId] : [])) as { n: number };
-  return row.n;
+export async function countActiveAdmins(exceptUserId?: string) {
+  return convexCountAdmins({ activeOnly: true, exceptUserId });
 }
 
-export function isLastActiveAdmin(userId: string) {
-  const user = findPlatformUserById(userId);
+export async function isLastActiveAdmin(userId: string) {
+  const user = await findPlatformUserById(userId);
   if (!user || user.role !== "admin" || user.status !== "active") return false;
-  return countActiveAdmins(userId) === 0;
+  return (await countActiveAdmins(userId)) === 0;
+}
+
+export async function listUserGroupCodes(userId: string) {
+  const { codes } = await convexListUserGrants(userId);
+  return codes;
 }

@@ -73,6 +73,9 @@ Khi chưa có `DATABASE_URL`, ứng dụng dùng kho JSON cục bộ `data/bizca
 
 Xem `.env.example`. Bắt buộc trên production: `AUTH_SECRET`.
 
+Đăng nhập nền tảng `/dang-nhap` dùng Convex (`platform*` tables), không dùng
+bảng MyBizCar `users`. Chi tiết: `docs/PLATFORM_CONVEX.md`.
+
 ### Gắn domain bizcar.vabix.edu.vn
 
 1. Trỏ DNS về cùng deployment Next.js.

@@ -6,9 +6,9 @@ import { formatDateTime } from "@/platform/time";
 export default async function AccountsPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   await requireMenu("/admin/he-thong/tai-khoan");
   const { q } = await searchParams;
-  const { rows } = listUsers({ q, limit: 50, offset: 0 });
-  const departments = listDepartments() as { id: string; name: string }[];
-  const groups = listGroups() as { id: string; name: string; status: string }[];
+  const { rows } = await listUsers({ q, limit: 50, offset: 0 });
+  const departments = (await listDepartments()) as { id: string; name: string }[];
+  const groups = (await listGroups()) as { id: string; name: string; status: string }[];
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-semibold text-[#163c3e]">Tài khoản</h1>

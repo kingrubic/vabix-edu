@@ -33,7 +33,11 @@ Nội dung file `src/content/*` được seed vào `cms_documents` (origin `file
 
 ## Dữ liệu chính
 
-`users` (role admin/mod/user) → `permission_groups` / grants → `departments`  
+Auth/IAM (Convex, namespaced — **không** dùng bảng MyBizCar `users`):
+`platformUsers` → `platformPermissionGroups` / grants / members → sessions / tokens / `platformAuditLogs`.
+
+Vẫn trên SQLite `data/vabix-platform.sqlite`:
+`departments`  
 `cms_documents` + versions  
 `lms_courses` → `lms_course_versions` → modules/lessons  
 `lms_classes` → staff / enrollments / schedules / attendance  
@@ -41,9 +45,9 @@ Nội dung file `src/content/*` được seed vào `cms_documents` (origin `file
 assignments / submissions / grades / eval_3w  
 questions / quizzes / attempts  
 certificates (snapshot template)  
-tasks / inquiries / notifications / files / audit_logs
+tasks / inquiries / notifications / files
 
-CSDL: SQLite `data/vabix-platform.sqlite`. Migration `src/platform/db/migrations/0001_init.sql`, backup tự động vào `data/backups/` trước khi apply migration mới.
+Chi tiết Convex: `docs/PLATFORM_CONVEX.md`. Migration SQLite LMS/CMS: `src/platform/db/migrations/0001_init.sql`.
 
 ## Ma trận quyền
 
@@ -72,7 +76,7 @@ Tạo khóa → soạn giáo trình trên **bản nháp** → xuất bản phiê
 
 ## Biến môi trường
 
-Xem `.env.example`. Storage: `data/uploads/`. Job thông báo: `POST /api/platform/jobs/notifications` với `Authorization: Bearer $PLATFORM_JOB_SECRET`. Export báo cáo: `GET /api/platform/reports/learning` (cần quyền `lms.reports` / export).
+Xem `.env.example`. Auth nền tảng cần `CONVEX_URL` + `PLATFORM_CONVEX_SECRET` (và cùng secret trên Convex). Storage: `data/uploads/`. Job thông báo: `POST /api/platform/jobs/notifications` với `Authorization: Bearer $PLATFORM_JOB_SECRET`. Export báo cáo: `GET /api/platform/reports/learning` (cần quyền `lms.reports` / export).
 
 ## Kiểm thử
 

@@ -4,8 +4,8 @@ import { saveDepartmentForm } from "@/platform/ui/actions";
 
 export default async function DepartmentsPage() {
   await requireMenu("/admin/he-thong/phong-ban");
-  const rows = listDepartments() as Record<string, unknown>[];
-  const users = listUsers({ status: "active", limit: 200 }).rows as { id: string; name: string }[];
+  const rows = (await listDepartments()) as Record<string, unknown>[];
+  const users = (await listUsers({ status: "active", limit: 200 })).rows as { id: string; name: string }[];
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-semibold text-[#163c3e]">Phòng ban</h1>

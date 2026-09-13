@@ -1,0 +1,3 @@
+{"id":"7fe72859-f3ed-435b-8271-e24be7950e9c","email":"vutrananh97@gmail.com","name":"Trần Anh Vũ - Admin","role":"admin","status":"active","password_hash":"<bcrypt from sqlite — do not invent>"}
+{"id":"93b3e4e6-6dda-43c3-b922-fee34009f516","email":"thuyvabix@gmail.com","name":"Thanh Thuỳ Vabix","role":"admin","status":"pending","password_hash":"<bcrypt from sqlite — do not invent>"}
+{"id":"78ee0001-f8d6-4f01-a1ef-cdeebd106137","email":"vutrananh.marketing@gmail.com","name":"Trần Anh Vũ","role":"user","status":"pending","password_hash":"<bcrypt from sqlite — do not invent>"}

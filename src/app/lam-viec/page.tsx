@@ -10,9 +10,9 @@ export default async function UserWorkPage() {
   if (!can(actor, "work.user.mine", "view") && !can(actor, "work.mine", "view") && actor.role === "user") {
     return <p>Bạn chưa được cấp quyền công việc.</p>;
   }
-  const rows = listTasks(actor, "mine") as Record<string, unknown>[];
-  const created = listTasks(actor, "created") as Record<string, unknown>[];
-  const people = directoryForTasks() as { id: string; name: string; department_name: string | null }[];
+  const rows = (await listTasks(actor, "mine")) as Record<string, unknown>[];
+  const created = (await listTasks(actor, "created")) as Record<string, unknown>[];
+  const people = (await directoryForTasks()) as { id: string; name: string; department_name: string | null }[];
   const canCreate = actor.role !== "user" || can(actor, "work.user.created", "create");
   return (
     <div className="space-y-6">

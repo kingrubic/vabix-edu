@@ -3,6 +3,8 @@ import { writeAudit } from "@/platform/audit";
 import { assertCan, type Actor } from "@/platform/permissions/evaluate";
 import { endsAfterStart } from "@/platform/time";
 import { notifyUsers } from "@/platform/notify/service";
+import { findPlatformUserById, listUserGroupCodes } from "@/platform/auth/session";
+import { mapUserDirectory } from "@/platform/convex/repo";
 
 export function listClasses() {
   return getDb()
@@ -107,23 +109,23 @@ export function saveClass(
   return id;
 }
 
-export function classStaff(classId: string) {
-  return getDb()
-    .prepare(
-      `SELECT s.*, u.name, u.email FROM lms_class_staff s JOIN users u ON u.id = s.user_id WHERE s.class_id = ?`,
-    )
-    .all(classId);
+export async function classStaff(classId: string) {
+  const rows = getDb().prepare(`SELECT * FROM lms_class_staff WHERE class_id = ?`).all(classId) as Array<
+    Record<string, unknown> & { user_id: string }
+  >;
+  const users = await mapUserDirectory(rows.map((row) => row.user_id));
+  return rows.map((row) => ({
+    ...row,
+    name: users.get(row.user_id)?.name ?? "",
+    email: users.get(row.user_id)?.email ?? "",
+  }));
 }
 
-export function assignStaff(actor: Actor, classId: string, userId: string, role: "instructor" | "assistant" | "coordinator") {
+export async function assignStaff(actor: Actor, classId: string, userId: string, role: "instructor" | "assistant" | "coordinator") {
   assertCan(actor, "lms.staffing", "assign");
-  const groups = getDb()
-    .prepare(
-      `SELECT g.code FROM permission_group_members m JOIN permission_groups g ON g.id = m.group_id WHERE m.user_id = ? AND g.status='active'`,
-    )
-    .all(userId) as { code: string }[];
-  const user = getDb().prepare(`SELECT role FROM users WHERE id = ?`).get(userId) as { role: string } | undefined;
-  const hasTeaching = user?.role === "admin" || user?.role === "mod" || groups.some((row) => row.code === "instructor");
+  const groups = await listUserGroupCodes(userId);
+  const user = await findPlatformUserById(userId);
+  const hasTeaching = user?.role === "admin" || user?.role === "mod" || groups.includes("instructor");
   getDb()
     .prepare(
       `INSERT OR IGNORE INTO lms_class_staff (id, class_id, user_id, role, created_at, created_by) VALUES (?, ?, ?, ?, ?, ?)`,
@@ -176,7 +178,7 @@ export function saveLearner(
   return id;
 }
 
-export function enroll(actor: Actor, classId: string, learnerProfileId: string) {
+export async function enroll(actor: Actor, classId: string, learnerProfileId: string) {
   assertCan(actor, "lms.learners", "assign");
   const existing = getDb()
     .prepare(`SELECT id, status FROM lms_enrollments WHERE class_id = ? AND learner_profile_id = ?`)
@@ -202,14 +204,8 @@ export function enroll(actor: Actor, classId: string, learnerProfileId: string) 
        VALUES (?, ?, ?, ?, 'pending', ?, NULL, ?, ?)`,
     )
     .run(id, classId, learnerProfileId, profile.account_user_id, at, actor.id, at);
-  const groups = profile.account_user_id
-    ? (getDb()
-        .prepare(
-          `SELECT g.code FROM permission_group_members m JOIN permission_groups g ON g.id = m.group_id WHERE m.user_id = ? AND g.status='active'`,
-        )
-        .all(profile.account_user_id) as { code: string }[])
-    : [];
-  const warning = profile.account_user_id && !groups.some((row) => row.code === "learner")
+  const groups = profile.account_user_id ? await listUserGroupCodes(profile.account_user_id) : [];
+  const warning = profile.account_user_id && !groups.includes("learner")
     ? "Tài khoản chưa có nhóm quyền Học viên. Yêu cầu Admin cấp nhóm trước khi học viên vào cổng học tập."
     : !profile.account_user_id
       ? "Hồ sơ chưa liên kết tài khoản. Mod không được tự tạo tài khoản — gửi yêu cầu cho Admin."
@@ -231,17 +227,21 @@ export function setEnrollmentStatus(actor: Actor, enrollmentId: string, status: 
   getDb().prepare(`UPDATE lms_enrollments SET status=?, updated_at=? WHERE id=?`).run(status, nowIso(), enrollmentId);
 }
 
-export function listEnrollments(classId: string) {
-  return getDb()
+export async function listEnrollments(classId: string) {
+  const rows = getDb()
     .prepare(
-      `SELECT e.*, p.full_name, p.email, p.organization, u.name AS account_name
+      `SELECT e.*, p.full_name, p.email, p.organization
        FROM lms_enrollments e
        JOIN learner_profiles p ON p.id = e.learner_profile_id
-       LEFT JOIN users u ON u.id = e.user_id
        WHERE e.class_id = ?
        ORDER BY p.full_name`,
     )
-    .all(classId);
+    .all(classId) as Array<Record<string, unknown> & { user_id: string | null }>;
+  const users = await mapUserDirectory(rows.map((row) => row.user_id ?? ""));
+  return rows.map((row) => ({
+    ...row,
+    account_name: row.user_id ? users.get(row.user_id)?.name ?? null : null,
+  })) as Array<Record<string, unknown> & { id: string; full_name: string; email?: string; user_id: string | null; account_name: string | null }>;
 }
 
 export function saveSchedule(
@@ -336,7 +336,7 @@ export function importLearnerPreview(actor: Actor, rows: { fullName: string; ema
   });
 }
 
-export function importLearners(
+export async function importLearners(
   actor: Actor,
   rows: { fullName: string; email: string; phone?: string; organization?: string }[],
   classId?: string,
@@ -363,7 +363,7 @@ export function importLearners(
     } else {
       reused.push(id);
     }
-    if (classId) enroll(actor, classId, id);
+    if (classId) await enroll(actor, classId, id);
   }
   return { ok: true as const, preview, created, reused };
 }
