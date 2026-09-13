@@ -1,17 +1,29 @@
-import { getDb, nowIso, newId } from "@/platform/db/client";
+import { nowIso, newId } from "@/platform/db/client";
 import { hashPassword } from "@/security/auth";
 import { bootPlatform } from "@/platform/boot";
 import { redirect } from "next/navigation";
-import { writeAudit } from "@/platform/audit";
+import { writeAuditAsync } from "@/platform/audit";
+import { convexCountAdmins, convexUpsertUser } from "@/platform/convex/repo";
+import { isPlatformConvexConfigured } from "@/platform/convex/client";
 
 export default async function SetupPage() {
   await bootPlatform();
-  const count = (getDb().prepare(`SELECT COUNT(*) AS n FROM users WHERE role='admin'`).get() as { n: number }).n;
+  if (!isPlatformConvexConfigured()) {
+    return (
+      <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-5">
+        <h1 className="text-2xl font-semibold text-[#163c3e]">Chưa kết nối Convex</h1>
+        <p className="mt-2 text-sm text-[#66746f]">
+          Đặt CONVEX_URL và PLATFORM_CONVEX_SECRET trước khi tạo Admin nền tảng.
+        </p>
+      </div>
+    );
+  }
+  const count = await convexCountAdmins();
   if (count > 0) redirect("/dang-nhap");
   async function create(formData: FormData) {
     "use server";
     await bootPlatform();
-    const exists = (getDb().prepare(`SELECT COUNT(*) AS n FROM users WHERE role='admin'`).get() as { n: number }).n;
+    const exists = await convexCountAdmins();
     if (exists > 0) redirect("/dang-nhap");
     const email = String(formData.get("email") ?? "").trim().toLowerCase();
     const name = String(formData.get("name") ?? "Quản trị viên");
@@ -20,13 +32,24 @@ export default async function SetupPage() {
     const hash = await hashPassword(password);
     const id = newId();
     const at = nowIso();
-    getDb()
-      .prepare(
-        `INSERT INTO users (id, email, name, password_hash, avatar_file_id, role, department_id, status, last_login_at, created_at, updated_at, created_by, updated_by, archived_at, is_seed)
-         VALUES (?, ?, ?, ?, NULL, 'admin', NULL, 'active', NULL, ?, ?, NULL, NULL, NULL, 0)`,
-      )
-      .run(id, email, name, hash, at, at);
-    writeAudit({ actorUserId: id, action: "user.bootstrap", entityType: "user", entityId: id, summary: "Tạo Admin đầu tiên từ trang thiết lập." });
+    await convexUpsertUser({
+      id,
+      email,
+      name,
+      passwordHash: hash,
+      role: "admin",
+      departmentId: null,
+      status: "active",
+      createdAt: at,
+      updatedAt: at,
+    });
+    await writeAuditAsync({
+      actorUserId: id,
+      action: "user.bootstrap",
+      entityType: "user",
+      entityId: id,
+      summary: "Tạo Admin đầu tiên từ trang thiết lập.",
+    });
     redirect("/dang-nhap");
   }
   return (

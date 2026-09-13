@@ -9,12 +9,15 @@ export default async function TeachingAttendancePage() {
   const actor = await requirePageActor();
   const classes = teachingClasses(actor.id) as { id: string; name: string }[];
   if (!classes.length) return <EmptyState title="Chưa được phân công lớp" body="Điểm danh chỉ hiện với lớp bạn phụ trách." />;
+  const enrollmentByClass = new Map(
+    await Promise.all(classes.map(async (cls) => [cls.id, await listEnrollments(cls.id)] as const)),
+  );
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-[#163c3e]">Điểm danh</h1>
       {classes.map((cls) => {
         const schedules = getDb().prepare(`SELECT id, title FROM lms_schedules WHERE class_id=? ORDER BY starts_at`).all(cls.id) as { id: string; title: string }[];
-        const enrollments = listEnrollments(cls.id) as { id: string; full_name: string }[];
+        const enrollments = (enrollmentByClass.get(cls.id) ?? []) as { id: string; full_name: string }[];
         return (
           <section key={cls.id} className="platform-card p-5">
             <h2 className="font-semibold">{cls.name}</h2>

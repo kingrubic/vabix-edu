@@ -11,10 +11,10 @@ export default async function ClassesPage({ searchParams }: { searchParams: Prom
   const classes = listClasses() as Record<string, unknown>[];
   const courses = listCourses() as { id: string; name: string }[];
   const current = classes.find((row) => row.id === id);
-  const enrollments = id ? listEnrollments(id) as Record<string, unknown>[] : [];
-  const staff = id ? classStaff(id) as Record<string, unknown>[] : [];
+  const enrollments = id ? (await listEnrollments(id)) as Record<string, unknown>[] : [];
+  const staff = id ? (await classStaff(id)) as Record<string, unknown>[] : [];
   const learners = listLearners();
-  const people = directoryForTasks() as { id: string; name: string }[];
+  const people = (await directoryForTasks()) as { id: string; name: string }[];
   const versions = current ? (listVersions(String(current.course_id)) as { id: string; version_number: number; status: string }[]) : [];
   const publishedVersions = courses.flatMap((course) =>
     (listVersions(course.id) as { id: string; version_number: number; status: string }[])

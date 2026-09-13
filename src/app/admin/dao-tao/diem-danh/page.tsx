@@ -6,13 +6,16 @@ import { saveAttendanceForm } from "@/platform/ui/actions";
 export default async function AdminAttendancePage() {
   await requireMenu("/admin/dao-tao/diem-danh");
   const classes = listClasses() as { id: string; name: string }[];
+  const enrollmentByClass = new Map(
+    await Promise.all(classes.map(async (cls) => [cls.id, await listEnrollments(cls.id)] as const)),
+  );
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-[#163c3e]">Điểm danh</h1>
       <p className="text-sm text-[#66746f]">Công thức chuyên cần: (có mặt + đi muộn) / (có mặt + đi muộn + vắng). Vắng có phép không nằm mẫu số.</p>
       {classes.map((cls) => {
         const schedules = getDb().prepare(`SELECT id, title FROM lms_schedules WHERE class_id=? ORDER BY starts_at`).all(cls.id) as { id: string; title: string }[];
-        const enrollments = listEnrollments(cls.id) as { id: string; full_name: string }[];
+        const enrollments = (enrollmentByClass.get(cls.id) ?? []) as { id: string; full_name: string }[];
         return (
           <section key={cls.id} className="platform-card p-5">
             <h2 className="font-semibold">{cls.name}</h2>

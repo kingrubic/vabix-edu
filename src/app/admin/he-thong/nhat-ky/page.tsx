@@ -4,7 +4,7 @@ import { formatDateTime } from "@/platform/time";
 
 export default async function AuditPage() {
   await requireMenu("/admin/he-thong/nhat-ky");
-  const rows = listAudit(100) as Record<string, unknown>[];
+  const rows = (await listAudit(100)) as Record<string, unknown>[];
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-[#163c3e]">Nhật ký quản trị / bảo mật</h1>

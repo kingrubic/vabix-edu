@@ -6,8 +6,8 @@ import { GroupEditor } from "./GroupEditor";
 export default async function GroupsPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
   await requireMenu("/admin/he-thong/nhom-quyen");
   const { id } = await searchParams;
-  const groups = listGroups() as { id: string; code: string; name: string; status: string; member_count: number; is_seed: number }[];
-  const current = id ? getGroup(id) : null;
+  const groups = (await listGroups()) as { id: string; code: string; name: string; status: string; member_count: number; is_seed: number }[];
+  const current = id ? await getGroup(id) : null;
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-semibold text-[#163c3e]">Nhóm quyền</h1>

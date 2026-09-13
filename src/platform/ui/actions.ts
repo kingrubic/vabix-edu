@@ -46,7 +46,7 @@ export async function saveUserForm(formData: FormData) {
 export async function saveDepartmentForm(formData: FormData) {
   try {
     const actor = await requirePageActor();
-    saveDepartment(actor, {
+    await saveDepartment(actor, {
       id: String(formData.get("id") ?? "") || undefined,
       code: String(formData.get("code") ?? ""),
       name: String(formData.get("name") ?? ""),
@@ -69,7 +69,7 @@ export async function saveGroupForm(formData: FormData) {
       String(formData.get("grants") ?? "[]"),
       [],
     );
-    saveGroup(actor, {
+    await saveGroup(actor, {
       id: String(formData.get("id") ?? "") || undefined,
       code: String(formData.get("code") ?? ""),
       name: String(formData.get("name") ?? ""),
@@ -218,7 +218,7 @@ export async function reorderLessonsForm(formData: FormData) {
 export async function enrollForm(formData: FormData) {
   try {
     const actor = await requirePageActor();
-    enroll(actor, String(formData.get("classId") ?? ""), String(formData.get("learnerProfileId") ?? ""));
+    await enroll(actor, String(formData.get("classId") ?? ""), String(formData.get("learnerProfileId") ?? ""));
     return;
   } catch (error) {
     fail(error);
@@ -245,7 +245,7 @@ export async function saveLearnerForm(formData: FormData) {
 export async function assignStaffForm(formData: FormData) {
   try {
     const actor = await requirePageActor();
-    assignStaff(
+    await assignStaff(
       actor,
       String(formData.get("classId") ?? ""),
       String(formData.get("userId") ?? ""),
@@ -488,7 +488,7 @@ export async function importLearnersForm(formData: FormData) {
       phone: row.phone || row.dienthoai || row["dien thoai"] || "",
       organization: row.organization || row.doanhnghiep || row.company || "",
     }));
-    const result = importLearners(actor, rows, classId);
+    const result = await importLearners(actor, rows, classId);
     if (!result.ok) {
       const first = result.preview.find((row) => row.errors.length);
       throw new Error(result.message + (first ? ` (${first.email || first.fullName}: ${first.errors.join(", ")})` : ""));
@@ -513,7 +513,7 @@ export async function revokeCertForm(formData: FormData) {
 export async function saveTaskForm(formData: FormData) {
   try {
     const actor = await requirePageActor();
-    saveTask(actor, {
+    await saveTask(actor, {
       title: String(formData.get("title") ?? ""),
       description: String(formData.get("description") ?? ""),
       assigneeUserId: String(formData.get("assigneeUserId") ?? ""),

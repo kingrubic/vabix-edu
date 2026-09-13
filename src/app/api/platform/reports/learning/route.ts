@@ -13,7 +13,7 @@ export async function GET() {
   }
   const lines = ["lop,hoc_vien,tien_do_noi_dung,chuyen_can,dat_khoa"];
   for (const cls of listClasses() as { id: string; name: string }[]) {
-    for (const enrollment of listEnrollments(cls.id) as { id: string; full_name: string }[]) {
+    for (const enrollment of (await listEnrollments(cls.id)) as { id: string; full_name: string }[]) {
       const content = contentProgress(enrollment.id);
       const att = attendanceRate(enrollment.id);
       const done = completionState(enrollment.id);

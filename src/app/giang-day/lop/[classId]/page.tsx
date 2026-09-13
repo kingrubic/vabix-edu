@@ -10,7 +10,7 @@ export default async function TeachingClassPage({ params }: { params: Promise<{ 
   const { classId } = await params;
   if (!canAccessClass(actor.id, classId, actor.role)) notFound();
   const cls = getClass(classId);
-  const enrollments = listEnrollments(classId) as { id: string; full_name: string; email: string }[];
+  const enrollments = (await listEnrollments(classId)) as { id: string; full_name: string; email: string }[];
   const schedules = getDb().prepare(`SELECT id, title FROM lms_schedules WHERE class_id=?`).all(classId) as { id: string; title: string }[];
   return (
     <div className="space-y-6">

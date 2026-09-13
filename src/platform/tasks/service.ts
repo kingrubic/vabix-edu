@@ -2,6 +2,8 @@ import { getDb, nowIso, newId } from "@/platform/db/client";
 import { assertCan, can, type Actor } from "@/platform/permissions/evaluate";
 import { notifyUsers } from "@/platform/notify/service";
 import { writeAudit } from "@/platform/audit";
+import { findPlatformUserById, listUserGroupCodes } from "@/platform/auth/session";
+import { mapUserDirectory } from "@/platform/convex/repo";
 
 function nextTaskCode() {
   const year = new Date().getFullYear();
@@ -9,12 +11,10 @@ function nextTaskCode() {
   return `CV-${year}-${String(count).padStart(4, "0")}`;
 }
 
-export function listTasks(actor: Actor, filter: "mine" | "created" | "all" | "overdue") {
+export async function listTasks(actor: Actor, filter: "mine" | "created" | "all" | "overdue") {
   const now = nowIso().slice(0, 10);
-  let sql = `SELECT t.*, a.name AS assignee_name, c.name AS creator_name, d.name AS department_name
+  let sql = `SELECT t.*, d.name AS department_name
     FROM tasks t
-    JOIN users a ON a.id = t.assignee_user_id
-    JOIN users c ON c.id = t.creator_user_id
     LEFT JOIN departments d ON d.id = t.department_id
     WHERE 1=1`;
   const params: unknown[] = [];
@@ -43,10 +43,18 @@ export function listTasks(actor: Actor, filter: "mine" | "created" | "all" | "ov
     params.push(now);
   }
   sql += ` ORDER BY t.due_on IS NULL, t.due_on, t.updated_at DESC`;
-  return getDb().prepare(sql).all(...params);
+  const rows = getDb().prepare(sql).all(...params) as Array<
+    Record<string, unknown> & { assignee_user_id: string; creator_user_id: string }
+  >;
+  const users = await mapUserDirectory(rows.flatMap((row) => [row.assignee_user_id, row.creator_user_id]));
+  return rows.map((row) => ({
+    ...row,
+    assignee_name: users.get(row.assignee_user_id)?.name ?? "",
+    creator_name: users.get(row.creator_user_id)?.name ?? "",
+  }));
 }
 
-export function saveTask(
+export async function saveTask(
   actor: Actor,
   input: {
     id?: string;
@@ -65,18 +73,13 @@ export function saveTask(
 ) {
   const menu = actor.role === "user" ? "work.user.created" : "work.all";
   assertCan(actor, menu, input.id ? "update" : "create");
-  const assignee = getDb().prepare(`SELECT id, status FROM users WHERE id=?`).get(input.assigneeUserId) as { status: string } | undefined;
+  const assignee = await findPlatformUserById(input.assigneeUserId);
   if (!assignee || assignee.status !== "active") throw new Error("Người nhận phải là tài khoản đang hoạt động.");
-  const groups = getDb()
-    .prepare(
-      `SELECT g.code FROM permission_group_members m JOIN permission_groups g ON g.id = m.group_id WHERE m.user_id=? AND g.status='active'`,
-    )
-    .all(input.assigneeUserId) as { code: string }[];
-  const assigneeUser = getDb().prepare(`SELECT role FROM users WHERE id=?`).get(input.assigneeUserId) as { role: string };
+  const groups = await listUserGroupCodes(input.assigneeUserId);
   const hasWork =
-    assigneeUser.role === "admin" ||
-    assigneeUser.role === "mod" ||
-    groups.some((row) => row.code === "internal_staff");
+    assignee.role === "admin" ||
+    assignee.role === "mod" ||
+    groups.includes("internal_staff");
   const at = nowIso();
   const id = input.id ?? newId();
   if (input.id) {

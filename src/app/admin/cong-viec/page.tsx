@@ -9,8 +9,8 @@ export default async function TasksPage({ searchParams }: { searchParams: Promis
   await requireMenu("/admin/cong-viec");
   const { view } = await searchParams;
   const filter = (view === "mine" || view === "created" || view === "overdue" ? view : "all") as "mine" | "created" | "all" | "overdue";
-  const rows = listTasks(actor, filter) as Record<string, unknown>[];
-  const people = directoryForTasks() as { id: string; name: string; department_name: string | null }[];
+  const rows = (await listTasks(actor, filter)) as Record<string, unknown>[];
+  const people = (await directoryForTasks()) as { id: string; name: string; department_name: string | null }[];
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-[#163c3e]">Công việc</h1>
