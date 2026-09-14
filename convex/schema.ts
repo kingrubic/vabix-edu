@@ -33,6 +33,7 @@ export default defineSchema({
     updatedBy: v.union(v.string(), v.null()),
     archivedAt: v.union(v.string(), v.null()),
     isSeed: v.boolean(),
+    mustChangePassword: v.optional(v.boolean()),
   })
     .index("by_platformId", ["platformId"])
     .index("by_emailLower", ["emailLower"])

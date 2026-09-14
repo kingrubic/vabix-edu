@@ -70,6 +70,7 @@ export function toActor(user: PlatformUserRow, claims: PlatformClaims, grants: G
     grants,
     assignedClassIds: loadAssignedClassIds(user.id),
     isSeed: Boolean(user.is_seed),
+    mustChangePassword: Boolean(user.must_change_password),
     claims,
   };
 }

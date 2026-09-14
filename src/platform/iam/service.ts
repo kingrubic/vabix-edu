@@ -3,20 +3,17 @@ import { writeAuditAsync } from "@/platform/audit";
 import { type Actor } from "@/platform/permissions/evaluate";
 import { SAMPLE_GROUPS, type DataScope, type PermissionAction, type PlatformRole } from "@/platform/permissions/registry";
 import { hashPassword } from "@/security/auth";
-import { sendPlatformMail } from "@/platform/mail/send";
 import {
   countActiveAdmins,
   findPlatformUserByEmail,
-  hashToken,
+  findPlatformUserById,
   isLastActiveAdmin,
-  randomToken,
   revokeUserSessions,
 } from "@/platform/auth/session";
 import { isAdminOnlyMenu } from "@/platform/permissions/registry";
 import { isPlatformConvexConfigured } from "@/platform/convex/client";
 import {
   convexCountAdmins,
-  convexCreateToken,
   convexGetGroup,
   convexGroupMemberCount,
   convexListGroups,
@@ -143,6 +140,16 @@ export async function userGroupIds(userId: string) {
   return groupIds;
 }
 
+function normalizeTempPassword(value: string | undefined, required: boolean) {
+  const tempPassword = value?.trim() ?? "";
+  if (!tempPassword) {
+    if (required) throw new Error("Cần mật khẩu tạm.");
+    return "";
+  }
+  if (tempPassword.length < 10) throw new Error("Mật khẩu tạm tối thiểu 10 ký tự.");
+  return tempPassword;
+}
+
 export async function saveUser(
   actor: Actor,
   input: {
@@ -153,7 +160,7 @@ export async function saveUser(
     departmentId: string | null;
     groupIds: string[];
     status: "pending" | "active" | "locked" | "archived";
-    invite: boolean;
+    tempPassword?: string;
   },
 ) {
   forbidModIdentity(actor);
@@ -164,9 +171,11 @@ export async function saveUser(
     throw new Error("Không thể khóa, lưu trữ hoặc hạ quyền Admin cuối cùng.");
   }
 
+  const tempPassword = normalizeTempPassword(input.tempPassword, !input.id);
   const at = nowIso();
   const id = input.id ?? newId();
-  let activation: { token?: string; mail?: string } = {};
+  const passwordHash = tempPassword ? await hashPassword(tempPassword) : undefined;
+  const status = tempPassword && input.status === "pending" ? "active" : input.status;
 
   await convexUpsertUser({
     id,
@@ -174,39 +183,18 @@ export async function saveUser(
     name: input.name.trim(),
     role: input.role,
     departmentId: input.departmentId,
-    status: input.status,
+    status,
     updatedAt: at,
     updatedBy: actor.id,
     createdBy: actor.id,
-    archivedAt: input.status === "archived" ? at : null,
+    archivedAt: status === "archived" ? at : null,
     keepExistingHashIfIncomingNull: true,
+    ...(passwordHash ? { passwordHash, mustChangePassword: true } : {}),
   });
   await convexSetUserGroups(id, input.role === "user" ? input.groupIds : [], actor.id);
 
-  if (input.status === "locked" || input.status === "archived" || input.id) {
+  if (status === "locked" || status === "archived" || input.id || tempPassword) {
     await revokeUserSessions(id);
-  }
-
-  if (!input.id && input.invite) {
-    const token = randomToken();
-    await convexCreateToken({
-      userId: id,
-      purpose: "activation",
-      tokenHash: hashToken(token),
-      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      createdBy: actor.id,
-    });
-    const origin = process.env.PLATFORM_PUBLIC_URL || "";
-    const link = `${origin}/dat-lai-mat-khau?token=${token}&activate=1`;
-    const mail = await sendPlatformMail({
-      to: email,
-      subject: "Kích hoạt tài khoản VABIX",
-      text: `Bạn được mời sử dụng nền tảng VABIX. Đặt mật khẩu tại: ${link}`,
-    });
-    activation = {
-      token: mail.ok ? undefined : token,
-      mail: mail.ok ? "sent" : mail.message,
-    };
   }
 
   await writeAuditAsync({
@@ -215,9 +203,50 @@ export async function saveUser(
     entityType: "user",
     entityId: id,
     summary: `${input.id ? "Cập nhật" : "Tạo"} tài khoản ${email}.`,
-    metadata: { role: input.role, status: input.status, invited: input.invite },
+    metadata: {
+      role: input.role,
+      status,
+      tempPassword: Boolean(tempPassword),
+    },
   });
-  return { id, activation };
+  return { id };
+}
+
+export async function resetUserTempPassword(actor: Actor, userId: string, tempPassword: string) {
+  forbidModIdentity(actor);
+  const password = normalizeTempPassword(tempPassword, true);
+  const user = await findPlatformUserById(userId);
+  if (!user) throw new Error("Không tìm thấy tài khoản.");
+  if (user.status === "archived") throw new Error("Không thể đặt mật khẩu cho tài khoản đã lưu trữ.");
+
+  const at = nowIso();
+  const status = user.status === "pending" ? "active" : user.status;
+  await convexUpsertUser({
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    role: user.role,
+    departmentId: user.department_id,
+    status,
+    passwordHash: await hashPassword(password),
+    mustChangePassword: true,
+    avatarFileId: user.avatar_file_id,
+    lastLoginAt: user.last_login_at,
+    createdAt: user.created_at,
+    updatedAt: at,
+    updatedBy: actor.id,
+    isSeed: Boolean(user.is_seed),
+    keepExistingHashIfIncomingNull: false,
+  });
+  await revokeUserSessions(user.id);
+  await writeAuditAsync({
+    actorUserId: actor.id,
+    action: "user.temp_password_reset",
+    entityType: "user",
+    entityId: user.id,
+    summary: `Đặt mật khẩu tạm cho ${user.email}.`,
+  });
+  return { id: user.id };
 }
 
 export async function importUsersPreview(actor: Actor, rows: { name: string; email: string; role?: string }[]) {

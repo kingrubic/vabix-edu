@@ -40,6 +40,7 @@ export const userFields = {
   updatedBy: v.union(v.string(), v.null()),
   archivedAt: v.union(v.string(), v.null()),
   isSeed: v.boolean(),
+  mustChangePassword: v.optional(v.boolean()),
 };
 
 export type PlatformUserDoc = {
@@ -59,6 +60,7 @@ export type PlatformUserDoc = {
   updatedBy: string | null;
   archivedAt: string | null;
   isSeed: boolean;
+  mustChangePassword?: boolean;
 };
 
 export function toUserRow(doc: PlatformUserDoc) {
@@ -78,5 +80,6 @@ export function toUserRow(doc: PlatformUserDoc) {
     updated_by: doc.updatedBy,
     archived_at: doc.archivedAt,
     is_seed: doc.isSeed ? 1 : 0,
+    must_change_password: Boolean(doc.mustChangePassword),
   };
 }

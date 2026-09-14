@@ -64,7 +64,7 @@ export const PLATFORM_PUBLIC_PREFIXES = [
   "/chung-nhan/",
 ];
 
-export const PLATFORM_PROTECTED_PREFIXES = ["/admin", "/hoc-tap", "/giang-day", "/lam-viec", "/tai-khoan"];
+export const PLATFORM_PROTECTED_PREFIXES = ["/admin", "/hoc-tap", "/giang-day", "/lam-viec", "/tai-khoan", "/doi-mat-khau"];
 
 export function isPlatformPublicPath(pathname: string) {
   return PLATFORM_PUBLIC_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}`));

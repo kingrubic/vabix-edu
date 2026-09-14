@@ -12,6 +12,7 @@ type UserRow = PlatformUserRow & {
   updated_by?: string | null;
   archived_at?: string | null;
   groups?: string;
+  must_change_password?: boolean;
 };
 
 function client() {
@@ -78,6 +79,7 @@ export async function convexUpsertUser(input: {
   updatedBy?: string | null;
   archivedAt?: string | null;
   isSeed?: boolean;
+  mustChangePassword?: boolean;
   keepExistingHashIfIncomingNull?: boolean;
 }) {
   const at = nowIso();
@@ -101,6 +103,7 @@ export async function convexUpsertUser(input: {
         updatedBy: input.updatedBy ?? null,
         archivedAt: input.archivedAt ?? null,
         isSeed: input.isSeed ?? false,
+        ...(input.mustChangePassword !== undefined ? { mustChangePassword: input.mustChangePassword } : {}),
       },
     }),
   )) as string;

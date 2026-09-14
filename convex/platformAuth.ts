@@ -197,6 +197,7 @@ export const upsertUser = mutation({
       email: args.user.email.trim(),
       emailLower,
       passwordHash,
+      mustChangePassword: args.user.mustChangePassword ?? existing?.mustChangePassword ?? false,
     };
     if (existing) {
       const { platformId: _platformId, ...patch } = payload;
@@ -246,6 +247,7 @@ export const updatePassword = mutation({
       passwordHash: args.passwordHash,
       name: args.name && args.name.trim() ? args.name.trim() : user.name,
       status,
+      mustChangePassword: false,
       updatedAt: args.at,
     });
   },

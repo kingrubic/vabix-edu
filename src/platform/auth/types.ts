@@ -13,6 +13,7 @@ export type PlatformUserRow = {
   status: "pending" | "active" | "locked" | "archived";
   last_login_at: string | null;
   is_seed: number;
+  must_change_password?: boolean;
 };
 
 export type PlatformActor = Actor & {
@@ -20,6 +21,7 @@ export type PlatformActor = Actor & {
   name: string;
   avatarFileId: string | null;
   isSeed: boolean;
+  mustChangePassword: boolean;
   claims: PlatformClaims;
 };
 

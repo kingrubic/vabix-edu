@@ -1,6 +1,7 @@
 import { requireMenu } from "@/platform/auth/guard";
 import { listUsers, listDepartments, listGroups } from "@/platform/iam/service";
 import { saveUserForm } from "@/platform/ui/actions";
+import { ResetTempPasswordForm, TempPasswordField } from "@/platform/ui/TempPasswordField";
 import { formatDateTime } from "@/platform/time";
 
 export default async function AccountsPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
@@ -30,6 +31,7 @@ export default async function AccountsPage({ searchParams }: { searchParams: Pro
               <th>Nhóm quyền</th>
               <th>Trạng thái</th>
               <th>Đăng nhập gần nhất</th>
+              <th>Mật khẩu tạm</th>
             </tr>
           </thead>
           <tbody>
@@ -40,15 +42,25 @@ export default async function AccountsPage({ searchParams }: { searchParams: Pro
                 <td>{String(row.role)}</td>
                 <td>{String(row.department_name ?? "—")}</td>
                 <td>{String(row.groups ?? "—")}</td>
-                <td>{String(row.status)}</td>
+                <td>
+                  {String(row.status)}
+                  {row.must_change_password ? " · đổi MK" : ""}
+                </td>
                 <td>{formatDateTime(row.last_login_at as string | null)}</td>
+                <td>
+                  {row.status === "archived" ? "—" : <ResetTempPasswordForm userId={String(row.id)} />}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <section className="platform-card p-6">
-        <h2 className="font-semibold text-[#163c3e]">Tạo / mời tài khoản</h2>
+        <h2 className="font-semibold text-[#163c3e]">Tạo tài khoản</h2>
+        <p className="mt-1 text-sm text-[#66746f]">
+          Chép mật khẩu tạm rồi gửi thủ công cho user (Zalo, email, …). Hệ thống không gửi lời mời
+          kích hoạt.
+        </p>
         <form action={saveUserForm} className="mt-4 grid gap-3 md:grid-cols-2">
           <label className="text-sm">Họ tên<input className="input mt-1" name="name" required /></label>
           <label className="text-sm">Email<input className="input mt-1" type="email" name="email" required /></label>
@@ -79,14 +91,17 @@ export default async function AccountsPage({ searchParams }: { searchParams: Pro
           </label>
           <label className="text-sm">
             Trạng thái
-            <select className="input mt-1" name="status" defaultValue="pending">
-              <option value="pending">Chờ kích hoạt</option>
+            <select className="input mt-1" name="status" defaultValue="active">
               <option value="active">Hoạt động</option>
               <option value="locked">Khóa</option>
               <option value="archived">Lưu trữ</option>
             </select>
           </label>
-          <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="invite" defaultChecked /> Gửi lời mời kích hoạt</label>
+          <TempPasswordField
+            required
+            autoGenerate
+            help="User đăng nhập bằng mật khẩu này rồi bắt buộc đổi mật khẩu mới. Hãy chép trước khi lưu."
+          />
           <button className="bg-[#163c3e] px-4 py-2 text-white md:col-span-2">Lưu tài khoản</button>
         </form>
       </section>

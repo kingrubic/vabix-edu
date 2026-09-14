@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requirePageActor } from "@/platform/auth/guard";
-import { saveDepartment, saveGroup, saveUser } from "@/platform/iam/service";
+import { resetUserTempPassword, saveDepartment, saveGroup, saveUser } from "@/platform/iam/service";
 import { saveCms } from "@/platform/cms/service";
 import { parseJson } from "@/platform/sanitize";
 import { saveCourse, saveLesson, saveModule, publishVersion, cloneVersion, reorderLessons } from "@/platform/lms/courses";
@@ -33,9 +33,20 @@ export async function saveUserForm(formData: FormData) {
       role: String(formData.get("role") ?? "user") as PlatformRole,
       departmentId: String(formData.get("departmentId") ?? "") || null,
       groupIds,
-      status: String(formData.get("status") ?? "pending") as "pending" | "active" | "locked" | "archived",
-      invite: formData.get("invite") === "on",
+      status: String(formData.get("status") ?? "active") as "pending" | "active" | "locked" | "archived",
+      tempPassword: String(formData.get("tempPassword") ?? ""),
     });
+    revalidatePath("/admin/he-thong/tai-khoan");
+    return;
+  } catch (error) {
+    fail(error);
+  }
+}
+
+export async function resetTempPasswordForm(formData: FormData) {
+  try {
+    const actor = await requirePageActor();
+    await resetUserTempPassword(actor, String(formData.get("userId") ?? ""), String(formData.get("tempPassword") ?? ""));
     revalidatePath("/admin/he-thong/tai-khoan");
     return;
   } catch (error) {

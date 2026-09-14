@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { bootPlatform } from "@/platform/boot";
 import { getPlatformActor, type PlatformActor } from "@/platform/auth/session";
@@ -5,10 +6,18 @@ import { can, homePath, visibleWorkspaces, type ResourceContext } from "@/platfo
 import type { PermissionAction, Workspace } from "@/platform/permissions/registry";
 import { menusByPath } from "@/platform/permissions/registry";
 
+const PASSWORD_CHANGE_PATH = "/doi-mat-khau";
+
 export async function requirePageActor(): Promise<PlatformActor> {
   await bootPlatform();
   const actor = await getPlatformActor();
   if (!actor) redirect("/dang-nhap");
+  if (actor.mustChangePassword) {
+    const pathname = (await headers()).get("x-pathname") ?? "";
+    if (pathname !== PASSWORD_CHANGE_PATH && !pathname.startsWith(`${PASSWORD_CHANGE_PATH}/`)) {
+      redirect(PASSWORD_CHANGE_PATH);
+    }
+  }
   return actor;
 }
 

@@ -13,6 +13,7 @@ export const metadata = {
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
   await bootPlatform();
   const actor = await getPlatformActor();
+  if (actor?.mustChangePassword) redirect("/doi-mat-khau");
   if (actor) redirect(homePath(actor));
   const { next } = await searchParams;
   return <LoginScreen next={next} />;

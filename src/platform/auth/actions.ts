@@ -70,6 +70,7 @@ export async function platformLoginAction(_prev: { error?: string } | null, form
   });
 
   const actor = toActor(user, { sub: user.id, email: user.email, name: user.name, jti });
+  if (user.must_change_password) redirect("/doi-mat-khau");
   const dest = safePlatformNext(String(formData.get("next") ?? ""), homePath(actor));
   redirect(dest);
 }
@@ -180,4 +181,36 @@ export async function activateAccountAction(_prev: { error?: string; ok?: boolea
     summary: "Kích hoạt tài khoản.",
   });
   return { ok: true };
+}
+
+export async function changeOwnPasswordAction(_prev: { error?: string } | null, formData: FormData) {
+  const actor = await getPlatformActor();
+  if (!actor) return { error: "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại." };
+  if (!actor.mustChangePassword) return { error: "Tài khoản không cần đổi mật khẩu bắt buộc." };
+
+  const current = String(formData.get("current") ?? "");
+  const password = String(formData.get("password") ?? "");
+  const confirm = String(formData.get("confirm") ?? "");
+  if (password.length < 10) return { error: "Mật khẩu mới tối thiểu 10 ký tự." };
+  if (password !== confirm) return { error: "Xác nhận mật khẩu không khớp." };
+
+  const user = await findPlatformUserByEmail(actor.email);
+  if (!user || user.status !== "active" || !user.password_hash) {
+    return { error: "Không tìm thấy tài khoản." };
+  }
+  const currentOk = await verifyPassword(current, user.password_hash);
+  if (!currentOk) return { error: "Mật khẩu tạm không đúng." };
+  const reused = await verifyPassword(password, user.password_hash);
+  if (reused) return { error: "Mật khẩu mới phải khác mật khẩu tạm." };
+
+  const passwordHash = await hashPassword(password);
+  await convexUpdatePassword({ userId: user.id, passwordHash, forceActive: true });
+  await writeAuditAsync({
+    actorUserId: user.id,
+    action: "auth.password_changed",
+    entityType: "user",
+    entityId: user.id,
+    summary: "Đổi mật khẩu tạm thành mật khẩu mới.",
+  });
+  redirect(homePath(toActor({ ...user, must_change_password: false }, actor.claims)));
 }
