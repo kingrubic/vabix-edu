@@ -15,7 +15,7 @@ const items = [
   { href: "/mang-luoi/lang-nganh", title: "Làng ngành", body: "Cộng đồng ngành được liên kết trong Trustworking." },
   { href: "/mang-luoi/nha-cung-cap", title: "Nhà cung cấp", body: "Hồ sơ năng lực cung cấp; sàng lọc ban đầu không đồng nghĩa bảo lãnh." },
   { href: "/mang-luoi/tro-thanh-doi-tac", title: "Trở thành đối tác", body: "Đề xuất hợp tác, giới thiệu giải pháp hoặc tìm đối tác." },
-  { href: "/giai-phap/trustworking", title: "Trustworking", body: "Kết nối đúng nhà cung cấp với đúng thị trường." },
+  { href: "/trustworking", title: "Trustworking", body: "Kết nối đúng nhà cung cấp với đúng thị trường." },
 ];
 
 export default function NetworkPage() {

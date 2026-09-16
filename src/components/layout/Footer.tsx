@@ -5,32 +5,31 @@ import { Logo } from "@/components/brand/Logo";
 
 const cols = [
   {
-    title: "Ba mũi nhọn",
+    title: "Đào tạo & huấn luyện",
     links: [
-      { label: "Đào tạo & huấn luyện", href: "/giai-phap/dao-tao-huan-luyen" },
-      { label: "Tư vấn chuyển đổi", href: "/giai-phap/tu-van-chuyen-doi" },
-      { label: "Trustworking", href: "/giai-phap/trustworking" },
-      { label: "Tổng quan 3T", href: "/giai-phap" },
+      { label: "Tổng quan đào tạo", href: "/dao-tao" },
+      { label: "BMDO", href: "/dao-tao/bmdo" },
+      { label: "MBM", href: "/dao-tao/mbm" },
+      { label: "Đào tạo theo yêu cầu", href: "/dao-tao/theo-yeu-cau-doanh-nghiep" },
     ],
   },
   {
-    title: "Chương trình & mô hình",
+    title: "3T",
     links: [
-      { label: "Danh mục chương trình", href: "/chuong-trinh" },
-      { label: "BMDO", href: "/chuong-trinh/bmdo" },
-      { label: "MBM", href: "/chuong-trinh/mbm" },
-      { label: "BizCar", href: "/mo-hinh-phuong-phap/bizcar" },
-      { label: "3W", href: "/mo-hinh-phuong-phap/3w" },
+      { label: "Tư vấn chuyển đổi", href: "/tu-van-chuyen-doi" },
+      { label: "Trustworking", href: "/trustworking" },
+      { label: "Mô hình & phương pháp", href: "/mo-hinh-phuong-phap" },
+      { label: "Về VABIX", href: "/ve-vabix" },
     ],
   },
   {
-    title: "Hệ sinh thái",
+    title: "Tri thức",
     links: [
-      { label: "Sản phẩm tri thức", href: "/san-pham-tri-thuc" },
-      { label: "Nhân lực mở & số", href: "/nhan-luc-mo-nhan-luc-so" },
-      { label: "Chuyên gia", href: "/mang-luoi/chuyen-gia" },
-      { label: "Case study", href: "/tri-thuc/case-study" },
-      { label: "Sự kiện", href: "/su-kien" },
+      { label: "Hệ sinh thái tri thức", href: "/tri-thuc" },
+      { label: "Sách", href: "/sach" },
+      { label: "Cẩm nang", href: "/cam-nang" },
+      { label: "Góc chia sẻ", href: "/goc-chia-se" },
+      { label: "Đội ngũ / chuyên gia", href: "/mang-luoi/chuyen-gia" },
     ],
   },
 ];
@@ -97,7 +96,7 @@ export function Footer() {
             </address>
             <p className="mt-4">
               <Link href="/dang-nhap" className="text-sm text-vabix-soft-gold hover:text-vabix-gold">
-                Đăng nhập cổng học tập
+                Cổng học viên
               </Link>
             </p>
           </div>

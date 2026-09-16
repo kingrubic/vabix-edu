@@ -40,7 +40,7 @@ VABIX đồng hành với doanh nghiệp trên hành trình SEE – DESIGN – A
     excerpt: "B2A giúp đội ngũ kinh doanh đi từ địa chỉ, địa bàn đến chiến lược và kết quả, thay vì kết nối chung chung.",
     content: `B2A là mô hình VABIX dùng để biến kết nối thành doanh thu có địa chỉ. Thay vì nói “mở rộng thị trường” một cách chung, B2A buộc đội ngũ trả lời: địa chỉ nào, địa bàn nào, chiến lược tiếp cận ra sao, nguồn lực phân bổ thế nào.
 
-Bốn bước Địa chỉ → Địa bàn → Chiến lược → Kết quả đã được triển khai thực chiến cùng các đơn vị VNPT. Khi mỗi địa bàn có một cách đọc riêng, việc phủ sóng và chăm sóc khách hàng trở thành hệ thống, không còn phụ thuộc hoàn toàn vào cá nhân xuất sắc.
+Bốn bước Địa chỉ → Địa bàn → Chiến lược → Kết quả giúp đội ngũ đọc thị trường có địa chỉ. Khi mỗi địa bàn có một cách đọc riêng, việc phủ sóng và chăm sóc khách hàng trở thành hệ thống hơn, ít phụ thuộc hoàn toàn vào cá nhân xuất sắc.
 
 B2A bổ sung cho BABOSO: một bên chuẩn hóa cách đánh thị trường theo không gian, một bên chuẩn hóa hành trình khách hàng theo thời gian.`,
     category: "sales",
@@ -57,7 +57,7 @@ B2A bổ sung cho BABOSO: một bên chuẩn hóa cách đánh thị trường t
     title: "Đổi mới sáng tạo trong quản trị SME & Startup: tư duy thiết kế và vận hành thực chiến",
     excerpt:
       "Đổi mới không dừng ở tuyên ngôn. Hội thảo cùng SIHUB đặt đổi mới vào từng cấu phần của doanh nghiệp.",
-    content: `Hội thảo “Đổi mới sáng tạo trong quản trị SME và Startup: Tư duy thiết kế và vận hành doanh nghiệp thực chiến” do SIHUB và VABIX phối hợp tổ chức đã thu hút hơn 60 lãnh đạo startup và SME.
+    content: `Hội thảo “Đổi mới sáng tạo trong quản trị SME và Startup: Tư duy thiết kế và vận hành doanh nghiệp thực chiến” do SIHUB và VABIX phối hợp tổ chức. Số người tham dự và vai trò tổ chức được ghi nhận theo từng sự kiện — không dùng làm số liệu mặc định trên website.
 
 Đổi mới sáng tạo, dưới lăng kính quản trị, phải là quá trình biến ý tưởng thành giá trị thực — sản phẩm, dịch vụ, quy trình, marketing hoặc mô hình kinh doanh. Theo BizCar, khi doanh nghiệp nhìn thấy rõ chiếc xe của mình, họ biết bánh nào cần đổi trước, tránh “đổi mới sai bánh”.
 

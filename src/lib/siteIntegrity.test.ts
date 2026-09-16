@@ -45,13 +45,13 @@ test("BMDO is a program, not a methodology", () => {
   assert.equal(methodologies.some((m) => m.slug === "bmdo"), false);
   assert.equal(
     iaRedirects.some(
-      (r) => r.source === "/mo-hinh-phuong-phap/bmdo" && r.destination === "/chuong-trinh/bmdo",
+      (r) => r.source === "/mo-hinh-phuong-phap/bmdo" && r.destination === "/dao-tao/bmdo",
     ),
     true,
   );
   assert.equal(
     legacyRedirects.some(
-      (r) => r.source === "/mo-hinh-phuong-phap/bmdo" && r.destination === "/chuong-trinh/bmdo",
+      (r) => r.source === "/mo-hinh-phuong-phap/bmdo" && r.destination === "/dao-tao/bmdo",
     ),
     true,
   );

@@ -47,7 +47,7 @@ export function NetworkGraph() {
     { href: "/mo-hinh-phuong-phap/bizcar", label: "BizCar", x: 50, y: 12 },
     { href: "/mo-hinh-phuong-phap/b2a", label: "B2A", x: 88, y: 42 },
     { href: "/mo-hinh-phuong-phap/baboso", label: "BABOSO", x: 78, y: 82 },
-    { href: "/mo-hinh-phuong-phap/kora", label: "KORA", x: 22, y: 82 },
+    { href: "/mo-hinh-phuong-phap/karot", label: "KAROT", x: 22, y: 82 },
     { href: "/mo-hinh-phuong-phap/klass", label: "KLASS", x: 12, y: 42 },
   ];
   return (

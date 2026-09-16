@@ -46,7 +46,7 @@ export const solutions: Solution[] = [
       "Lộ trình triển khai theo giai đoạn",
       "Bộ công cụ theo dõi và điều chỉnh",
     ],
-    methodologies: ["bizcar", "bmdo", "kora"],
+    methodologies: ["bizcar", "bmdo", "karot"],
     faqs: [
       { question: "Tư vấn chiến lược của VABIX khác chương trình đào tạo như thế nào?", answer: "Tư vấn xuất phát từ bài toán cụ thể của doanh nghiệp: khảo sát, chẩn đoán, thiết kế lộ trình và đồng hành triển khai. Đào tạo tập trung nâng năng lực lãnh đạo và đội ngũ. Hai hình thức thường được kết hợp khi doanh nghiệp vừa cần định hướng vừa cần năng lực thực thi." },
       { question: "Doanh nghiệp quy mô vừa và nhỏ có phù hợp không?", answer: "Có. BizCar và quy trình tư vấn của VABIX được thiết kế để SME và startup nhìn thấy toàn hệ thống, ưu tiên đúng chỗ thay vì áp dụng mô hình quốc tế nguyên bản." },

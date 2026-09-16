@@ -25,7 +25,9 @@ export function saveInquiryFromLead(payload: LeadPayload, sourcePath = "") {
       payload.phone,
       payload.company ?? "",
       payload.role ?? "",
-      [payload.need, payload.message].filter(Boolean).join("\n"),
+      [payload.need, payload.message, payload.marketingConsent ? "Đồng ý nhận thông tin chương trình." : "", payload.utm ? `UTM: ${JSON.stringify(payload.utm)}` : ""]
+        .filter(Boolean)
+        .join("\n"),
       payload.program ?? null,
       payload.eventSlug ?? null,
       at,

@@ -34,7 +34,7 @@ export function MethodologyTemplate({ method, extra }: { method: Methodology; ex
           <section>
             <SectionHeading title="Phù hợp với ai" />
             <ul className="mt-4 list-disc pl-5">
-              {method.whoFor.map((x) => (
+              {(method.whoFor ?? []).map((x) => (
                 <li key={x}>{x}</li>
               ))}
             </ul>
@@ -42,7 +42,7 @@ export function MethodologyTemplate({ method, extra }: { method: Methodology; ex
           <section>
             <SectionHeading title="Kết quả hướng tới" />
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {method.outcomes.map((x) => (
+              {(method.outcomes ?? []).map((x) => (
                 <li key={x} className="bg-vabix-ivory p-4 text-sm">
                   {x}
                 </li>
@@ -52,7 +52,7 @@ export function MethodologyTemplate({ method, extra }: { method: Methodology; ex
           <section>
             <SectionHeading title="Hành trình" />
             <ol className="mt-6 grid gap-5 sm:grid-cols-2">
-              {method.process.map((p) => (
+              {(method.process ?? []).map((p) => (
                 <li key={p.step} className="border-t border-vabix-gold pt-4">
                   <p className="text-sm font-semibold text-vabix-gold">{p.step}</p>
                   <h3 className="mt-1 font-semibold text-vabix-deep-teal">{p.title}</h3>
@@ -64,7 +64,7 @@ export function MethodologyTemplate({ method, extra }: { method: Methodology; ex
         </div>
         <aside>
           <div className="border border-vabix-deep-teal/10 bg-white p-6 lg:sticky lg:top-28">
-            <LeadForm type="program" program={method.slug} title="Đăng ký chương trình" />
+            <LeadForm type="consult" title="Trao đổi về mô hình này" />
           </div>
         </aside>
       </Container>

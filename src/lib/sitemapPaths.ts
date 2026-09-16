@@ -14,11 +14,11 @@ import {
 const staticPaths = [
   "/",
   "/ve-vabix",
+  "/dao-tao",
+  "/dao-tao/lich",
+  "/tu-van-chuyen-doi",
+  "/trustworking",
   "/giai-phap",
-  "/giai-phap/dao-tao-huan-luyen",
-  "/giai-phap/tu-van-chuyen-doi",
-  "/giai-phap/trustworking",
-  "/chuong-trinh",
   "/mo-hinh-phuong-phap",
   "/san-pham-tri-thuc",
   "/nhan-luc-mo-nhan-luc-so",
@@ -32,6 +32,10 @@ const staticPaths = [
   "/tri-thuc/case-study",
   "/tri-thuc/cam-nang",
   "/tri-thuc/sach",
+  "/goc-chia-se",
+  "/sach",
+  "/cam-nang",
+  "/tim-kiem",
   "/su-kien",
   "/su-kien/archive",
   "/lien-he",
@@ -47,8 +51,8 @@ const staticPaths = [
 export function sitemapPaths(): string[] {
   const paths = [
     ...staticPaths,
-    ...consultingServices.map((s) => `/giai-phap/tu-van-chuyen-doi/${s.slug}`),
-    ...programs.filter((p) => p.status === "published").map((p) => `/chuong-trinh/${p.slug}`),
+    ...consultingServices.map((s) => `/tu-van-chuyen-doi/${s.slug}`),
+    ...programs.filter((p) => p.status === "published").map((p) => `/dao-tao/${p.slug}`),
     ...methodologies.map((m) => `/mo-hinh-phuong-phap/${m.slug}`),
     ...knowledgeProducts
       .filter((p) => p.status === "published")

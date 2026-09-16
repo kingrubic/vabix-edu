@@ -74,11 +74,11 @@ export default async function MethodPage({ params }: { params: Promise<{ slug: s
             BizCar là mô hình. BMDO là thao trường 30 buổi đào tạo thực hành. MBM là chương trình 12 tháng làm chủ mô hình. 3W là chuẩn thành công WOW–WELL–WIN. MyBizCar là công cụ đánh giá trên 12 khối.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <Link href="/chuong-trinh/bmdo" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">BMDO</Link>
-            <Link href="/chuong-trinh/mbm" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">MBM</Link>
+            <Link href="/dao-tao/bmdo" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">BMDO</Link>
+            <Link href="/dao-tao/mbm" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">MBM</Link>
             <Link href="/mo-hinh-phuong-phap/3w" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">3W</Link>
             <Link href="/mo-hinh-phuong-phap/mybizcar" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">MyBizCar</Link>
-            <Link href="/giai-phap/tu-van-chuyen-doi" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">Tư vấn chuyển đổi</Link>
+            <Link href="/tu-van-chuyen-doi" className="border border-vabix-deep-teal/15 px-4 py-2 text-sm font-semibold text-vabix-deep-teal">Tư vấn chuyển đổi</Link>
           </div>
         </section>
         <section className="bg-vabix-ivory p-6">

@@ -6,81 +6,88 @@ export const pillars: Pillar[] = [
     number: "01",
     en: "Training & Coaching",
     vi: "Đào tạo và huấn luyện",
-    href: "/giai-phap/dao-tao-huan-luyen",
+    href: "/dao-tao",
     problem:
-      "Lãnh đạo và đội ngũ nhìn doanh nghiệp manh mún, thiếu ngôn ngữ chung và sản phẩm quản trị có thể áp dụng ngay vào công việc.",
+      "Người học cần nhìn rõ vấn đề, thiết kế giải pháp, ứng dụng vào công việc và đo lường kết quả — không chỉ nghe thêm một khóa lý thuyết.",
     value:
-      "Phát triển năng lực lãnh đạo, quản trị và thực thi thông qua chương trình thực chiến, huấn luyện và các sản phẩm có thể ứng dụng vào công việc.",
+      "Từ Thao trường CEO, huấn luyện 1:1 đến đào tạo theo nhu cầu doanh nghiệp — giúp người học nhìn rõ vấn đề, thiết kế giải pháp, ứng dụng vào công việc và đo lường kết quả.",
     summary:
-      "Từ thao trường CEO đến huấn luyện 1:1 và đào tạo theo yêu cầu — học để nhìn rõ, thiết kế được và thực thi có bằng chứng.",
+      "Từ Thao trường CEO, huấn luyện 1:1 đến đào tạo theo nhu cầu doanh nghiệp — giúp người học nhìn rõ vấn đề, thiết kế giải pháp, ứng dụng vào công việc và đo lường kết quả.",
     services: [
-      { label: "Đào tạo và huấn luyện CEO", href: "/giai-phap/dao-tao-huan-luyen#nhom-chuong-trinh" },
-      { label: "Đào tạo theo yêu cầu doanh nghiệp", href: "/chuong-trinh/dao-tao-theo-yeu-cau" },
-      { label: "Phát triển đội ngũ quản lý", href: "/giai-phap/dao-tao-huan-luyen#nhom-chuong-trinh" },
-      { label: "Ứng dụng AI trong doanh nghiệp", href: "/giai-phap/dao-tao-huan-luyen#nhom-chuong-trinh" },
-      { label: "Huấn luyện CEO 1:1", href: "/giai-phap/dao-tao-huan-luyen#nhom-chuong-trinh" },
+      { label: "Dành cho Doanh chủ & CEO", href: "/dao-tao#doanh-chu" },
+      { label: "Dành cho Quản lý & Nhân viên", href: "/dao-tao#quan-ly" },
+      { label: "Đào tạo theo yêu cầu doanh nghiệp", href: "/dao-tao/theo-yeu-cau-doanh-nghiep" },
+      { label: "Lịch học / lớp đang mở", href: "/dao-tao/lich" },
     ],
-    cta: { label: "Xem đào tạo & huấn luyện", href: "/giai-phap/dao-tao-huan-luyen" },
+    cta: { label: "Khám phá đào tạo và huấn luyện", href: "/dao-tao" },
   },
   {
     id: "tu-van-chuyen-doi",
     number: "02",
     en: "Transformation",
     vi: "Tư vấn chuyển đổi",
-    href: "/giai-phap/tu-van-chuyen-doi",
+    href: "/tu-van-chuyen-doi",
     problem:
-      "Doanh nghiệp có nhiều sáng kiến nhưng thiếu chẩn đoán điểm nghẽn, thiết kế đồng bộ và đồng hành triển khai — dễ tạo thêm điểm gãy mới.",
+      "Doanh nghiệp có nhiều sáng kiến nhưng thiếu chẩn đoán điểm nghẽn, thiết kế đồng bộ và đồng hành triển khai.",
     value:
-      "Đồng hành đánh giá hiện trạng, xác định điểm nghẽn, thiết kế giải pháp, triển khai và đo lường cải tiến một cách đồng bộ.",
+      "Nhìn toàn diện doanh nghiệp để xác định đúng ưu tiên, thiết kế phương án và đồng hành triển khai thay đổi — kết nối chiến lược, thị trường, con người, tài chính, công nghệ và vận hành.",
     summary:
-      "Tư vấn chuyển đổi doanh nghiệp nhìn toàn diện chiến lược, thị trường, con người, tài chính, tổ chức, công nghệ và vận hành.",
+      "Nhìn toàn diện doanh nghiệp để xác định đúng ưu tiên, thiết kế phương án và đồng hành triển khai thay đổi — kết nối chiến lược, thị trường, con người, tài chính, công nghệ và vận hành.",
     services: [
-      { label: "Đánh giá và chẩn đoán doanh nghiệp", href: "/giai-phap/tu-van-chuyen-doi/danh-gia-toan-dien" },
-      { label: "Tái cấu trúc và mô hình kinh doanh", href: "/giai-phap/tu-van-chuyen-doi/tai-cau-truc" },
-      { label: "Tổ chức, quy trình và hiệu suất", href: "/giai-phap/tu-van-chuyen-doi" },
-      { label: "Chuyển đổi số và ứng dụng AI", href: "/giai-phap/tu-van-chuyen-doi/chuyen-doi-so-ai" },
-      { label: "Đồng hành triển khai", href: "/giai-phap/tu-van-chuyen-doi/dong-hanh-trien-khai" },
+      { label: "Đánh giá toàn diện và chẩn đoán", href: "/tu-van-chuyen-doi/danh-gia-toan-dien" },
+      { label: "Tái cấu trúc doanh nghiệp", href: "/tu-van-chuyen-doi/tai-cau-truc" },
+      { label: "Chuyển đổi số và ứng dụng AI", href: "/tu-van-chuyen-doi/chuyen-doi-so-ai" },
+      { label: "Đồng hành triển khai", href: "/tu-van-chuyen-doi/dong-hanh-trien-khai" },
     ],
-    cta: { label: "Xem tư vấn chuyển đổi", href: "/giai-phap/tu-van-chuyen-doi" },
+    cta: { label: "Khám phá tư vấn chuyển đổi", href: "/tu-van-chuyen-doi" },
   },
   {
     id: "trustworking",
     number: "03",
     en: "Trustworking",
     vi: "Kết nối kinh doanh dựa trên niềm tin",
-    href: "/giai-phap/trustworking",
+    href: "/trustworking",
     problem:
-      "Networking thông thường rộng nhưng nông: tốn thời gian gặp sai đối tác, thiếu sàng lọc năng lực và không đi đến hợp tác bền vững.",
+      "Networking thông thường rộng nhưng nông: dễ gặp sai đối tác, thiếu sàng lọc và không đi đến hợp tác bền vững.",
     value:
-      "Kết nối có chọn lọc giữa doanh chủ, chuyên gia, đối tác, nhà cung cấp và thị trường phù hợp trên nền tảng niềm tin, giá trị tương hỗ và hợp tác bền vững.",
+      "Kết nối doanh nghiệp, chuyên gia và đối tác theo nhu cầu và khả lực phù hợp. Chú trọng tìm hiểu, đối chiếu thông tin và làm rõ kỳ vọng trước khi giới thiệu, hướng đến hợp tác có trách nhiệm và giá trị lâu dài.",
     summary:
-      "Kết nối đúng nhà cung cấp với đúng thị trường — sàng lọc hồ sơ, bằng chứng và mức độ cam kết trước khi giới thiệu.",
+      "Kết nối doanh nghiệp, chuyên gia và đối tác theo nhu cầu và khả lực phù hợp. Chú trọng tìm hiểu, đối chiếu thông tin và làm rõ kỳ vọng trước khi giới thiệu.",
     services: [
-      { label: "Kết nối chuyên gia", href: "/mang-luoi/chuyen-gia" },
-      { label: "Kết nối đối tác", href: "/mang-luoi/doi-tac" },
-      { label: "Nhà cung cấp & làng ngành", href: "/mang-luoi/lang-nganh" },
-      { label: "Sự kiện cộng đồng", href: "/su-kien" },
-      { label: "Làng Kết Nối VABIX", href: "/cong-cu-dan" },
+      { label: "Dành cho nhà cung cấp", href: "/trustworking#nha-cung-cap" },
+      { label: "Dành cho khách hàng / đối tác", href: "/trustworking#khach-hang" },
+      { label: "Quy trình Trustworking", href: "/trustworking#quy-trinh" },
+      { label: "Gửi nhu cầu kết nối", href: "/trustworking#ket-noi" },
     ],
-    cta: { label: "Xem Trustworking", href: "/giai-phap/trustworking" },
+    cta: { label: "Khám phá Trustworking", href: "/trustworking" },
   },
 ];
 
 export const supportingLayers = [
   {
-    title: "Sản phẩm tri thức",
-    href: "/san-pham-tri-thuc",
-    summary: "Sách, cẩm nang, biểu mẫu quản trị và học liệu số hỗ trợ chuyển kiến thức thành quyết định.",
+    title: "Sách",
+    href: "/sach",
+    summary: "Ấn phẩm tri thức giúp doanh chủ và đội ngũ học, làm và truyền lại phương pháp thực chiến.",
   },
   {
-    title: "Nhân lực mở & Nhân lực số",
-    href: "/nhan-luc-mo-nhan-luc-so",
-    summary: "Kết nối chuyên gia theo dự án và thiết kế AI Agent dưới sự giám sát của con người.",
+    title: "Cẩm nang",
+    href: "/cam-nang",
+    summary: "Tài liệu hướng dẫn theo chuyên đề, hỗ trợ quyết định và hành động.",
   },
   {
-    title: "Mô hình & phương pháp",
-    href: "/mo-hinh-phuong-phap",
-    summary: "BizCar, B2A, BABOSO, KORA, KLASS và chuẩn thành công 3W.",
+    title: "Học liệu",
+    href: "/tri-thuc#hoc-lieu",
+    summary: "Học liệu số phục vụ chương trình và quá trình ứng dụng.",
+  },
+  {
+    title: "Nhân lực mở",
+    href: "/nhan-luc-mo-nhan-luc-so#nhan-luc-mo",
+    summary: "Bổ sung chuyên môn. Linh hoạt nguồn lực. Phối hợp theo mục tiêu.",
+  },
+  {
+    title: "Nhân lực số",
+    href: "/nhan-luc-mo-nhan-luc-so#nhan-luc-so",
+    summary: "Rõ nhiệm vụ. Đúng quyền hạn. Vận hành có kiểm soát.",
   },
 ];
 

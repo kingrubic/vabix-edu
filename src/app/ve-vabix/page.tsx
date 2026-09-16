@@ -4,6 +4,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { principles, journey } from "@/content/about";
 import {
   mission,
+  missionDetail,
   missionChannels,
   aspiration2031,
   aspirationDetail,
@@ -14,16 +15,16 @@ import {
   founderMessage,
   positioning,
   tagline,
+  aboutIntro,
   glossary,
 } from "@/content/brand";
 import { pillars } from "@/content/pillars";
-import { featuredExperts } from "@/content/experts";
 import { partners } from "@/content/network";
+import { publishedFeaturedExperts, publishedPage } from "@/platform/cms/catalog";
 import { ExpertCard, PartnerLogo } from "@/components/cards/Cards";
 import { Button } from "@/components/ui/Button";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
-import { publishedPage } from "@/platform/cms/catalog";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -36,6 +37,7 @@ export const metadata = createMetadata({
 export default function AboutPage() {
   const cms = publishedPage("ve-vabix");
   const missionText = typeof cms?.mission === "string" ? cms.mission : mission;
+  const founderTitle = typeof cms?.founderTitle === "string" ? cms.founderTitle : siteConfig.founder.role;
   return (
     <>
       <PageHero
@@ -47,14 +49,19 @@ export default function AboutPage() {
 
       <Container className="py-16">
         <p className="eyebrow">{tagline}</p>
-        <h2 className="mt-3 text-3xl font-semibold text-vabix-deep-teal">VABIX là ai?</h2>
-        <p className="measure mt-4 text-lg text-vabix-muted">{positioning}</p>
+        <h2 className="mt-3 text-3xl font-semibold text-vabix-deep-teal" id="ve-vabix">VABIX là ai?</h2>
+        {aboutIntro.map((p) => (
+          <p key={p} className="measure mt-4 text-lg text-vabix-muted">
+            {p}
+          </p>
+        ))}
       </Container>
 
       <section id="su-menh" className="bg-vabix-ivory py-16">
         <Container>
           <p className="eyebrow">Sứ mệnh</p>
           <p className="mt-4 max-w-4xl text-xl font-medium text-vabix-deep-teal">{missionText}</p>
+          <p className="measure mt-4 text-vabix-muted">{missionDetail}</p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-3">
             {missionChannels.map((c) => (
               <li key={c} className="bg-white p-4 font-semibold text-vabix-deep-teal">
@@ -125,7 +132,7 @@ export default function AboutPage() {
         </div>
       </Container>
 
-      <Container className="grid items-center gap-10 py-16 lg:grid-cols-2">
+      <Container className="grid items-center gap-10 py-16 lg:grid-cols-2" id="nha-sang-lap">
         <div>
           <p className="eyebrow">Thông điệp nhà sáng lập</p>
           <blockquote className="mt-4 text-2xl font-medium text-vabix-deep-teal">“{founderQuote}”</blockquote>
@@ -135,14 +142,14 @@ export default function AboutPage() {
             </p>
           ))}
           <p className="mt-6 font-semibold text-vabix-deep-teal">{siteConfig.founder.name}</p>
-          <p className="text-sm text-vabix-muted">{siteConfig.founder.role}</p>
+          <p className="text-sm text-vabix-muted">{founderTitle}</p>
         </div>
         <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden bg-vabix-deep-teal">
           <Image src="/images/portraits/nguyen-chi-thanh.png" alt="Nguyễn Chí Thành, nhà sáng lập VABIX" fill className="object-cover object-top" sizes="400px" />
         </div>
       </Container>
 
-      <section className="bg-vabix-ivory py-16">
+      <section className="bg-vabix-ivory py-16" id="hanh-trinh">
         <Container>
           <h2 className="text-3xl font-semibold text-vabix-deep-teal">Hành trình</h2>
           <ol className="mt-8 grid gap-6 md:grid-cols-4">
@@ -184,8 +191,8 @@ export default function AboutPage() {
       <section className="py-16">
         <Container>
           <h2 className="text-3xl font-semibold text-vabix-deep-teal">Mạng lưới chuyên gia</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {featuredExperts.slice(0, 6).map((e) => (
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {publishedFeaturedExperts().slice(0, 7).map((e) => (
               <ExpertCard key={e.id} expert={e} />
             ))}
           </div>

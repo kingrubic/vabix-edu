@@ -21,7 +21,7 @@ export default function WorkforcePage() {
         crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Nhân lực mở & nhân lực số" }]}
       />
       <Container className="grid gap-8 py-16 lg:grid-cols-2">
-        <article className="border border-vabix-deep-teal/10 p-8">
+        <article className="border border-vabix-deep-teal/10 p-8" id="nhan-luc-mo">
           <p className="eyebrow">Hỗ trợ 3T</p>
           <h2 className="mt-2 text-2xl font-semibold text-vabix-deep-teal">{workforce.openTalent.title}</h2>
           <p className="mt-4 text-vabix-muted">{workforce.openTalent.summary}</p>
@@ -34,7 +34,7 @@ export default function WorkforcePage() {
             Xem mạng lưới chuyên gia
           </Link>
         </article>
-        <article className="border border-vabix-gold/40 p-8">
+        <article className="border border-vabix-gold/40 p-8" id="nhan-luc-so">
           <p className="eyebrow">Hỗ trợ 3T</p>
           <h2 className="mt-2 text-2xl font-semibold text-vabix-deep-teal">{workforce.digitalTalent.title}</h2>
           <p className="mt-4 text-vabix-muted">{workforce.digitalTalent.summary}</p>
@@ -76,7 +76,7 @@ export default function WorkforcePage() {
             </ul>
           </div>
           <div className="border border-vabix-deep-teal/10 bg-white p-6">
-            <LeadForm type="trust-expert" title="Nhu cầu nhân lực mở / nhân lực số" />
+          <LeadForm type="open-workforce" title="Nhu cầu nhân lực mở / nhân lực số" />
           </div>
         </Container>
       </section>

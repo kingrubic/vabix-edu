@@ -122,13 +122,15 @@ export const trainingGroups = [
 ];
 
 export const trainingMethod = {
+  positioning: "Học để nhìn rõ. Thiết kế để làm được. Triển khai để tạo kết quả.",
   steps: [
-    { title: "Mô thức quản trị", body: "Khung tư duy và ngôn ngữ chung để nhìn doanh nghiệp." },
-    { title: "Ví dụ thực tế", body: "Tình huống đã diễn ra trong bối cảnh doanh nghiệp Việt." },
-    { title: "Thực hành trên doanh nghiệp", body: "Học viên làm trên dữ liệu và bài toán thật của mình." },
-    { title: "Phản biện đa chiều", body: "Đối chiếu giả định, phương án và rủi ro trước khi chốt." },
-    { title: "Cải tiến", body: "Điều chỉnh sản phẩm quản trị sau phản biện." },
-    { title: "Cam kết ứng dụng", body: "Xác định người làm, thời hạn và cách theo dõi." },
+    { title: "A — ACTIVATE", body: "Cùng khởi động." },
+    { title: "P — PARADIGM", body: "Mô thức thực chiến." },
+    { title: "P — PRACTICE", body: "Thực hành thiết kế." },
+    { title: "L — LENS", body: "Lăng kính đa chiều." },
+    { title: "I — IMPROVE", body: "Cải tiến." },
+    { title: "E — EXTRACT", body: "Đúc kết bài học." },
+    { title: "R — RESOLVE", body: "Triển khai ra kết quả." },
   ],
   possibleOutputs: [
     "Bản đánh giá hiện trạng.",

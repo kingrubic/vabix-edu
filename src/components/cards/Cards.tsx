@@ -13,11 +13,13 @@ export function ExpertCard({ expert }: { expert: Expert }) {
       className="group block border border-vabix-deep-teal/10 bg-white p-5 transition-colors hover:border-vabix-gold"
     >
       <div className="relative mx-auto aspect-square w-28 overflow-hidden rounded-full bg-vabix-deep-teal">
-        <Image src={expert.portrait} alt={expert.name} fill className="object-cover object-top" sizes="112px" />
+        {expert.portrait ? (
+          <Image src={expert.portrait} alt={expert.name} fill className="object-cover object-top" sizes="112px" />
+        ) : null}
       </div>
       <h3 className="mt-4 text-center text-base font-semibold text-vabix-deep-teal">{expert.name}</h3>
       <p className="mt-1 text-center text-sm text-vabix-muted">{expert.title}</p>
-      <p className="mt-2 text-center text-xs tracking-wide text-vabix-gold">{expert.expertise.slice(0, 2).join(" · ")}</p>
+      <p className="mt-2 text-center text-xs tracking-wide text-vabix-gold">{(expert.expertise ?? []).slice(0, 2).join(" · ")}</p>
     </Link>
   );
 }
@@ -26,7 +28,9 @@ export function CaseStudyCard({ item }: { item: CaseStudy }) {
   return (
     <article className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white">
       <div className="relative aspect-[16/10] overflow-hidden bg-vabix-deep-teal">
-        <Image src={item.coverImage} alt={`${item.organization} — ${item.industry}`} fill className="object-cover opacity-80" sizes="(max-width: 768px) 100vw, 33vw" />
+        {item.coverImage ? (
+          <Image src={item.coverImage} alt={`${item.organization} — ${item.industry}`} fill className="object-cover opacity-80" sizes="(max-width: 768px) 100vw, 33vw" />
+        ) : null}
       </div>
       <div className="flex flex-1 flex-col p-6">
         <p className="eyebrow">{item.organization}</p>
@@ -51,7 +55,9 @@ export function EventCard({ event }: { event: EventItem }) {
   return (
     <article className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white">
       <div className="relative aspect-[16/10] bg-vabix-teal">
-        <Image src={event.image} alt="" fill className="object-cover opacity-70" sizes="(max-width: 768px) 100vw, 33vw" />
+        {event.image ? (
+          <Image src={event.image} alt="" fill className="object-cover opacity-70" sizes="(max-width: 768px) 100vw, 33vw" />
+        ) : null}
         <p className="absolute left-4 top-4 bg-vabix-deep-teal px-2 py-1 text-xs font-semibold tracking-wide text-white uppercase">
           {statusLabel}
         </p>
@@ -80,7 +86,9 @@ export function ArticleCard({ article }: { article: Article }) {
   return (
     <article className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white">
       <div className="relative aspect-[16/10] bg-vabix-ivory">
-        <Image src={article.coverImage} alt="" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+        {article.coverImage ? (
+          <Image src={article.coverImage} alt="" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+        ) : null}
       </div>
       <div className="flex flex-1 flex-col p-5">
         <p className="eyebrow">{article.categoryLabel}</p>

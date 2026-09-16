@@ -5,10 +5,10 @@ import { inquiryForm, saveTaskForm } from "@/platform/ui/actions";
 import { formatDateTime } from "@/platform/time";
 
 const MAP: Record<string, string[]> = {
-  "chuong-trinh": ["program"],
+  "chuong-trinh": ["program", "training", "corporate-training", "bmdo", "mbm"],
   "su-kien": ["event"],
-  "tu-van": ["consult"],
-  trustworking: ["connect", "trust-buyer", "trust-supplier", "trust-expert", "partnership"],
+  "tu-van": ["consult", "contact", "transformation", "open-workforce", "digital-workforce", "support-service"],
+  trustworking: ["connect", "trustworking", "trust-buyer", "trust-supplier", "trust-expert", "partnership"],
 };
 
 export default async function InquiriesPage({ params }: { params: Promise<{ type: string }> }) {
@@ -30,10 +30,15 @@ export default async function InquiriesPage({ params }: { params: Promise<{ type
               <input type="hidden" name="id" value={String(row.id)} />
               <select className="input" name="status" defaultValue={String(row.status)}>
                 <option value="new">Mới</option>
-                <option value="processing">Đang xử lý</option>
+                <option value="contacted">Đã liên hệ</option>
+                <option value="qualified">Đủ điều kiện</option>
+                <option value="in_progress">Đang xử lý</option>
+                <option value="processing">Đang xử lý (cũ)</option>
+                <option value="won">Thành công</option>
+                <option value="closed">Đóng</option>
+                <option value="archived">Lưu trữ</option>
                 <option value="confirmed">Xác nhận</option>
                 <option value="linked">Đã liên kết</option>
-                <option value="closed">Đóng</option>
               </select>
               <select className="input" name="assigneeUserId" defaultValue={String(row.assignee_user_id ?? "")}>
                 <option value="">Chưa gán</option>

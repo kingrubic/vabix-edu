@@ -38,7 +38,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  await bootPlatform();
+  try {
+    await bootPlatform();
+  } catch (error) {
+    console.error("[platform] boot failed; public site continues with file content", error);
+  }
   return (
     <html lang="vi" className={beVietnam.variable} data-scroll-behavior="smooth">
       <body className="min-h-screen antialiased">

@@ -200,7 +200,10 @@ export type TrainingProgram = {
   title: string;
   shortTitle: string;
   englishName?: string;
+  programCode?: string;
   group: ProgramGroupId;
+  tagline?: string;
+  shortDescription?: string;
   audience: string;
   audienceList: string[];
   problem: string;
@@ -214,9 +217,11 @@ export type TrainingProgram = {
   durationNote?: string;
   format?: string;
   certificate?: string;
+  clarification?: string;
   faculty?: string[];
   status: "published" | "draft";
   featured: boolean;
+  registrationOpen?: boolean;
   relatedPrograms: string[];
   relatedModels: string[];
   seoDescription: string;

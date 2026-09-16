@@ -30,6 +30,11 @@ function upsert(
     `INSERT OR IGNORE INTO cms_documents (id, type, slug, title, status, payload, seo, internal_notes, featured, sort_order, published_at, published_by, version, origin, is_seed, created_at, updated_at, created_by, updated_by, archived_at)
      VALUES (?, ?, ?, ?, ?, ?, ?, '', ?, 0, ?, NULL, 1, 'file-seed', 1, ?, ?, NULL, NULL, NULL)`,
   ).run(newId(), type, slug, title, status, JSON.stringify(payload), JSON.stringify(seo), featured ? 1 : 0, status === "published" ? at : null, at, at);
+  db.prepare(
+    `UPDATE cms_documents
+     SET title = ?, payload = ?, seo = ?, featured = ?, status = ?, updated_at = ?
+     WHERE type = ? AND slug = ? AND origin = 'file-seed' AND is_seed = 1 AND version = 1`,
+  ).run(title, JSON.stringify(payload), JSON.stringify(seo), featured ? 1 : 0, status, at, type, slug);
 }
 
 export function seedCmsFromFiles() {
@@ -40,8 +45,10 @@ export function seedCmsFromFiles() {
     {
       heroHeadline: brand.heroHeadline,
       heroSubheadline: brand.heroSubheadline,
+      heroSupporting: brand.heroSupporting,
       tagline: brand.tagline,
       supportingMessage: brand.supportingMessage,
+      founderTitle: brand.founderTitleDefault,
     },
     "published",
     { title: "VABIX — Kết tri thức. Nối giá trị.", description: siteConfig.description },
@@ -51,6 +58,7 @@ export function seedCmsFromFiles() {
     aspiration2031: brand.aspiration2031,
     journey: about.journey,
     painPoints: about.painPoints,
+    founderTitle: brand.founderTitleDefault,
   });
   upsert("page", "giai-phap", "Giải pháp 3T", { pillars });
   upsert("nav", "primary", "Menu chính", { items: primaryNav });

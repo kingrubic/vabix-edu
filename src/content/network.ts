@@ -43,7 +43,7 @@ export const testimonials: Testimonial[] = [
 export const handbooks: Handbook[] = [
   { id: "h1", slug: "quan-ly-tai-chinh-ca-nhan", title: "Quản lý tài chính cá nhân", summary: "Cẩm nang giúp cư dân và học viên làm chủ dòng tiền cá nhân.", legacyPath: "/quan-ly-tai-chinh-ca-nhan" },
   { id: "h2", slug: "lua-chon-thiet-bi-truyen-thong", title: "Lựa chọn thiết bị truyền thông", summary: "Gợi ý lựa chọn thiết bị truyền thông phù hợp nhu cầu doanh nghiệp.", legacyPath: "/lua-chon-thiet-bi-truyen-thong" },
-  { id: "h3", slug: "cam-nang-ve-gao", title: "Cẩm nang về gạo", summary: "Tri thức ngành cho làng thực phẩm và nhà cung cấp liên quan.", legacyPath: "/cam-nang-ve-gao" },
+  { id: "h3", slug: "cam-nang-ve-gao", title: "Tìm hiểu và lựa chọn gạo an toàn", summary: "Cẩm nang giúp tìm hiểu và lựa chọn gạo an toàn, minh bạch nguồn gốc.", legacyPath: "/cam-nang-ve-gao" },
   { id: "h4", slug: "cam-nang-ve-gach", title: "Cẩm nang về gạch", summary: "Cẩm nang ngành vật liệu cho làng kiến trúc và xây dựng.", legacyPath: "/cam-nang-ve-gach" },
   { id: "h5", slug: "lua-chon-noi-that", title: "Lựa chọn nội thất", summary: "Định hướng lựa chọn nội thất cho không gian sống và làm việc.", legacyPath: "/lua-chon-noi-that" },
   { id: "h6", slug: "mua-san-pham-sach", title: "Mua sản phẩm sạch", summary: "Cẩm nang lựa chọn sản phẩm sạch, minh bạch nguồn gốc.", legacyPath: "/mua-san-pham-sach" },
@@ -53,12 +53,24 @@ export const handbooks: Handbook[] = [
 export const books: Book[] = [
   {
     id: "b1",
+    slug: "nang-luong-hanh-phuc-gia-dinh-so-xa-hoi-xanh",
+    title: "Năng lượng hạnh phúc trong gia đình số và xã hội xanh",
+    summary: "Công trình tri thức về năng lượng hạnh phúc trong bối cảnh gia đình số và xã hội xanh.",
+  },
+  {
+    id: "b2",
     slug: "quan-tri-kinh-doanh-thuc-chien-b2a",
     title: "Quản trị kinh doanh thực chiến theo mô hình B2A",
     summary: "Nền tảng tri thức của mô hình B2A — từ địa chỉ, địa bàn đến chiến lược và kết quả thị trường.",
   },
   {
-    id: "b2",
+    id: "b3",
+    slug: "chiec-xe-cuoc-doi-the-lifecar",
+    title: "Chiếc Xe Cuộc Đời — The LifeCar",
+    summary: "Mô hình chiếc xe cuộc đời — The LifeCar — để nhìn hành trình con người như một hệ thống có thể thiết kế.",
+  },
+  {
+    id: "b4",
     slug: "bizcar-thiet-ke-van-hanh",
     title: "BizCar — Thiết kế và vận hành doanh nghiệp",
     summary: "Khung 12 khối chức năng giúp lãnh đạo nhìn doanh nghiệp như một hệ thống thống nhất.",

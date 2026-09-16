@@ -11,7 +11,7 @@ export const experts: Expert[] = [
     shortBio:
       "Nhà sáng lập VABIX và mô hình BizCar. Tác giả các khung BMDO, MTA Engine, B2A — đồng hành cùng doanh nghiệp Việt trong tư duy thiết kế và vận hành thực chiến.",
     fullBio:
-      "Ông Nguyễn Chí Thành là Nhà sáng lập VABIX, Chủ tịch HĐQT kiêm Tổng Giám đốc Công ty Cổ phần VABIX, đồng thời là tác giả mô hình BizCar. Ông đã nghiên cứu và triển khai các khung tư duy quản trị thực chiến — trong đó có BMDO, MTA Engine và B2A — nhằm giúp lãnh đạo nhìn doanh nghiệp như một hệ thống thống nhất, nhận diện điểm nghẽn và thiết kế lại năng lực vận hành phù hợp từng giai đoạn. Ông thường xuyên đồng hành cùng các tổ chức lớn như VNPT, cộng đồng startup và SME tại SIHUB, cũng như nhiều doanh nghiệp Việt Nam trên hành trình kiến tạo nội lực và mở rộng kết nối.",
+      "Ông Nguyễn Chí Thành là Nhà sáng lập VABIX, Chủ tịch HĐQT kiêm Tổng Giám đốc Công ty Cổ phần VABIX, đồng thời là tác giả mô hình BizCar. Ông đã nghiên cứu và triển khai các khung tư duy quản trị thực chiến — trong đó có BMDO, MTA Engine và B2A — nhằm giúp lãnh đạo nhìn doanh nghiệp như một hệ thống thống nhất, nhận diện điểm nghẽn và thiết kế lại năng lực vận hành phù hợp từng giai đoạn. Ông đồng hành cùng cộng đồng doanh nghiệp Việt Nam trên hành trình kiến tạo nội lực và mở rộng kết nối.",
     portrait: "/images/portraits/nguyen-chi-thanh.png",
     featured: true,
     order: 1,
@@ -107,6 +107,24 @@ export const experts: Expert[] = [
     order: 6,
     programs: ["baboso"],
     caseStudies: ["sihub-startup-sme"],
+    articles: [],
+  },
+  {
+    id: "exp-14",
+    slug: "tran-anh-vu",
+    name: "ThS. NCS Trần Anh Vũ",
+    title: "Chuyên gia Marketing - AI hệ thống",
+    organizationRole: "Chuyên gia VABIX",
+    expertise: ["AI hệ thống", "Marketing"],
+    shortBio:
+      "Chuyên gia marketing và AI hệ thống, đồng hành cùng doanh nghiệp đưa AI vào vận hành có kiểm soát, gắn marketing với hệ thống thay vì công cụ rời rạc.",
+    fullBio:
+      "Thạc sĩ, nghiên cứu sinh Trần Anh Vũ chuyên về marketing và AI hệ thống. Ông đồng hành cùng VABIX trong các chương trình giúp doanh nghiệp thiết kế năng lực số, ứng dụng AI có kiểm soát và chuẩn hóa hoạt động marketing trên một hệ thống thống nhất. AI hỗ trợ thực hiện; con người giữ quyền quyết định và trách nhiệm quản trị.",
+    portrait: "/images/portraits/tran-anh-vu.png",
+    featured: true,
+    order: 7,
+    programs: ["ung-dung-ai-hieu-suat"],
+    caseStudies: [],
     articles: [],
   },
   {

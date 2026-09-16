@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const metadata = createMetadata({
   title: "Mô hình & phương pháp",
-  description: "BizCar là mô hình quản trị. BMDO và MBM là chương trình. 3W là chuẩn thành công. B2A, BABOSO, KORA, KLASS và MyBizCar bổ sung hệ sinh thái phương pháp.",
+  description: "The BizCar, APPLIER, MAIS, 3W, KAROT, KLASS, BABOSO, DGH — cùng B2A và MyBizCar.",
   path: "/mo-hinh-phuong-phap",
 });
 
