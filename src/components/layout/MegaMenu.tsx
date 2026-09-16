@@ -11,13 +11,22 @@ export function MegaMenu({ items, inverted }: { items: NavItem[]; inverted: bool
     : "text-vabix-deep-teal/90 hover:text-vabix-deep-teal";
 
   return (
-    <nav className="hidden min-w-0 items-center xl:flex" aria-label="Điều hướng chính">
+    <nav
+      className="hidden min-w-0 flex-1 items-center justify-center overflow-hidden xl:flex"
+      aria-label="Điều hướng chính"
+    >
       {items.map((item) => {
         const hasMenu = Boolean(item.groups?.length || item.children?.length);
+        const headerLabel = item.shortLabel ?? item.label;
         if (!hasMenu) {
           return (
-            <Link key={item.href} href={item.href} className={`px-2 py-2 text-[13px] font-medium whitespace-nowrap ${linkCls}`}>
-              {item.label}
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-label={item.label}
+              className={`px-1.5 py-2 text-[12.5px] font-medium whitespace-nowrap 2xl:px-2 2xl:text-[13px] ${linkCls}`}
+            >
+              {headerLabel}
             </Link>
           );
         }
@@ -31,11 +40,12 @@ export function MegaMenu({ items, inverted }: { items: NavItem[]; inverted: bool
           >
             <Link
               href={item.href}
-              className={`flex items-center gap-1 px-2 py-2 text-[13px] font-medium whitespace-nowrap ${linkCls}`}
+              className={`flex items-center gap-0.5 px-1.5 py-2 text-[12.5px] font-medium whitespace-nowrap 2xl:px-2 2xl:text-[13px] ${linkCls}`}
+              aria-label={item.label}
               aria-expanded={open}
               aria-haspopup="true"
             >
-              {item.label}
+              {headerLabel}
               <span aria-hidden className="text-[10px]">
                 ▾
               </span>

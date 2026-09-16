@@ -24,6 +24,8 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
             >
               Thử lại
             </button>
+            {/* global-error replaces the root layout, so next/link is unavailable. */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/" className="inline-flex min-h-11 items-center px-5 text-sm font-semibold">
               Về trang chủ
             </a>

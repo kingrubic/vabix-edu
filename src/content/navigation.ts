@@ -12,6 +12,8 @@ export type NavGroup = {
 
 export type NavItem = {
   label: string;
+  /** Compact label for the desktop header; full `label` stays in menus and footer. */
+  shortLabel?: string;
   href: string;
   groups?: NavGroup[];
   children?: NavChild[];
@@ -34,6 +36,7 @@ export const primaryNav: NavItem[] = [
   },
   {
     label: "Đào tạo & huấn luyện",
+    shortLabel: "Đào tạo",
     href: "/dao-tao",
     children: [
       { label: "Tổng quan", href: "/dao-tao", description: "Học để nhìn rõ. Thiết kế để làm được. Triển khai để tạo kết quả." },
@@ -47,6 +50,7 @@ export const primaryNav: NavItem[] = [
   },
   {
     label: "Tư vấn chuyển đổi",
+    shortLabel: "Tư vấn",
     href: "/tu-van-chuyen-doi",
     children: [
       { label: "Tổng quan", href: "/tu-van-chuyen-doi" },
@@ -69,6 +73,7 @@ export const primaryNav: NavItem[] = [
   },
   {
     label: "Mô hình & phương pháp",
+    shortLabel: "Mô hình",
     href: "/mo-hinh-phuong-phap",
     children: [
       { label: "The BizCar", href: "/mo-hinh-phuong-phap/bizcar", description: "Mô hình quản trị 12 khối chức năng." },
@@ -83,6 +88,7 @@ export const primaryNav: NavItem[] = [
   },
   {
     label: "Hệ sinh thái tri thức",
+    shortLabel: "Tri thức",
     href: "/tri-thuc",
     children: [
       { label: "Tổng quan", href: "/tri-thuc" },

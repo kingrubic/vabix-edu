@@ -51,23 +51,27 @@ export function Header() {
             : "bg-transparent text-white"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-3 px-4 sm:h-[76px] sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center gap-3 px-4 sm:h-[72px] sm:px-6 lg:gap-4 lg:px-8">
           <Link href={siteConfig.portals.vabixHome} className="flex shrink-0 items-center" aria-label="VABIX — trang chủ">
-            <Logo variant={solid ? "light" : "dark"} priority />
+            <Logo variant={solid ? "light" : "dark"} className="h-10 max-w-[min(168px,42vw)] sm:h-11" priority />
           </Link>
 
           <MegaMenu items={primaryNav} inverted={!solid} />
 
-          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <div className="relative z-10 ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
             <Link
               href="/tim-kiem"
-              className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase xl:inline ${
+              className={`hidden h-10 w-10 items-center justify-center xl:inline-flex ${
                 solid ? "text-vabix-muted hover:text-vabix-deep-teal" : "text-white/80 hover:text-white"
               }`}
+              aria-label="Tìm kiếm"
             >
-              Tìm kiếm
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.25" stroke="currentColor" strokeWidth="1.75" />
+                <path d="M16 16.5 20 20.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+              </svg>
             </Link>
-            <Button href="/dang-nhap" variant="gold" className="min-h-10 px-3 text-sm sm:px-4">
+            <Button href="/dang-nhap" variant="gold" className="min-h-10 px-3 text-[13px] sm:px-4">
               Cổng học viên
             </Button>
             <button

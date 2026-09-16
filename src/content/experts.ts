@@ -120,7 +120,7 @@ export const experts: Expert[] = [
       "Chuyên gia marketing và AI hệ thống, đồng hành cùng doanh nghiệp đưa AI vào vận hành có kiểm soát, gắn marketing với hệ thống thay vì công cụ rời rạc.",
     fullBio:
       "Thạc sĩ, nghiên cứu sinh Trần Anh Vũ chuyên về marketing và AI hệ thống. Ông đồng hành cùng VABIX trong các chương trình giúp doanh nghiệp thiết kế năng lực số, ứng dụng AI có kiểm soát và chuẩn hóa hoạt động marketing trên một hệ thống thống nhất. AI hỗ trợ thực hiện; con người giữ quyền quyết định và trách nhiệm quản trị.",
-    portrait: "/images/portraits/tran-anh-vu.png",
+    portrait: "/images/portraits/tran-anh-vu-portrait.png",
     featured: true,
     order: 7,
     programs: ["ung-dung-ai-hieu-suat"],

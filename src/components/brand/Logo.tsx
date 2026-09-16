@@ -11,7 +11,7 @@ const sources = {
   dark: { src: "/brand/logo-lockup-dark.png", width: 430, height: 124 },
 } as const;
 
-export function Logo({ variant = "light", className = "h-11 sm:h-[52px]", priority }: LogoProps) {
+export function Logo({ variant = "light", className = "h-11 max-w-[min(210px,48vw)] sm:h-[52px]", priority }: LogoProps) {
   const img = sources[variant];
   return (
     <Image
@@ -19,7 +19,7 @@ export function Logo({ variant = "light", className = "h-11 sm:h-[52px]", priori
       alt="VABIX — Kết tri thức. Nối giá trị."
       width={img.width}
       height={img.height}
-      className={`w-auto max-w-[min(210px,48vw)] object-contain object-left ${className}`}
+      className={`w-auto object-contain object-left ${className}`}
       priority={priority}
     />
   );
