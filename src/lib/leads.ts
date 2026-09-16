@@ -1,5 +1,15 @@
 export const LEAD_TYPES = [
   "consult",
+  "contact",
+  "training",
+  "corporate-training",
+  "bmdo",
+  "mbm",
+  "transformation",
+  "trustworking",
+  "open-workforce",
+  "digital-workforce",
+  "support-service",
   "connect",
   "program",
   "event",
@@ -24,8 +34,11 @@ export type LeadPayload = {
   program?: string;
   eventSlug?: string;
   consent: boolean;
+  marketingConsent?: boolean;
   website?: string;
   elapsedMs?: number;
+  sourcePage?: string;
+  utm?: Record<string, string>;
 };
 
 export type LeadResult =
@@ -41,6 +54,15 @@ function isLeadType(value: unknown): value is LeadType {
 
 function asTrimmedString(value: unknown): string {
   return typeof value === "string" ? value : "";
+}
+
+function parseUtm(raw: unknown): Record<string, string> | undefined {
+  if (!raw || typeof raw !== "object") return undefined;
+  const out: Record<string, string> = {};
+  for (const [key, value] of Object.entries(raw as Record<string, unknown>)) {
+    if (typeof value === "string" && value.trim() && key.startsWith("utm_")) out[key] = value.trim();
+  }
+  return Object.keys(out).length ? out : undefined;
 }
 
 export function parseLead(input: unknown): { ok: true; payload: LeadPayload } | { ok: false; message: string } {
@@ -65,8 +87,11 @@ export function parseLead(input: unknown): { ok: true; payload: LeadPayload } | 
     program: typeof raw.program === "string" ? raw.program : undefined,
     eventSlug: typeof raw.eventSlug === "string" ? raw.eventSlug : undefined,
     consent: raw.consent === true,
+    marketingConsent: raw.marketingConsent === true,
     website: typeof raw.website === "string" ? raw.website : undefined,
     elapsedMs: typeof raw.elapsedMs === "number" ? raw.elapsedMs : undefined,
+    sourcePage: typeof raw.sourcePage === "string" ? raw.sourcePage : undefined,
+    utm: parseUtm(raw.utm),
   };
 
   if (!payload.name.trim()) return { ok: false, message: "Vui lòng nhập họ tên." };
@@ -77,7 +102,7 @@ export function parseLead(input: unknown): { ok: true; payload: LeadPayload } | 
     return { ok: false, message: "Email chưa hợp lệ." };
   }
   if (!payload.consent) {
-    return { ok: false, message: "Vui lòng đồng ý với chính sách bảo mật trước khi gửi." };
+    return { ok: false, message: "Vui lòng đồng ý với chính sách quyền riêng tư trước khi gửi." };
   }
   return { ok: true, payload };
 }
@@ -114,7 +139,7 @@ export async function submitLead(input: unknown, sourcePath = ""): Promise<LeadR
     const { bootPlatform } = await import("@/platform/boot");
     const { saveInquiryFromLead } = await import("@/platform/inquiries/service");
     await bootPlatform();
-    const saved = saveInquiryFromLead(payload, sourcePath);
+    const saved = saveInquiryFromLead(payload, sourcePath || payload.sourcePage || "");
     const endpoint = process.env.LEAD_WEBHOOK_URL;
     if (endpoint) {
       try {

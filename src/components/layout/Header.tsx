@@ -10,8 +10,8 @@ import { MegaMenu } from "@/components/layout/MegaMenu";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Logo } from "@/components/brand/Logo";
 
-function hasDarkHero(pathname: string) {
-  if (pathname === "/" || pathname === "/vabix") return true;
+function hasDarkHero(pathname: string | null) {
+  if (!pathname || pathname === "/" || pathname === "/vabix") return true;
   return pathname.startsWith("/mo-hinh-phuong-phap/") && pathname !== "/mo-hinh-phuong-phap/";
 }
 
@@ -60,23 +60,15 @@ export function Header() {
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <Link
-              href="/dang-nhap"
+              href="/tim-kiem"
               className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase xl:inline ${
                 solid ? "text-vabix-muted hover:text-vabix-deep-teal" : "text-white/80 hover:text-white"
               }`}
             >
-              Đăng nhập
+              Tìm kiếm
             </Link>
-            <Link
-              href="/cong-cu-dan"
-              className={`hidden text-[12px] font-semibold tracking-[0.12em] uppercase 2xl:inline ${
-                solid ? "text-vabix-muted hover:text-vabix-deep-teal" : "text-white/80 hover:text-white"
-              }`}
-            >
-              Cổng Cư dân
-            </Link>
-            <Button href="/ket-noi#tu-van" variant="gold" className="hidden min-h-10 px-3 text-sm xl:inline-flex 2xl:px-4">
-              Trao đổi nhu cầu
+            <Button href="/dang-nhap" variant="gold" className="min-h-10 px-3 text-sm sm:px-4">
+              Cổng học viên
             </Button>
             <button
               type="button"

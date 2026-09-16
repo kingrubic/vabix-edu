@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Case Study",
-  description: "Đồng hành thực chiến cùng VNPT, SIHUB, SUSPRO và các doanh nghiệp Việt.",
+  description: "Các chương trình tư vấn, đào tạo và chuyển đổi được triển khai trên bài toán thật của tổ chức.",
   path: "/tri-thuc/case-study",
 });
 

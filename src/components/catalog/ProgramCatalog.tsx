@@ -62,7 +62,7 @@ export function ProgramCatalog({ programs = filePrograms }: { programs?: Trainin
       <p className="mt-4 text-sm text-vabix-muted">{list.length} chương trình phù hợp</p>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {list.map((p) => (
-          <Link key={p.slug} href={`/chuong-trinh/${p.slug}`} className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white p-6 hover:border-vabix-gold">
+          <Link key={p.slug} href={`/dao-tao/${p.slug}`} className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white p-6 hover:border-vabix-gold">
             <p className="eyebrow">{programGroups.find((g) => g.id === p.group)?.label}</p>
             <h2 className="mt-2 text-lg font-semibold text-vabix-deep-teal">{p.title}</h2>
             <p className="mt-3 flex-1 text-sm text-vabix-muted">{p.audience}</p>

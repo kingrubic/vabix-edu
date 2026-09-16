@@ -21,16 +21,20 @@ npm run build
 
 ## Kiến trúc thông tin (3T)
 
-- `/` Trang chủ
-- `/ve-vabix` Sứ mệnh, khát vọng 2031, cam kết, 5 giá trị
-- `/giai-phap` Tổng quan 3T
-- `/giai-phap/dao-tao-huan-luyen` Training & Coaching
-- `/giai-phap/tu-van-chuyen-doi` Transformation (+ 12 dịch vụ)
-- `/giai-phap/trustworking` Trustworking
-- `/chuong-trinh` Catalog đào tạo
-- `/mo-hinh-phuong-phap` BizCar, 3W, B2A, BABOSO, KORA, KLASS, MyBizCar
-- `/san-pham-tri-thuc` Sách, cẩm nang, biểu mẫu, học liệu
-- `/nhan-luc-mo-nhan-luc-so` Nhân lực mở & nhân lực số
+Local `/` phục vụ MyBizCar; website VABIX xem `/vabix`. Production `vabix.edu.vn` lấy `/` làm trang chủ VABIX.
+
+- `/` Trang chủ (12 section positioning)
+- `/ve-vabix` Sứ mệnh, khát vọng 2031, cam kết, 5 giá trị, 3T, founder
+- `/dao-tao` Đào tạo & huấn luyện (CEO, quản lý, theo yêu cầu)
+- `/dao-tao/bmdo` BMDO · `/dao-tao/mbm` MBM (không phải thạc sĩ)
+- `/tu-van-chuyen-doi` Transformation (+ 12 dịch vụ)
+- `/trustworking` Kết nối dựa trên niềm tin
+- `/mo-hinh-phuong-phap` BizCar, APPLIER, MAIS, 3W, KAROT, KLASS, BABOSO, DGH, MyBizCar
+- `/tri-thuc` Hệ sinh thái: sách, cẩm nang, học liệu, nhân lực
+- `/goc-chia-se` Bài viết / case / sự kiện
+- `/lien-he` · `/dang-nhap` Cổng học viên
+
+URL cũ (`/chuong-trinh`, `/giai-phap/*`, `/mo-hinh-phuong-phap/kora`) 301/308 về canonical. Xem `CHANGELOG_VABIX.md`.
 
 Nội dung: `src/content/`. Liên hệ: `src/lib/siteConfig.ts`. Form: `POST /api/leads` (cần `LEAD_WEBHOOK_URL`).
 Xem `CONTENT_APPROVAL.md` cho dữ liệu chưa được Founder duyệt.

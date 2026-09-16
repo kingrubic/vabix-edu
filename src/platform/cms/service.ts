@@ -71,15 +71,15 @@ export function listPublishedCms(type: string) {
 function revalidatePublic(type: string, slug: string) {
   revalidateTag("cms");
   const paths: Record<string, string[]> = {
-    page: slug === "home" ? ["/vabix"] : [`/${slug}`],
-    program: ["/chuong-trinh", `/chuong-trinh/${slug}`],
+    page: slug === "home" ? ["/", "/vabix"] : slug === "ve-vabix" ? ["/ve-vabix"] : [`/${slug}`],
+    program: ["/dao-tao", `/dao-tao/${slug}`, "/chuong-trinh", `/chuong-trinh/${slug}`],
     methodology: ["/mo-hinh-phuong-phap", `/mo-hinh-phuong-phap/${slug}`],
     expert: ["/mang-luoi/chuyen-gia", `/mang-luoi/chuyen-gia/${slug}`],
-    article: ["/tri-thuc", `/tri-thuc/${slug}`],
+    article: ["/goc-chia-se", "/tri-thuc", `/tri-thuc/${slug}`],
     case_study: ["/tri-thuc/case-study", `/tri-thuc/case-study/${slug}`],
     event: ["/su-kien", `/su-kien/${slug}`],
-    knowledge_product: ["/san-pham-tri-thuc", `/san-pham-tri-thuc/${slug}`],
-    solution: ["/giai-phap", `/giai-phap/${slug}`],
+    knowledge_product: ["/tri-thuc", "/san-pham-tri-thuc", `/san-pham-tri-thuc/${slug}`],
+    solution: ["/tu-van-chuyen-doi", `/tu-van-chuyen-doi/${slug}`, "/giai-phap", `/giai-phap/${slug}`],
   };
   for (const path of paths[type] ?? []) {
     revalidatePath(path);

@@ -12,6 +12,8 @@ const defaultNeeds = [
   "Trustworking — giới thiệu giải pháp",
   "Kết nối chuyên gia",
   "Đăng ký chương trình",
+  "Nhân lực mở / nhân lực số",
+  "Dịch vụ hỗ trợ",
   "Hợp tác cùng VABIX",
   "Khác",
 ];
@@ -22,9 +24,29 @@ const needByType: Partial<Record<LeadType, string[]>> = {
   "trust-expert": ["Tư vấn chuyên môn", "Đồng hành dự án", "Giảng dạy / huấn luyện", "Khác"],
   partnership: ["Hợp tác chương trình", "Hợp tác truyền thông", "Hợp tác mạng lưới", "Khác"],
   program: ["Đăng ký chương trình", "Tư vấn chương trình theo yêu cầu", "Khảo sát nội bộ", "Khác"],
+  training: ["Tư vấn chương trình", "Đăng ký lớp", "Khảo sát nội bộ", "Khác"],
+  "corporate-training": ["Thiết kế chương trình nội bộ", "Khảo sát hiện trạng", "Đào tạo theo phòng ban", "Khác"],
+  bmdo: ["Tư vấn BMDO", "Lớp đang mở", "Khảo sát doanh nghiệp", "Khác"],
+  mbm: ["Tư vấn MBM", "Lịch khai giảng", "Đối tượng phù hợp", "Khác"],
+  transformation: ["Đánh giá nhu cầu chuyển đổi", "Chẩn đoán doanh nghiệp", "Đồng hành triển khai", "Khác"],
+  trustworking: ["Tìm nhà cung cấp", "Giới thiệu năng lực cung cấp", "Kết nối đối tác", "Khác"],
+  "open-workforce": ["Kết nối chuyên gia", "Nhân sự dự án", "Đội ngũ linh hoạt", "Khác"],
+  "digital-workforce": ["Trợ lý AI", "AI Agent", "Automation có kiểm soát", "Khác"],
+  "support-service": ["Nhân sự sự kiện", "Kết nối diễn giả", "KOL", "Hỗ trợ bản thảo sách", "Khác"],
 };
 
 const sizes = ["Dưới 20 người", "20–50", "51–200", "Trên 200"];
+
+function readUtm() {
+  if (typeof window === "undefined") return {};
+  const params = new URLSearchParams(window.location.search);
+  const utm: Record<string, string> = {};
+  for (const key of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]) {
+    const value = params.get(key);
+    if (value) utm[key] = value;
+  }
+  return utm;
+}
 
 export function LeadForm({
   type = "consult",
@@ -44,6 +66,7 @@ export function LeadForm({
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (status === "loading") return;
     setStatus("loading");
     setMessage("");
     const fd = new FormData(e.currentTarget);
@@ -60,8 +83,11 @@ export function LeadForm({
       program: program ?? String(fd.get("program") ?? ""),
       eventSlug,
       consent: fd.get("consent") === "on",
+      marketingConsent: fd.get("marketingConsent") === "on",
       website: String(fd.get("website") ?? ""),
       elapsedMs: Date.now() - started,
+      sourcePage: typeof window !== "undefined" ? window.location.pathname : "",
+      utm: readUtm(),
     };
     const res = await fetch("/api/leads", {
       method: "POST",
@@ -120,12 +146,16 @@ export function LeadForm({
       <label className="flex items-start gap-2 text-sm text-vabix-muted">
         <input type="checkbox" name="consent" className="mt-1" required />
         <span>
-          Tôi đồng ý với{" "}
+          Tôi đã đọc{" "}
           <a className="underline" href="/chinh-sach-quyen-rieng-tu">
-            chính sách quyền riêng tư
+            Chính sách quyền riêng tư
           </a>{" "}
-          và việc VABIX lưu trữ, bảo mật và liên hệ về yêu cầu này. Thông tin không được dùng để chào bán một chiều.
+          và đồng ý để VABIX xử lý thông tin tôi cung cấp nhằm tiếp nhận, tư vấn và liên hệ về yêu cầu này.
         </span>
+      </label>
+      <label className="flex items-start gap-2 text-sm text-vabix-muted">
+        <input type="checkbox" name="marketingConsent" className="mt-1" />
+        <span>Tôi đồng ý nhận thông tin chương trình, sự kiện và tri thức từ VABIX (không bắt buộc).</span>
       </label>
       {message ? (
         <p className={`text-sm ${status === "success" ? "text-vabix-forest" : "text-red-800"}`} role="status">

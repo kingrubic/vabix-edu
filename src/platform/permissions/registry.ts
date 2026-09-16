@@ -305,7 +305,7 @@ export const SAMPLE_GROUPS: {
 
 export const PUBLIC_CMS_FIELDS: Record<string, string[]> = {
   page: ["slug", "title", "payload.hero", "payload.blocks", "payload.faq", "seo"],
-  program: ["slug", "title", "shortTitle", "group", "audience", "audienceList", "problem", "objectives", "topics", "topicCategories", "methodology", "deliverables", "outcomes", "duration", "durationNote", "format", "certificate", "faculty", "featured", "relatedPrograms", "relatedModels", "seoDescription"],
+  program: ["slug", "title", "shortTitle", "englishName", "programCode", "group", "tagline", "shortDescription", "audience", "audienceList", "problem", "objectives", "topics", "topicCategories", "methodology", "deliverables", "outcomes", "duration", "durationNote", "format", "certificate", "clarification", "faculty", "featured", "registrationOpen", "relatedPrograms", "relatedModels", "seoDescription"],
   solution: ["slug", "title", "shortTitle", "pillar", "summary", "whoFor", "painPoints", "outcomes", "scope", "process", "deliverables", "methodologies", "faqs"],
   methodology: ["slug", "name", "shortName", "eyebrow", "headline", "summary", "description", "whoFor", "outcomes", "process", "related"],
   expert: ["slug", "name", "title", "organizationRole", "expertise", "shortBio", "fullBio", "portrait", "linkedin", "featured", "programs"],

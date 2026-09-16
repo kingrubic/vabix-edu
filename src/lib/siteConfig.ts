@@ -11,9 +11,9 @@ export const siteConfig = {
   legalName: "Công ty Cổ phần VABIX",
   tagline: "Kết tri thức. Nối giá trị.",
   positioning: "Hệ sinh thái tri thức thực chiến và phát triển doanh nghiệp",
-  statement: "Chuyển hóa tri thức thành năng lực. Đồng hành kiến tạo doanh nghiệp phát triển bền vững.",
+  statement: "Kết tri thức. Nối giá trị.",
   description:
-    "VABIX đồng hành cùng doanh chủ, lãnh đạo và doanh nghiệp thông qua đào tạo & huấn luyện thực chiến, tư vấn chuyển đổi và Trustworking — kết nối kinh doanh dựa trên niềm tin.",
+    "VABIX đồng hành cùng doanh chủ và đội ngũ trong phát triển doanh nghiệp thông qua đào tạo và huấn luyện thực chiến, tư vấn chuyển đổi và kết nối kinh doanh dựa trên niềm tin.",
   website: "https://vabix.edu.vn",
   marketplaceWebsite: "https://vabix.vn",
   locale: "vi_VN",
@@ -58,11 +58,12 @@ export const siteConfig = {
     vabixHome: "/vabix",
   },
   cta: {
-    primary: { label: "Trao đổi nhu cầu doanh nghiệp", href: "/ket-noi#tu-van" },
-    consult: { label: "Đăng ký tư vấn", href: "/ket-noi#tu-van" },
-    explore: { label: "Khám phá 3 mũi nhọn", href: "/giai-phap" },
+    primary: { label: "Trao đổi cùng VABIX", href: "/ket-noi#tu-van" },
+    consult: { label: "Trao đổi cùng VABIX", href: "/ket-noi#tu-van" },
+    explore: { label: "Khám phá hệ sinh thái VABIX", href: "/ve-vabix" },
     schedule: { label: "Đặt lịch trao đổi", href: "/ket-noi#tu-van" },
     contact: { label: "Liên hệ VABIX", href: "/lien-he" },
+    learner: { label: "Cổng học viên", href: "/dang-nhap" },
   },
 } as const;
 

@@ -74,14 +74,17 @@ export function MobileMenu({ id, open, onClose }: { id: string; open: boolean; o
           );
         })}
         <Link href="/dang-nhap" onClick={onClose} className="py-4 text-sm font-semibold tracking-[0.12em] uppercase text-vabix-muted">
-          Đăng nhập
+          Cổng học viên
         </Link>
-        <Link href="/cong-cu-dan" onClick={onClose} className="py-4 text-sm font-semibold tracking-[0.12em] uppercase text-vabix-muted">
-          Cổng Cư dân
+        <Link href="/tim-kiem" onClick={onClose} className="py-4 text-sm font-semibold tracking-[0.12em] uppercase text-vabix-muted">
+          Tìm kiếm
         </Link>
         <div className="mt-4 flex flex-col gap-3">
-          <Button href="/ket-noi#tu-van" onClick={onClose}>
-            Trao đổi nhu cầu doanh nghiệp
+          <Button href="/dang-nhap" onClick={onClose}>
+            Cổng học viên
+          </Button>
+          <Button href="/ket-noi#tu-van" variant="outline" onClick={onClose}>
+            Trao đổi cùng VABIX
           </Button>
           <p className="text-sm text-vabix-muted">
             {siteConfig.contact.hotline} · {siteConfig.contact.email}

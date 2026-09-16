@@ -15,7 +15,7 @@ export default function TermsPage() {
       <PageHero title="Điều khoản sử dụng" crumbs={[{ name: "Trang chủ", href: "/" }, { name: "Điều khoản" }]} />
       <Container className="py-16">
         <p className="measure text-vabix-muted">
-          Nội dung trên {siteConfig.website} thuộc {siteConfig.legalName}. Việc sao chép tri thức, mô hình (BizCar, B2A, BABOSO, BMDO, KORA, KLASS) để thương mại hóa khi chưa có thỏa thuận bằng văn bản là không được phép. Việc kết nối, đào tạo và tư vấn chịu điều khoản hợp đồng riêng khi hai bên ký kết.
+          Nội dung trên {siteConfig.website} thuộc {siteConfig.legalName}. Việc sao chép tri thức, mô hình (BizCar, B2A, BABOSO, BMDO, KAROT, KLASS, APPLIER, DGH) để thương mại hóa khi chưa có thỏa thuận bằng văn bản là không được phép. Việc kết nối, đào tạo và tư vấn chịu điều khoản hợp đồng riêng khi hai bên ký kết.
         </p>
       </Container>
     </>

@@ -7,20 +7,22 @@ import { events } from "@/content/events";
 import { knowledgeProducts } from "@/content/knowledgeProducts";
 import { solutions } from "@/content/solutions";
 import { getCms, listPublishedCms, publicPayload } from "./service";
+import { seedCmsFromFiles } from "./seed";
 import { pickAllowlisted } from "@/platform/permissions/registry";
 import type { ArticleCategory, TrainingProgram as Program } from "@/content/types";
 
 function overlayList<T extends { slug: string }>(type: string, files: T[]): T[] {
   try {
+    seedCmsFromFiles();
     const docs = listPublishedCms(type);
-    const published = new Map(docs.map((doc) => [doc.slug, publicPayload<T>(doc)]));
+    const published = new Map(docs.map((doc) => [doc.slug, publicPayload<Partial<T>>(doc)]));
     const taken = new Set<string>();
     const merged: T[] = [];
     for (const file of files) {
       const doc = getCms(type, file.slug);
       if (doc) {
         if (doc.status === "published") {
-          merged.push({ ...file, ...published.get(file.slug) });
+          merged.push(mergeFileAndCms(file, published.get(file.slug)));
           taken.add(file.slug);
         }
         continue;
@@ -36,6 +38,21 @@ function overlayList<T extends { slug: string }>(type: string, files: T[]): T[] 
   } catch {
     return files;
   }
+}
+
+function mergeFileAndCms<T extends object>(file: T, cms?: Partial<T>): T {
+  if (!cms) return file;
+  const merged = { ...file, ...cms } as T;
+  for (const key of Object.keys(file) as (keyof T)[]) {
+    const original = file[key];
+    const next = merged[key];
+    if (Array.isArray(original) && !Array.isArray(next)) merged[key] = original;
+    if (original && typeof original === "object" && !Array.isArray(original) && (next == null || typeof next !== "object")) {
+      merged[key] = original;
+    }
+    if (typeof original === "string" && typeof next !== "string") merged[key] = original;
+  }
+  return merged;
 }
 
 export function publishedPrograms(): Program[] {
@@ -130,6 +147,7 @@ export function publishedSolution(slug: string) {
 
 export function publishedPage(slug: string) {
   try {
+    seedCmsFromFiles();
     const doc = getCms("page", slug);
     if (!doc || doc.status !== "published") return null;
     return publicPayload<Record<string, unknown>>(doc);
