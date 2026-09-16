@@ -20,7 +20,7 @@ import {
 } from "@/content/brand";
 import { pillars } from "@/content/pillars";
 import { partners } from "@/content/network";
-import { publishedFeaturedExperts, publishedPage } from "@/platform/cms/catalog";
+import { featuredExperts } from "@/content/experts";
 import { ExpertCard, PartnerLogo } from "@/components/cards/Cards";
 import { Button } from "@/components/ui/Button";
 import { createMetadata } from "@/lib/seo";
@@ -35,9 +35,8 @@ export const metadata = createMetadata({
 });
 
 export default function AboutPage() {
-  const cms = publishedPage("ve-vabix");
-  const missionText = typeof cms?.mission === "string" ? cms.mission : mission;
-  const founderTitle = typeof cms?.founderTitle === "string" ? cms.founderTitle : siteConfig.founder.role;
+  const missionText = mission;
+  const founderTitle = siteConfig.founder.role;
   return (
     <>
       <PageHero
@@ -192,7 +191,7 @@ export default function AboutPage() {
         <Container>
           <h2 className="text-3xl font-semibold text-vabix-deep-teal">Mạng lưới chuyên gia</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {publishedFeaturedExperts().slice(0, 7).map((e) => (
+            {featuredExperts.slice(0, 7).map((e) => (
               <ExpertCard key={e.id} expert={e} />
             ))}
           </div>

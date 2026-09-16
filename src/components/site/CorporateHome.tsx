@@ -1,11 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { pillars, supportingLayers } from "@/content/pillars";
+import { programs } from "@/content/programs";
+import { articles } from "@/content/articles";
+import { methodologies } from "@/content/methodologies";
 import {
-  heroHeadline as fileHeroHeadline,
-  heroSubheadline as fileHeroSubheadline,
-  heroSupporting as fileHeroSupporting,
-  tagline as fileTagline,
+  heroHeadline,
+  heroSubheadline,
+  heroSupporting,
+  tagline,
   threeTSubtitle,
   positioning,
   founderQuote,
@@ -22,24 +25,15 @@ import { ArrowIcon, JsonLd } from "@/components/ui/Misc";
 import { ArticleCard } from "@/components/cards/Cards";
 import { CTASection } from "@/components/sections/CTASection";
 import { breadcrumbJsonLd } from "@/lib/seo";
-import {
-  publishedFeaturedPrograms,
-  publishedArticlesByCategory,
-  publishedPage,
-  publishedMethodologies,
-} from "@/platform/cms/catalog";
 
 export function CorporateHome() {
-  const cmsHome = publishedPage("home");
-  const heroHeadline = typeof cmsHome?.heroHeadline === "string" ? cmsHome.heroHeadline : fileHeroHeadline;
-  const heroSubheadline = typeof cmsHome?.heroSubheadline === "string" ? cmsHome.heroSubheadline : fileHeroSubheadline;
-  const heroSupporting = typeof cmsHome?.heroSupporting === "string" ? cmsHome.heroSupporting : fileHeroSupporting;
-  const tagline = typeof cmsHome?.tagline === "string" ? cmsHome.tagline : fileTagline;
-  const founderTitle = typeof cmsHome?.founderTitle === "string" ? cmsHome.founderTitle : founderTitleDefault;
-  const featuredArticles = publishedArticlesByCategory().slice(0, 6);
-  const methods = publishedMethodologies().filter((item) => (ecosystemMethodSlugs as readonly string[]).includes(item.slug));
-  const featured = publishedFeaturedPrograms().filter((p) => (homepageFeaturedSlugs as readonly string[]).includes(p.slug));
-  const bmdo = featured.find((p) => p.slug === "bmdo") ?? publishedFeaturedPrograms().find((p) => p.slug === "bmdo");
+  const founderTitle = founderTitleDefault;
+  const featuredArticles = [...articles].sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? "")).slice(0, 6);
+  const methods = methodologies.filter((item) => (ecosystemMethodSlugs as readonly string[]).includes(item.slug));
+  const featured = programs.filter(
+    (p) => p.status === "published" && p.featured && (homepageFeaturedSlugs as readonly string[]).includes(p.slug),
+  );
+  const bmdo = featured.find((p) => p.slug === "bmdo") ?? programs.find((p) => p.slug === "bmdo");
 
   return (
     <>
