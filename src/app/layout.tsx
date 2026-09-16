@@ -4,7 +4,6 @@ import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { JsonLd } from "@/components/ui/Misc";
 import { createMetadata, organizationJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
-import { bootPlatform } from "@/platform/boot";
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -39,6 +38,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   try {
+    const { bootPlatform } = await import("@/platform/boot");
     await bootPlatform();
   } catch (error) {
     console.error("[platform] boot failed; public site continues with file content", error);
