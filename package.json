@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/lib/siteIntegrity.test.ts src/lib/contentGovernance.test.ts src/platform/permissions/evaluate.test.ts src/platform/lms/progress.test.ts src/platform/convex/seedUsers.test.ts scripts/platform-to-convex/jsonl.test.ts",
+    "test": "tsx --test src/lib/siteIntegrity.test.ts src/lib/contentGovernance.test.ts src/platform/permissions/evaluate.test.ts src/platform/lms/progress.test.ts src/platform/convex/seedUsers.test.ts scripts/platform-to-convex/jsonl.test.ts src/db/demoAccounts.test.ts",
     "platform:export-sqlite": "tsx scripts/platform-sqlite-export/export.ts",
     "platform:migrate-convex": "tsx scripts/platform-to-convex/migrate.ts"
   },

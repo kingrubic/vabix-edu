@@ -5,6 +5,7 @@ import { BizcarShell } from "@/components/bizcar/Shell";
 import { Panel } from "@/components/bizcar/Ui";
 import { getCurrentUser } from "@/security/session";
 import { loadStore } from "@/db/store";
+import { DEMO_ACCOUNTS, readDemoPassword } from "@/db/demoAccounts";
 
 export const metadata = {
   title: "Đăng nhập — MyBizCar 3D",
@@ -27,19 +28,8 @@ export default async function LoginPage() {
         </div>
         <Panel>
           <Suspense fallback={<p className="text-white/50">Đang tải form…</p>}>
-            <LoginForm />
+            <LoginForm demoPassword={readDemoPassword()} demoAccounts={DEMO_ACCOUNTS} />
           </Suspense>
-          <div className="mt-6 text-xs text-white/50">
-            <p>Tài khoản minh họa (mật khẩu không hiển thị trên giao diện):</p>
-            <ul className="mt-2 space-y-1">
-              <li>ceo@demo.vabix.edu.vn — Quản trị doanh nghiệp</li>
-              <li>coach@vabix.edu.vn — Đánh giá viên</li>
-              <li>admin@vabix.edu.vn — Quản trị nền tảng</li>
-              <li>academic@vabix.edu.vn — Quản trị học thuật</li>
-              <li>member@demo.vabix.edu.vn — Thành viên</li>
-              <li>viewer@demo.vabix.edu.vn — Người xem</li>
-            </ul>
-          </div>
         </Panel>
       </div>
     </BizcarShell>

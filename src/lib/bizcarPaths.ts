@@ -27,6 +27,7 @@ export function isPublicBizcarAppPath(pathname: string): boolean {
     pathname === bizcarPath.home ||
     pathname === bizcarPath.engine ||
     pathname === bizcarPath.login ||
+    pathname === `${BIZCAR_BASE}/dang-nhap` ||
     pathname.startsWith("/api/bizcar/auth")
   );
 }
