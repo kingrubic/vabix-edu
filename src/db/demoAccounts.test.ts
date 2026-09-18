@@ -43,14 +43,21 @@ test("readDemoPassword prefers the seed env override when set", () => {
   else process.env[DEMO_SEED_PASSWORD_ENV] = previous;
 });
 
-test("login page copy no longer claims demo passwords are hidden", () => {
+test("login helper lists email and role without a public password", () => {
   const page = readFileSync(new URL("../app/bizcar/login/page.tsx", import.meta.url), "utf8");
   const form = readFileSync(new URL("../components/bizcar/LoginForm.tsx", import.meta.url), "utf8");
+  const alias = readFileSync(new URL("../app/bizcar/dang-nhap/page.tsx", import.meta.url), "utf8");
   const text = `${page}\n${form}`;
+  assert.equal(text.includes("mật khẩu demo công khai"), false);
   assert.equal(text.includes("mật khẩu không hiển thị"), false);
-  assert.match(text, /mật khẩu demo công khai/);
-  assert.match(text, /readDemoPassword/);
-  assert.match(text, /DEMO_ACCOUNTS/);
+  assert.equal(form.includes("{demoPassword}"), false);
+  assert.match(form, /Tài khoản minh họa:/);
+  assert.match(form, /Nhấn một tài khoản để điền email và mật khẩu/);
+  assert.match(form, /setEmail\(account\.email\)/);
+  assert.match(form, /setPassword\(demoPassword\)/);
+  assert.match(page, /readDemoPassword/);
+  assert.match(page, /DEMO_ACCOUNTS/);
+  assert.match(alias, /from "\.\.\/login\/page"/);
 });
 
 test("JSON seed still creates every demo helper email", () => {
