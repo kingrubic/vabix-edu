@@ -62,7 +62,7 @@ Trên local và preview, `/` mở MyBizCar (không mở website VABIX). Producti
 
 Trên domain `bizcar.vabix.edu.vn` (khi có DNS), middleware map `/` → `/bizcar` và `/engine` → `/bizcar/engine`.
 
-Tài khoản DEMO (mật khẩu công khai chung, hiện trên `/bizcar/login` — nguồn: `src/db/demoAccounts.ts`):
+Tài khoản DEMO (email / vai trò trên `/bizcar/login`; mật khẩu được điền khi nhấn tài khoản — nguồn: `src/db/demoAccounts.ts`):
 
 - `ceo@demo.vabix.edu.vn` — COMPANY_ADMIN
 - `coach@vabix.edu.vn` — COACH_EVALUATOR

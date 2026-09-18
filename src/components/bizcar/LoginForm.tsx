@@ -50,7 +50,7 @@ export function LoginForm({
         <PrimaryButton disabled={pending}>{pending ? "Đang xác thực…" : "Vào không gian làm việc"}</PrimaryButton>
       </form>
       <div className="mt-6 text-xs text-white/50">
-        <p>Tài khoản minh họa (mật khẩu demo công khai):</p>
+        <p>Tài khoản minh họa:</p>
         <p className="mt-1 text-[11px] text-white/40">Nhấn một tài khoản để điền email và mật khẩu.</p>
         <ul className="mt-2 space-y-1">
           {demoAccounts.map((account) => (
@@ -64,8 +64,7 @@ export function LoginForm({
                 }}
               >
                 <span>{account.email}</span>
-                <span className="text-white/40"> — {account.role} — </span>
-                <span className="font-medium tracking-wide text-vabix-gold/90">{demoPassword}</span>
+                <span className="text-white/40"> — {account.role}</span>
               </button>
             </li>
           ))}

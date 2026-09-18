@@ -7,7 +7,9 @@
  * authenticate. `BIZCAR_DEMO_SEED_PASSWORD` may override the well-known
  * default when an existing deployment already seeded a different value.
  *
- * The plaintext is intentional — it is not a production customer secret.
+ * The login list shows email and role only; clicking a row fills the
+ * shared demo password into the form. The plaintext is not a production
+ * customer secret.
  */
 export const DEMO_SEED_PASSWORD_ENV = "BIZCAR_DEMO_SEED_PASSWORD";
 
