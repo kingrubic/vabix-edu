@@ -3,7 +3,7 @@ import { Container, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/sections/CTASection";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { ProgramCatalog } from "@/components/catalog/ProgramCatalog";
-import { trainingMethod } from "@/content/training";
+import { trainingGroups, trainingMethod } from "@/content/training";
 import { programGroups } from "@/content/programs";
 import { publishedPrograms } from "@/platform/cms/catalog";
 import { threeW } from "@/content/threeW";
@@ -21,6 +21,7 @@ export const metadata = createMetadata({
 
 export default function TrainingHubPage() {
   const programs = publishedPrograms();
+  const coaching = trainingGroups.find((group) => group.id === "coaching");
   return (
     <>
       <PageHero
@@ -41,6 +42,21 @@ export default function TrainingHubPage() {
             <SectionHeading title="A. Dành cho Doanh chủ & CEO" />
             <ProgramList programs={programs.filter((p) => p.group === "ceo")} />
           </section>
+          {coaching ? (
+            <section id="coaching">
+              <SectionHeading title={`${coaching.number}. ${coaching.title}`} />
+              <p className="measure mt-4 text-vabix-muted">{coaching.goal}</p>
+              <p className="measure mt-3 text-sm text-vabix-muted">Đối tượng: {coaching.audience}</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {coaching.topics.map((topic) => (
+                  <li key={topic} className="border border-vabix-deep-teal/10 bg-white px-3 py-1.5 text-sm text-vabix-deep-teal">
+                    {topic}
+                  </li>
+                ))}
+              </ul>
+              <p className="measure mt-4 text-sm text-vabix-muted">{coaching.outcomes.join(" · ")}</p>
+            </section>
+          ) : null}
           <section id="quan-ly">
             <SectionHeading title="B. Dành cho đội ngũ quản lý & nhân viên" />
             <ProgramList programs={programs.filter((p) => p.group === "management")} />

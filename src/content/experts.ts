@@ -12,7 +12,7 @@ export const experts: Expert[] = [
       "Nhà sáng lập VABIX và mô hình BizCar. Tác giả các khung BMDO, MTA Engine, B2A — đồng hành cùng doanh nghiệp Việt trong tư duy thiết kế và vận hành thực chiến.",
     fullBio:
       "Ông Nguyễn Chí Thành là Nhà sáng lập VABIX, Chủ tịch HĐQT kiêm Tổng Giám đốc Công ty Cổ phần VABIX, đồng thời là tác giả mô hình BizCar. Ông đã nghiên cứu và triển khai các khung tư duy quản trị thực chiến — trong đó có BMDO, MTA Engine và B2A — nhằm giúp lãnh đạo nhìn doanh nghiệp như một hệ thống thống nhất, nhận diện điểm nghẽn và thiết kế lại năng lực vận hành phù hợp từng giai đoạn. Ông đồng hành cùng cộng đồng doanh nghiệp Việt Nam trên hành trình kiến tạo nội lực và mở rộng kết nối.",
-    portrait: "/images/portraits/nguyen-chi-thanh.png",
+    portrait: "/images/portraits/nguyen-chi-thanh.jpg",
     featured: true,
     order: 1,
     programs: ["bizcar", "bmdo", "b2a"],

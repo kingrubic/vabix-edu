@@ -64,6 +64,7 @@ export const siteConfig = {
     schedule: { label: "Đặt lịch trao đổi", href: "/ket-noi#tu-van" },
     contact: { label: "Liên hệ VABIX", href: "/lien-he" },
     learner: { label: "Cổng học viên", href: "/dang-nhap" },
+    register: { label: "Đăng ký tư vấn", href: "/ket-noi#tu-van" },
   },
 } as const;
 

@@ -10,7 +10,7 @@ import { solutions } from "@/content/solutions";
 import { consultingServices } from "@/content/consulting";
 import { pillars } from "@/content/pillars";
 import { partners, villages } from "@/content/network";
-import { primaryNav } from "@/content/navigation";
+import { primaryNav, footerColumns } from "@/content/navigation";
 import * as brand from "@/content/brand";
 import * as about from "@/content/about";
 import { siteConfig } from "@/lib/siteConfig";
@@ -67,6 +67,7 @@ export function seedCmsFromFiles() {
     tagline: siteConfig.tagline,
     contact: siteConfig.contact,
     social: siteConfig.social,
+    columns: footerColumns,
   });
   upsert("policy", "chinh-sach-bao-mat", "Chính sách bảo mật", { path: "/chinh-sach-bao-mat" });
   upsert("policy", "dieu-khoan", "Điều khoản", { path: "/dieu-khoan" });

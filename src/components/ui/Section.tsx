@@ -11,7 +11,7 @@ export function Container({
   as?: "div" | "section" | "header" | "footer" | "nav";
   id?: string;
 }) {
-  return <Tag id={id} className={`mx-auto w-full max-w-[1200px] px-5 sm:px-6 lg:px-8 ${className}`}>{children}</Tag>;
+  return <Tag id={id} className={`vabix-shell ${className}`}>{children}</Tag>;
 }
 
 export function SectionHeading({

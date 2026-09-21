@@ -144,7 +144,15 @@ export default function AboutPage() {
           <p className="text-sm text-vabix-muted">{founderTitle}</p>
         </div>
         <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden bg-vabix-deep-teal">
-          <Image src="/images/portraits/nguyen-chi-thanh.png" alt="Nguyễn Chí Thành, nhà sáng lập VABIX" fill className="object-cover object-top" sizes="400px" />
+          <Image
+            src="/images/portraits/nguyen-chi-thanh.jpg"
+            alt="Nguyễn Chí Thành, nhà sáng lập VABIX"
+            fill
+            priority
+            unoptimized
+            className="object-cover object-top"
+            sizes="(min-width: 1024px) 24rem, min(100vw, 24rem)"
+          />
         </div>
       </Container>
 

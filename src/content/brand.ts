@@ -18,7 +18,7 @@ export const aboutIntro = [
 ];
 
 export const heroSubheadline =
-  "VABIX đồng hành cùng doanh chủ và đội ngũ trong phát triển năng lực, chuyển đổi doanh nghiệp và kiến tạo những mối quan hệ kinh doanh dựa trên niềm tin.";
+  "Đồng hành doanh chủ và đội ngũ phát triển năng lực, chuyển đổi doanh nghiệp và kết nối dựa trên niềm tin.";
 
 export const heroSupporting =
   "Từ tri thức thực chiến đến những giải pháp có thể triển khai, đo lường và tạo ra giá trị dài hạn.";
