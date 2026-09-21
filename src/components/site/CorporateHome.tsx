@@ -5,10 +5,6 @@ import { programs } from "@/content/programs";
 import { articles } from "@/content/articles";
 import { methodologies } from "@/content/methodologies";
 import {
-  heroHeadline,
-  heroSubheadline,
-  heroSupporting,
-  tagline,
   threeTSubtitle,
   positioning,
   founderQuote,
@@ -24,6 +20,7 @@ import { Container, SectionHeading } from "@/components/ui/Section";
 import { ArrowIcon, JsonLd } from "@/components/ui/Misc";
 import { ArticleCard } from "@/components/cards/Cards";
 import { CTASection } from "@/components/sections/CTASection";
+import { HomeHero } from "@/components/sections/HomeHero";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
 export function CorporateHome() {
@@ -38,33 +35,11 @@ export function CorporateHome() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Trang chủ", path: "/" }])} />
-      <section className="relative overflow-hidden bg-vabix-deep-teal pt-28 text-white sm:pt-32">
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <div className="absolute -left-32 top-20 h-96 w-96 rounded-full bg-teal-400/10 blur-3xl" />
-          <div className="absolute right-0 top-0 h-[480px] w-[480px] bg-[radial-gradient(circle,rgba(222,164,67,0.12),transparent_60%)]" />
-        </div>
-        <Container className="relative pb-20">
-          <p className="eyebrow">VABIX</p>
-          <p className="mt-3 text-sm font-semibold tracking-[0.18em] text-vabix-soft-gold uppercase">{tagline}</p>
-          <h1 className="mt-5 max-w-5xl text-balance text-[32px] font-semibold leading-[1.15] sm:text-[46px] lg:text-[clamp(44px,4.6vw,64px)]">
-            {heroHeadline}
-          </h1>
-          <p className="measure mt-6 text-base text-white/80 sm:text-lg">{heroSubheadline}</p>
-          <p className="measure mt-4 text-sm text-white/70">{heroSupporting}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/tri-thuc" variant="gold">
-              Khám phá hệ sinh thái VABIX
-            </Button>
-            <Button href={paths.consult} variant="outline" className="border-white/40 text-white">
-              Trao đổi cùng VABIX
-            </Button>
-          </div>
-        </Container>
-      </section>
+      <HomeHero />
 
-      <section className="py-20" id="ba-mui-nhon">
+      <section className="relative bg-vabix-warm pb-20 pt-12 sm:pt-16" id="ba-mui-nhon">
         <Container>
-          <SectionHeading align="center" eyebrow="Ba mũi nhọn — 3T" title="BA MŨI NHỌN — 3T" description={threeTSubtitle} />
+          <SectionHeading align="center" eyebrow="02 — Ba mũi nhọn 3T" title="BA MŨI NHỌN — 3T" description={threeTSubtitle} />
           <div className="mt-14 grid gap-6 lg:grid-cols-3">
             {pillars.map((p) => (
               <article key={p.id} className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white p-8">

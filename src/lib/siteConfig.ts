@@ -13,7 +13,7 @@ export const siteConfig = {
   positioning: "Hệ sinh thái tri thức thực chiến và phát triển doanh nghiệp",
   statement: "Kết tri thức. Nối giá trị.",
   description:
-    "VABIX đồng hành cùng doanh chủ và đội ngũ trong phát triển doanh nghiệp thông qua đào tạo và huấn luyện thực chiến, tư vấn chuyển đổi và kết nối kinh doanh dựa trên niềm tin.",
+    "VABIX đồng hành cùng doanh chủ và đội ngũ trong phát triển năng lực, chuyển đổi doanh nghiệp và kiến tạo những mối quan hệ kinh doanh dựa trên niềm tin.",
   website: "https://vabix.edu.vn",
   marketplaceWebsite: "https://vabix.vn",
   locale: "vi_VN",
