@@ -2,6 +2,12 @@ import type { CoreValue } from "./types";
 
 export const tagline = "VABIX – KẾT TRI THỨC. NỐI GIÁ TRỊ.";
 
+export const heroEyebrow = "Hệ sinh thái tri thức thực chiến";
+export const heroTagline = "Kết tri thức. Nối giá trị.";
+export const heroHeadline = "Chuyển hóa tri thức thành năng lực hành động.";
+export const heroHeadlineLead = "Chuyển hóa tri thức";
+export const heroHeadlineHighlight = "năng lực hành động";
+
 export const positioning =
   "VABIX xây dựng hệ sinh thái tri thức thực chiến và phát triển doanh nghiệp, nơi tri thức được chuyển thành hành động, kết quả được kiểm chứng bằng thực tiễn và quan hệ hợp tác được vun đắp bằng niềm tin.";
 
@@ -11,13 +17,11 @@ export const aboutIntro = [
   "Khởi nguồn từ thực tiễn Việt. Phát huy trí tuệ Việt. Kết nối để cùng phát triển.",
 ];
 
-export const heroHeadline = "KẾT TRI THỨC. NỐI GIÁ TRỊ.";
-
 export const heroSubheadline =
-  "VABIX đồng hành cùng doanh chủ và đội ngũ trong phát triển doanh nghiệp thông qua đào tạo và huấn luyện thực chiến, tư vấn chuyển đổi và kết nối kinh doanh dựa trên niềm tin.";
+  "VABIX đồng hành cùng doanh chủ và đội ngũ trong phát triển năng lực, chuyển đổi doanh nghiệp và kiến tạo những mối quan hệ kinh doanh dựa trên niềm tin.";
 
 export const heroSupporting =
-  "Chúng tôi giúp doanh nghiệp đưa tri thức vào hành động, giải quyết những vấn đề quản trị cụ thể và đo lường kết quả cải tiến; đồng thời kết nối những đối tác phù hợp để cùng tạo giá trị lâu dài.";
+  "Từ tri thức thực chiến đến những giải pháp có thể triển khai, đo lường và tạo ra giá trị dài hạn.";
 
 export const supportingMessage = [
   "Phát triển khả lực.",
