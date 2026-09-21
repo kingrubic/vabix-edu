@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { EngineWorkbench } from "@/components/engine/EngineWorkbench";
+import { EngineExperience } from "@/mybizcar/engine/EngineExperience";
+import { StudioFrame } from "@/mybizcar/engine/StudioFrame";
+import { engineViewFromModel, extrasFromBundle } from "@/mybizcar/from-engine-model";
 import { BizcarShell } from "@/components/bizcar/Shell";
 import { DemoMark, Panel } from "@/components/bizcar/Ui";
 import { loadStore } from "@/db/store";
@@ -37,10 +39,11 @@ export default async function EngineModulePage({
     );
   }
   const model = assembleEngine(bundle);
+  const view = engineViewFromModel(model, extrasFromBundle(bundle));
   const isDemo = bundle.assessment.isDemo || bundle.organization?.isDemo;
   return (
     <BizcarShell user={user} title="Động cơ doanh nghiệp MTUA">
-      <div className="mx-auto max-w-7xl space-y-5 px-4 py-8">
+      <div className="mx-auto max-w-[1440px] space-y-5 px-4 py-8">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="eyebrow">Module chính · /bizcar/engine</p>
@@ -69,7 +72,16 @@ export default async function EngineModulePage({
             {bundle.organization?.name} · {bundle.assessment.title} · MDS là chất lượng thiết kế, không phải bằng chứng đã triển khai.
           </p>
         </Panel>
-        <EngineWorkbench model={model} />
+        <StudioFrame demo={Boolean(isDemo)}>
+          <EngineExperience
+            model={view}
+            caption={
+              isDemo
+                ? "Sedan quản trị — dữ liệu minh họa từ hồ sơ đánh giá DEMO."
+                : "Sedan quản trị — dữ liệu từ hồ sơ đánh giá."
+            }
+          />
+        </StudioFrame>
       </div>
     </BizcarShell>
   );
