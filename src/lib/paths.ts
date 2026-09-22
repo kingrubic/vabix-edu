@@ -29,10 +29,9 @@ export const paths = {
 
 export const homepageFeaturedSlugs = [
   "bmdo",
-  "mbm",
+  "quan-tri-chien-luoc-digai",
   "thao-truong-khoi-nghiep",
-  "ung-dung-ai-hieu-suat",
-  "theo-yeu-cau-doanh-nghiep",
+  "lanh-dao-tinh-thuc",
 ] as const;
 
 export const ecosystemMethodSlugs = [

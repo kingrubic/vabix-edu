@@ -4,8 +4,8 @@ export const tagline = "VABIX – KẾT TRI THỨC. NỐI GIÁ TRỊ.";
 
 export const heroEyebrow = "Hệ sinh thái tri thức thực chiến";
 export const heroTagline = "Kết tri thức. Nối giá trị.";
-export const heroHeadline = "Chuyển hóa tri thức thành năng lực hành động.";
-export const heroHeadlineLead = "Chuyển hóa tri thức";
+export const heroHeadline = "Chuyển hóa tri thức thành năng lực hành động";
+export const heroHeadlineLead = "Chuyển hóa tri thức thành";
 export const heroHeadlineHighlight = "năng lực hành động";
 
 export const positioning =
