@@ -3,6 +3,7 @@
 export const paths = {
   home: "/",
   about: "/ve-vabix",
+  founderMessage: "/thong-diep-nha-sang-lap",
   training: "/dao-tao",
   program: (slug: string) => `/dao-tao/${slug}`,
   programSchedule: "/dao-tao/lich",

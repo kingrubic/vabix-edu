@@ -9,7 +9,7 @@ import { paths } from "@/lib/paths";
 import { Button } from "@/components/ui/Button";
 import { MegaMenu } from "@/components/layout/MegaMenu";
 import { MobileMenu } from "@/components/layout/MobileMenu";
-import { Logo } from "@/components/brand/Logo";
+import { BrandLockup } from "@/components/brand/Logo";
 import { ArrowIcon } from "@/components/ui/Misc";
 
 function hasDarkHero(pathname: string | null) {
@@ -70,11 +70,7 @@ export function Header() {
       >
         <div className="vabix-shell flex h-full items-center gap-4 lg:gap-8">
           <Link href={siteConfig.portals.vabixHome} className="flex shrink-0 items-center" aria-label="VABIX — trang chủ">
-            <Logo
-              variant={solid ? "light" : "dark"}
-              className={`max-w-[min(188px,46vw)] object-contain ${scrolled ? "h-10 xl:h-11" : "h-11 sm:h-12"}`}
-              priority
-            />
+            <BrandLockup tone={solid ? "onLight" : "onDark"} priority markClassName={scrolled ? "h-11" : "h-12 sm:h-14"} />
           </Link>
 
           <MegaMenu items={primaryNav} inverted={inverted} />

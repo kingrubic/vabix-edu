@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/siteConfig";
 import { footerColumns } from "@/content/navigation";
-import { Logo } from "@/components/brand/Logo";
+import { BrandLockup } from "@/components/brand/Logo";
 import { ArrowIcon } from "@/components/ui/Misc";
 
 const socials = [
@@ -24,12 +24,11 @@ export function Footer() {
       </div>
 
       <div className="vabix-shell relative z-10 py-12">
-        <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.15fr)_repeat(4,minmax(0,1fr))_minmax(0,1.25fr)]">
+        <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-[minmax(12.5rem,1.05fr)_repeat(4,minmax(0,1fr))_minmax(11rem,1.2fr)]">
           <div>
-            <Link href={siteConfig.portals.vabixHome} aria-label="VABIX — trang chủ">
-              <Logo variant="dark" className="h-10 sm:h-11" />
+            <Link href={siteConfig.portals.vabixHome} className="inline-flex items-center" aria-label="VABIX — trang chủ">
+              <BrandLockup tagline={false} markClassName="h-14 w-14" />
             </Link>
-            <p className="mt-3 text-[13px] leading-relaxed text-white/70">{siteConfig.tagline}</p>
             <ul className="mt-4 flex items-center gap-1.5">
               {socials.map((item) => (
                 <li key={item.label}>
@@ -38,7 +37,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.label}
-                    className="inline-flex h-9 w-9 items-center justify-center text-vabix-soft-gold transition-colors duration-200 hover:text-vabix-gold"
+                    className="vabix-footer-social"
                   >
                     <item.icon />
                   </a>

@@ -18,7 +18,7 @@ export const aboutIntro = [
 ];
 
 export const heroSubheadline =
-  "Đồng hành doanh chủ và đội ngũ phát triển năng lực, chuyển đổi doanh nghiệp và kết nối dựa trên niềm tin.";
+  "Đồng hành cùng Doanh chủ, CEO và Đội ngũ để phát triển năng lực quản trị – vận hành, chuyển hóa tri thức thành kết quả và mở rộng kết nối kinh doanh dựa trên niềm tin.";
 
 export const heroSupporting =
   "Từ tri thức thực chiến đến những giải pháp có thể triển khai, đo lường và tạo ra giá trị dài hạn.";
@@ -100,6 +100,32 @@ export const founderMessage = [
 ];
 
 export const founderTitleDefault = "Nhà sáng lập VABIX · Chủ tịch HĐQT kiêm Tổng Giám đốc";
+
+export const founderManifestoQuote =
+  "Tôi tin rằng một doanh nghiệp sẽ không phải đơn độc trên hành trình phát triển khi tri thức được chuyển hóa thành hành động, con người cùng trưởng thành trong trách nhiệm và những mối quan hệ kinh doanh được kiến tạo trên nền tảng của niềm tin.";
+
+export const founderLetter = {
+  salutation: "Kính gửi Quý Doanh nghiệp và Quý Đối tác,",
+  motto: "Kết tri thức. Nối giá trị.",
+  closing: "Trân trọng,",
+  paragraphs: [
+    "Mỗi doanh nghiệp đều bắt đầu từ một khát vọng.",
+    "Trong khát vọng ấy có tâm huyết của người sáng lập, niềm tin của đội ngũ và tương lai của nhiều con người đang cùng nhau vun đắp. Nhưng để biến khát vọng thành hiện thực, người đứng đầu thường phải đi qua một hành trình không hề dễ dàng.",
+    "Trong nhiều năm đồng hành cùng doanh chủ và CEO, tôi thường nghe những trăn trở rất thật: đã học nhiều kiến thức quản trị nhưng vẫn khó áp dụng vào chính doanh nghiệp mình; đã dành nhiều thời gian và công sức nhưng kết quả chưa tương xứng; đã mở rộng nhiều mối quan hệ nhưng vẫn chưa tìm được người thực sự thấu hiểu và đồng hành.",
+    "Đằng sau những trăn trở ấy là những câu hỏi lớn:",
+    "Làm thế nào để người lãnh đạo nhìn rõ hướng đi giữa một môi trường không ngừng biến động? Làm thế nào để đội ngũ chủ động nhận trách nhiệm và cùng tạo ra kết quả? Làm thế nào để doanh nghiệp vận hành hiệu quả mà người đứng đầu không phải có mặt trong mọi việc? Và làm thế nào để tìm được những đối tác đủ năng lực, phù hợp về giá trị và đáng tin cậy để cùng phát triển?",
+    "VABIX được hình thành từ chính những câu hỏi đó.",
+    "Chúng tôi lựa chọn sứ mệnh chuyển hóa tri thức thực chiến thành năng lực hành động, giúp con người và doanh nghiệp không chỉ biết thêm, mà còn nhìn rõ hơn, làm đúng hơn và tạo ra những thay đổi thực chất.",
+    "VABIX phát triển trên hai lõi kết nối: Kết nối tri thức và Kết nối kinh doanh.",
+    "Qua kết nối tri thức, doanh nhân và đội ngũ được tiếp cận những mô hình, phương pháp, chuyên gia và chương trình phù hợp với bài toán thực tế của mình. Qua kết nối kinh doanh, doanh nghiệp có thêm cơ hội tìm thấy đúng đối tác, đúng khách hàng và đúng nguồn nhân lực để bổ sung năng lực và mở rộng con đường phát triển.",
+    "Tại VABIX, chúng tôi nuôi dưỡng khát vọng kiến tạo Triết nghiệm Việt — một nền tri thức thực chiến do người Việt phát triển, được hình thành từ những vấn đề của thực tiễn Việt Nam, tiếp thu tinh hoa tiến bộ của thế giới và hướng đến khả năng ứng dụng rộng rãi.",
+    "Tri thức ấy không dừng lại trên trang sách, trong lớp học hay ở những mô hình đẹp mắt. Thông qua tư vấn, đào tạo, huấn luyện và đồng hành triển khai, VABIX cùng doanh nghiệp đưa tri thức vào từng quyết định, từng cách làm và từng hoạt động hằng ngày.",
+    "Với tôi, giá trị của VABIX không được đo bằng số lượng khái niệm được truyền đạt, mà bằng những thay đổi có thể nhìn thấy: người lãnh đạo sáng rõ hơn về hướng đi; đội ngũ trưởng thành hơn trong trách nhiệm; doanh nghiệp phối hợp và vận hành tốt hơn; những cuộc gặp gỡ ban đầu từng bước trở thành quan hệ hợp tác lâu dài dựa trên niềm tin.",
+    "Xây dựng VABIX cũng là hành trình chúng tôi không ngừng học hỏi từ chính những con người đang làm kinh doanh mỗi ngày. Mỗi chia sẻ thẳng thắn, mỗi bài toán khó và mỗi kết quả ứng dụng đều giúp chúng tôi hiểu doanh nghiệp sâu hơn, hoàn thiện nền tảng tri thức và nâng cao năng lực đồng hành.",
+    "Tôi tin rằng một doanh nghiệp sẽ không phải đơn độc trên hành trình phát triển khi tri thức được chuyển hóa thành hành động, con người cùng trưởng thành trong trách nhiệm và những mối quan hệ kinh doanh được kiến tạo trên nền tảng của niềm tin.",
+    "Cảm ơn Quý Doanh nghiệp và Quý Đối tác đã dành cho VABIX cơ hội được lắng nghe, cùng tháo gỡ, cùng kiến tạo và cùng phát triển.",
+  ],
+} as const;
 
 export const glossary = [
   { term: "VABIX", meaning: "Hệ sinh thái tri thức thực chiến và phát triển doanh nghiệp. Tên gọi gắn với Villages of Business; chữ X là biểu tượng của kết nối." },

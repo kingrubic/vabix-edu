@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { FloatingContact } from "./FloatingContact";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { isBizcarHost, isBizcarPath } from "@/security/routes";
@@ -20,6 +21,7 @@ export async function ConditionalChrome({ children }: { children: React.ReactNod
       <Header />
       <main id="noi-dung">{children}</main>
       <Footer />
+      <FloatingContact />
     </>
   );
 }

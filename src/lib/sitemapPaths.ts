@@ -14,6 +14,7 @@ import {
 const staticPaths = [
   "/",
   "/ve-vabix",
+  "/thong-diep-nha-sang-lap",
   "/dao-tao",
   "/dao-tao/lich",
   "/tu-van-chuyen-doi",

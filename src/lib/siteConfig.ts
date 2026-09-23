@@ -38,7 +38,11 @@ export const siteConfig = {
     supportEmailHref: "mailto:support@vabix.vn",
     address:
       "Tầng 2, Toà nhà Thanh Long, 456 Xô Viết Nghệ Tĩnh, Phường Thạnh Mỹ Tây, TP. Hồ Chí Minh",
-    addressShort: "456 Xô Viết Nghệ Tĩnh, TP. Hồ Chí Minh",
+    addressShort: "456 Xô Viết Nghệ Tĩnh, Phường Gia Định, TP. HCM",
+    quickPhone: "0919 171 976",
+    quickPhoneHref: "tel:0919171976",
+    quickEmail: "maithanhvabix@gmail.com",
+    quickEmailHref: "mailto:maithanhvabix@gmail.com",
   },
   social: {
     facebook: "https://www.facebook.com/VabixVietnam",
@@ -47,6 +51,7 @@ export const siteConfig = {
     youtube: "https://www.youtube.com/@VABIX",
     zalo: "https://zalo.me/vabix",
     zaloLabel: "VABIX Official",
+    zaloChat: "https://zalo.me/0919171976",
   },
   portals: {
     resident: "https://smar.vabix.vn/",

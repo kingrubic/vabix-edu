@@ -1,12 +1,8 @@
-import {
-  heroSubheadline,
-  heroTagline,
-  heroEyebrow,
-} from "@/content/brand";
+import { heroSubheadline, heroEyebrow } from "@/content/brand";
 import { paths } from "@/lib/paths";
 import { Button } from "@/components/ui/Button";
 import { ArrowIcon } from "@/components/ui/Misc";
-import { ThreeTEcosystem } from "@/components/visuals/ThreeTEcosystem";
+import { DualCoreEcosystem } from "@/components/visuals/DualCoreEcosystem";
 
 function KnowledgeNetwork() {
   return (
@@ -47,19 +43,16 @@ export function HomeHero() {
 
       <div className="vabix-shell relative z-10 grid min-h-[640px] items-center pb-14 pt-[96px] sm:min-h-[660px] sm:pb-16 sm:pt-[102px] lg:grid-cols-[minmax(0,0.54fr)_minmax(0,0.46fr)] lg:gap-10 lg:min-h-[680px] lg:pb-16 lg:pt-[108px] xl:gap-12">
         <div className="hero-content max-w-[640px]">
-          <p className="vabix-hero-in text-[11px] font-semibold tracking-[0.22em] text-vabix-gold uppercase sm:text-[12px]">
+          <p className="vabix-hero-in text-[15px] font-semibold tracking-[0.18em] text-vabix-gold uppercase sm:text-[17px]">
             {heroEyebrow}
           </p>
-          <p className="vabix-hero-in vabix-hero-in-tagline mt-2.5 text-[15px] font-medium tracking-[0.02em] text-vabix-soft-gold/85 sm:text-[16px]">
-            {heroTagline}
-          </p>
 
-          <h1 className="vabix-hero-in vabix-hero-in-title vabix-hero-title mt-6">
+          <h1 className="vabix-hero-in vabix-hero-in-title vabix-hero-title mt-5">
             <span className="vabix-hero-line">Chuyển hóa tri thức thành</span>
             <span className="vabix-hero-highlight vabix-hero-line">năng lực hành động</span>
           </h1>
 
-          <p className="vabix-hero-in vabix-hero-in-copy mt-6 max-w-[500px] text-[15px] leading-[1.7] text-[#f4efe4]/82 sm:text-[16px] sm:leading-[1.75]">
+          <p className="vabix-hero-in vabix-hero-in-copy mt-6 max-w-[560px] text-[15px] leading-[1.7] text-[#f4efe4]/82 sm:text-[16px] sm:leading-[1.75]">
             {heroSubheadline}
           </p>
 
@@ -85,7 +78,7 @@ export function HomeHero() {
         </div>
 
         <div className="hero-visual vabix-hero-in vabix-hero-in-visual mx-auto mt-10 w-full max-w-[520px] lg:mt-0 lg:max-w-none lg:justify-self-stretch">
-          <ThreeTEcosystem />
+          <DualCoreEcosystem />
         </div>
       </div>
 

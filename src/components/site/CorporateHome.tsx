@@ -1,16 +1,12 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { pillars, supportingLayers } from "@/content/pillars";
 import { articles } from "@/content/articles";
-import { methodologies } from "@/content/methodologies";
-import { founderQuote, founderMessage, founderTitleDefault } from "@/content/brand";
 import { siteConfig } from "@/lib/siteConfig";
-import { ecosystemMethodSlugs, paths } from "@/lib/paths";
-import { trustworking } from "@/content/trustworking";
+import { paths } from "@/lib/paths";
 import { Container, SectionHeading } from "@/components/ui/Section";
 import { ArrowIcon, JsonLd } from "@/components/ui/Misc";
 import { ArticleCard } from "@/components/cards/Cards";
-import { CTASection } from "@/components/sections/CTASection";
 import { HomeHero } from "@/components/sections/HomeHero";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
@@ -62,25 +58,56 @@ const homePrograms = [
   },
 ] as const;
 
-const homePillarCopy = [
+const twinPillars = [
   {
-    id: "dao-tao-huan-luyen",
-    title: "Đào tạo & Huấn luyện",
-    body: "Từ CEO Academy, coaching 1:1 đến chương trình doanh nghiệp theo nhu cầu — tập trung vào năng lực có thể ứng dụng và đo lường.",
-    cta: "Khám phá đào tạo",
+    id: "tri-thuc",
+    number: "01",
+    tone: "teal",
+    title: "Kết nối tri thức",
+    lead: "Phát triển nội lực doanh nghiệp thông qua tri thức thực chiến, tư duy hệ thống và năng lực ứng dụng.",
+    close: "Tri thức → Năng lực → Hành động",
+    items: [
+      {
+        index: "01",
+        title: "Tư vấn chiến lược",
+        body: "Chẩn đoán hiện trạng, xác định ưu tiên và xây dựng lộ trình phát triển phù hợp.",
+      },
+      {
+        index: "02",
+        title: "Đào tạo doanh chủ & CEO",
+        body: "Rèn tư duy quản trị, năng lực điều hành và khả năng ứng dụng trên chính doanh nghiệp.",
+      },
+      {
+        index: "03",
+        title: "Đào tạo & huấn luyện đội ngũ",
+        body: "Thiết kế chương trình theo nhu cầu, đồng hành ứng dụng và đo lường kết quả thực tế.",
+      },
+    ],
   },
   {
-    id: "tu-van-chuyen-doi",
-    title: "Tư vấn chuyển đổi",
-    body: "Xác định đúng ưu tiên, thiết kế phương án và đồng hành triển khai chuyển đổi từ chiến lược đến vận hành.",
-    cta: "Khám phá chuyển đổi",
-  },
-  {
-    id: "trustworking",
+    id: "kinh-doanh",
+    number: "02",
+    tone: "gold",
     title: "Kết nối kinh doanh",
-    titleRest: "dựa trên niềm tin",
-    body: "Kết nối doanh nghiệp, chuyên gia và đối tác trên cơ sở nhu cầu phù hợp, thông tin rõ ràng và giá trị tương hỗ.",
-    cta: "Khám phá Trustworking",
+    lead: "Kết nối đúng người, đúng nhu cầu và tạo nền tảng cho những quan hệ hợp tác bền vững.",
+    close: "Đúng người → Đúng nhu cầu → Giá trị bền vững",
+    items: [
+      {
+        index: "01",
+        title: "Kết nối đối tác",
+        body: "Giúp doanh nghiệp tìm đối tác phù hợp, bổ sung nguồn lực và mở rộng cơ hội hợp tác.",
+      },
+      {
+        index: "02",
+        title: "Kết nối khách hàng",
+        body: "Giúp doanh nghiệp tiếp cận đúng khách hàng tiềm năng và phát triển thị trường.",
+      },
+      {
+        index: "03",
+        title: "Kết nối nhân lực",
+        body: "Kết nối nguồn nhân lực lõi, nhân lực mở và nhân lực số phù hợp với từng giai đoạn phát triển.",
+      },
+    ],
   },
 ] as const;
 
@@ -114,10 +141,19 @@ const transformationSteps = [
 
 const transformationOutputs = ["Ưu tiên rõ", "Kế hoạch hành động", "Người chịu trách nhiệm", "Tiêu chí đo lường"] as const;
 
+const knowledgeModels = [
+  { slug: "bizcar", index: "01", name: "The BizCar", line: "Thiết kế và vận hành doanh nghiệp toàn diện.", x: 20, y: 20 },
+  { slug: "applier", index: "02", name: "APPLIER", line: "Học để nhìn rõ. Thiết kế để làm được.", x: 50, y: 12 },
+  { slug: "mais", index: "03", name: "MAIS", line: "Đo lường → Phân tích → Cải tiến → Chuẩn hóa.", x: 80, y: 20 },
+  { slug: "3w", index: "04", name: "3W", line: "WOW · WELL · WIN", x: 88, y: 50 },
+  { slug: "karot", index: "05", name: "KAROT", line: "Rõ đích đến · Đúng vấn đề · Tập trung nguồn lực.", x: 80, y: 82 },
+  { slug: "klass", index: "06", name: "KLASS", line: "Xây nền vững · Thực hành có hướng dẫn · Phát triển bằng bằng chứng.", x: 50, y: 90 },
+  { slug: "baboso", index: "07", name: "BABOSO", line: "Được biết đến · Được cân nhắc · Được lựa chọn.", x: 20, y: 82 },
+  { slug: "dgh", index: "08", name: "DGH", line: "Khung định hướng chuyển đổi Số · Xanh · Hạnh phúc.", x: 12, y: 50 },
+] as const;
+
 export function CorporateHome() {
-  const founderTitle = founderTitleDefault;
   const featuredArticles = [...articles].sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? "")).slice(0, 6);
-  const methods = methodologies.filter((item) => (ecosystemMethodSlugs as readonly string[]).includes(item.slug));
 
   return (
     <>
@@ -128,46 +164,53 @@ export function CorporateHome() {
         <div className="vabix-3t-pillars-bg" aria-hidden="true">
           <span className="vabix-3t-pillars-glow vabix-3t-pillars-glow-a" />
           <span className="vabix-3t-pillars-glow vabix-3t-pillars-glow-b" />
-          <span className="vabix-3t-pillars-ring vabix-3t-pillars-ring-a" />
-          <span className="vabix-3t-pillars-ring vabix-3t-pillars-ring-b" />
         </div>
         <Container className="relative z-[1]">
-          <div className="vabix-pillar-head">
-            <h2>BA MŨI NHỌN — 3T</h2>
-            <p>Phát triển năng lực. Chuyển đổi doanh nghiệp. Kết nối cơ hội.</p>
-          </div>
-          <div className="vabix-pillar-rail" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="vabix-pillar-grid">
-            {pillars.map((pillar) => {
-              const copy = homePillarCopy.find((item) => item.id === pillar.id);
-              if (!copy) return null;
-              return (
-                <article key={pillar.id} className="vabix-pillar">
-                  <span className="vabix-pillar-accent" aria-hidden="true" />
-                  <p className="vabix-pillar-kicker">
-                    {pillar.number} · {pillar.en}
+          <header className="vabix-twin-intro">
+            <p className="eyebrow">Hệ sinh thái VABIX</p>
+            <h2>Hai trụ cột phát triển doanh nghiệp</h2>
+            <p>Xây nội lực từ tri thức. Mở rộng cơ hội bằng kết nối.</p>
+          </header>
+          <p className="vabix-twin-chain">
+            <span>Tri thức</span>
+            <i aria-hidden="true" />
+            <span>Năng lực</span>
+            <i aria-hidden="true" />
+            <span>Kết nối</span>
+            <i aria-hidden="true" />
+            <span>Phát triển</span>
+          </p>
+          <div className="vabix-twin">
+            {twinPillars.map((pillar, index) => (
+              <Fragment key={pillar.id}>
+                {index === 1 ? (
+                  <p className="vabix-twin-bridge">
+                    Nội lực <span aria-hidden="true">↔</span> Cơ hội
                   </p>
-                  <h3 className={`vabix-pillar-title${"titleRest" in copy ? " vabix-pillar-title-balance" : ""}`}>
-                    {copy.title}
-                    {"titleRest" in copy ? (
-                      <>
-                        <br />
-                        {copy.titleRest}
-                      </>
-                    ) : null}
-                  </h3>
-                  <p className="vabix-pillar-body">{copy.body}</p>
-                  <Link href={pillar.href} className="vabix-pillar-cta">
-                    {copy.cta}
-                    <ArrowIcon className="h-3.5 w-3.5" />
-                  </Link>
+                ) : null}
+                <article id={`tru-cot-${pillar.number}`} className={`vabix-twin-panel vabix-twin-panel-${pillar.tone}`}>
+                  <span className="vabix-twin-watermark" aria-hidden="true">
+                    {pillar.number}
+                  </span>
+                  <p className="vabix-twin-kicker">Trụ cột {pillar.number}</p>
+                  <h3>{pillar.title}</h3>
+                  <p className="vabix-twin-lead">{pillar.lead}</p>
+                  <ul>
+                    {pillar.items.map((item) => (
+                      <li key={item.title} className="vabix-twin-row">
+                        <span className="vabix-twin-index">{item.index}</span>
+                        <div>
+                          <h4>{item.title}</h4>
+                          <p>{item.body}</p>
+                        </div>
+                        <ArrowIcon className="vabix-twin-arrow h-3.5 w-3.5" />
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="vabix-twin-close">{pillar.close}</p>
                 </article>
-              );
-            })}
+              </Fragment>
+            ))}
           </div>
         </Container>
       </section>
@@ -198,21 +241,11 @@ export function CorporateHome() {
           <div className="vabix-about-stage">
             <figure className="vabix-about-main">
               <Image
-                src="/images/hero/sihub-workshop.jpg"
-                alt="Chuyên gia VABIX chia sẻ trong buổi đào tạo cùng SIHUB, trước doanh nghiệp và startup"
+                src="/images/about/dao-tao-thuc-chien.jpg?v=2"
+                alt="Chuyên gia VABIX đồng hành cùng doanh chủ và đội ngũ trong buổi đào tạo thực chiến"
                 fill
                 unoptimized
                 sizes="(max-width: 1023px) 100vw, 62vw"
-                className="object-cover"
-              />
-            </figure>
-            <figure className="vabix-about-inset">
-              <Image
-                src="/images/about/vnpt-session.jpg"
-                alt="Buổi đồng hành chuyển đổi tư duy cùng đội ngũ kinh doanh VNPT"
-                fill
-                unoptimized
-                sizes="180px"
                 className="object-cover"
               />
             </figure>
@@ -346,96 +379,232 @@ export function CorporateHome() {
         </Container>
       </section>
 
-      <section className="bg-vabix-ivory py-20" id="trustworking">
+      <section className="vabix-trust" id="trustworking">
         <Container>
-          <p className="eyebrow">Trustworking</p>
-          <h2 className="mt-3 max-w-3xl text-3xl font-semibold text-vabix-deep-teal sm:text-4xl">{trustworking.headline}</h2>
-          <p className="measure mt-4 text-vabix-muted">{trustworking.summary}</p>
-          <Link href={paths.trustworking} className="mt-6 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
-            Gửi nhu cầu kết nối <ArrowIcon />
-          </Link>
-        </Container>
-      </section>
+          <header className="vabix-trust-head">
+            <p className="eyebrow">Trustworking</p>
+            <h2>Kết nối đối tác</h2>
+            <p className="vabix-trust-sub">Đúng đối tác · Đúng nhu cầu · Cộng hưởng giá trị</p>
+          </header>
 
-      <section className="py-20" id="mo-hinh">
-        <Container>
-          <SectionHeading title="Mô hình & phương pháp VABIX" description="The BizCar, APPLIER, MAIS, 3W, KAROT, KLASS, BABOSO và DGH — các mô hình VABIX dùng trong đào tạo và chuyển đổi." />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {methods.map((m) => (
-              <Link key={m.slug} href={paths.method(m.slug)} className="border border-vabix-deep-teal/10 p-6 hover:border-vabix-gold">
-                <p className="eyebrow">{m.shortName}</p>
-                <h3 className="mt-2 font-semibold text-vabix-deep-teal">{m.name}</h3>
-                <p className="mt-2 text-sm text-vabix-muted">{m.headline}</p>
-              </Link>
-            ))}
-          </div>
-          <Link href={paths.methods} className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
-            Khám phá các mô hình & phương pháp <ArrowIcon />
-          </Link>
-        </Container>
-      </section>
-
-      <section className="bg-vabix-ivory py-20" id="tri-thuc">
-        <Container>
-          <SectionHeading title="Hệ sinh thái tri thức" />
-          <div className="mt-10 grid gap-4 md:grid-cols-5">
-            {supportingLayers.map((l) => (
-              <Link key={l.href} href={l.href} className="border border-vabix-deep-teal/10 bg-white p-6 hover:border-vabix-gold">
-                <h3 className="font-semibold text-vabix-deep-teal">{l.title}</h3>
-                <p className="mt-3 text-sm text-vabix-muted">{l.summary}</p>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-20" id="nha-sang-lap">
-        <Container className="grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <p className="eyebrow">Thông điệp nhà sáng lập</p>
-            <blockquote className="mt-4 text-2xl font-medium text-vabix-deep-teal">“{founderQuote}”</blockquote>
-            {(Array.isArray(founderMessage) ? founderMessage : []).slice(0, 2).map((p) => (
-              <p key={p} className="measure mt-4 text-vabix-muted">
-                {p}
+          <div className="vabix-trust-grid">
+            <div className="vabix-trust-copy">
+              <p>
+                VABIX kết nối doanh nghiệp với đối tác chiến lược, nhà cung cấp, nhà phân phối và đơn vị triển khai dựa trên nhu cầu thực tế, khả năng bổ trợ và nền tảng niềm tin — hướng tới những quan hệ hợp tác có thể triển khai và tạo giá trị lâu dài.
               </p>
-            ))}
-            <p className="mt-6 font-semibold text-vabix-deep-teal">{siteConfig.founder.name}</p>
-            <p className="text-sm text-vabix-muted">{founderTitle}</p>
-          </div>
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden bg-vabix-deep-teal">
-            <Image
-              src="/images/portraits/nguyen-chi-thanh.jpg"
-              alt="Nguyễn Chí Thành, nhà sáng lập VABIX"
-              fill
-              priority
-              unoptimized
-              className="object-cover object-top"
-              sizes="(min-width: 1024px) 24rem, min(100vw, 24rem)"
-            />
+              <ol className="vabix-trust-principles">
+                <li>
+                  <span>01</span>
+                  <strong>Năng lực phù hợp</strong>
+                </li>
+                <li>
+                  <span>02</span>
+                  <strong>Giá trị tương đồng</strong>
+                </li>
+                <li>
+                  <span>03</span>
+                  <strong>Thiện chí đồng hành</strong>
+                </li>
+              </ol>
+              <Link href={`${paths.trustworking}#ket-noi`} className="vabix-trust-cta">
+                Gửi nhu cầu kết nối đối tác
+                <ArrowIcon className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            <figure className="vabix-trust-visual" aria-label="Trustworking journey: nhu cầu thực tế, kết nối phù hợp, cộng hưởng giá trị.">
+              <div className="vabix-trust-emblem">
+                <Image
+                  src="/brand/trustworking-mark.png"
+                  alt="Trustworking — Beyond networking, building trust"
+                  width={1024}
+                  height={1024}
+                />
+              </div>
+              <p className="vabix-trust-journey">Trustworking journey</p>
+              <ol className="vabix-trust-flow">
+                <li className="vabix-trust-step">
+                  <p className="vabix-trust-num">01</p>
+                  <div className="vabix-trust-rail" aria-hidden="true">
+                    <span className="vabix-trust-mark" />
+                  </div>
+                  <div className="vabix-trust-body">
+                    <h3>Nhu cầu thực tế</h3>
+                    <p>Làm rõ doanh nghiệp đang cần gì và mục tiêu hợp tác.</p>
+                  </div>
+                </li>
+                <li className="vabix-trust-step">
+                  <p className="vabix-trust-num">02</p>
+                  <div className="vabix-trust-rail" aria-hidden="true">
+                    <span className="vabix-trust-mark" />
+                  </div>
+                  <div className="vabix-trust-body">
+                    <h3>Kết nối phù hợp</h3>
+                    <p>Chọn lọc đối tác dựa trên khả năng bổ trợ, giá trị và điều kiện hợp tác.</p>
+                    <p className="vabix-trust-types">
+                      <span>Đối tác chiến lược</span>
+                      <span>Nhà cung cấp</span>
+                      <span>Nhà phân phối</span>
+                      <span>Đơn vị triển khai</span>
+                    </p>
+                  </div>
+                </li>
+                <li className="vabix-trust-step">
+                  <p className="vabix-trust-num">03</p>
+                  <div className="vabix-trust-rail" aria-hidden="true">
+                    <span className="vabix-trust-mark" />
+                  </div>
+                  <div className="vabix-trust-body">
+                    <h3>Cộng hưởng giá trị</h3>
+                    <p>Hướng tới quan hệ hợp tác có thể triển khai và phát triển lâu dài.</p>
+                  </div>
+                </li>
+              </ol>
+            </figure>
           </div>
         </Container>
       </section>
 
-      <section className="bg-vabix-ivory py-20" id="goc-chia-se">
+      <section className="vabix-know" id="mo-hinh">
+        <Container>
+          <div className="vabix-know-top">
+            <div className="vabix-know-copy">
+              <p className="eyebrow">Triết nghiệm Việt</p>
+              <h2>Nền tảng tri thức VABIX</h2>
+              <p className="vabix-know-tag">Tri thức do người Việt kiến tạo · Từ thực tiễn Việt Nam · Hướng đến giá trị toàn cầu</p>
+              <p>
+                VABIX theo đuổi khát vọng xây dựng “Triết nghiệm Việt” — một nền tri thức thực chiến được hình thành từ suy ngẫm, trải nghiệm, hệ thống hóa và kiểm chứng trong thực tiễn.
+              </p>
+              <p>
+                Từ The BizCar, APPLIER, MAIS đến KAROT, KLASS, BABOSO, 3W và DGH, mỗi mô hình đều hướng đến một mục tiêu chung: chuyển hóa tri thức thành năng lực hành động và kết quả thực tiễn.
+              </p>
+              <Link href={paths.methods} className="vabix-know-cta">
+                Khám phá nền tảng tri thức VABIX
+                <ArrowIcon className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            <figure className="vabix-know-map" aria-label="Kiến trúc tri thức VABIX: tám mô hình cùng thuộc nền tảng VABIX Knowledge.">
+              <p className="vabix-know-kicker">VABIX Knowledge Architecture</p>
+              <div className="vabix-know-field">
+                <svg className="vabix-know-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  {knowledgeModels.map((model) => (
+                    <line key={model.slug} className="vabix-know-line" data-model={model.slug} x1="50" y1="50" x2={model.x} y2={model.y} />
+                  ))}
+                </svg>
+                <div className="vabix-know-core">
+                  <span>VABIX</span>
+                  <strong>Knowledge</strong>
+                </div>
+                <div className="vabix-know-nodes" aria-hidden="true">
+                  {knowledgeModels.map((model, index) => (
+                    <span key={model.slug} className="vabix-know-node" data-model={model.slug} style={{ left: `${model.x}%`, top: `${model.y}%`, ["--i" as string]: index }}>
+                      <span className="vabix-know-dot" />
+                      {model.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </figure>
+          </div>
+
+          <div className="vabix-know-directory">
+            <p className="eyebrow">Các mô hình &amp; phương pháp</p>
+            <ol className="vabix-know-list">
+              {knowledgeModels.map((model) => (
+                <li key={model.slug}>
+                  <Link href={paths.method(model.slug)} className="vabix-know-item" data-model={model.slug}>
+                    <span className="vabix-know-index">{model.index}</span>
+                    <strong>{model.name}</strong>
+                    <span className="vabix-know-line-copy">{model.line}</span>
+                    <ArrowIcon className="vabix-know-arrow" aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Container>
+      </section>
+
+      <section className="vabix-founder" id="nha-sang-lap">
+        <header className="vabix-founder-head">
+          <p className="eyebrow">Thông điệp từ nhà sáng lập</p>
+          <h2>
+            Kiến tạo nội lực <span>–</span> Mở rộng kết nối <span>–</span> Phát triển bền vững
+          </h2>
+        </header>
+        <Container>
+          <div className="vabix-founder-grid">
+            <div className="vabix-founder-copy">
+              <p className="vabix-founder-intro">Mỗi doanh nghiệp đều bắt đầu từ một khát vọng.</p>
+              <p>
+                Trong nhiều năm đồng hành cùng doanh chủ và CEO, tôi nhận thấy thách thức lớn không nằm ở việc thiếu kiến thức, mà ở khả năng chuyển hóa tri thức thành hành động, xây dựng một đội ngũ trưởng thành và tìm được những mối quan hệ đủ tin cậy để cùng phát triển.
+              </p>
+              <p>
+                VABIX được hình thành từ chính những trăn trở ấy — với hai lõi Kết nối tri thức và Kết nối kinh doanh, giúp doanh nghiệp vừa nâng cao nội lực, vừa mở rộng cơ hội trên nền tảng của niềm tin.
+              </p>
+              <blockquote className="vabix-founder-quote">
+                <p>“Tôi tin rằng doanh nghiệp sẽ không phải đơn độc khi tri thức được chuyển hóa thành hành động, con người cùng trưởng thành và những mối quan hệ được kiến tạo trên nền tảng của niềm tin.”</p>
+              </blockquote>
+              <Link href={paths.founderMessage} className="vabix-founder-cta">
+                Đọc toàn bộ thông điệp
+                <ArrowIcon className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            <figure className="vabix-founder-portrait">
+              <div className="vabix-founder-frame">
+                <Image
+                  src="/images/portraits/nguyen-chi-thanh.jpg"
+                  alt="Nguyễn Chí Thành, nhà sáng lập VABIX"
+                  fill
+                  priority
+                  unoptimized
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 32rem, min(100vw, 32rem)"
+                />
+              </div>
+              <figcaption>
+                <strong>{siteConfig.founder.name}</strong>
+                <span>Nhà sáng lập VABIX</span>
+              </figcaption>
+            </figure>
+          </div>
+        </Container>
+      </section>
+
+      <section className="vabix-share" id="goc-chia-se">
         <Container>
           <SectionHeading title="Góc chia sẻ" description="Bài viết mới nhất từ hệ sinh thái tri thức VABIX." />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="vabix-share-grid">
             {featuredArticles.map((a) => (
               <ArticleCard key={a.id} article={a} />
             ))}
           </div>
-          <Link href={paths.insights} className="mt-8 inline-flex items-center gap-2 font-semibold text-vabix-deep-teal">
+          <Link href={paths.insights} className="vabix-share-more">
             Xem góc chia sẻ <ArrowIcon />
           </Link>
         </Container>
       </section>
 
-      <CTASection
-        title="Doanh nghiệp của bạn đang cần thay đổi điều gì?"
-        description="VABIX đồng hành từ nhu cầu thật — đào tạo, chuyển đổi hoặc Trustworking — đánh giá bằng bằng chứng."
-        primary={{ label: "Trao đổi cùng VABIX", href: paths.consult }}
-        secondary={{ label: "Khám phá hệ sinh thái VABIX", href: "/tri-thuc" }}
-      />
+      <section className="vabix-close" id="bat-dau">
+        <div className="vabix-close-decor" aria-hidden="true" />
+        <Container>
+          <p className="vabix-close-eyebrow">Bắt đầu từ đúng vấn đề</p>
+          <h2>Doanh nghiệp không cần thay đổi mọi thứ. Chỉ cần bắt đầu đúng chỗ.</h2>
+          <p className="vabix-close-body">
+            Mỗi doanh nghiệp có một trạng thái và một bài toán riêng. VABIX bắt đầu bằng việc lắng nghe, cùng bạn nhìn rõ điều cần ưu tiên, xác định năng lực cần bổ sung và lựa chọn cách đồng hành phù hợp — để mỗi nỗ lực đều hướng đến một thay đổi có thể nhìn thấy.
+          </p>
+          <div className="vabix-close-actions">
+            <Link href={paths.consult} className="vabix-close-primary">
+              Chia sẻ bài toán của bạn
+            </Link>
+            <Link href="/giai-phap" className="vabix-close-secondary">
+              Khám phá cách VABIX đồng hành
+            </Link>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }
