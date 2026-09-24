@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/siteConfig";
-import { footerColumns } from "@/content/navigation";
+import { chrome, footerFor } from "@/i18n/nav";
+import { getLocale } from "@/i18n/server";
+import { withLocale } from "@/i18n/locale";
 import { BrandLockup } from "@/components/brand/Logo";
 import { ArrowIcon } from "@/components/ui/Misc";
 
@@ -10,7 +12,10 @@ const socials = [
   { label: "YouTube", href: siteConfig.social.youtube, icon: YouTubeIcon },
 ] as const;
 
-export function Footer() {
+export async function Footer() {
+  const locale = await getLocale();
+  const ui = chrome(locale);
+  const columns = footerFor(locale);
   const year = new Date().getFullYear();
   return (
     <footer className="vabix-footer">
@@ -26,7 +31,7 @@ export function Footer() {
       <div className="vabix-shell relative z-10 py-12">
         <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-[minmax(12.5rem,1.05fr)_repeat(4,minmax(0,1fr))_minmax(11rem,1.2fr)]">
           <div>
-            <Link href={siteConfig.portals.vabixHome} className="inline-flex items-center" aria-label="VABIX — trang chủ">
+            <Link href={withLocale(siteConfig.portals.vabixHome, locale)} className="inline-flex items-center" aria-label={ui.home}>
               <BrandLockup tagline={false} markClassName="h-14 w-14" />
             </Link>
             <ul className="mt-4 flex items-center gap-1.5">
@@ -45,17 +50,17 @@ export function Footer() {
               ))}
             </ul>
             <Link
-              href={siteConfig.cta.register.href}
+              href={withLocale(siteConfig.cta.register.href, locale)}
               className="group mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-vabix-gold hover:text-vabix-soft-gold"
             >
-              {siteConfig.cta.register.label}
+              {ui.register}
               <span className="inline-flex transition-transform duration-200 group-hover:translate-x-[3px]">
                 <ArrowIcon className="h-3.5 w-3.5" />
               </span>
             </Link>
           </div>
 
-          {footerColumns.map((col) => (
+          {columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
               <Link
                 href={col.href}
@@ -76,7 +81,7 @@ export function Footer() {
           ))}
 
           <div>
-            <p className="eyebrow mb-3">Liên hệ</p>
+            <p className="eyebrow mb-3">{ui.contact}</p>
             <address className="space-y-1.5 text-[13px] leading-snug not-italic text-white/80">
               <p>{siteConfig.contact.addressShort}</p>
               <p>
@@ -92,8 +97,8 @@ export function Footer() {
               <p className="text-white/55">MST {siteConfig.taxId}</p>
             </address>
             <p className="mt-3">
-              <Link href={siteConfig.cta.learner.href} className="text-[13px] text-vabix-soft-gold hover:text-vabix-gold">
-                {siteConfig.cta.learner.label}
+              <Link href={withLocale(siteConfig.cta.learner.href, locale)} className="text-[13px] text-vabix-soft-gold hover:text-vabix-gold">
+                {ui.learner}
                 <span aria-hidden className="ml-1 text-[11px] opacity-70">
                   ↗
                 </span>
@@ -106,20 +111,20 @@ export function Footer() {
       <div className="relative z-10 border-t border-white/10">
         <div className="vabix-shell flex flex-col gap-2 py-4 text-[11px] text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {siteConfig.legalName}. {siteConfig.tagline}
+            © {year} {siteConfig.legalName}. {ui.tagline}
           </p>
           <div className="flex flex-wrap gap-3.5">
-            <Link href="/chinh-sach-quyen-rieng-tu" className="hover:text-white">
-              Quyền riêng tư
+            <Link href={withLocale("/chinh-sach-quyen-rieng-tu", locale)} className="hover:text-white">
+              {ui.privacy}
             </Link>
-            <Link href="/dieu-khoan" className="hover:text-white">
-              Điều khoản
+            <Link href={withLocale("/dieu-khoan", locale)} className="hover:text-white">
+              {ui.terms}
             </Link>
-            <Link href="/chinh-sach-bao-mat" className="hover:text-white">
-              Bảo mật
+            <Link href={withLocale("/chinh-sach-bao-mat", locale)} className="hover:text-white">
+              {ui.security}
             </Link>
-            <Link href="/khuyen-cao" className="hover:text-white">
-              Khuyến cáo
+            <Link href={withLocale("/khuyen-cao", locale)} className="hover:text-white">
+              {ui.notice}
             </Link>
           </div>
         </div>

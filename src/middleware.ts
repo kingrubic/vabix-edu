@@ -13,10 +13,12 @@ import {
   isPlatformProtectedPath,
   verifyPlatformSession,
 } from "@/platform/auth/jwt";
+import { isLocaleSkipped, LOCALE_HEADER, stripLocale } from "@/i18n/locale";
 
-function continueWithPath(request: NextRequest, effectivePath: string, rewriteTo?: string) {
+function continueWithPath(request: NextRequest, effectivePath: string, rewriteTo?: string, locale?: string) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-pathname", effectivePath);
+  if (locale) requestHeaders.set(LOCALE_HEADER, locale);
 
   if (rewriteTo && rewriteTo !== request.nextUrl.pathname) {
     const url = request.nextUrl.clone();
@@ -32,12 +34,22 @@ function continueWithPath(request: NextRequest, effectivePath: string, rewriteTo
 }
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const rawPath = request.nextUrl.pathname;
+  const localePrefixed = rawPath === "/en" || rawPath.startsWith("/en/");
+  const pathname = localePrefixed ? stripLocale(rawPath) : rawPath;
+
+  if (localePrefixed && isLocaleSkipped(pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname;
+    return NextResponse.redirect(url);
+  }
+
+  const locale = localePrefixed ? "en" : undefined;
   const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
   const rewritten = rewriteBizcarHostPath(pathname, host);
 
   if (rewritten && (isBizcarHost(host) || (pathname === "/" && shouldServeBizcarAtRoot(host)))) {
-    const response = continueWithPath(request, rewritten, rewritten);
+    const response = continueWithPath(request, rewritten, rewritten, locale);
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
     response.headers.set("Cache-Control", "private, no-store");
     return response;
@@ -73,7 +85,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  const response = continueWithPath(request, pathname);
+  const response = continueWithPath(request, pathname, localePrefixed ? pathname : undefined, locale);
   if (
     isBizcarPath(pathname) ||
     isBizcarHost(host) ||

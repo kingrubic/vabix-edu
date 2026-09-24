@@ -32,6 +32,8 @@ export type NavItem = {
 
 export function isNavItemActive(item: NavItem, pathname: string | null) {
   if (!pathname) return false;
+  if (pathname === "/en") pathname = "/";
+  else if (pathname.startsWith("/en/")) pathname = pathname.slice(3);
   if (item.excludeMatch?.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
     return false;
   }

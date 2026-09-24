@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
-import { primaryNav, type NavItem } from "@/content/navigation";
+import { type NavItem } from "@/content/navigation";
 import { siteConfig } from "@/lib/siteConfig";
-import { paths } from "@/lib/paths";
+import { chrome, navFor } from "@/i18n/nav";
+import { withLocale, type Locale } from "@/i18n/locale";
 import { Button } from "@/components/ui/Button";
+import { LanguageSwitch } from "./LanguageSwitch";
 import { ArrowIcon } from "@/components/ui/Misc";
 
-export function MobileMenu({ id, open, onClose }: { id: string; open: boolean; onClose: () => void }) {
+export function MobileMenu({ id, open, onClose, locale }: { id: string; open: boolean; onClose: () => void; locale: Locale }) {
   const [expanded, setExpanded] = useState<string | null>(null);
 
   useEffect(() => {
@@ -16,6 +18,8 @@ export function MobileMenu({ id, open, onClose }: { id: string; open: boolean; o
   }, [open]);
 
   if (!open) return null;
+  const ui = chrome(locale);
+  const nav = navFor(locale);
 
   return (
     <div
@@ -23,42 +27,45 @@ export function MobileMenu({ id, open, onClose }: { id: string; open: boolean; o
       className="fixed inset-x-0 bottom-0 top-[72px] z-[60] overflow-y-auto bg-vabix-warm text-vabix-deep-teal xl:hidden"
       role="dialog"
       aria-modal="true"
-      aria-label="Menu di động"
+      aria-label={ui.mobileMenu}
     >
       <nav className="flex min-h-full flex-col px-5 py-4">
-        {primaryNav.map((item) => (
+        {nav.map((item) => (
           <MobileItem key={item.label} item={item} expanded={expanded} setExpanded={setExpanded} onClose={onClose} />
         ))}
 
         <div className="mt-6 border-t border-vabix-deep-teal/10 pt-5">
           <Link
-            href={paths.search}
+            href={withLocale("/tim-kiem", locale)}
             onClick={onClose}
             className="flex min-h-11 items-center text-[15px] font-medium text-vabix-muted"
           >
-            Tìm kiếm
+            {ui.search}
           </Link>
           <Link
-            href={siteConfig.cta.learner.href}
+            href={withLocale(siteConfig.cta.learner.href, locale)}
             onClick={onClose}
             className="flex min-h-11 items-center text-[15px] font-medium text-vabix-deep-teal"
           >
-            {siteConfig.cta.learner.label}
+            {ui.learner}
             <span aria-hidden className="ml-1 text-[12px] opacity-60">
               ↗
             </span>
           </Link>
           <Button
-            href={siteConfig.cta.register.href}
+            href={withLocale(siteConfig.cta.register.href, locale)}
             onClick={onClose}
             className="group mt-4 min-h-12 w-full rounded-md text-[15px] font-semibold"
           >
-            {siteConfig.cta.register.label}
+            {ui.register}
             <span className="inline-flex transition-transform duration-200 group-hover:translate-x-[3px]">
               <ArrowIcon />
             </span>
           </Button>
-          <p className="mt-5 pb-8 text-sm text-vabix-muted">
+          <div className="mt-5">
+            <LanguageSwitch />
+          </div>
+          <p className="mt-4 pb-8 text-sm text-vabix-muted">
             {siteConfig.contact.hotline} · {siteConfig.contact.email}
           </p>
         </div>

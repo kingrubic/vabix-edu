@@ -68,7 +68,9 @@ function Satellite({
   onEnter,
   onLeave,
   onTap,
+  nodes,
 }: {
+  nodes: NodeInfo[];
   index: number;
   pathId: string;
   dur: number;
@@ -80,7 +82,7 @@ function Satellite({
   onLeave: () => void;
   onTap: (index: number) => void;
 }) {
-  const info = NODES[index];
+  const info = nodes[index];
   const active = shown === index;
   const offset = index % 3;
   const begin = `${-offset * (dur / 3)}s`;
@@ -155,7 +157,9 @@ function RingLayer({
   onEnter,
   onLeave,
   onTap,
+  nodes,
 }: {
+  nodes: NodeInfo[];
   face: "front" | "back";
   shown: number;
   reduced: boolean;
@@ -176,7 +180,8 @@ function RingLayer({
             {face === "front" &&
               still.slice(0, ring.count).map((point, offset) => (
                 <Satellite
-                  key={NODES[ring.start + offset].title}
+                  key={nodes[ring.start + offset].title}
+                  nodes={nodes}
                   index={ring.start + offset}
                   pathId={`vabix-orbit-${ring.id}-front`}
                   dur={ring.dur}
@@ -196,15 +201,26 @@ function RingLayer({
   );
 }
 
-export function DualCoreEcosystem() {
+const NODES_EN: NodeInfo[] = [
+  { orbit: "teal", title: "Strategy consulting", detail: "Set the right growth priorities" },
+  { orbit: "teal", title: "CEO training", detail: "Sharpen how leaders decide" },
+  { orbit: "teal", title: "Team training", detail: "Practice together and measure results" },
+  { orbit: "gold", title: "Partner connections", detail: "Open the right collaborations" },
+  { orbit: "gold", title: "Customer connections", detail: "Reach the customers who fit" },
+  { orbit: "gold", title: "Talent connections", detail: "The right people for each stage" },
+];
+
+export function DualCoreEcosystem({ locale = "vi" }: { locale?: "vi" | "en" }) {
   const [reduced, setReduced] = useState(false);
   const [active, setActive] = useState(0);
   const [hover, setHover] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
   const [linked, setLinked] = useState<Orbit | null>(null);
   const [coarse, setCoarse] = useState(false);
+  const nodes = locale === "en" ? NODES_EN : NODES;
   const shown = hover ?? active;
-  const info = NODES[shown];
+  const info = nodes[shown];
+  const en = locale === "en";
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -225,7 +241,7 @@ export function DualCoreEcosystem() {
   useEffect(() => {
     if (reduced || paused) return;
     const id = window.setInterval(() => {
-      setActive((current) => (current + 1) % NODES.length);
+      setActive((current) => (current + 1) % nodes.length);
     }, 3600);
     return () => window.clearInterval(id);
   }, [reduced, paused]);
@@ -284,17 +300,17 @@ export function DualCoreEcosystem() {
   const figureClass = ["vabix-dual", linked ? `is-linked-${linked}` : "", `is-live-${info.orbit}`].filter(Boolean).join(" ");
 
   return (
-    <figure className={figureClass} aria-label="Mô hình hệ sinh thái VABIX: lõi VABIX với hai quỹ đạo Kết nối tri thức và Kết nối kinh doanh">
+    <figure className={figureClass} aria-label={en ? "VABIX ecosystem: a core with Knowledge and Business orbits" : "Mô hình hệ sinh thái VABIX: lõi VABIX với hai quỹ đạo Kết nối tri thức và Kết nối kinh doanh"}>
       <div className="vabix-dual-stage">
         <span className="vabix-dual-aura" aria-hidden="true" />
 
         <a className="vabix-dual-pole vabix-dual-pole-teal" href="#tru-cot-01">
-          <span className="vabix-dual-pole-name">Kết nối tri thức</span>
+          <span className="vabix-dual-pole-name">{en ? "Knowledge" : "Kết nối tri thức"}</span>
         </a>
 
         <div className="vabix-dual-scene">
           <svg className="vabix-dual-svg vabix-dual-svg-back" viewBox="0 0 400 400" aria-hidden="true">
-            <RingLayer face="back" shown={shown} reduced={reduced} onEnter={enterNode} onLeave={leaveNode} onTap={tapNode} />
+            <RingLayer nodes={nodes} face="back" shown={shown} reduced={reduced} onEnter={enterNode} onLeave={leaveNode} onTap={tapNode} />
           </svg>
 
           <div className="vabix-dual-core">
@@ -303,14 +319,14 @@ export function DualCoreEcosystem() {
           </div>
 
           <svg className="vabix-dual-svg vabix-dual-svg-front" viewBox="0 0 400 400">
-            <RingLayer face="front" shown={shown} reduced={reduced} onEnter={enterNode} onLeave={leaveNode} onTap={tapNode} />
+            <RingLayer nodes={nodes} face="front" shown={shown} reduced={reduced} onEnter={enterNode} onLeave={leaveNode} onTap={tapNode} />
           </svg>
         </div>
 
-        <p className="vabix-dual-motto">Tri thức · Kết nối · Phát triển</p>
+        <p className="vabix-dual-motto">{en ? "Knowledge · Connection · Growth" : "Tri thức · Kết nối · Phát triển"}</p>
 
         <a className="vabix-dual-pole vabix-dual-pole-gold" href="#tru-cot-02">
-          <span className="vabix-dual-pole-name">Kết nối kinh doanh</span>
+          <span className="vabix-dual-pole-name">{en ? "Business" : "Kết nối kinh doanh"}</span>
         </a>
       </div>
 

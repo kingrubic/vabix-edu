@@ -31,11 +31,13 @@ export function BrandLockup({
   markClassName = "h-12 sm:h-14",
   priority,
   tagline = true,
+  taglineText = siteConfig.tagline,
 }: {
   tone?: "onDark" | "onLight";
   markClassName?: string;
   priority?: boolean;
   tagline?: boolean;
+  taglineText?: string;
 }) {
   const name = tone === "onLight" ? "text-vabix-deep-teal" : "text-[#f8f5ed]";
   const tag = tone === "onLight" ? "text-vabix-deep-teal/65" : "text-[#f8f5ed]/75";
@@ -53,7 +55,7 @@ export function BrandLockup({
         <span className={`block font-semibold tracking-[0.16em] whitespace-nowrap ${tagline ? "text-[15px] sm:text-[17px]" : "text-[18px] sm:text-[20px]"} ${name}`}>
           VABIX
         </span>
-        {tagline ? <span className={`mt-1 block text-[10px] sm:text-[11px] ${tag}`}>{siteConfig.tagline}</span> : null}
+        {tagline ? <span className={`mt-1 block text-[10px] sm:text-[11px] ${tag}`}>{taglineText}</span> : null}
       </span>
     </span>
   );

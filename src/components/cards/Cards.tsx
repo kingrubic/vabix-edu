@@ -82,7 +82,7 @@ export function EventCard({ event }: { event: EventItem }) {
   );
 }
 
-export function ArticleCard({ article }: { article: Article }) {
+export function ArticleCard({ article, hrefPrefix = "" }: { article: Article; hrefPrefix?: string }) {
   return (
     <article className="flex h-full flex-col border border-vabix-deep-teal/10 bg-white">
       <div className="relative aspect-[16/10] bg-vabix-ivory">
@@ -93,7 +93,7 @@ export function ArticleCard({ article }: { article: Article }) {
       <div className="flex flex-1 flex-col p-5">
         <p className="eyebrow">{article.categoryLabel}</p>
         <h3 className="mt-2 text-lg font-semibold text-vabix-deep-teal">
-          <Link href={`/tri-thuc/${article.slug}`}>{article.title}</Link>
+          <Link href={`${hrefPrefix}/tri-thuc/${article.slug}`}>{article.title}</Link>
         </h3>
         <p className="mt-2 line-clamp-3 text-sm text-vabix-muted">{article.excerpt}</p>
       </div>

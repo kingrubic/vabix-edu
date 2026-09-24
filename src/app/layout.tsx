@@ -4,6 +4,8 @@ import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { JsonLd } from "@/components/ui/Misc";
 import { createMetadata, organizationJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
+import { getLocale } from "@/i18n/server";
+import { chrome } from "@/i18n/nav";
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -43,15 +45,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   } catch (error) {
     console.error("[platform] boot failed; public site continues with file content", error);
   }
+  const locale = await getLocale();
+  const ui = chrome(locale);
   return (
-    <html lang="vi" className={beVietnam.variable} data-scroll-behavior="smooth">
+    <html lang={locale} className={beVietnam.variable} data-scroll-behavior="smooth">
       <body className="min-h-screen antialiased">
         <JsonLd data={organizationJsonLd()} />
         <a
           href="#noi-dung"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-vabix-gold focus:px-3 focus:py-2 focus:text-vabix-deep-teal"
         >
-          Bỏ qua điều hướng
+          {ui.skip}
         </a>
         <ConditionalChrome>{children}</ConditionalChrome>
       </body>

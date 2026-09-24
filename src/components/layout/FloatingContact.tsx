@@ -1,33 +1,40 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/siteConfig";
+import { localeFromPathname } from "@/i18n/locale";
 
 const items = [
   {
     label: "Zalo",
     href: siteConfig.social.zaloChat,
     external: true,
-    aria: "Chat Zalo với VABIX",
+    ariaVi: "Chat Zalo với VABIX",
+    ariaEn: "Chat with VABIX on Zalo",
     icon: ZaloIcon,
   },
   {
     label: siteConfig.contact.quickPhone,
     href: siteConfig.contact.quickPhoneHref,
     external: false,
-    aria: `Gọi ${siteConfig.contact.quickPhone}`,
+    ariaVi: `Gọi ${siteConfig.contact.quickPhone}`,
+    ariaEn: `Call ${siteConfig.contact.quickPhone}`,
     icon: PhoneIcon,
   },
   {
     label: siteConfig.contact.quickEmail,
     href: siteConfig.contact.quickEmailHref,
     external: false,
-    aria: `Gửi email ${siteConfig.contact.quickEmail}`,
+    ariaVi: `Gửi email ${siteConfig.contact.quickEmail}`,
+    ariaEn: `Email ${siteConfig.contact.quickEmail}`,
     icon: MailIcon,
   },
 ] as const;
 
 export function FloatingContact() {
+  const locale = localeFromPathname(usePathname() ?? "/");
+  const en = locale === "en";
   const [open, setOpen] = useState(false);
   const listId = useId();
 
@@ -41,14 +48,14 @@ export function FloatingContact() {
   }, [open]);
 
   return (
-    <nav className={`vabix-float${open ? " is-open" : ""}`} aria-label="Liên hệ nhanh">
+    <nav className={`vabix-float${open ? " is-open" : ""}`} aria-label={en ? "Quick contact" : "Liên hệ nhanh"}>
       <ul className="vabix-float-list" id={listId}>
         {items.map((item) => (
-          <li key={item.aria}>
+          <li key={item.href}>
             <a
               className="vabix-float-link"
               href={item.href}
-              aria-label={item.aria}
+              aria-label={en ? item.ariaEn : item.ariaVi}
               {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               <span className="vabix-float-label">{item.label}</span>
@@ -64,7 +71,7 @@ export function FloatingContact() {
         className="vabix-float-toggle"
         aria-expanded={open}
         aria-controls={listId}
-        aria-label={open ? "Đóng liên hệ nhanh" : "Mở liên hệ nhanh"}
+        aria-label={open ? (en ? "Close quick contact" : "Đóng liên hệ nhanh") : en ? "Open quick contact" : "Mở liên hệ nhanh"}
         onClick={() => setOpen((value) => !value)}
       >
         {open ? <CloseIcon /> : <PhoneIcon />}
