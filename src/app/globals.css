@@ -2063,7 +2063,7 @@ section[id],
 }
 
 .vabix-about-main img {
-  object-position: center top;
+  object-position: center;
 }
 
 .vabix-about-caption {
@@ -4433,6 +4433,85 @@ section[id],
   .vabix-trust-step:hover .vabix-trust-body,
   .vabix-trust-cta:hover {
     transform: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .vabix-3t-pillars,
+  .vabix-about,
+  .vabix-programs,
+  .vabix-xform-section,
+  .vabix-trust,
+  .vabix-know,
+  .vabix-founder,
+  .vabix-share,
+  .vabix-close {
+    padding-block: 3.15rem;
+  }
+
+  .vabix-twin-intro h2,
+  .vabix-about-copy h2,
+  .vabix-programs-head h2,
+  .vabix-xform-section h2,
+  .vabix-trust-head h2,
+  .vabix-know-copy h2,
+  .vabix-founder-head h2,
+  .vabix-share h2,
+  .vabix-close h2 {
+    font-size: 1.7rem;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+  }
+
+  .vabix-founder-intro {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
+  .vabix-founder-quote p {
+    font-size: 1.05rem;
+  }
+
+  .vabix-share .measure,
+  .vabix-close-body,
+  .vabix-trust-copy > p,
+  .vabix-know-copy > p:not(.eyebrow):not(.vabix-know-tag),
+  .vabix-about-lead,
+  .vabix-programs-lead {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .vabix-about-stage {
+    --about-bleed: 0px;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .vabix-share-grid {
+    gap: 1.15rem;
+    margin-top: 1.6rem;
+  }
+
+  .vabix-close h2 {
+    margin-top: 0.7rem;
+  }
+
+  .vabix-close-body {
+    margin-top: 1rem;
+  }
+
+  .vabix-close-actions,
+  .vabix-trust-cta,
+  .vabix-know-cta,
+  .vabix-xform-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .vabix-trust-cta,
+  .vabix-know-cta {
+    font-size: 0.82rem;
   }
 }
 

@@ -41,8 +41,8 @@ export const siteConfig = {
     addressShort: "456 Xô Viết Nghệ Tĩnh, Phường Gia Định, TP. HCM",
     quickPhone: "0919 171 976",
     quickPhoneHref: "tel:0919171976",
-    quickEmail: "maithanhvabix@gmail.com",
-    quickEmailHref: "mailto:maithanhvabix@gmail.com",
+    quickEmail: "thuyvabix@gmail.com",
+    quickEmailHref: "mailto:thuyvabix@gmail.com",
   },
   social: {
     facebook: "https://www.facebook.com/VabixVietnam",

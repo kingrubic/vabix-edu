@@ -241,7 +241,7 @@ export function CorporateHome() {
           <div className="vabix-about-stage">
             <figure className="vabix-about-main">
               <Image
-                src="/images/about/dao-tao-thuc-chien.jpg?v=2"
+                src="/images/about/dao-tao-thuc-chien.jpg?v=3"
                 alt="Chuyên gia VABIX đồng hành cùng doanh chủ và đội ngũ trong buổi đào tạo thực chiến"
                 fill
                 unoptimized
