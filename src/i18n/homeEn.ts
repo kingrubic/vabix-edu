@@ -118,7 +118,7 @@ export const homeReviewsEn = {
       id: "binh-valenta-phan-van-truong",
       initials: "BV",
       name: "Bình Valenta",
-      role: "On a session with Professor Phan Văn Trường",
+      role: "Session with Professor Phan Văn Trường",
       quote:
         "At VABIX I heard Professor Phan Văn Trường speak from the heart. A senior voice in international negotiation, an advisor on trade to the French government, awarded the Légion d'Honneur — and at seventy-nine still devoted to his country. What stayed was more than a lesson in management. It was the example of a citizen who keeps giving.",
     },

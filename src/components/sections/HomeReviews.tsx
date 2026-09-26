@@ -13,7 +13,7 @@ const reviewsVi = {
       name: "Huê Helen",
       role: "Doanh nhân · Làng VABIX",
       quote:
-        "Ban đầu nghe Thầy Thành chia sẻ về BizCar, tôi rất tò mò — nhưng năm mươi buổi nghe thì dài. Chỉ sau sáu buổi, mọi thứ vỡ oà. Mỗi buổi là một cú chạm sâu: nhìn lại chính mình, soi lại doanh nghiệp, và thấy rõ điều mình thật sự đang tìm. BizCar không chỉ dạy kiến thức. Nó giúp hiểu, thay đổi, và lớn lên.",
+        "Ban đầu nghe Thầy Thành chia sẻ về BizCar, tôi rất tò mò — nhưng năm mươi buổi thì thấy dài. Chỉ sau sáu buổi, mọi thứ vỡ oà. Mỗi buổi là một cú chạm sâu: nhìn lại chính mình, soi lại doanh nghiệp, và thấy rõ điều mình thật sự đang tìm. BizCar không chỉ dạy kiến thức. Nó giúp hiểu, thay đổi, và lớn lên.",
     },
     {
       id: "ivydo-do-nhi",
@@ -21,7 +21,7 @@ const reviewsVi = {
       name: "Ivydo Do Nhi",
       role: "Doanh nghiệp · khóa MYBIZCAR",
       quote:
-        "Sáu buổi ngắn với Thầy Nguyễn Chí Thành và thầy cô Làng VABIX đã khiến tôi nhìn lại những vấp của lần khởi nghiệp trước, và tìm lại la bàn cho chính mình. Mỗi buổi là bài học thực tế, chạm đúng nỗi đau người làm chủ nào cũng từng trải. Năng lượng của thầy cô và các anh chị CEO lan ấm cả lớp — đủ để muốn tái khởi nghiệp vững hơn.",
+        "Sáu buổi ngắn với Thầy Nguyễn Chí Thành và thầy cô Làng VABIX đã khiến tôi nhìn lại những vấp váp của lần khởi nghiệp trước, và tìm lại la bàn cho chính mình. Mỗi buổi là bài học thực tế, chạm đúng nỗi đau người làm chủ nào cũng từng trải. Năng lượng của thầy cô và các anh chị CEO thì ấm và tươi — đủ để muốn tái khởi nghiệp vững hơn.",
     },
     {
       id: "binh-valenta",
