@@ -8,6 +8,7 @@ import { Container, SectionHeading } from "@/components/ui/Section";
 import { ArrowIcon, JsonLd } from "@/components/ui/Misc";
 import { ArticleCard } from "@/components/cards/Cards";
 import { HomeHero } from "@/components/sections/HomeHero";
+import { HomeReviews } from "@/components/sections/HomeReviews";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import { getLocale } from "@/i18n/server";
 import { withLocale } from "@/i18n/locale";
@@ -272,6 +273,8 @@ export async function CorporateHome() {
           </div>
         </Container>
       </section>
+
+      <HomeReviews locale={locale} />
 
       <section className="vabix-programs" id="dao-tao">
         <div className="vabix-programs-bg" aria-hidden="true">

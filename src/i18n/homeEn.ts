@@ -85,6 +85,46 @@ export const transformationStepsEn = [
 
 export const transformationOutputsEn = ["Clear priorities", "An action plan", "A named owner", "Measures that matter"];
 
+export const homeReviewsEn = {
+  eyebrow: "From the classroom",
+  title: "Voices from businesses that have walked with VABIX",
+  lead: "A few words from owners who have studied and stayed with Làng VABIX.",
+  items: [
+    {
+      id: "hue-helen",
+      initials: "HH",
+      name: "Huê Helen",
+      role: "Entrepreneur · Làng VABIX",
+      quote:
+        "When I first heard Thầy Thành describe BizCar, I was curious — and fifty sessions sounded long. After only six, everything opened. Each session was a deep touch: I looked back at myself, looked into the business, and saw what I was actually seeking. BizCar does not only teach. It helps you understand, change, and grow.",
+    },
+    {
+      id: "ivydo-do-nhi",
+      initials: "IN",
+      name: "Ivydo Do Nhi",
+      role: "Business owner · MYBIZCAR",
+      quote:
+        "Six short sessions with Nguyễn Chí Thành and the Làng VABIX teachers made me face the missteps of an earlier venture, and find a compass for myself again. Each class was practical, and it met a pain every owner has lived. The warmth of the teachers and fellow CEOs filled the room. It was enough to want a steadier new start.",
+    },
+    {
+      id: "binh-valenta",
+      initials: "BV",
+      name: "Bình Valenta",
+      role: "Business owner · Valenta",
+      quote:
+        "On the first day I was startled to find Valenta written into the curriculum as a live case. The course ran nearly four months, and in the first week I almost sent an assistant in my place — too busy, and afraid I would not keep up. They said this knowledge had to be carried home by the leader. If the team is to learn, I have to go first. I returned, and the value went past what I had hoped for.",
+    },
+    {
+      id: "binh-valenta-phan-van-truong",
+      initials: "BV",
+      name: "Bình Valenta",
+      role: "Session with Professor Phan Văn Trường",
+      quote:
+        "At VABIX I heard Professor Phan Văn Trường speak from the heart. A senior voice in international negotiation, an advisor on trade to the French government, awarded the Légion d'Honneur — and at seventy-nine still devoted to his country. What stayed was more than a lesson in management. It was the example of a citizen who keeps giving.",
+    },
+  ],
+};
+
 export const knowledgeModelsEn = [
   { slug: "bizcar", index: "01", name: "The BizCar", line: "Design and operate the whole business.", x: 20, y: 20 },
   { slug: "applier", index: "02", name: "APPLIER", line: "Learn in order to see. Design in order to do.", x: 50, y: 12 },
