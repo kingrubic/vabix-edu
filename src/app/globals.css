@@ -4515,6 +4515,145 @@ section[id],
   }
 }
 
+.vabix-reviews {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 36% 42% at 8% 0%, rgba(222, 164, 67, 0.07), transparent 70%),
+    var(--color-vabix-warm);
+  padding-block: 2.85rem 3.1rem;
+  scroll-margin-top: 6.5rem;
+}
+
+.vabix-reviews-head {
+  margin-inline: auto;
+  max-width: 38rem;
+  text-align: center;
+}
+
+.vabix-reviews-head h2 {
+  margin-top: 0.7rem;
+  color: var(--color-vabix-deep-teal);
+  font-size: clamp(1.7rem, 2.4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+}
+
+.vabix-reviews-lead {
+  margin-top: 0.75rem;
+  color: rgba(22, 60, 62, 0.68);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.vabix-reviews-grid {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.85rem;
+}
+
+.vabix-review {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 1.35rem 1.25rem 1.15rem;
+  border: 1px solid rgba(22, 60, 62, 0.1);
+  border-radius: 22px;
+  background: rgba(255, 253, 249, 0.92);
+  box-shadow: 0 8px 18px rgba(22, 60, 62, 0.04);
+  transition: border-color 280ms ease, box-shadow 280ms ease;
+}
+
+.vabix-review:hover {
+  border-color: rgba(222, 164, 67, 0.45);
+  box-shadow: 0 12px 28px rgba(22, 60, 62, 0.06);
+}
+
+.vabix-review-mark {
+  color: var(--color-vabix-gold);
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 0.7;
+  letter-spacing: 0;
+}
+
+.vabix-review blockquote {
+  margin: 0.85rem 0 0;
+}
+
+.vabix-review blockquote p {
+  margin: 0;
+  color: var(--color-vabix-deep-teal);
+  font-size: 0.98rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.vabix-review-by {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.15rem;
+}
+
+.vabix-review-initials {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid rgba(222, 164, 67, 0.55);
+  border-radius: 999px;
+  color: var(--color-vabix-deep-teal);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.vabix-review-who {
+  display: grid;
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.vabix-review-who strong {
+  color: var(--color-vabix-deep-teal);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.vabix-review-who span {
+  color: var(--color-vabix-muted);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+@media (min-width: 768px) {
+  .vabix-reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.05rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vabix-reviews {
+    padding-block: 4.15rem 4.4rem;
+  }
+
+  .vabix-reviews-grid {
+    margin-top: 2.15rem;
+  }
+
+  .vabix-review {
+    padding: 1.5rem 1.4rem 1.25rem;
+  }
+}
+
 @keyframes vabix-footer-breathe {
   0%,
   100% {
