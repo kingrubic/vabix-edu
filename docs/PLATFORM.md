@@ -31,6 +31,8 @@ MyBizCar `/bizcar/*` không đổi.
 
 Nội dung file `src/content/*` được seed vào `cms_documents` (origin `file-seed`). Trang công khai đọc overlay (chương trình, mô hình, chuyên gia, bài viết, case study, sự kiện, sản phẩm tri thức, giải pháp, hero trang chủ, sứ mệnh Về VABIX): có bản CMS thì theo trạng thái CMS; chưa có thì dùng file. Ghi chú nội bộ không trả qua API public (`pickAllowlisted`).
 
+Seed chỉ thêm/cập nhật, **không xóa**. Khi xóa một mục khỏi `src/content/*`, dòng `file-seed` cũ trong `cms_documents` không còn được hiển thị công khai (danh sách, trang chi tiết, `/api/public/cms`) — xem `src/platform/cms/orphans.ts` — nhưng vẫn nằm trong DB và trang quản trị; khi deploy nên sao lưu rồi xóa (hoặc lưu trữ) dòng đó. Dòng tạo trong CMS (origin `cms`) không bị ảnh hưởng.
+
 ## Dữ liệu chính
 
 Auth/IAM (Convex, namespaced — **không** dùng bảng MyBizCar `users`):

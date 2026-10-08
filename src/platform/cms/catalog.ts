@@ -6,10 +6,38 @@ import { caseStudies } from "@/content/caseStudies";
 import { events } from "@/content/events";
 import { knowledgeProducts } from "@/content/knowledgeProducts";
 import { solutions } from "@/content/solutions";
+import { consultingServices } from "@/content/consulting";
 import { getCms, listPublishedCms, publicPayload } from "./service";
 import { seedCmsFromFiles } from "./seed";
+import { fileSeedSourceFrom, isOrphanedFileSeed, type FileSeedSource } from "./orphans";
 import { pickAllowlisted } from "@/platform/permissions/registry";
 import type { ArticleCategory, TrainingProgram as Program } from "@/content/types";
+
+// Every content file that `seedCmsFromFiles()` copies into `cms_documents`, keyed by CMS type.
+// Used to ignore leftover `file-seed` rows whose entry has been removed from `src/content/*`.
+const FILE_SEED_ITEMS: Record<string, () => readonly { slug: string; id?: string }[]> = {
+  program: () => programs,
+  methodology: () => methodologies,
+  expert: () => experts,
+  article: () => articles,
+  case_study: () => caseStudies,
+  event: () => events,
+  knowledge_product: () => knowledgeProducts,
+  solution: () => [...solutions, ...consultingServices],
+};
+
+const fileSeedSources = new Map<string, FileSeedSource>();
+
+function fileSeedSource(type: string): FileSeedSource | null {
+  const items = FILE_SEED_ITEMS[type];
+  if (!items) return null;
+  let source = fileSeedSources.get(type);
+  if (!source) {
+    source = fileSeedSourceFrom(items());
+    fileSeedSources.set(type, source);
+  }
+  return source;
+}
 
 function overlayList<T extends { slug: string }>(type: string, files: T[]): T[] {
   try {
@@ -30,7 +58,11 @@ function overlayList<T extends { slug: string }>(type: string, files: T[]): T[] 
       merged.push(file);
     }
     for (const doc of docs) {
-      if (!taken.has(doc.slug) && !files.some((file) => file.slug === doc.slug)) {
+      if (
+        !taken.has(doc.slug) &&
+        !files.some((file) => file.slug === doc.slug) &&
+        !isOrphanedFileSeed(doc, fileSeedSource(type))
+      ) {
         merged.push(publicPayload<T>(doc));
       }
     }
@@ -159,6 +191,7 @@ export function publishedPage(slug: string) {
 export function publicCmsRecord(type: string, slug: string) {
   const doc = getCms(type, slug);
   if (!doc || doc.status !== "published") return null;
+  if (isOrphanedFileSeed(doc, fileSeedSource(type))) return null;
   return pickAllowlisted(type, { ...publicPayload(doc), slug: doc.slug, title: doc.title });
 }
 

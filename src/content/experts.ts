@@ -128,24 +128,6 @@ export const experts: Expert[] = [
     articles: [],
   },
   {
-    id: "exp-07",
-    slug: "dang-thi-cam-hiep",
-    name: "ThS., NCS. Đặng Thị Cẩm Hiệp",
-    title: "Chuyên gia Marketing & Thương mại điện tử",
-    organizationRole: "Chuyên gia VABIX",
-    expertise: ["Marketing", "Thương mại điện tử", "Chuyển đổi số"],
-    shortBio:
-      "Chuyên gia marketing và thương mại điện tử, đồng hành cùng doanh nghiệp trên hành trình số hóa kênh bán và trải nghiệm khách hàng.",
-    fullBio:
-      "Thạc sĩ, nghiên cứu sinh Đặng Thị Cẩm Hiệp chuyên sâu marketing và thương mại điện tử. Bà hỗ trợ các chương trình thực chiến giúp doanh nghiệp kết nối thị trường số với vận hành nội bộ.",
-    portrait: "/images/portraits/expert-07.png",
-    featured: false,
-    order: 7,
-    programs: ["baboso"],
-    caseStudies: [],
-    articles: [],
-  },
-  {
     id: "exp-08",
     slug: "le-anh-tu",
     name: "Lê Anh Tú",
