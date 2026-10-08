@@ -33,6 +33,8 @@ Nội dung file `src/content/*` được seed vào `cms_documents` (origin `file
 
 Seed chỉ thêm/cập nhật, **không xóa**. Khi xóa một mục khỏi `src/content/*`, dòng `file-seed` cũ trong `cms_documents` không còn được hiển thị công khai (danh sách, trang chi tiết, `/api/public/cms`) — xem `src/platform/cms/orphans.ts` — nhưng vẫn nằm trong DB và trang quản trị; khi deploy nên sao lưu rồi xóa (hoặc lưu trữ) dòng đó. Dòng tạo trong CMS (origin `cms`) không bị ảnh hưởng.
 
+Chuyên gia: `Tiêu đề` của tài liệu CMS là **tên** chuyên gia; `payload.title` là chức danh/mô tả ngắn hiển thị trên thẻ (xem `src/platform/cms/expertPayload.ts`). Seed chỉ ghi đè các dòng `file-seed` còn `version = 1`; dòng đã sửa trong CMS (version > 1) giữ nội dung cũ cho tới khi sửa tay hoặc xóa.
+
 ## Dữ liệu chính
 
 Auth/IAM (Convex, namespaced — **không** dùng bảng MyBizCar `users`):

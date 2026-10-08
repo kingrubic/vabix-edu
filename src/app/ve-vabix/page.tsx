@@ -199,7 +199,7 @@ export default function AboutPage() {
         <Container>
           <h2 className="text-3xl font-semibold text-vabix-deep-teal">Mạng lưới chuyên gia</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredExperts.slice(0, 7).map((e) => (
+            {featuredExperts.map((e) => (
               <ExpertCard key={e.id} expert={e} />
             ))}
           </div>
