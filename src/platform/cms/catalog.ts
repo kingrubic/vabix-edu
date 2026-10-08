@@ -7,11 +7,13 @@ import { events } from "@/content/events";
 import { knowledgeProducts } from "@/content/knowledgeProducts";
 import { solutions } from "@/content/solutions";
 import { consultingServices } from "@/content/consulting";
-import { getCms, listPublishedCms, publicPayload } from "./service";
+import { getCms, listPublishedCms, publicPayload, type CmsDocument } from "./service";
+import { parseJson } from "@/platform/sanitize";
+import { mapExpertCmsPayload } from "./expertPayload";
 import { seedCmsFromFiles } from "./seed";
 import { fileSeedSourceFrom, isOrphanedFileSeed, type FileSeedSource } from "./orphans";
 import { pickAllowlisted } from "@/platform/permissions/registry";
-import type { ArticleCategory, TrainingProgram as Program } from "@/content/types";
+import type { ArticleCategory, Expert, TrainingProgram as Program } from "@/content/types";
 
 // Every content file that `seedCmsFromFiles()` copies into `cms_documents`, keyed by CMS type.
 // Used to ignore leftover `file-seed` rows whose entry has been removed from `src/content/*`.
@@ -39,11 +41,25 @@ function fileSeedSource(type: string): FileSeedSource | null {
   return source;
 }
 
-function overlayList<T extends { slug: string }>(type: string, files: T[]): T[] {
+type PayloadMapper = (doc: CmsDocument) => Record<string, unknown>;
+
+function expertPayload(doc: CmsDocument): Record<string, unknown> {
+  return mapExpertCmsPayload(
+    doc.title,
+    parseJson<Record<string, unknown>>(doc.payload, {}),
+    publicPayload<Record<string, unknown>>(doc),
+  );
+}
+
+function overlayList<T extends { slug: string }>(
+  type: string,
+  files: T[],
+  toPayload: PayloadMapper = (doc) => publicPayload<Record<string, unknown>>(doc),
+): T[] {
   try {
     seedCmsFromFiles();
     const docs = listPublishedCms(type);
-    const published = new Map(docs.map((doc) => [doc.slug, publicPayload<Partial<T>>(doc)]));
+    const published = new Map(docs.map((doc) => [doc.slug, toPayload(doc) as Partial<T>]));
     const taken = new Set<string>();
     const merged: T[] = [];
     for (const file of files) {
@@ -63,7 +79,7 @@ function overlayList<T extends { slug: string }>(type: string, files: T[]): T[] 
         !files.some((file) => file.slug === doc.slug) &&
         !isOrphanedFileSeed(doc, fileSeedSource(type))
       ) {
-        merged.push(publicPayload<T>(doc));
+        merged.push(toPayload(doc) as unknown as T);
       }
     }
     return merged;
@@ -108,8 +124,8 @@ export function publishedMethodology(slug: string) {
   return publishedMethodologies().find((item) => item.slug === slug) ?? null;
 }
 
-export function publishedExperts() {
-  return overlayList("expert", experts);
+export function publishedExperts(): Expert[] {
+  return overlayList("expert", experts, expertPayload);
 }
 
 export function publishedExpert(slug: string) {
@@ -192,7 +208,8 @@ export function publicCmsRecord(type: string, slug: string) {
   const doc = getCms(type, slug);
   if (!doc || doc.status !== "published") return null;
   if (isOrphanedFileSeed(doc, fileSeedSource(type))) return null;
-  return pickAllowlisted(type, { ...publicPayload(doc), slug: doc.slug, title: doc.title });
+  const record = type === "expert" ? expertPayload(doc) : { ...publicPayload(doc), title: doc.title };
+  return pickAllowlisted(type, { ...record, slug: doc.slug });
 }
 
 export type { TrainingProgram } from "@/content/types";
