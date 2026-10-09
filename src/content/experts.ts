@@ -176,7 +176,7 @@ export const experts: Expert[] = [
       "Chuyên gia chuyển đổi số và AI, hỗ trợ doanh nghiệp đưa công nghệ vào quy trình thay vì dừng ở khẩu hiệu.",
     fullBio:
       "Ông Nguyễn Trần Đoan Khoa đồng hành cùng các chương trình AI-First Enterprise của VABIX, giúp lãnh đạo và đội ngũ đưa AI vào workflow, năng suất và ra quyết định.",
-    portrait: "/images/portraits/nguyen-tran-doan-khoa-2026.webp",
+    portrait: "/images/portraits/nguyen-tran-doan-khoa-v2.webp",
     featured: true,
     order: 10,
     programs: ["bmdo"],
