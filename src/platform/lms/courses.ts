@@ -1,15 +1,9 @@
 import { getDb, nowIso, newId, tx } from "@/platform/db/client";
 import { writeAudit } from "@/platform/audit";
 import { assertCan, type Actor } from "@/platform/permissions/evaluate";
-import { parseJson } from "@/platform/sanitize";
+import { DEFAULT_COMPLETION } from "./completionRules";
 
-export const DEFAULT_COMPLETION = {
-  contentPercent: 80,
-  attendancePercent: 70,
-  requiredAssignments: true,
-  require3w: false,
-  requireApproval: false,
-};
+export { DEFAULT_COMPLETION, parseRules } from "./completionRules";
 
 export function listCourses() {
   return getDb().prepare(`SELECT * FROM lms_courses ORDER BY updated_at DESC`).all();
@@ -266,8 +260,4 @@ export function versionImpact(versionId: string) {
     .all(versionId) as { id: string; status: string }[];
   const active = classes.filter((row) => row.status === "in_progress" || row.status === "upcoming");
   return { classCount: classes.length, activeCount: active.length, classes };
-}
-
-export function parseRules(raw: string | null | undefined) {
-  return { ...DEFAULT_COMPLETION, ...parseJson(raw, {}) };
 }
