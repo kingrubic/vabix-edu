@@ -25,8 +25,8 @@ const homePrograms = [
     body: "Giúp doanh chủ nhìn doanh nghiệp như một hệ thống, nhận diện điểm nghẽn và thực hành thiết kế giải pháp ngay trên bài toán doanh nghiệp thật.",
     meta: ["30 buổi thực chiến", "12 miền quản trị", "Học để thiết kế", "Rèn để vận hành"],
     cta: "Khám phá BMDO",
-    image: "/images/hero/sihub-workshop.jpg",
-    imagePosition: "18% 42%",
+    image: "/images/programs/bmdo-poster.webp",
+    imagePosition: "10% 28%",
   },
   {
     slug: "quan-tri-chien-luoc-digai",
@@ -36,8 +36,8 @@ const homePrograms = [
     body: "Giúp CEO nhìn rõ bối cảnh, xác định ưu tiên và chuyển chiến lược thành phương án hành động phù hợp trong thời đại số và AI.",
     meta: ["Chiến lược", "DIGAI", "Thực hành trên doanh nghiệp"],
     cta: "Khám phá chương trình",
-    image: "/images/programs/digai.jpg",
-    imagePosition: "28% 42%",
+    image: "/images/programs/digai-poster.webp",
+    imagePosition: "10% 28%",
   },
   {
     slug: "thao-truong-khoi-nghiep",
@@ -47,8 +47,8 @@ const homePrograms = [
     body: "Đồng hành cùng người khởi nghiệp kiểm chứng nhu cầu, thiết kế mô hình kinh doanh và thử nghiệm trước khi mở rộng.",
     meta: ["Innovation", "Business Model", "Validation"],
     cta: "Khám phá chương trình",
-    image: "/images/programs/khoi-nghiep.jpg",
-    imagePosition: "72% 48%",
+    image: "/images/programs/khoi-nghiep-poster.webp",
+    imagePosition: "10% 28%",
   },
   {
     slug: "lanh-dao-tinh-thuc",
@@ -58,8 +58,8 @@ const homePrograms = [
     body: "Rèn năng lực tự nhận diện, lắng nghe, trao quyền và kiến tạo môi trường để đội ngũ cùng phát triển.",
     meta: ["Leadership", "Self-awareness", "Team Development"],
     cta: "Khám phá chương trình",
-    image: "/images/about/vnpt-session.jpg",
-    imagePosition: "58% 62%",
+    image: "/images/programs/lanh-dao-poster.webp",
+    imagePosition: "10% 28%",
   },
 ] as const;
 
