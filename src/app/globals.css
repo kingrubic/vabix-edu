@@ -2611,8 +2611,10 @@ section[id],
 
   .vabix-program-feature:hover .vabix-program-media,
   .vabix-program-card:hover .vabix-program-media,
+  .vabix-program-more:hover .vabix-program-media,
   .vabix-program-feature:focus-visible .vabix-program-media,
-  .vabix-program-card:focus-visible .vabix-program-media {
+  .vabix-program-card:focus-visible .vabix-program-media,
+  .vabix-program-more:focus-visible .vabix-program-media {
     opacity: 0;
     transform: translate3d(0, -108%, 0);
     transition:
@@ -2623,14 +2625,18 @@ section[id],
   .vabix-program-feature:hover .vabix-program-media img,
   .vabix-program-card:hover .vabix-program-media img,
   .vabix-program-feature:focus-visible .vabix-program-media img,
-  .vabix-program-card:focus-visible .vabix-program-media img {
+  .vabix-program-card:focus-visible .vabix-program-media img,
+  .vabix-program-more:hover .vabix-program-media img,
+  .vabix-program-more:focus-visible .vabix-program-media img {
     transform: scale(1.06);
   }
 
   .vabix-program-feature:hover .vabix-program-body,
   .vabix-program-card:hover .vabix-program-body,
+  .vabix-program-more:hover .vabix-program-body,
   .vabix-program-feature:focus-visible .vabix-program-body,
-  .vabix-program-card:focus-visible .vabix-program-body {
+  .vabix-program-card:focus-visible .vabix-program-body,
+  .vabix-program-more:focus-visible .vabix-program-body {
     opacity: 1;
     transform: none;
     transition:
@@ -2641,13 +2647,15 @@ section[id],
 
 @media (max-width: 767px) {
   .vabix-program-feature,
-  .vabix-program-card {
+  .vabix-program-card,
+  .vabix-program-more {
     padding-top: 0;
   }
 
   .vabix-program-media,
   .vabix-program-feature:hover .vabix-program-media,
-  .vabix-program-card:hover .vabix-program-media {
+  .vabix-program-card:hover .vabix-program-media,
+  .vabix-program-more:hover .vabix-program-media {
     position: relative;
     inset: auto;
     z-index: 0;
@@ -2664,14 +2672,18 @@ section[id],
   .vabix-program-body,
   .vabix-program-feature:hover .vabix-program-body,
   .vabix-program-card:hover .vabix-program-body,
+  .vabix-program-more:hover .vabix-program-body,
   .vabix-program-feature:focus-visible .vabix-program-body,
-  .vabix-program-card:focus-visible .vabix-program-body {
+  .vabix-program-card:focus-visible .vabix-program-body,
+  .vabix-program-more:focus-visible .vabix-program-body {
     opacity: 1;
     transform: none;
   }
 
   .vabix-program-card .vabix-program-media,
-  .vabix-program-card:hover .vabix-program-media {
+  .vabix-program-card:hover .vabix-program-media,
+  .vabix-program-more .vabix-program-media,
+  .vabix-program-more:hover .vabix-program-media {
     width: calc(100% + 2.8rem);
     margin: 0 -1.4rem 1rem;
     border-radius: 20px 20px 0 0;
@@ -2679,7 +2691,8 @@ section[id],
 
   .vabix-program-media img,
   .vabix-program-feature:hover .vabix-program-media img,
-  .vabix-program-card:hover .vabix-program-media img {
+  .vabix-program-card:hover .vabix-program-media img,
+  .vabix-program-more:hover .vabix-program-media img {
     transform: none;
   }
 
@@ -2717,7 +2730,8 @@ section[id],
   }
 
   .vabix-program-card .vabix-program-cta,
-  .vabix-program-feature .vabix-program-cta {
+  .vabix-program-feature .vabix-program-cta,
+  .vabix-program-more .vabix-program-cta {
     margin-top: 1.15rem;
   }
 }
@@ -3147,10 +3161,13 @@ section[id],
   .vabix-program-card:hover .vabix-program-media,
   .vabix-program-feature:focus-visible .vabix-program-media,
   .vabix-program-card:focus-visible .vabix-program-media,
+  .vabix-program-more:hover .vabix-program-media,
+  .vabix-program-more:focus-visible .vabix-program-media,
   .vabix-program-media img,
   .vabix-program-body,
   .vabix-program-feature:hover .vabix-program-body,
   .vabix-program-card:hover .vabix-program-body,
+  .vabix-program-more:hover .vabix-program-body,
   .vabix-program-fade {
     transform: none;
     transition: none;
