@@ -342,14 +342,27 @@ export async function CorporateHome() {
               );
             })}
             <Link href={href(paths.training)} className="vabix-program-more">
-              <span className="vabix-program-more-arc" aria-hidden="true" />
-              <p className="vabix-program-kicker">{en ? "The VABIX training system" : "Hệ đào tạo VABIX"}</p>
-              <h3>{en ? "Explore the full program range" : "Khám phá toàn bộ chương trình"}</h3>
-              <p className="vabix-program-desc">{en ? "Find a program that fits the stage of the business and the problem in front of it." : "Tìm chương trình phù hợp với giai đoạn phát triển và bài toán của doanh nghiệp."}</p>
-              <span className="vabix-program-cta">
-                {en ? "View all" : "Xem tất cả"}
-                <ArrowIcon className="h-3.5 w-3.5" />
+              <span className="vabix-program-media" aria-hidden="true">
+                <Image
+                  src="/images/programs/kham-pha-poster.webp"
+                  alt=""
+                  fill
+                  unoptimized
+                  sizes="(max-width: 767px) 100vw, 24vw"
+                  className="object-cover"
+                  style={{ objectPosition: "10% 28%" }}
+                />
               </span>
+              <div className="vabix-program-body">
+                <span className="vabix-program-more-arc" aria-hidden="true" />
+                <p className="vabix-program-kicker">{en ? "The VABIX training system" : "Hệ đào tạo VABIX"}</p>
+                <h3>{en ? "Explore the full program range" : "Khám phá toàn bộ chương trình"}</h3>
+                <p className="vabix-program-desc">{en ? "Find a program that fits the stage of the business and the problem in front of it." : "Tìm chương trình phù hợp với giai đoạn phát triển và bài toán của doanh nghiệp."}</p>
+                <span className="vabix-program-cta">
+                  {en ? "View all" : "Xem tất cả"}
+                  <ArrowIcon className="h-3.5 w-3.5" />
+                </span>
+              </div>
             </Link>
           </div>
         </Container>
