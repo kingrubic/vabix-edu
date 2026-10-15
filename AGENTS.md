@@ -1,5 +1,19 @@
 # Agent notes (Cursor Cloud / Background Agents)
 
+## Ports on the Mac Mini — VABIX uses 3003, never 3011
+
+- VABIX production: launchd `ai.vabix.edu.web` → `next start --port 3003` → tunnel `vabix-edu-web` → vabix.edu.vn.
+- **Port 3011 belongs to Akiko (akikohoanganh.asia).** Its tunnel serves whatever listens on
+  127.0.0.1:3011. On 2026-10-14 a hand-started `npm exec next start -p 3011` in this repo took
+  that port, Akiko crash-looped (`EADDRINUSE`) and akikohoanganh.asia showed the VABIX homepage.
+- Do not run `next start` / `next dev` / previews on 3011 (or on any port another service uses).
+  For a temporary server pick a free port and check it first, and stop it when done:
+
+```bash
+lsof -nP -iTCP:<port> -sTCP:LISTEN   # empty output = free
+```
+
+
 This repo ships **project** Cursor helpers under `.cursor/` so Cloud Agents (which do **not** see your Mac Mini `~/.cursor`) still get useful context.
 
 ## What is committed vs local-only
